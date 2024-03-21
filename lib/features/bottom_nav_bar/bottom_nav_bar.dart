@@ -6,6 +6,7 @@ import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_flutter_user/features/bottom_nav_bar/widgets/CustomNavigatorWidget.dart';
 import 'package:smart_recruitment_flutter_user/features/bottom_nav_bar/widgets/bottom_nav_bar_screens.dart';
+import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
 
 
@@ -54,39 +55,39 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
                       widgetIndex: 0,
-                      svgPath: "",
+                      svgPath: Assets.svgHome,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Explore'.tr(),
+                    label: 'Home'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
                       widgetIndex: 1,
-                      svgPath: "",
+                      svgPath: Assets.svgCase,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Map'.tr(),
+                    label: 'Jobs'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
                       widgetIndex: 2,
-                      svgPath: "",
+                      svgPath: Assets.svgProfile,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Add Property'.tr(),
+                    label: 'Profile'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
                       widgetIndex: 3,
-                      svgPath: "",
+                      svgPath: Assets.svgStar,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'WishList'.tr(),
+                    label: 'Favourite'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
                       widgetIndex: 4,
-                      svgPath: "",
+                      svgPath: Assets.svgMore,
                       selectedIndex: selectedIndex,
                     ),
                     label: 'More'.tr(),

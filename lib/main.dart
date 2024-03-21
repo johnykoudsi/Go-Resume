@@ -1,16 +1,22 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/app_bloc_observer.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_core/utility/theme/app_style.dart';
-
 import 'core/router/app_router.dart';
 
 void main() {
   Bloc.observer = MyBlocObserver();
 
-  runApp(MyApp(appRouter: AppRouter()));
+  runApp(EasyLocalization(
+    supportedLocales: const [Locale('en'), Locale('ar')],
+    path: 'assets/translation',
+    startLocale: const Locale('en'),
+    fallbackLocale: const Locale('en'),
+    child: MyApp(appRouter: AppRouter()),
+  ));
 }
 
 class MyApp extends StatefulWidget {
