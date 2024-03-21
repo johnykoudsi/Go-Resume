@@ -1,67 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
+import 'package:smart_recruitment_core/utility/app_bloc_observer.dart';
+import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_core/utility/theme/app_style.dart';
 
+import 'core/router/app_router.dart';
+
 void main() {
-  runApp(const MyApp());
+  Bloc.observer = MyBlocObserver();
+
+  runApp(MyApp(appRouter: AppRouter()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  final AppRouter appRouter;
 
+  const MyApp({required this.appRouter, super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: AppStyle.theme,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  void initState() {
+    NetworkHelpers.globalUserBloc = UserBloc();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+    return BlocProvider.value(
+      value: NetworkHelpers.globalUserBloc,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppStyle.theme,
+        onGenerateRoute: widget.appRouter.onGenerateRoute,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
