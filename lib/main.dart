@@ -12,7 +12,7 @@ void main() {
 
   runApp(EasyLocalization(
     supportedLocales: const [Locale('en'), Locale('ar')],
-    path: 'assets/traenslation',
+    path: 'assets/translation',
     startLocale: const Locale('en'),
     fallbackLocale: const Locale('en'),
     child: MyApp(appRouter: AppRouter()),
@@ -41,6 +41,9 @@ class _MyAppState extends State<MyApp> {
     return BlocProvider.value(
       value: NetworkHelpers.globalUserBloc,
       child: MaterialApp(
+        locale: context.locale,
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
         debugShowCheckedModeBanner: false,
         theme: AppStyle.theme,
         onGenerateRoute: widget.appRouter.onGenerateRoute,
