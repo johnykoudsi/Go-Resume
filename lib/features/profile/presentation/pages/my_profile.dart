@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smart_recruitment_core/utility/theme/app_style.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
@@ -78,7 +77,7 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                       child: Center(
                         child: SvgPicture.asset(
-                          Assets.imagesSvgCamera,
+                          Assets.svgCamera,
                           width: screenWidth * 0.07,
                           height: screenWidth * 0.07,
                           color: Colors.black,
@@ -98,7 +97,7 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                       child: Center(
                         child: SvgPicture.asset(
-                          Assets.imagesSvgCamera,
+                          Assets.svgCamera,
                           width: screenWidth * 0.06,
                           height: screenWidth * 0.06,
                           color: Colors.black,
@@ -131,13 +130,14 @@ class _MyProfileState extends State<MyProfile> {
                 fontSize: 25,
               ),
             ),
-            SizedBox(height: screenHeight*0.02,),
+            SizedBox(
+              height: screenHeight * 0.02,
+            ),
             Container(
               width: screenWidth * 0.9,
               height: screenHeight * 0.3,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -147,7 +147,6 @@ class _MyProfileState extends State<MyProfile> {
                     offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
-
               ),
               child: const Column(
                 children: [
