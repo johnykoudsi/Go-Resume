@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 
-
 class CustomNavigatorWidget extends StatelessWidget {
   CustomNavigatorWidget({
     Key? key,
@@ -25,9 +24,8 @@ class CustomNavigatorWidget extends StatelessWidget {
         width: getWidth * 0.1,
         decoration: BoxDecoration(
           borderRadius: AppBorders.k4BorderRadius,
-          color: selectedIndex == widgetIndex
-              ? AppColors.kMainColor100
-              : Colors.transparent,
+          gradient:
+              selectedIndex == widgetIndex ? AppColors.kLinearColor : null,
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),

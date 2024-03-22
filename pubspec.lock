@@ -511,7 +511,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "47f1630db46330a5fd7abcb77fab821288bca6c9"
+      resolved-ref: afd3d8f150ab2c6a3a67514457cabb5db56f4695
       url: "https://gitlab.com/ehsan.ab101/smart_recruitment_flutter_core.git"
     source: git
     version: "1.0.0+1"
