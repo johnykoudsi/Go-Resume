@@ -37,6 +37,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/svg/
-    - assets/images/png/
+    - assets/images/jpg/
     - assets/translation/
+    - assets/images/svg/camera.svg
   uses-material-design: true
