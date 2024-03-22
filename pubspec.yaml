@@ -37,7 +37,16 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/svg/
+    - assets/images/png/
     - assets/images/jpg/
     - assets/translation/
-    - assets/images/svg/camera.svg
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: fonts/CAIRO-LIGHT.OTF
+          weight: 200
+        - asset: fonts/CAIRO-REGULAR.OTF
+          weight: 400
+        - asset: fonts/CAIRO-BOLD2.TTF
+          weight: 800
   uses-material-design: true

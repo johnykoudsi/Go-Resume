@@ -12,7 +12,7 @@ void main() {
 
   runApp(EasyLocalization(
     supportedLocales: const [Locale('en'), Locale('ar')],
-    path: 'assets/translation',
+    path: 'assets/traenslation',
     startLocale: const Locale('en'),
     fallbackLocale: const Locale('en'),
     child: MyApp(appRouter: AppRouter()),

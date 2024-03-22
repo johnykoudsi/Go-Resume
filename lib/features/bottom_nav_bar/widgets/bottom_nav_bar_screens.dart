@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 
 
@@ -19,7 +20,7 @@ class GetSelectedScreenByIndex extends StatelessWidget {
             body: Center(
               child: Text(
                 'Check Named Route',
-                style: TextStyle(fontSize: 30, color: Colors.black),
+                style: AppFontStyles.mediumH1,
               ),
             ),
           );
