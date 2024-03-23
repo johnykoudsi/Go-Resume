@@ -41,6 +41,9 @@ class _MyAppState extends State<MyApp> {
     return BlocProvider.value(
       value: NetworkHelpers.globalUserBloc,
       child: MaterialApp(
+        locale: context.locale,
+        supportedLocales: context.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
         debugShowCheckedModeBanner: false,
         theme: AppStyle.theme,
         onGenerateRoute: widget.appRouter.onGenerateRoute,

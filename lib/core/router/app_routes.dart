@@ -2,8 +2,8 @@
 
 class AppRoutes {
 
-  static const String bottomNavBarScreen = "/bottom_nav";
-  static const String myProfileScreen = "/";
+  static const String bottomNavBarScreen = "/";
+  static const String myProfileScreen = "/d";
 
 
 }
