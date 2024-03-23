@@ -25,7 +25,7 @@ class FlutterNotificationsClass {
     'nostra_casa', // title// description
     importance: Importance.max,
     enableLights: true,
-    ledColor: AppColors.blackColor,
+    ledColor: AppColors.fontColor,
   );
 
   Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {

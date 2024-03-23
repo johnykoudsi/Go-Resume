@@ -20,7 +20,7 @@ class SearchTextField extends StatelessWidget {
       padding: const EdgeInsets.symmetric(
           horizontal: 16,vertical: 16),
       child: Material(
-        elevation: 4,
+        elevation: 3,
         borderRadius: BorderRadius.circular(7),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ class SearchTextField extends StatelessWidget {
                   onTap:onClear,
                   child: const Icon(
                     Icons.cancel_rounded,
-                    color: AppColors.redColor,
+                    color: AppColors.kRedColor,
                   ),
                 )
                     : GestureDetector(
