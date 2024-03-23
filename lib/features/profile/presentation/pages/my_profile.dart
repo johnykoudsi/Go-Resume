@@ -1,7 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
+import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
+
+import '../widgets/CustomCard.dart';
+import '../widgets/Skill.dart';
+import '../widgets/job.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
@@ -12,9 +18,45 @@ class MyProfile extends StatefulWidget {
 
 class _MyProfileState extends State<MyProfile> {
   @override
+
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    List<Job> jobs = [
+      const Job(
+        role: "Software Engineer",
+        startDate: "5/2022",
+        endDate: "5/2023",
+        company: "Tech Company",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
+      ),
+      const Job(
+        role: "Another Role",
+        startDate: "6/2023",
+        endDate: "8/2024",
+        company: "Another Company",
+        description: "Another description goes here.",
+      ),
+    ];
+    List<Skill> skills = [
+      const Skill(
+        skillName: "Microsoft Word",
+        imagePath: "assets/images/svg/case.svg",
+        description: "Computer Skill",
+      ),
+      const Skill(
+        skillName: "Python",
+        imagePath: "assets/images/svg/case.svg",
+        description: "Programming Language",
+
+      ),
+      const Skill(
+        skillName: "Scrum",
+        imagePath: "assets/images/svg/case.svg",
+        description: "Team Skill",
+      ),
+      // Add more skills as needed
+    ];
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
       body: SingleChildScrollView(
@@ -123,39 +165,16 @@ class _MyProfileState extends State<MyProfile> {
                 ],
               ),
             ),
-            const Text(
+            Text(
               "John Doe",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25,
-              ),
+              style: AppFontStyles.boldH2.copyWith(color: Colors.black),
             ),
             SizedBox(
               height: screenHeight * 0.02,
             ),
-            Container(
-              width: screenWidth * 0.9,
-              height: screenHeight * 0.3,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              child: const Column(
-                children: [
-                  Row(
-                    children: [Text("")],
-                  )
-                ],
-              ),
-            )
+            CustomCard(title:"Experiences",operation: "Manage",jobs: jobs),
+            SizedBox(height: screenHeight*0.02,),
+            CustomCard(title:"Skills",operation: "Manage",skills: skills),
           ],
         ),
       ),
