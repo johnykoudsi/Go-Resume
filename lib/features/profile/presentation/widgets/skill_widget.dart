@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
-class Skill extends StatelessWidget {
+class SkillWidget extends StatelessWidget {
   final String skillName;
   final String description;
   final String imagePath;
 
-  const Skill({
+  const SkillWidget({
     Key? key,
     required this.skillName,
     required this.description,
@@ -17,7 +17,6 @@ class Skill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Row(
       children: [
         SvgPicture.asset(
@@ -26,7 +25,7 @@ class Skill extends StatelessWidget {
           height: screenWidth * 0.07,
           color: Colors.black,
         ),
-        SizedBox(width: screenWidth*0.05), // Add spacing between the image and the text
+        SizedBox(width: screenWidth*0.05),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

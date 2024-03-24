@@ -8,11 +8,16 @@ class Assets {
   static const String svgCamera = 'assets/images/svg/camera.svg';
   static const String svgCase = 'assets/images/svg/case.svg';
   static const String svgEdit = 'assets/images/svg/edit.svg';
+  static const String svgFacebook = 'assets/images/svg/facebook.svg';
   static const String svgHome = 'assets/images/svg/Home.svg';
+  static const String svgLinkedin = 'assets/images/svg/linkedin.svg';
   static const String svgMore = 'assets/images/svg/more.svg';
   static const String svgNotification = 'assets/images/svg/Notification.svg';
+  static const String svgPhone = 'assets/images/svg/phone.svg';
   static const String svgProfile = 'assets/images/svg/Profile.svg';
   static const String svgStar = 'assets/images/svg/star.svg';
+  static const String svgTelegram = 'assets/images/svg/telegram.svg';
+  static const String svgWhatsapp = 'assets/images/svg/whatsapp.svg';
   static const String translationAr = 'assets/translation/ar.json';
   static const String translationEn = 'assets/translation/en.json';
 

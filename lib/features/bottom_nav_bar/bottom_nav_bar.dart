@@ -45,7 +45,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 selectedFontSize: 0.0,
                 unselectedFontSize: 0.0,
                 elevation: 0,
-                backgroundColor: AppColors.kBackGroundColor,
+                backgroundColor: Colors.white,
                 type: BottomNavigationBarType.fixed,
                 currentIndex: selectedIndex,
                 showSelectedLabels: false,

@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/presentation/widgets/contact_info_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
-import '../widgets/CustomCard.dart';
-import '../widgets/Skill.dart';
-import '../widgets/job.dart';
+import '../widgets/custom_card_widget.dart';
+import '../widgets/education_and_certificates_widget.dart';
+import '../widgets/skill_widget.dart';
+import '../widgets/job_widget.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
@@ -22,15 +24,15 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    List<Job> jobs = [
-      const Job(
+    List<JobWidget> jobs = [
+      const JobWidget(
         role: "Software Engineer",
         startDate: "5/2022",
         endDate: "5/2023",
         company: "Tech Company",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
       ),
-      const Job(
+      const JobWidget(
         role: "Another Role",
         startDate: "6/2023",
         endDate: "8/2024",
@@ -38,24 +40,64 @@ class _MyProfileState extends State<MyProfile> {
         description: "Another description goes here.",
       ),
     ];
-    List<Skill> skills = [
-      const Skill(
+    List<SkillWidget> skills = [
+      const SkillWidget(
         skillName: "Microsoft Word",
         imagePath: "assets/images/svg/case.svg",
         description: "Computer Skill",
       ),
-      const Skill(
+      const SkillWidget(
         skillName: "Python",
         imagePath: "assets/images/svg/case.svg",
         description: "Programming Language",
 
       ),
-      const Skill(
+      const SkillWidget(
         skillName: "Scrum",
         imagePath: "assets/images/svg/case.svg",
         description: "Team Skill",
       ),
-      // Add more skills as needed
+    ];
+    List<EducationAndCertificatesWidget> educationAndCertificates = [
+      const EducationAndCertificatesWidget(
+        specialization: "Bachelor of Science in Computer Science",
+        startDate: "2018",
+        endDate: "2022",
+        organization: "University of XYZ",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      ),
+      const EducationAndCertificatesWidget(
+        specialization: "Master of Business Administration",
+        startDate: "2022",
+        endDate: "2024",
+        organization: "ABC Business School",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      ),
+      const EducationAndCertificatesWidget(
+        specialization: "Certificate in Graphic Design",
+        startDate: "2020",
+        endDate: "2021",
+        organization: "Design Academy",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      ),
+    ];
+    List<ContactInfoWidget> contacts = [
+      const ContactInfoWidget(
+        imagePath: "assets/images/svg/facebook.svg",
+      ),
+      const ContactInfoWidget(
+        imagePath: "assets/images/svg/telegram.svg",
+      ),
+      const ContactInfoWidget(
+        imagePath: "assets/images/svg/phone.svg",
+      ),
+      const ContactInfoWidget(
+        imagePath: "assets/images/svg/whatsapp.svg",
+      ),
+      const ContactInfoWidget(
+        imagePath: "assets/images/svg/linkedin.svg",
+      ),
+
     ];
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
@@ -160,14 +202,14 @@ class _MyProfileState extends State<MyProfile> {
                   Positioned(
                       top: screenHeight * 0.38,
                       left: screenWidth / 18,
-                      child: const Text("55 Views",
-                          style: TextStyle(color: Colors.white))),
+                      child:  Text("55 Views",
+                          style: AppFontStyles.mediumH6.copyWith(color: Colors.white),)),
                 ],
               ),
             ),
             Text(
               "John Doe",
-              style: AppFontStyles.boldH2.copyWith(color: Colors.black),
+              style: AppFontStyles.boldH1.copyWith(color: Colors.black),
             ),
             SizedBox(
               height: screenHeight * 0.02,
@@ -175,6 +217,10 @@ class _MyProfileState extends State<MyProfile> {
             CustomCard(title:"Experiences",operation: "Manage",jobs: jobs),
             SizedBox(height: screenHeight*0.02,),
             CustomCard(title:"Skills",operation: "Manage",skills: skills),
+            SizedBox(height: screenHeight*0.02,),
+            CustomCard(title:"Education & Certificates",operation: "Manage",educationAndCertificates: educationAndCertificates),
+            SizedBox(height: screenHeight*0.02,),
+            CustomCard(title:"Contact Info",operation: "Manage",contactInfo: contacts),
           ],
         ),
       ),

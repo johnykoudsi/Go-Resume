@@ -4,7 +4,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/all_companies/presentation/pages/all_companies.dart';
 import 'package:smart_recruitment_flutter_user/features/all_jobs/presentation/pages/all_jobs.dart';
 import 'package:smart_recruitment_flutter_user/features/home/presentation/pages/home_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/profile/presentation/pages/my_profile.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/presentation/pages/my_profile_screen.dart';
 
 class GetSelectedScreenByIndex extends StatelessWidget {
   const GetSelectedScreenByIndex({required this.screenIndex, Key? key})
