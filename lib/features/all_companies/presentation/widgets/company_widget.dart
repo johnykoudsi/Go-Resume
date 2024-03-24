@@ -23,7 +23,7 @@ class CompanyWidget extends StatelessWidget {
       onPressed: () {},
       child: Container(
         padding: const EdgeInsets.all(18),
-        height: 160,
+        height: 170,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
