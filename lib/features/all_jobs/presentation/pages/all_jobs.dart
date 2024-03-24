@@ -37,7 +37,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
         ),
       ),
       body: ListView(
-        padding: EdgeInsets.all(18),
+        padding: const EdgeInsets.all(18),
         children: [
           JobWidget(),
           JobWidget(),
