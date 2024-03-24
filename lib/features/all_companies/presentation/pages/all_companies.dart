@@ -12,7 +12,7 @@ class AllCompaniesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Favourites".tr()),
+        title: Text("Favourite".tr()),
         centerTitle: false,
         actions: [
           IconButton(
