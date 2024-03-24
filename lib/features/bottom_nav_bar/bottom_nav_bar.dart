@@ -59,6 +59,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       selectedIndex: selectedIndex,
                     ),
                     label: 'Home'.tr(),
+                    tooltip: 'Home'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -67,6 +68,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       selectedIndex: selectedIndex,
                     ),
                     label: 'Jobs'.tr(),
+                    tooltip: 'Jobs'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -75,6 +77,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       selectedIndex: selectedIndex,
                     ),
                     label: 'Profile'.tr(),
+                    tooltip: 'Profile'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -83,6 +86,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       selectedIndex: selectedIndex,
                     ),
                     label: 'Favourite'.tr(),
+                    tooltip: 'Favourite'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -91,6 +95,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       selectedIndex: selectedIndex,
                     ),
                     label: 'More'.tr(),
+                    tooltip: 'More'.tr(),
                   ),
                 ],
               ),
