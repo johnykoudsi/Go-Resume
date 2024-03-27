@@ -105,7 +105,7 @@ class _MyProfileState extends State<MyProfile> {
         child: Column(
           children: [
             SizedBox(
-              height: screenHeight * 0.45,
+             // height: screenHeight * 0.45,
               child: Stack(
                 children: [
                   // Cover Image
@@ -119,9 +119,8 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: screenHeight * 0.35,
-                    left: 0,
+                  Padding(
+                    padding:  EdgeInsets.only(top: screenHeight*0.35),
                     child: Container(
                       width: screenWidth,
                       height: screenHeight * 0.08,
@@ -129,29 +128,29 @@ class _MyProfileState extends State<MyProfile> {
                           const BoxDecoration(gradient: AppColors.kLinearColor),
                     ),
                   ),
-                  Positioned(
-                    top: screenHeight * 0.25,
-                    left: screenWidth / 2 - screenWidth * 0.15,
-                    child: Container(
-                      width: screenWidth * 0.3,
-                      height: screenWidth * 0.3,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: Colors.white,
-                          width: 3,
-                        ),
-                        image: const DecorationImage(
-                          image: AssetImage(
-                              'assets/images/jpg/profile_image.jpg'), // Replace with your profile image path
-                          fit: BoxFit.cover,
+                  Padding(
+                    padding:  EdgeInsets.only(top: screenHeight*0.29),
+                    child: Center(
+                      child: Container(
+                        width: screenWidth * 0.3,
+                        height: screenWidth * 0.3,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white,
+                            width: screenWidth*0.005
+                          ),
+                          image: const DecorationImage(
+                            image: AssetImage(
+                                'assets/images/jpg/profile_image.jpg'), // Replace with your profile image path
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: screenHeight * 0.28,
-                    left: screenWidth / 1.12,
+                  Padding(
+                    padding:  EdgeInsets.only(top: screenHeight*0.29,left: screenWidth*0.88),
                     child: Container(
                       width: screenWidth * 0.1,
                       height: screenWidth * 0.1,
@@ -189,9 +188,8 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: screenHeight * 0.36,
-                    left: screenWidth / 1.12,
+                  Padding(
+                    padding:  EdgeInsets.only(top: screenHeight*0.365,left: screenWidth*0.88),
                     child: SvgPicture.asset(
                       Assets.svgEdit,
                       width: screenWidth * 0.08,
@@ -199,11 +197,11 @@ class _MyProfileState extends State<MyProfile> {
                       color: Colors.white,
                     ),
                   ),
-                  Positioned(
-                      top: screenHeight * 0.38,
-                      left: screenWidth / 18,
-                      child:  Text("55 Views",
-                          style: AppFontStyles.mediumH6.copyWith(color: Colors.white),)),
+                  Padding(
+                    padding:  EdgeInsets.only(top: screenHeight*0.375,left: screenWidth*0.02),
+                    child: Text("55 Views",
+                        style: AppFontStyles.mediumH6.copyWith(color: Colors.white),),
+                  ),
                 ],
               ),
             ),
