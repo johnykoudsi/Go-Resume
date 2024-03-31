@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
@@ -8,6 +9,7 @@ import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
 import '../widgets/custom_card_widget.dart';
 import '../widgets/education_and_certificates_widget.dart';
+import '../widgets/profile_image_widget.dart';
 import '../widgets/skill_widget.dart';
 import '../widgets/job_widget.dart';
 
@@ -104,106 +106,46 @@ class _MyProfileState extends State<MyProfile> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-             // height: screenHeight * 0.45,
-              child: Stack(
-                children: [
-                  // Cover Image
-                  Container(
-                    width: double.infinity,
-                    height: screenHeight * 0.35,
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: screenHeight * 0.35,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/jpg/cover_image.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:  EdgeInsets.only(top:screenHeight * 0.21 ),
+                  child: const ProfileImageWidget(),
+                ),
+
+                Positioned(
+                  bottom: screenHeight*0.1,
+                  right: 2,
+                  child: Container(
+                    width: screenWidth * 0.1,
+                    height: screenWidth * 0.1,
                     decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/jpg/cover_image.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(top: screenHeight*0.35),
-                    child: Container(
-                      width: screenWidth,
-                      height: screenHeight * 0.08,
-                      decoration:
-                          const BoxDecoration(gradient: AppColors.kLinearColor),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(top: screenHeight*0.29),
-                    child: Center(
-                      child: Container(
-                        width: screenWidth * 0.3,
-                        height: screenWidth * 0.3,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: Colors.white,
-                            width: screenWidth*0.005
-                          ),
-                          image: const DecorationImage(
-                            image: AssetImage(
-                                'assets/images/jpg/profile_image.jpg'), // Replace with your profile image path
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(top: screenHeight*0.29,left: screenWidth*0.88),
-                    child: Container(
-                      width: screenWidth * 0.1,
-                      height: screenWidth * 0.1,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          Assets.svgCamera,
-                          width: screenWidth * 0.07,
-                          height: screenWidth * 0.07,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: screenHeight * 0.35,
-                    left: screenWidth / 1.7,
-                    child: Container(
-                      width: screenWidth * 0.08,
-                      height: screenWidth * 0.08,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          Assets.svgCamera,
-                          width: screenWidth * 0.06,
-                          height: screenWidth * 0.06,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(top: screenHeight*0.365,left: screenWidth*0.88),
-                    child: SvgPicture.asset(
-                      Assets.svgEdit,
-                      width: screenWidth * 0.08,
-                      height: screenWidth * 0.08,
                       color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        Assets.svgCamera,
+                        width: screenWidth * 0.07,
+                        height: screenWidth * 0.07,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
-                  Padding(
-                    padding:  EdgeInsets.only(top: screenHeight*0.375,left: screenWidth*0.02),
-                    child: Text("55 Views",
-                        style: AppFontStyles.mediumH6.copyWith(color: Colors.white),),
-                  ),
-                ],
-              ),
+                ),
+
+
+              ],
             ),
             Text(
               "John Doe",

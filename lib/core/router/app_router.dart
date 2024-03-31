@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_flutter_user/features/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/presentation/pages/my_profile_screen.dart';
+import '../../features/more/presentation/pages/more_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
@@ -8,11 +9,11 @@ class AppRouter {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
 
-        case AppRoutes.myProfileScreen:
-          return const MyProfile();
+
 
         case AppRoutes.bottomNavBarScreen:
           return const BottomNavBar();
+
 
         default:
           return const Scaffold(
