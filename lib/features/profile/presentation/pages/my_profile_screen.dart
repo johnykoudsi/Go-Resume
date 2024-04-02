@@ -7,6 +7,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/presentation/widgets/contact_info_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../widgets/custom_card_widget.dart';
 import '../widgets/education_and_certificates_widget.dart';
 import '../widgets/profile_image_widget.dart';
@@ -156,7 +157,7 @@ class _MyProfileState extends State<MyProfile> {
             ),
             CustomCard(title:"Experiences",operation: "Manage",jobs: jobs),
             SizedBox(height: screenHeight*0.02,),
-            CustomCard(title:"Skills",operation: "Manage",skills: skills),
+            CustomCard(title:"Skills",operation: "Manage",skills: skills,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.mySkills);},),
             SizedBox(height: screenHeight*0.02,),
             CustomCard(title:"Education & Certificates",operation: "Manage",educationAndCertificates: educationAndCertificates),
             SizedBox(height: screenHeight*0.02,),

@@ -40,7 +40,7 @@ class ProfileImageWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "${viewsNumber} Views",
+                      "$viewsNumber Views",
                       style:
                           AppFontStyles.mediumH6.copyWith(color: Colors.white),
                     ),

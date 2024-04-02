@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/presentation/widgets/contact_info_widget.dart';
@@ -12,6 +13,7 @@ class CustomCard extends StatelessWidget {
   final List<ContactInfoWidget>? contactInfo;
   final String title;
   final String operation;
+  final VoidCallback? onOperationPressed;
 
   const CustomCard({
     Key? key,
@@ -21,6 +23,7 @@ class CustomCard extends StatelessWidget {
     this.contactInfo,
     required this.title,
     required this.operation,
+    this.onOperationPressed,
   }) : super(key: key);
 
   @override
@@ -50,9 +53,12 @@ class CustomCard extends StatelessWidget {
                     title,
                     style: AppFontStyles.boldH6,
                   ),
-                  Text(
-                    operation,
-                    style: AppFontStyles.boldH6.copyWith(color: Colors.red),
+                  GestureDetector(
+                    onTap: onOperationPressed,
+                    child: Text(
+                      operation,
+                      style: AppFontStyles.boldH6.copyWith(color: Colors.red),
+                    ),
                   ),
                 ],
               ),
