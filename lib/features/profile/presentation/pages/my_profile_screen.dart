@@ -120,7 +120,7 @@ class _MyProfileState extends State<MyProfile> {
                 ),
                 Padding(
                   padding:  EdgeInsets.only(top:screenHeight * 0.21 ),
-                  child: const ProfileImageWidget(),
+                  child: const ProfileImageWidget(profileImage: 'assets/images/jpg/profile_image.jpg', viewsNumber: '55',),
                 ),
 
                 Positioned(

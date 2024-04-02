@@ -8,7 +8,12 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import '../../../../generated/assets.dart';
 
 class ProfileImageWidget extends StatelessWidget {
-  const ProfileImageWidget({Key? key}) : super(key: key);
+  final String profileImage;
+  final String viewsNumber;
+  const ProfileImageWidget({Key? key,
+  required this.profileImage,
+  required this.viewsNumber,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,7 @@ class ProfileImageWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "55 Views",
+                      "${viewsNumber} Views",
                       style:
                           AppFontStyles.mediumH6.copyWith(color: Colors.white),
                     ),
@@ -62,9 +67,9 @@ class ProfileImageWidget extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(
                       color: Colors.white, width: screenWidth * 0.005),
-                  image: const DecorationImage(
+                  image:  DecorationImage(
                     image: AssetImage(
-                        'assets/images/jpg/profile_image.jpg'), // Replace with your profile image path
+                        profileImage), // Replace with your profile image path
                     fit: BoxFit.cover,
                   ),
                 ),
