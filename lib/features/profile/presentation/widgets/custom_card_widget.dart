@@ -54,7 +54,9 @@ class CustomCard extends StatelessWidget {
                     style: AppFontStyles.boldH6,
                   ),
                   GestureDetector(
-                    onTap: onOperationPressed,
+                    onTap:
+                      onOperationPressed,
+
                     child: Text(
                       operation,
                       style: AppFontStyles.boldH6.copyWith(color: Colors.red),
