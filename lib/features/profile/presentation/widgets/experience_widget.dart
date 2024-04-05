@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
-class JobWidget extends StatelessWidget {
+class ExperienceWidget extends StatelessWidget {
   final String role;
   final String startDate;
   final String endDate;
@@ -10,7 +10,7 @@ class JobWidget extends StatelessWidget {
   final String description;
 
 
-  const JobWidget({
+  const ExperienceWidget({
     Key? key,
     required this.role,
     required this.startDate,

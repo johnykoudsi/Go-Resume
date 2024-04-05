@@ -12,7 +12,7 @@ import '../widgets/custom_card_widget.dart';
 import '../widgets/education_and_certificates_widget.dart';
 import '../widgets/profile_image_widget.dart';
 import '../widgets/skill_widget.dart';
-import '../widgets/job_widget.dart';
+import '../widgets/experience_widget.dart';
 
 class MyProfile extends StatefulWidget {
   const MyProfile({Key? key}) : super(key: key);
@@ -27,15 +27,15 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    List<JobWidget> jobs = [
-      const JobWidget(
+    List<ExperienceWidget> jobs = [
+      const ExperienceWidget(
         role: "Software Engineer",
         startDate: "5/2022",
         endDate: "5/2023",
         company: "Tech Company",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
       ),
-      const JobWidget(
+      const ExperienceWidget(
         role: "Another Role",
         startDate: "6/2023",
         endDate: "8/2024",
@@ -155,7 +155,7 @@ class _MyProfileState extends State<MyProfile> {
             SizedBox(
               height: screenHeight * 0.02,
             ),
-            CustomCard(title:"Experiences",operation: "Manage",jobs: jobs),
+            CustomCard(title:"Experiences",operation: "Manage",jobs: jobs,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.myExperiences);},),
             SizedBox(height: screenHeight*0.02,),
             CustomCard(title:"Skills",operation: "Manage",skills: skills,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.mySkills);},),
             SizedBox(height: screenHeight*0.02,),

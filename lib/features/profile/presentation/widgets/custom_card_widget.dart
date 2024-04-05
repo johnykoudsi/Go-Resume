@@ -4,10 +4,10 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/presentation/widgets/contact_info_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/presentation/widgets/education_and_certificates_widget.dart';
 import 'skill_widget.dart';
-import 'job_widget.dart';
+import 'experience_widget.dart';
 
 class CustomCard extends StatelessWidget {
-  final List<JobWidget>? jobs;
+  final List<ExperienceWidget>? jobs;
   final List<SkillWidget>? skills;
   final List<EducationAndCertificatesWidget>? educationAndCertificates;
   final List<ContactInfoWidget>? contactInfo;
@@ -71,7 +71,7 @@ class CustomCard extends StatelessWidget {
                         return Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: screenHeight * 0.01),
-                          child: JobWidget(
+                          child: ExperienceWidget(
                             role: job.role,
                             startDate: job.startDate,
                             endDate: job.endDate,

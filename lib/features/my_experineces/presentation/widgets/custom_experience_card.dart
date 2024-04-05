@@ -1,22 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import '../../../profile/presentation/widgets/skill_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/presentation/widgets/experience_widget.dart';
 
-class CustomSkillsCard extends StatelessWidget {
+class CustomExperiencesCard extends StatelessWidget {
+  const CustomExperiencesCard(
+      {Key? key,
+      required this.title,
+      required this.operation,
+      required this.experience,
+      this.onOperationPressed})
+      : super(key: key);
   final String title;
   final String operation;
-  final SkillWidget skill;
+  final ExperienceWidget experience;
   final VoidCallback? onOperationPressed;
-
-  const CustomSkillsCard({
-    Key? key,
-    required this.title,
-    required this.operation,
-    required this.skill,
-    this.onOperationPressed,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
@@ -59,11 +56,12 @@ class CustomSkillsCard extends StatelessWidget {
               Column(children: [
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
-                  child: SkillWidget(
-                    skillName: skill.skillName,
-                    imagePath: skill.imagePath,
-                    description: skill.description,
-                  ),
+                  child: ExperienceWidget(
+                      description: experience.description,
+                      role: experience.role,
+                      startDate: experience.startDate,
+                      endDate: experience.endDate,
+                      company: experience.company),
                 ),
               ])
             ],
