@@ -9,9 +9,6 @@ class JobWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double getWidth = MediaQuery.of(context).size.width;
-    double getHeight = MediaQuery.of(context).size.height;
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: ElevatedButton(
