@@ -159,7 +159,7 @@ class _MyProfileState extends State<MyProfile> {
             SizedBox(height: screenHeight*0.02,),
             CustomCard(title:"Skills",operation: "Manage",skills: skills,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.mySkills);},),
             SizedBox(height: screenHeight*0.02,),
-            CustomCard(title:"Education & Certificates",operation: "Manage",educationAndCertificates: educationAndCertificates),
+            CustomCard(title:"Education & Certificates",operation: "Manage",educationAndCertificates: educationAndCertificates,onOperationPressed: (){Navigator.of(context).pushNamed(AppRoutes.myEducationAndCertificates);},),
             SizedBox(height: screenHeight*0.02,),
             CustomCard(title:"Contact Info",operation: "Manage",contactInfo: contacts),
           ],

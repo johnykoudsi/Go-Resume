@@ -4,8 +4,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class CustomFloatingButtonWidget extends StatelessWidget {
   final String title;
-  const CustomFloatingButtonWidget({Key? key,
-  required this.title,
+  const CustomFloatingButtonWidget({Key? key, required this.title
   }) : super(key: key);
 
   @override
@@ -15,6 +14,7 @@ class CustomFloatingButtonWidget extends StatelessWidget {
       width: screenWidth*0.17, // Adjust width as needed
       height: screenWidth*0.17, // Adjust height as needed
       child: FloatingActionButton(
+        heroTag: null,
         onPressed: () {
           // Your onPressed logic here
         },

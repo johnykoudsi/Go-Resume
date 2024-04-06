@@ -23,8 +23,6 @@ List<SkillWidget> skills = [
     imagePath: "assets/images/svg/case.svg",
     description: "Computer Skill",
   ),
-
-
 ];
 
 class _MySkillsScreenState extends State<MySkillsScreen> {
@@ -33,7 +31,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Skills",style: AppFontStyles.boldH1,),
+        title: const Text("My Skills",style: AppFontStyles.boldH2,),
         iconTheme: const IconThemeData(size: 25,color: AppColors.fontColor),
       ),
       body:  ListView.builder(
