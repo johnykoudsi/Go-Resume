@@ -8,6 +8,7 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/more/presentation/widgets/more_items_widget.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../generated/assets.dart';
 import '../widgets/employee_on_road_widget.dart';
 
@@ -30,8 +31,8 @@ class _MoreScreenState extends State<MoreScreen> {
           Stack(
             children: [
               const EmployeeOnRoad(),
-              MoreItemsWidget(iconPath: Assets.svgMySubmissions, text: 'My Submissions', topPadding: screenHeight*0.55,),
-              MoreItemsWidget(iconPath: Assets.svgNotification, text: 'Notifications', topPadding: screenHeight*0.65,),
+              MoreItemsWidget(iconPath: Assets.svgMySubmissions, text: 'My Submissions', topPadding: screenHeight*0.55,onTap: (){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);},),
+              MoreItemsWidget(iconPath: Assets.svgNotification, text: 'Notifications', topPadding: screenHeight*0.65,onTap: (){Navigator.of(context).pushNamed(AppRoutes.myNotifications);}),
               MoreItemsWidget(iconPath: Assets.svgLanguage, text: 'Language', topPadding: screenHeight*0.75,),
               MoreItemsWidget(iconPath: Assets.svgUpdate, text: 'Update', topPadding: screenHeight*0.85,),
               Padding(
