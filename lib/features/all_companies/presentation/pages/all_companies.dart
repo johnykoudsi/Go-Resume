@@ -5,6 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_recruitment_flutter_user/features/all_companies/presentation/widgets/company_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
+import '../../../../core/router/app_routes.dart';
+
 class AllCompaniesScreen extends StatelessWidget {
   const AllCompaniesScreen({super.key});
 
@@ -16,7 +18,10 @@ class AllCompaniesScreen extends StatelessWidget {
         centerTitle: false,
         actions: [
           IconButton(
-              onPressed: () {}, icon: SvgPicture.asset(Assets.svgNotification))
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.myNotifications);
+
+              }, icon: SvgPicture.asset(Assets.svgNotification))
         ],
       ),
       body: AlignedGridView.count(

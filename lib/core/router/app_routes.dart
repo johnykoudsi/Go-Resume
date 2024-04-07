@@ -8,6 +8,7 @@ class AppRoutes {
   static const String myEducationAndCertificates = "/my_education_and_certificates";
   static const String mySubmissions = "/my_submissions";
   static const String myNotifications = "/my_notifications";
+  static const String jobDetails = "/job_details";
 
 
 

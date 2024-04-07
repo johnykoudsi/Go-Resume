@@ -8,6 +8,8 @@ import 'package:smart_recruitment_flutter_user/features/home/presentation/widget
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 
+import '../../../../core/router/app_routes.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -32,7 +34,9 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: false,
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.myNotifications);
+              },
               icon: SvgPicture.asset(
                 Assets.svgNotification,
                 color: Colors.white,

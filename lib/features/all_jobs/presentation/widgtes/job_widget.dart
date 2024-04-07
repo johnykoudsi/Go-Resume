@@ -4,6 +4,8 @@ import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
+import '../../../../core/router/app_routes.dart';
+
 class JobWidget extends StatelessWidget {
   const JobWidget({super.key});
 
@@ -23,7 +25,10 @@ class JobWidget extends StatelessWidget {
             borderRadius: AppBorders.k15BorderRadius,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.jobDetails);
+
+        },
         child: Container(
           padding: const EdgeInsets.all(18),
           height: 160,
@@ -66,9 +71,18 @@ class JobWidget extends StatelessWidget {
                     style: AppFontStyles.regularH6
                         .copyWith(color: AppColors.kGreyColor),
                   ),
-                  Text(
-                    "Open",
-                    style: AppFontStyles.boldH5.copyWith(color: AppColors.kGreenColor),
+                  Row(
+                    children: [
+                      const Icon(Icons.fiber_manual_record,
+                        size: 10,
+                        color: AppColors.kGreenColor,
+                      ),
+                      const SizedBox(width: 2,),
+                      Text(
+                        "Open",
+                        style: AppFontStyles.boldH5.copyWith(color: AppColors.kGreenColor),
+                      ),
+                    ],
                   ),
                 ],
               ),
