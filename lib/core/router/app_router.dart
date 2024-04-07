@@ -6,15 +6,15 @@ import 'package:smart_recruitment_flutter_user/features/my_experineces/presentat
 import 'package:smart_recruitment_flutter_user/features/my_notifications/presentation/pages/my_notifications_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_skills/presentation/pages/my_skills_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/profile/presentation/pages/my_profile_screen.dart';
-import '../../features/more/presentation/pages/more_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/splash/presentation/pages/splash_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
-
+        case AppRoutes.splashScreen:
+          return const SplashScreen();
         case AppRoutes.bottomNavBarScreen:
           return const BottomNavBar();
         case AppRoutes.mySkills:

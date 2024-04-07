@@ -5,6 +5,8 @@ class Assets {
   static const String jpgCarousel = 'assets/images/jpg/carousel.jpg';
   static const String jpgCoverImage = 'assets/images/jpg/cover_image.jpg';
   static const String jpgProfileImage = 'assets/images/jpg/profile_image.jpg';
+  static const String pngGoResumeLogo = 'assets/images/png/go_resume_logo.png';
+  static const String pngImg = 'assets/images/png/splash.png';
   static const String svgCamera = 'assets/images/svg/camera.svg';
   static const String svgCase = 'assets/images/svg/case.svg';
   static const String svgEdit = 'assets/images/svg/edit.svg';
@@ -21,6 +23,7 @@ class Assets {
   static const String svgProfile = 'assets/images/svg/Profile.svg';
   static const String svgRoad = 'assets/images/svg/road.svg';
   static const String svgSignOut = 'assets/images/svg/sign_out.svg';
+  static const String svgSplashScreenEmployee = 'assets/images/svg/splash_screen_employee.svg';
   static const String svgStar = 'assets/images/svg/star.svg';
   static const String svgTelegram = 'assets/images/svg/telegram.svg';
   static const String svgUpdate = 'assets/images/svg/update.svg';

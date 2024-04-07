@@ -157,38 +157,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             SizedBox(
               height: screenHeight * 0.03,
             ),
-      // Container(
-      //   height: 48,
-      //   decoration: BoxDecoration(
-      //     gradient: AppColors.kLinearColor,
-      //     borderRadius: AppBorders.k15BorderRadius,
-      //   ),
-      //   child: ElevatedButton(
-      //     style: ElevatedButton.styleFrom(
-      //       backgroundColor: Colors.transparent,
-      //       shadowColor: Colors.transparent,
-      //       foregroundColor: AppColors.kMainColor100,
-      //       elevation: 0,
-      //       disabledBackgroundColor: AppColors.kGreyColor,
-      //       animationDuration: const Duration(milliseconds: 250),
-      //       minimumSize: Size(double.infinity, screenHeight * 0.045),
-      //       maximumSize: Size(double.infinity, screenHeight * 0.1),
-      //       shape: const RoundedRectangleBorder(
-      //         borderRadius: AppBorders.k8BorderRadius, // <-- Radius
-      //       ),
-      //     ),
-      //     onPressed: (){},
-      //     child: Text(
-      //       "title",
-      //       textAlign: TextAlign.center,
-      //       style: const TextStyle(
-      //         color: AppColors.kBackGroundColor,
-      //         fontWeight: AppFontWeight.bold,
-      //         fontSize: 18,
-      //       ),
-      //     ),
-      //   ),
-      // ),
             ElevatedButtonWidget(title: "Apply",onPressed: (){},),
 
           ],
