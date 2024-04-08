@@ -2,7 +2,8 @@
 
 class AppRoutes {
 
-  static const String splashScreen = "/";
+  static const String login = "/";
+  static const String splashScreen = "/splash";
   static const String bottomNavBarScreen = "/bottom_nav_bar";
   static const String mySkills = "/my_skills";
   static const String myExperiences = "/my_experiences";
