@@ -1,30 +1,32 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
+import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/widgets/user_type_widget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+import '../../../../../core/router/app_routes.dart';
+
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController phoneController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController repeatPasswordController = TextEditingController();
+  String? _selectedUserType="Applicant";
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     final double heightBetweenFields = screenHeight * 0.015;
-
     return Scaffold(
       body: Form(
         key: _key,
@@ -35,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: screenHeight*0.1,),
+                SizedBox(height: screenHeight*0.05,),
                 ShaderMask(
                   blendMode: BlendMode.srcIn,
                   shaderCallback: (Rect bounds) {
@@ -47,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const Text(
-                  "Enter your phone number to login",
+                  "Enter your information to signup",
                   style: AppFontStyles.mediumH6,
                 ),
                 Column(
@@ -55,9 +57,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     // phone number text field
                     SizedBox(
-                      height: screenHeight * 0.1,
+                      height: screenHeight * 0.05,
                     ),
-
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: phoneController,
@@ -69,8 +70,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         return null;
                       },
-                      hintText: '+96347924893',
+                      hintText: 'Example: +96347924893',
                       textInputType: TextInputType.phone,
+                    ),
+                    SizedBox(height: heightBetweenFields,),
+                    CustomTextField(
+                      action: TextInputAction.done,
+                      controller: nameController,
+                      label: "Full Name",
+                      onlyNumber: false,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Full Name is required";
+                        }
+                        return null;
+                      },
+                      hintText: 'Example: John Due',
+                      textInputType: TextInputType.visiblePassword,
+                      passwordBool: false,
                     ),
                     SizedBox(height: heightBetweenFields,),
                     CustomTextField(
@@ -88,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         }
                         return null;
                       },
-                      hintText: '12345678a',
+                      hintText: 'Example: 12345678a',
                       textInputType: TextInputType.visiblePassword,
                       passwordBool: true,
                     ),
@@ -96,19 +113,47 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: heightBetweenFields,
                     ),
+                    CustomTextField(
+                      action: TextInputAction.done,
+                      controller: repeatPasswordController,
+                      label: "Repeat Password",
+                      onlyNumber: false,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Repeat Password is required";
+                        }
+                        RegExp regex = RegExp(r'^(?=.*?[a-z]).{8,}$');
+                        if (!regex.hasMatch(value)) {
+                          return 'Please Enter valid password';
+                        }
+                        if (passwordController.value != repeatPasswordController.value) {
+                          return "Doesn't match";
+                        }
+                        return null;
+                      },
+                      hintText: 'Example: 12345678a',
+                      textInputType: TextInputType.visiblePassword,
+                      passwordBool: true,
+                    ),
+                    SizedBox(
+                      height: heightBetweenFields*2,
+                    ),
+                    UserTypeWidget(selectedUserType: _selectedUserType, onUserTypeSelected: (value){setState(() {
+                      _selectedUserType=value;
+                    });})
                   ],
                 ),
-                SizedBox(height: screenHeight*0.1,),
-                ElevatedButtonWidget(title: "Login",onPressed: (){},),
-                SizedBox(height: screenHeight*0.1,),
+                SizedBox(height: screenHeight*0.05,),
+                ElevatedButtonWidget(title: "Signup",onPressed: (){},),
+                SizedBox(height: screenHeight*0.05,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                  const Text("Don't have account?",style: AppFontStyles.mediumH4,),
-                  GestureDetector(
-                      onTap: (){Navigator.popAndPushNamed(context, AppRoutes.signup);},
-                      child: Text(" Signup",style: AppFontStyles.mediumH4.copyWith(color: AppColors.kMainColor100),))
-                ],)
+                    const Text("Already have account?",style: AppFontStyles.mediumH4,),
+                    GestureDetector(
+                        onTap: (){Navigator.popAndPushNamed(context, AppRoutes.login);},
+                        child: Text(" Login",style: AppFontStyles.mediumH4.copyWith(color: AppColors.kMainColor100),))
+                  ],)
               ],
             ),
           ],

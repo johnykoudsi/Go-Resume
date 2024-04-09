@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return Scaffold(
       body: SizedBox(
-         height: screenHeight*0.9,
+         height: screenHeight,
          width: screenWidth,
          child:  const SplashLogoWidget()),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/pages/login_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/pages/signup-screen.dart';
 import 'package:smart_recruitment_flutter_user/features/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/job_details/presentation/pages/job_details_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_education_and_certificates/presentation/pages/my_education_and_certificates_screen.dart';
@@ -18,6 +19,8 @@ class AppRouter {
           return const SplashScreen();
         case AppRoutes.login:
           return const LoginScreen();
+        case AppRoutes.signup:
+          return const SignupScreen();
         case AppRoutes.bottomNavBarScreen:
           return const BottomNavBar();
         case AppRoutes.mySkills:

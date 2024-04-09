@@ -13,7 +13,7 @@ class SplashLogoWidget extends StatelessWidget {
     return  Stack(
       children: [
         Positioned(
-          top: screenHeight*0.1,
+          top: screenHeight*0.2,
           child: SvgPicture.asset(
             Assets.svgSplashScreenEmployee,
             width: screenWidth,
@@ -21,7 +21,7 @@ class SplashLogoWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: screenHeight*0.1,
+          top: screenHeight*0.2,
           left: screenWidth*0.1,
           right: screenWidth*0.1,
           child: Image(
