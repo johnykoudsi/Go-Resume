@@ -144,7 +144,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   ],
                 ),
                 SizedBox(height: screenHeight*0.05,),
-                ElevatedButtonWidget(title: "Signup",onPressed: (){},),
+                ElevatedButtonWidget(title: "Signup",onPressed: (){
+                 Navigator.popAndPushNamed(context, AppRoutes.verificationCode);
+                },),
                 SizedBox(height: screenHeight*0.05,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
