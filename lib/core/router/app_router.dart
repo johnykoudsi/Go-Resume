@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/pages/login_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/pages/signup-screen.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/pages/verification_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/job_details/presentation/pages/job_details_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/my_education_and_certificates/presentation/pages/my_education_and_certificates_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/my_experineces/presentation/pages/my_experiences_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_notifications/presentation/pages/my_notifications_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/my_skills/presentation/pages/my_skills_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/pages/splash_screen.dart';
+import '../../features/applicant_features/bottom_nav_bar/bottom_nav_bar.dart';
+import '../../features/applicant_features/my_education_and_certificates/presentation/pages/my_education_and_certificates_screen.dart';
+import '../../features/applicant_features/my_experineces/presentation/pages/my_experiences_screen.dart';
+import '../../features/applicant_features/my_skills/presentation/pages/my_skills_screen.dart';
+import '../../features/applicant_features/my_submissions/presentation/pages/my_submissions_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
