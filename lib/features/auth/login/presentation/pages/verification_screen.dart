@@ -5,6 +5,8 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:pinput/pinput.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/widgets/pin_input_widget.dart';
 
+import '../widgets/count_down_timer_widget.dart';
+
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({Key? key}) : super(key: key);
 
@@ -12,6 +14,7 @@ class VerificationScreen extends StatefulWidget {
   State<VerificationScreen> createState() => _VerificationScreenState();
 
 }
+
 final controller = TextEditingController();
 final focusNode = FocusNode();
 class _VerificationScreenState extends State<VerificationScreen> {
@@ -87,26 +90,33 @@ class _VerificationScreenState extends State<VerificationScreen> {
               preFilledWidget: PinPutTheme.preFilledWidget,
             ),
             SizedBox(
-              height: screenHeight * 0.18,
+              height: screenHeight * 0.1,
             ),
             ElevatedButtonWidget(
               title: 'Verify',
               onPressed: () {},
             ),
             SizedBox(
-              height: screenHeight * 0.02,
+              height: screenHeight * 0.05,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                TextButton(
-                  child: Text(
-                    "Resend Code",
-                    style: AppFontStyles.mediumH3,
-                  ),
-                  onPressed: () {},
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                     const Text(
+                      "Didn’t receive any code? ",
+                      style: AppFontStyles.mediumH4,
+                    ),
+                     Text(
+                      "Resend Code",
+                      style: AppFontStyles.mediumH4.copyWith(color: AppColors.kMainColor100),
+                    ),
+                  ],
                 ),
+                CountdownTimer(),
               ],
             ),
           ],
