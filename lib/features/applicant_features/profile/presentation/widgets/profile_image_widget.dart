@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_profile_image.dart';
 
 import '../../../../../generated/assets.dart';
 
@@ -61,20 +62,7 @@ class ProfileImageWidget extends StatelessWidget {
         Center(
           child: Stack(
             children: [
-              Container(
-                width: screenWidth * 0.35,
-                height: screenWidth * 0.35,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                      color: Colors.white, width: screenWidth * 0.005),
-                  image:  DecorationImage(
-                    image: AssetImage(
-                        profileImage), // Replace with your profile image path
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              CircularProfileImage(borderColor: Colors.white, image: profileImage,width: screenWidth * 0.35,height: screenWidth * 0.35,),
               Positioned(
                 bottom: 2,
                 right: 0,

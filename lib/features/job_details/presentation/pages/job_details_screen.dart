@@ -1,14 +1,13 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
-import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job_details/presentation/widgets/description_item_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/job_details/presentation/widgets/top_applicants_widget.dart';
 
 class JobDetailsScreen extends StatefulWidget {
-
-  const JobDetailsScreen({Key? key}) : super(key: key);
+final bool canApply;
+  const JobDetailsScreen({Key? key,this.canApply=true}) : super(key: key);
 
   @override
   State<JobDetailsScreen> createState() => _JobDetailsScreenState();
@@ -158,7 +157,21 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             SizedBox(
               height: screenHeight * 0.03,
             ),
-            ElevatedButtonWidget(title: "Apply",onPressed: (){},),
+            widget.canApply ?
+            ElevatedButtonWidget(title: "Apply",onPressed: (){},)
+          : Column(
+            children: [
+              Container(
+                height: screenWidth * 0.011, // Adjust height as needed
+                decoration: BoxDecoration(
+                  color: Colors.red, // Divider color
+                  borderRadius: BorderRadius.circular(
+                      screenWidth * 0.01), // Rounded corners
+                ),
+              ),
+              const TopApplicantsWidget(),
+            ],
+          ),
 
           ],
         ),
