@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/more/presentation/pages/more_screen.dart';
-
 import '../../../applicant_features/all_companies/presentation/pages/all_companies.dart';
 import '../../../applicant_features/all_jobs/presentation/pages/all_jobs.dart';
 import '../../../applicant_features/profile/presentation/pages/my_profile_screen.dart';
-import '../../home/presentation/pages/my_jobs_screen.dart';
+import '../../my_jobs/presentation/pages/my_jobs_screen.dart';
 
 
 class GetSelectedRecruiterScreenByIndex extends StatelessWidget {

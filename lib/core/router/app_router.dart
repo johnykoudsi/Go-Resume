@@ -5,6 +5,7 @@ import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/
 import 'package:smart_recruitment_flutter_user/features/job_details/presentation/pages/job_details_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_notifications/presentation/pages/my_notifications_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/pages/splash_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/recruiter_features/all_applicants/presentation/pages/all_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/bottom_nav_bar/recruiter_bottom_nav_bar.dart';
 import '../../features/applicant_features/bottom_nav_bar/bottom_nav_bar.dart';
 import '../../features/applicant_features/my_education_and_certificates/presentation/pages/my_education_and_certificates_screen.dart';
@@ -41,6 +42,8 @@ class AppRouter {
           return const MyNotification();
         case AppRoutes.jobDetails:
           return const JobDetailsScreen();
+        case AppRoutes.allApplicants:
+          return const AllApplicantsScreen();
 
         default:
           return const Scaffold(

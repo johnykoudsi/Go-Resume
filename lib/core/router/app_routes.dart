@@ -14,6 +14,7 @@ class AppRoutes {
   static const String mySubmissions = "/my_submissions";
   static const String myNotifications = "/my_notifications";
   static const String jobDetails = "/job_details";
+  static const String allApplicants = "/all_applicants";
 
 
 

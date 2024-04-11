@@ -42,9 +42,10 @@ class JobApplicantsWidget extends StatelessWidget {
                   CircularProfileImage(borderColor: AppColors.kMainColor100, image: Assets.jpgProfileImage,width: screenWidth*0.13,height: screenWidth*0.13,),
                   SizedBox(width: screenWidth*0.02,),
                   const Text("John Due",style: AppFontStyles.boldH5,),
+                  const Spacer(),
                   canReject
                       ? IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.edit))
+                          onPressed: () {}, icon: const Icon(Icons.cancel_outlined,color: AppColors.kRedColor,))
                       : const Text(""),
                 ],
               ),
