@@ -6,6 +6,7 @@ class Assets {
   static const String jpgCoverImage = 'assets/images/jpg/cover_image.jpg';
   static const String jpgProfileImage = 'assets/images/jpg/profile_image.jpg';
   static const String pngGoResumeLogo = 'assets/images/png/go_resume_logo.png';
+  static const String svgAdd = 'assets/images/svg/add.svg';
   static const String svgCamera = 'assets/images/svg/camera.svg';
   static const String svgCase = 'assets/images/svg/case.svg';
   static const String svgEdit = 'assets/images/svg/edit.svg';

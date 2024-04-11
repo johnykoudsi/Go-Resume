@@ -7,6 +7,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job_details/presentation/widgets/description_item_widget.dart';
 
 class JobDetailsScreen extends StatefulWidget {
+
   const JobDetailsScreen({Key? key}) : super(key: key);
 
   @override
@@ -150,10 +151,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             SizedBox(
               height: screenHeight * 0.02,
             ),
-             DescriptionItemWidget(description: "More than ten years of expertise in the field of mobile development"),
-             DescriptionItemWidget(description: "Proficient in React Native with deep understanding of UX best practices"),
-             DescriptionItemWidget(description: "Understanding deeply on GraphQL, REST, the fundamentals of HTTP, and how to create stable APIs will be a plus."),
-             DescriptionItemWidget(description: "Experience designing consumer-facing iOS and Android applications at scale with a focus on organizational effect (More than 1M users is plus)"),
+             const DescriptionItemWidget(description: "More than ten years of expertise in the field of mobile development"),
+             const DescriptionItemWidget(description: "Proficient in React Native with deep understanding of UX best practices"),
+             const DescriptionItemWidget(description: "Understanding deeply on GraphQL, REST, the fundamentals of HTTP, and how to create stable APIs will be a plus."),
+             const DescriptionItemWidget(description: "Experience designing consumer-facing iOS and Android applications at scale with a focus on organizational effect (More than 1M users is plus)"),
             SizedBox(
               height: screenHeight * 0.03,
             ),
