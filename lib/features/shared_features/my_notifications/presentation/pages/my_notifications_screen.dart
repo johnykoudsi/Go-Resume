@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/features/my_notifications/presentation/widgets/notification_widget.dart';
+
+import '../widgets/notification_widget.dart';
 
 class MyNotification extends StatefulWidget {
   const MyNotification({Key? key}) : super(key: key);

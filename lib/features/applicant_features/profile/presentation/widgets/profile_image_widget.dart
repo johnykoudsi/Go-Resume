@@ -10,11 +10,13 @@ import '../../../../../generated/assets.dart';
 
 
 class ProfileImageWidget extends StatelessWidget {
+  final bool visitor;
   final String profileImage;
   final String viewsNumber;
-  const ProfileImageWidget({Key? key,
+   const ProfileImageWidget({Key? key,
   required this.profileImage,
   required this.viewsNumber,
+    this.visitor=false,
   }) : super(key: key);
 
   @override
@@ -47,12 +49,13 @@ class ProfileImageWidget extends StatelessWidget {
                           AppFontStyles.mediumH6.copyWith(color: Colors.white),
                     ),
                     SizedBox(width: screenWidth * 0.65),
+                    !visitor ?
                     SvgPicture.asset(
                       Assets.svgEdit,
                       width: screenWidth * 0.08,
                       height: screenWidth * 0.08,
                       color: Colors.white,
-                    ),
+                    ): const Text("")
                   ],
                 ),
               ),
@@ -62,7 +65,9 @@ class ProfileImageWidget extends StatelessWidget {
         Center(
           child: Stack(
             children: [
+
               CircularProfileImage(borderColor: Colors.white, image: profileImage,width: screenWidth * 0.35,height: screenWidth * 0.35,),
+              !visitor ?
               Positioned(
                 bottom: 2,
                 right: 0,
@@ -82,7 +87,7 @@ class ProfileImageWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
+              ): const Text(""),
             ],
           ),
         ),

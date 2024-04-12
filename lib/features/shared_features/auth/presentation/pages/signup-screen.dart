@@ -3,9 +3,8 @@ import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/widgets/user_type_widget.dart';
-
-import '../../../../../core/router/app_routes.dart';
+import '../../../../../../core/router/app_routes.dart';
+import '../widgets/user_type_widget.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({Key? key}) : super(key: key);

@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
-import '../../../../generated/assets.dart';
 
 class MoreItemsWidget extends StatelessWidget {
   final String iconPath;

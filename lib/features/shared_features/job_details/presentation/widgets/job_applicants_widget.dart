@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/profile/presentation/pages/applicant_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_profile_image.dart';
-
-import '../../../../generated/assets.dart';
+import '../../../../../generated/assets.dart';
 
 class JobApplicantsWidget extends StatelessWidget {
   final bool canReject;
@@ -30,7 +30,12 @@ class JobApplicantsWidget extends StatelessWidget {
             borderRadius: AppBorders.k15BorderRadius,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context ,  MaterialPageRoute(
+            builder: (context) => const ApplicantProfileScreen(visitor: true), // or false based on your logic
+          ),
+          );
+        },
         child: Container(
           padding: const EdgeInsets.all(18),
           child: Column(

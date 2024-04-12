@@ -13,14 +13,15 @@ import '../widgets/profile_image_widget.dart';
 import '../widgets/skill_widget.dart';
 import '../widgets/experience_widget.dart';
 
-class MyProfile extends StatefulWidget {
-  const MyProfile({Key? key}) : super(key: key);
+class ApplicantProfileScreen extends StatefulWidget {
+ final bool visitor;
+  const ApplicantProfileScreen({Key? key,  this.visitor=false,}) : super(key: key);
 
   @override
-  State<MyProfile> createState() => _MyProfileState();
+  State<ApplicantProfileScreen> createState() => _ApplicantProfileScreenState();
 }
 
-class _MyProfileState extends State<MyProfile> {
+class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   @override
 
   Widget build(BuildContext context) {
@@ -120,9 +121,9 @@ class _MyProfileState extends State<MyProfile> {
                 ),
                 Padding(
                   padding:  EdgeInsets.only(top:screenHeight * 0.21 ),
-                  child: const ProfileImageWidget(profileImage: 'assets/images/jpg/profile_image.jpg', viewsNumber: '55',),
+                  child:  ProfileImageWidget(visitor: widget.visitor,profileImage: 'assets/images/jpg/profile_image.jpg', viewsNumber: '55',),
                 ),
-
+                !widget.visitor ?
                 Positioned(
                   bottom: screenHeight*0.1,
                   right: 2,
@@ -142,7 +143,7 @@ class _MyProfileState extends State<MyProfile> {
                       ),
                     ),
                   ),
-                ),
+                ): const Text(""),
               ],
             ),
             Text(
@@ -152,13 +153,13 @@ class _MyProfileState extends State<MyProfile> {
             SizedBox(
               height: screenHeight * 0.02,
             ),
-            CustomProfileCard(title:"Experiences",operation: "Manage",jobs: jobs,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.myExperiences);},),
+            CustomProfileCard(title:"Experiences",operation: widget.visitor ?"":"Manage",jobs: jobs,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.myExperiences);},),
             SizedBox(height: screenHeight*0.02,),
-            CustomProfileCard(title:"Skills",operation: "Manage",skills: skills,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.mySkills);},),
+            CustomProfileCard(title:"Skills",operation: widget.visitor ?"":"Manage",skills: skills,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.mySkills);},),
             SizedBox(height: screenHeight*0.02,),
-            CustomProfileCard(title:"Education & Certificates",operation: "Manage",educationAndCertificates: educationAndCertificates,onOperationPressed: (){Navigator.of(context).pushNamed(AppRoutes.myEducationAndCertificates);},),
+            CustomProfileCard(title:"Education & Certificates",operation: widget.visitor ?"":"Manage",educationAndCertificates: educationAndCertificates,onOperationPressed: (){Navigator.of(context).pushNamed(AppRoutes.myEducationAndCertificates);},),
             SizedBox(height: screenHeight*0.02,),
-            CustomProfileCard(title:"Contact Info",operation: "Manage",contactInfo: contacts),
+            CustomProfileCard(title:"Contact Info",operation: widget.visitor ?"":"Manage",contactInfo: contacts),
           ],
         ),
       ),

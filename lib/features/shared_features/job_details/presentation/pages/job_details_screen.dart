@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/features/job_details/presentation/widgets/description_item_widget.dart';
-import 'package:smart_recruitment_flutter_user/features/job_details/presentation/widgets/top_applicants_widget.dart';
+
+import '../widgets/description_item_widget.dart';
+import '../widgets/top_applicants_widget.dart';
 
 class JobDetailsScreen extends StatefulWidget {
 final bool canApply;

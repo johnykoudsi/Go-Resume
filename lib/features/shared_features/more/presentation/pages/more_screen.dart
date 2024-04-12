@@ -2,15 +2,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:smart_recruitment_core/utility/theme/app_style.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
-import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/features/more/presentation/widgets/more_items_widget.dart';
 
-import '../../../../core/router/app_routes.dart';
-import '../../../../generated/assets.dart';
+import '../../../../../core/router/app_routes.dart';
+import '../../../../../generated/assets.dart';
 import '../widgets/employee_on_road_widget.dart';
+import '../widgets/more_items_widget.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({Key? key}) : super(key: key);

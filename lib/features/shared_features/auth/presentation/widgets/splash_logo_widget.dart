@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../../../generated/assets.dart';
+import '../../../../../../generated/assets.dart';
 
 class SplashLogoWidget extends StatelessWidget {
   const SplashLogoWidget({Key? key}) : super(key: key);

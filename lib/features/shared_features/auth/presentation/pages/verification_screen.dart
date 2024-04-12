@@ -3,9 +3,8 @@ import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_wi
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:pinput/pinput.dart';
-import 'package:smart_recruitment_flutter_user/features/auth/login/presentation/widgets/pin_input_widget.dart';
-
 import '../widgets/count_down_timer_widget.dart';
+import '../widgets/pin_input_widget.dart';
 
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({Key? key}) : super(key: key);
