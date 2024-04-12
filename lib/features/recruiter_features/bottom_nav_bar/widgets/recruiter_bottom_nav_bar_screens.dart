@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/add_job/presentation/pages/add_job_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/recruiter_features/pinned_applicants/presentation/pages/pinned_applicants_screen.dart';
 import '../../../applicant_features/all_companies/presentation/pages/all_companies.dart';
 import '../../../applicant_features/all_jobs/presentation/pages/all_jobs.dart';
 import '../../../applicant_features/profile/presentation/pages/applicant_profile_screen.dart';
@@ -20,7 +21,7 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
         return const MyJobsScreen();
       }
       if (screenIndex == 1) {
-        return const AllJobsScreen();
+        return const PinnedApplicantsScreen();
       }
       if (screenIndex == 2) {
         return const AddJobScreen();

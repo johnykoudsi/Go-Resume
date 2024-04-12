@@ -20,6 +20,7 @@ class Assets {
   static const String svgMySubmissions = 'assets/images/svg/my_submissions.svg';
   static const String svgNotification = 'assets/images/svg/Notification.svg';
   static const String svgPhone = 'assets/images/svg/phone.svg';
+  static const String svgPin = 'assets/images/svg/pin.svg';
   static const String svgProfile = 'assets/images/svg/Profile.svg';
   static const String svgRoad = 'assets/images/svg/road.svg';
   static const String svgSignOut = 'assets/images/svg/sign_out.svg';

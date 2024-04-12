@@ -64,7 +64,7 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
                       widgetIndex: 1,
-                      svgPath: Assets.svgStar,
+                      svgPath: Assets.svgPin,
                       selectedIndex: selectedIndex,
                     ),
                     label: 'Pinned'.tr(),
