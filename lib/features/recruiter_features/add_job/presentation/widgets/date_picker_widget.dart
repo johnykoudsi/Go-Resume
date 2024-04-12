@@ -25,8 +25,9 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         return SizedBox(
           height: MediaQuery.of(context).size.height * 0.3, // Adjust the height as needed
           child: CupertinoDatePicker(
+            minimumDate:_selectedDate ?? DateTime.now().add(const Duration(days: 1)), // Set minimum date to tomorrow
             mode: CupertinoDatePickerMode.date,
-            initialDateTime: _selectedDate ?? DateTime.now(),
+            initialDateTime: _selectedDate ?? DateTime.now().add(const Duration(days: 1)),
             onDateTimeChanged: (DateTime newDate) {
               setState(() {
                 _selectedDate = newDate;
@@ -53,7 +54,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
       children: [
         Text(
           widget.label,
-          style: AppFontStyles.mediumH3,
+          style: AppFontStyles.mediumH4,
         ),
         const SizedBox(height: 8),
         Container(
@@ -65,10 +66,10 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           child: Row(
             children: [
               IconButton(
-                icon: Icon(Icons.calendar_today),
+                icon:  Icon(Icons.calendar_month,color: _selectedDate==null? AppColors.kGreyColor:AppColors.kMainColor100,),
                 onPressed: () => _selectDate(context),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                 child: InkWell(
                   onTap: () => _selectDate(context),
