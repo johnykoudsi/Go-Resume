@@ -5,8 +5,9 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class BenefitsWidget extends StatelessWidget {
   final VoidCallback? onPressed;
+  final String description;
 
-  const BenefitsWidget({Key? key, this.onPressed}) : super(key: key);
+  const BenefitsWidget({Key? key, this.onPressed,  required this.description}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +28,18 @@ class BenefitsWidget extends StatelessWidget {
         padding: const EdgeInsets.all(18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Text(
-              "Benefits",
-              style: AppFontStyles.mediumH3,
+            const Row(
+              children: [
+                Text(
+                  "Benefits",
+                  style: AppFontStyles.mediumH3,
+                ),
+              ],
             ),
             Text(
-              "Add some benefits that your company will provide for the position you're offering.",
+              description,
               style: AppFontStyles.mediumH4.copyWith(color: AppColors.kGreyColor),
             ),
           ],

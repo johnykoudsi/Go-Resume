@@ -9,7 +9,9 @@ import 'package:smart_recruitment_flutter_user/features/recruiter_features/add_j
 
 import '../../../../../core/router/app_routes.dart';
 import '../widgets/benefits_widget.dart';
+import '../../../../../utility/global_widgets/custom_drop_down.dart';
 import '../widgets/description_field.dart';
+import 'benefits_screen.dart';
 
 class AddJobScreen extends StatefulWidget {
   const AddJobScreen({Key? key}) : super(key: key);
@@ -27,23 +29,19 @@ class _AddJobScreenState extends State<AddJobScreen> {
   TextEditingController maximumSalaryController = TextEditingController();
   TextEditingController workHoursController = TextEditingController();
 
-  DateTime? _selectedDate; // Moved outside of the build method
   String? _selectedUserGender="None";
+  List<String> _selectedButtons = [];
 
+  void _handleButtonSelection(List<String> selectedItems) {
+    setState(() {
+      _selectedButtons = selectedItems;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     final double heightBetweenFields = screenHeight * 0.015;
-
-    // Removed the _selectedDate variable from here
-
-    void _updateSelectedDate(DateTime date) {
-      setState(() {
-        print('Selected date: $_selectedDate');
-        _selectedDate = date;
-      });
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -93,7 +91,19 @@ class _AddJobScreenState extends State<AddJobScreen> {
               height: heightBetweenFields * 2,
             ),
             BenefitsWidget(
-              onPressed: () {},
+              onPressed: () {
+                // Navigate to ButtonSelectionScreen and pass the list of items
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ButtonSelectionScreen(
+                      items: const ['14 Paid Vacation Days', 'Free Mobile Line', 'Friday’s Pizza','Paid Trips','Seasonal Bonuses','Flexible Time'],
+                      initiallySelectedItems: _selectedButtons, // Pass initially selected buttons
+                      onSelectionChanged: _handleButtonSelection,
+                    ),
+                  ),
+                );
+              }, description:_selectedButtons.isEmpty? "Add some benefits that your company will provide for the position you're offering.": _selectedButtons.join(', '),
             ),
             SizedBox(
               height: heightBetweenFields * 2,
@@ -147,6 +157,15 @@ class _AddJobScreenState extends State<AddJobScreen> {
               },
               hintText: 'Example: 8 hours',
               textInputType: TextInputType.number,
+            ),
+            SizedBox(
+              height: heightBetweenFields*2,
+            ),
+            CustomDropdown(
+              title: 'Job Type',
+              items: const ['Full Time', 'Part Time', 'Freelance','Outsourcing'],
+              onChanged: (value) {
+              },
             ),
             SizedBox(
               height: heightBetweenFields*2,
