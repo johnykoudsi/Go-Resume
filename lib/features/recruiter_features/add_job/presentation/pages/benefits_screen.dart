@@ -59,7 +59,6 @@ class _ButtonSelectionScreenState extends State<ButtonSelectionScreen> {
               child: Material(
                 elevation: 5,
                 borderRadius: AppBorders.k24BorderRadius,
-
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(

@@ -1,5 +1,7 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
@@ -11,6 +13,7 @@ import '../../../../../core/router/app_routes.dart';
 import '../widgets/benefits_widget.dart';
 import '../../../../../utility/global_widgets/custom_drop_down.dart';
 import '../widgets/description_field.dart';
+import '../../../../../utility/global_widgets/searchable_drop_down_widget.dart';
 import 'benefits_screen.dart';
 
 class AddJobScreen extends StatefulWidget {
@@ -28,9 +31,17 @@ class _AddJobScreenState extends State<AddJobScreen> {
   TextEditingController minimumSalaryController = TextEditingController();
   TextEditingController maximumSalaryController = TextEditingController();
   TextEditingController workHoursController = TextEditingController();
+  final List<String> dropdownItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
 
   String? _selectedUserGender="None";
   List<String> _selectedButtons = [];
+  List<String> myItems = ["Option 1", "Option 2", "Option 3"];
+  String selectedItem = "Option 2"; // Pre-select Option 2
+
+  void onSelect(String selected) {
+    // Handle user selection here
+    print("Selected: $selected");
+  }
 
   void _handleButtonSelection(List<String> selectedItems) {
     setState(() {
@@ -44,6 +55,8 @@ class _AddJobScreenState extends State<AddJobScreen> {
     final double heightBetweenFields = screenHeight * 0.015;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       appBar: AppBar(
         title: const Text(
           "Add Your Job Vacancy",
@@ -121,7 +134,15 @@ class _AddJobScreenState extends State<AddJobScreen> {
               },
               hintText: 'Example: 1000,000 sp',
               textInputType: TextInputType.number,
-
+            ),
+            SizedBox(
+              height: heightBetweenFields*2,
+            ),
+            CustomDropdown(
+              title: 'Compensation',
+              items: const ['Hourly Pay', 'Monthly Salary'],
+              onChanged: (value) {
+              },
             ),
             SizedBox(
               height: heightBetweenFields,
@@ -158,6 +179,10 @@ class _AddJobScreenState extends State<AddJobScreen> {
               hintText: 'Example: 8 hours',
               textInputType: TextInputType.number,
             ),
+            SizedBox(
+              height: heightBetweenFields*2,
+            ),
+            SearchableDropDownWidget(items: myItems, selectedItem: selectedItem, onSelect: onSelect, title: 'Work Field',),
             SizedBox(
               height: heightBetweenFields*2,
             ),
