@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../utility/global_widgets/custom_card.dart';
-import '../../../profile/presentation/widgets/experience_widget.dart';
+import '../../../../shared_features/applicant_profile/presentation/widgets/experience_widget.dart';
 class CustomExperiencesCard extends StatelessWidget {
   const CustomExperiencesCard(
       {Key? key,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../utility/global_widgets/custom_card.dart';
-import '../../../profile/presentation/widgets/education_and_certificates_widget.dart';
+import '../../../../shared_features/applicant_profile/presentation/widgets/education_and_certificates_widget.dart';
 
 class CustomEducationAndCertificatesCard extends StatelessWidget {
   const CustomEducationAndCertificatesCard(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
-import '../../../profile/presentation/widgets/skill_widget.dart';
+import '../../../../shared_features/applicant_profile/presentation/widgets/skill_widget.dart';
 import '../widgets/custom_skills_card.dart';
 
 class MySkillsScreen extends StatefulWidget {

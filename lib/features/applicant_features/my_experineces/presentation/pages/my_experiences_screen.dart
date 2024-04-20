@@ -5,7 +5,7 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
-import '../../../profile/presentation/widgets/experience_widget.dart';
+import '../../../../shared_features/applicant_profile/presentation/widgets/experience_widget.dart';
 import '../widgets/custom_experience_card.dart';
 
 

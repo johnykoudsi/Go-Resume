@@ -146,6 +146,9 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 ): const Text(""),
               ],
             ),
+            SizedBox(
+              height: screenHeight * 0.02,
+            ),
             Text(
               "John Doe",
               style: AppFontStyles.boldH1.copyWith(color: Colors.black),

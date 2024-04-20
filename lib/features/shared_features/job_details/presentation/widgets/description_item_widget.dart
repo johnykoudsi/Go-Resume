@@ -1,10 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-
+//works for both job requirements and company policies
 class DescriptionItemWidget extends StatelessWidget {
   final String description;
-  const DescriptionItemWidget({Key? key, required this.description}) : super(key: key);
+  final String? title;
+  const DescriptionItemWidget({Key? key, required this.description,  this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +19,15 @@ class DescriptionItemWidget extends StatelessWidget {
         SizedBox(width: screenWidth*0.03,),
         Container(
           constraints: BoxConstraints(maxWidth: screenWidth * 0.8),
-          child: Text(description,style: AppFontStyles.mediumH3,
-            softWrap: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              title != null ?
+              Text(title!,style: AppFontStyles.boldH3):const SizedBox(),
+              Text(description,style: AppFontStyles.mediumH3,
+                softWrap: true,
+              ),
+            ],
           ),
         ),
       ],

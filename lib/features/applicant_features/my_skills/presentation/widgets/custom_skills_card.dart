@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
-import '../../../profile/presentation/widgets/skill_widget.dart';
+
+import '../../../../shared_features/applicant_profile/presentation/widgets/skill_widget.dart';
+
 
 class CustomSkillsCard extends StatelessWidget {
   final String title;
