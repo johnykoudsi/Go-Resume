@@ -223,7 +223,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 operation: widget.visitor ? "" : "Manage",
                 contactInfo: contacts),
             const TopJobsSectionWidget(),
-
           ],
         ),
       ),
