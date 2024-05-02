@@ -18,7 +18,7 @@ class TopApplicantsWidget extends StatelessWidget {
               children: [
                 Text(
                   "Applicants",
-                  style: AppFontStyles.mediumH3.copyWith(fontSize: 22),
+                  style: AppFontStyles.mediumH4.copyWith(fontSize: 22),
                 ),
                 TextButton(
                     onPressed: () {Navigator.pushNamed(context, AppRoutes.allApplicants);},

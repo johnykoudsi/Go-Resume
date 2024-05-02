@@ -125,8 +125,8 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 ),
                 !widget.visitor ?
                 Positioned(
-                  bottom: screenHeight*0.1,
-                  right: 2,
+                  bottom: screenHeight * 0.08,
+                  right: 4,
                   child: Container(
                     width: screenWidth * 0.1,
                     height: screenWidth * 0.1,
@@ -151,7 +151,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
             ),
             Text(
               "John Doe",
-              style: AppFontStyles.boldH1.copyWith(color: Colors.black),
+              style: AppFontStyles.boldH2.copyWith(color: Colors.black),
             ),
             SizedBox(
               height: screenHeight * 0.02,

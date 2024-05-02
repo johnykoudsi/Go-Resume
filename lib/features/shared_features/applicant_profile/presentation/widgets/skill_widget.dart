@@ -31,11 +31,11 @@ class SkillWidget extends StatelessWidget {
           children: [
             Text(
               skillName,
-              style: AppFontStyles.boldH5,
+              style: AppFontStyles.boldH6,
             ),
             Text(
               description,
-              style: AppFontStyles.mediumH5,
+              style: AppFontStyles.mediumH6,
             ),
           ],
         ),

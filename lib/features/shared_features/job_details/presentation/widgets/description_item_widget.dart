@@ -23,8 +23,8 @@ class DescriptionItemWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               title != null ?
-              Text(title!,style: AppFontStyles.boldH3):const SizedBox(),
-              Text(description,style: AppFontStyles.mediumH3,
+              Text(title!,style: AppFontStyles.boldH5):const SizedBox(),
+              Text(description,style: AppFontStyles.mediumH5,
                 softWrap: true,
               ),
             ],

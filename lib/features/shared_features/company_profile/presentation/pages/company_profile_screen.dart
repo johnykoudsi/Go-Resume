@@ -133,8 +133,8 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 ),
                 !widget.visitor
                     ? Positioned(
-                        bottom: screenHeight * 0.1,
-                        right: 2,
+                        bottom: screenHeight * 0.08,
+                        right: 4,
                         child: Container(
                           width: screenWidth * 0.1,
                           height: screenWidth * 0.1,
@@ -160,14 +160,17 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             ),
             Text(
               "TechNex Company",
-              style: AppFontStyles.boldH1.copyWith(color: Colors.black),
+              style: AppFontStyles.boldH2.copyWith(color: Colors.black),
+            ),
+            SizedBox(
+              height: screenHeight * 0.02,
             ),
             const CustomCard(
                 title: "Description",
                 operation: "Manage",
                 content: Text(
                   "TechNex Solutions is a leading software development company at the forefront of innovation, dedicated to empowering businesses with cutting-edge technological solutions. With a passion for excellence and a commitment to client satisfaction, we leverage the latest advancements in software development to drive digital transformation and fuel growth for our clients worldwide.",
-                  style: AppFontStyles.mediumH3,
+                  style: AppFontStyles.mediumH4,
                 )),
             SizedBox(
               height: screenHeight * 0.02,
@@ -177,7 +180,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 operation: "Manage",
                 content: Text(
                   "Our vision at TechNex Solutions is to redefine the boundaries of possibility through technology. We strive to be the catalysts of change, revolutionizing industries and empowering organizations to thrive in the digital age.",
-                  style: AppFontStyles.mediumH3,
+                  style: AppFontStyles.mediumH4,
                 )),
             SizedBox(
               height: screenHeight * 0.02,

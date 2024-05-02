@@ -31,7 +31,7 @@ class EducationAndCertificatesWidget extends StatelessWidget {
           children: [
             Text(
               specialization,
-              style: AppFontStyles.boldH5,
+              style: AppFontStyles.boldH6,
             ),
           ],
         ),
@@ -41,18 +41,18 @@ class EducationAndCertificatesWidget extends StatelessWidget {
           children: [
             Text(
               "$startDate - $endDate",
-              style: AppFontStyles.mediumH5,
+              style: AppFontStyles.mediumH6,
             ),
             Text(
               organization,
-              style: AppFontStyles.mediumH5,
+              style: AppFontStyles.mediumH6,
             ),
           ],
         ),
         SizedBox(height: screenHeight*0.01),
         Text(
           description,
-          style: AppFontStyles.mediumH6.copyWith(color: AppColors.kGreyColor),
+          style: AppFontStyles.mediumH7.copyWith(color: AppColors.kGreyColor),
         ),
       ],
     );

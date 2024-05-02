@@ -25,7 +25,7 @@ class NotificationWidget extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: screenWidth * 0.05,
+            width: screenWidth * 0.02,
           ),
           Container(
             width: screenWidth * 0.12,
@@ -48,13 +48,13 @@ class NotificationWidget extends StatelessWidget {
             children: [
               Text(
                 notificationTitle,
-                style: AppFontStyles.boldH5,
+                style: AppFontStyles.boldH6,
               ),
               Container(
                 constraints: BoxConstraints(maxWidth: screenWidth * 0.5),
                 child: Text(
                   notificationDetails,
-                  style: AppFontStyles.mediumH5
+                  style: AppFontStyles.mediumH6
                       .copyWith(color: AppColors.kGreyColor),
                   softWrap: true,
                 ),
@@ -64,10 +64,10 @@ class NotificationWidget extends StatelessWidget {
           const Spacer(),
           Text(
             notificationDate,
-            style: AppFontStyles.mediumH5.copyWith(color: AppColors.kGreyColor),
+            style: AppFontStyles.mediumH6.copyWith(color: AppColors.kGreyColor),
           ),
           SizedBox(
-            width: screenWidth * 0.015,
+            width: screenWidth * 0.02,
           ),
         ],
       ),

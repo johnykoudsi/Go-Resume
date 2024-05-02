@@ -36,46 +36,54 @@ class JobApplicantsWidget extends StatelessWidget {
           ),
           );
         },
-        child: Container(
-          padding: const EdgeInsets.all(18),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  CircularProfileImage(borderColor: AppColors.kMainColor100, image: Assets.jpgProfileImage,width: screenWidth*0.13,height: screenWidth*0.13,),
-                  SizedBox(width: screenWidth*0.02,),
-                  const Text("John Due",style: AppFontStyles.boldH5,),
-                  const Spacer(),
-                  canReject
-                      ? IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.cancel_outlined,color: AppColors.kRedColor,))
-                      : const Text(""),
-                ],
-              ),
-              SizedBox(height: screenWidth*0.01,),
-              const Text(
-                "Software Engineer",
-                style: AppFontStyles.boldH5,
-              ),
-              Text(
-                "Damascus - Syria",
-                style: AppFontStyles.regularH6
-                    .copyWith(color: AppColors.kGreyColor),
-              ),
-              Row(
+        child: Stack(
+          children: [
+            canReject
+                ? Positioned(
+              right: 0,
+                  child: IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.cancel_outlined,color: AppColors.kRedColor,)),
+                )
+                : const Text(""),
+            Container(
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Row(
+                    children: [
+                      CircularProfileImage(borderColor: AppColors.kMainColor100, image: Assets.jpgProfileImage,width: screenWidth*0.13,height: screenWidth*0.13,),
+                      SizedBox(width: screenWidth*0.02,),
+                      const Text("John Due",style: AppFontStyles.boldH6,),
+                      const Spacer(),
+
+                    ],
+                  ),
+                  SizedBox(height: screenWidth*0.01,),
+                  const Text(
+                    "Software Engineer",
+                    style: AppFontStyles.boldH6,
+                  ),
                   Text(
-                    DateFormat.yMd().format(DateTime.now()),
+                    "Damascus - Syria",
                     style: AppFontStyles.regularH6
                         .copyWith(color: AppColors.kGreyColor),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        DateFormat.yMd().format(DateTime.now()),
+                        style: AppFontStyles.regularH6
+                            .copyWith(color: AppColors.kGreyColor),
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

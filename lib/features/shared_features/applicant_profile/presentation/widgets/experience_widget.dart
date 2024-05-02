@@ -31,7 +31,7 @@ class ExperienceWidget extends StatelessWidget {
           children: [
             Text(
               role,
-              style: AppFontStyles.boldH5,
+              style: AppFontStyles.boldH6,
             ),
           ],
         ),
@@ -41,18 +41,18 @@ class ExperienceWidget extends StatelessWidget {
           children: [
             Text(
               "$startDate - $endDate",
-              style: AppFontStyles.mediumH5,
+              style: AppFontStyles.mediumH6,
             ),
             Text(
               company,
-              style: AppFontStyles.mediumH5,
+              style: AppFontStyles.mediumH6,
             ),
           ],
         ),
         SizedBox(height: screenHeight*0.01),
         Text(
           description,
-          style: AppFontStyles.mediumH6.copyWith(color: AppColors.kGreyColor),
+          style: AppFontStyles.mediumH7.copyWith(color: AppColors.kGreyColor),
         ),
       ],
     );

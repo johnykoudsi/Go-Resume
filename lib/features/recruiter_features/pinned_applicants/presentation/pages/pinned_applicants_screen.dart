@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job_details/presentation/widgets/job_applicants_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
@@ -20,7 +21,7 @@ class _PinnedApplicantsScreenState extends State<PinnedApplicantsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Pinned Applicants".tr()),
+        title: Text("Pinned Applicants".tr(),style: AppFontStyles.boldH3,),
         centerTitle: false,
         actions: [
           IconButton(

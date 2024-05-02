@@ -26,17 +26,17 @@ class ProfileImageWidget extends StatelessWidget {
     return Stack(
       children: [
         Positioned(
-          bottom: 0,
+          bottom:1,
           child: Stack(
             children: [
               Container(
                 width: screenWidth,
-                height: screenHeight * 0.08,
+                height: screenHeight * 0.06,
                 decoration:
                     const BoxDecoration(gradient: AppColors.kLinearColor),
               ),
               Positioned(
-                bottom: screenHeight * 0.02,
+                bottom: screenHeight * 0.01,
                 left: screenWidth * 0.02,
                 right: screenWidth * 0.02,
                 child: Row(
@@ -65,7 +65,6 @@ class ProfileImageWidget extends StatelessWidget {
         Center(
           child: Stack(
             children: [
-
               CircularProfileImage(borderColor: Colors.white, image: profileImage,width: screenWidth * 0.35,height: screenWidth * 0.35,),
               !visitor ?
               Positioned(
