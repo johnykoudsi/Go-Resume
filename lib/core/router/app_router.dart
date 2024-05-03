@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/all_applicants/presentation/pages/all_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/bottom_nav_bar/recruiter_bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/company_profile/presentation/pages/company_profile_screen.dart';
@@ -27,7 +28,8 @@ class AppRouter {
         case AppRoutes.signup:
           return const SignupScreen();
         case AppRoutes.verificationCode:
-          return const VerificationScreen();
+          SignUpEvent args = settings.arguments as SignUpEvent;
+          return CodeVerificationScreenPage(signUpEvent: args);
         case AppRoutes.bottomNavBarScreen:
           return const BottomNavBar();
         case AppRoutes.recruiterBottomNavBar:

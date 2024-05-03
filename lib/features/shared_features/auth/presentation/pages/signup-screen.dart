@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
+import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import '../../../../../../core/router/app_routes.dart';
+import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../widgets/user_type_widget.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -19,7 +23,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController repeatPasswordController = TextEditingController();
-  String? _selectedUserType="Applicant";
+  String? _selectedUserType = "Applicant";
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,9 @@ class _SignupScreenState extends State<SignupScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(height: screenHeight*0.05,),
+                SizedBox(
+                  height: screenHeight * 0.05,
+                ),
                 ShaderMask(
                   blendMode: BlendMode.srcIn,
                   shaderCallback: (Rect bounds) {
@@ -61,22 +67,27 @@ class _SignupScreenState extends State<SignupScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: phoneController,
-                      label: "Phone Number",
+                      label: "Phone Number*",
                       onlyNumber: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return "Number is required";
+                        }
+                        else if (value.length!=12) {
+                          return "Number Must be 12 Characters";
                         }
                         return null;
                       },
                       hintText: 'Example: +96347924893',
                       textInputType: TextInputType.phone,
                     ),
-                    SizedBox(height: heightBetweenFields,),
+                    SizedBox(
+                      height: heightBetweenFields,
+                    ),
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: nameController,
-                      label: "Full Name",
+                      label: "Full Name*",
                       onlyNumber: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -88,11 +99,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       textInputType: TextInputType.visiblePassword,
                       passwordBool: false,
                     ),
-                    SizedBox(height: heightBetweenFields,),
+                    SizedBox(
+                      height: heightBetweenFields,
+                    ),
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: passwordController,
-                      label: "Password",
+                      label: "Password*",
                       onlyNumber: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -115,7 +128,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: repeatPasswordController,
-                      label: "Repeat Password",
+                      label: "Repeat Password*",
                       onlyNumber: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -125,7 +138,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         if (!regex.hasMatch(value)) {
                           return 'Please Enter valid password';
                         }
-                        if (passwordController.value != repeatPasswordController.value) {
+                        if (passwordController.value !=
+                            repeatPasswordController.value) {
                           return "Doesn't match";
                         }
                         return null;
@@ -135,26 +149,61 @@ class _SignupScreenState extends State<SignupScreen> {
                       passwordBool: true,
                     ),
                     SizedBox(
-                      height: heightBetweenFields*2,
+                      height: heightBetweenFields * 2,
                     ),
-                    UserTypeWidget(selectedUserType: _selectedUserType, onUserTypeSelected: (value){setState(() {
-                      _selectedUserType=value;
-                    });})
+                    UserTypeWidget(
+                        selectedUserType: _selectedUserType,
+                        onUserTypeSelected: (value) {
+                          setState(() {
+                            _selectedUserType = value;
+                          });
+                        })
                   ],
                 ),
-                SizedBox(height: screenHeight*0.05,),
-                ElevatedButtonWidget(title: "Signup",onPressed: (){
-                 Navigator.pushNamed(context, AppRoutes.verificationCode);
-                },),
-                SizedBox(height: screenHeight*0.05,),
+                SizedBox(
+                  height: screenHeight * 0.05,
+                ),
+
+                     ElevatedButtonWidget(
+                      title: "Signup",
+                      onPressed: () {
+                        if (_key.currentState!.validate()) {
+                          context.read<UserBloc>().add(SendSMSEvent(
+                              phoneNumber: phoneController.text));
+                          Navigator.of(context).pushNamed(
+                              AppRoutes.verificationCode,
+                              arguments: SignUpEvent(
+                                password: passwordController.text,
+                                phoneNumber: phoneController.text,
+                                fullName: nameController.text,
+                                gender: Gender.female,
+                                verificationCode: "0000",
+                                isCompany: _selectedUserType=="Applicant"?false:true,
+                              ));
+                        }
+                      }),
+
+                SizedBox(
+                  height: screenHeight * 0.05,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Already have account?",style: AppFontStyles.mediumH4,),
+                    const Text(
+                      "Already have account?",
+                      style: AppFontStyles.mediumH5,
+                    ),
                     GestureDetector(
-                        onTap: (){Navigator.popAndPushNamed(context, AppRoutes.login);},
-                        child: Text(" Login",style: AppFontStyles.mediumH4.copyWith(color: AppColors.kMainColor100),))
-                  ],)
+                        onTap: () {
+                          Navigator.popAndPushNamed(context, AppRoutes.login);
+                        },
+                        child: Text(
+                          " Login",
+                          style: AppFontStyles.mediumH5
+                              .copyWith(color: AppColors.kMainColor100),
+                        ))
+                  ],
+                )
               ],
             ),
           ],

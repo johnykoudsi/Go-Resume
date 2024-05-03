@@ -20,13 +20,13 @@ class UserTypeWidget extends StatelessWidget {
           groupValue: selectedUserType,
           onChanged: onUserTypeSelected,
         ),
-        const Text('Applicant',style: AppFontStyles.mediumH4,),
+        const Text('Applicant',style: AppFontStyles.mediumH5,),
         Radio<String>(
           value: 'Company Recruiter',
           groupValue: selectedUserType,
           onChanged: onUserTypeSelected,
         ),
-        const Text('Company Recruiter',style: AppFontStyles.mediumH4,),
+        const Text('Company Recruiter',style: AppFontStyles.mediumH5,),
       ],
     );
   }
