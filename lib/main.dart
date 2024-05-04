@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: NetworkHelpers.globalUserBloc,
+      value: NetworkHelpers.globalUserBloc..add(CheckUserFromLocalStorage()),
       child: MaterialApp(
         locale: context.locale,
         supportedLocales: context.supportedLocales,
