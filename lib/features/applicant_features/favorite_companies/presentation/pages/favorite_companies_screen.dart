@@ -5,16 +5,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
 import '../../../../../core/router/app_routes.dart';
-import '../widgets/company_widget.dart';
+import '../../../all_companies/presentation/widgets/company_widget.dart';
 
-class AllCompaniesScreen extends StatelessWidget {
-  const AllCompaniesScreen({super.key});
+class FavoriteCompaniesScreen extends StatelessWidget {
+  const FavoriteCompaniesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Companies".tr()),
+        title: Text("Favourite".tr()),
         centerTitle: false,
         actions: [
           IconButton(

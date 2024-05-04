@@ -2,6 +2,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
+import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes_no.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 
 import '../../../../../core/router/app_routes.dart';
@@ -31,9 +34,27 @@ class _MoreScreenState extends State<MoreScreen> {
               MoreItemsWidget(iconPath: Assets.svgNotification, text: 'Notifications', topPadding: screenHeight*0.65,onTap: (){Navigator.of(context).pushNamed(AppRoutes.myNotifications);}),
               MoreItemsWidget(iconPath: Assets.svgLanguage, text: 'Language', topPadding: screenHeight*0.75,),
               MoreItemsWidget(iconPath: Assets.svgUpdate, text: 'Update', topPadding: screenHeight*0.85,),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: MoreItemsWidget(iconPath: Assets.svgSignOut, text: 'SignOut', topPadding: screenHeight*0.95,),
+              GestureDetector(
+                onTap: () {
+                  DialogsWidgetsYesNo.showYesNoDialog(
+                      title: "Are you sure you want to sign out",
+                      noTitle: "Cancel",
+                      yesTitle: "Sign Out",
+                      onYesTap: () {
+                        context.read<UserBloc>().add(LogoutEvent());
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            AppRoutes.login,
+                                (Route<dynamic> route) => false);
+                      },
+                      onNoTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      context: context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: MoreItemsWidget(iconPath: Assets.svgSignOut, text: 'SignOut', topPadding: screenHeight*0.95,),
+                ),
               ),
             ],
           ),
