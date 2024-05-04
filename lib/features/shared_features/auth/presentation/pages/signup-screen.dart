@@ -176,7 +176,6 @@ class _SignupScreenState extends State<SignupScreen> {
                                 password: passwordController.text,
                                 phoneNumber: phoneController.text,
                                 fullName: nameController.text,
-                                gender: Gender.female,
                                 verificationCode: "0000",
                                 isCompany: _selectedUserType=="Applicant"?false:true,
                               ));

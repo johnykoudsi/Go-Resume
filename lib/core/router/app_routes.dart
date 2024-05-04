@@ -2,10 +2,10 @@
 
 class AppRoutes {
 
-  static const String login = "/login";
-  static const String splashScreen = "/splash";
+  static const String login = "/l";
+  static const String splashScreen = "/";
   static const String verificationCode = "/verification_code";
-  static const String signup = "/";
+  static const String signup = "/signup";
   static const String bottomNavBarScreen = "/bottom_nav_bar";
   static const String recruiterBottomNavBar = "/recruiter_bottom_nav_bar";
   static const String mySkills = "/my_skills";
