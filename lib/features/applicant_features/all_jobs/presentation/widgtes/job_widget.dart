@@ -43,20 +43,18 @@ class JobWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              editable ?
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   Text(
-                     submission.id.toString(),
-                    style: AppFontStyles.mediumH5,
-                  ),
+                  Spacer(),
                   editable==true ?
                   IconButton(onPressed: (){}, icon: const Icon(Icons.edit))
                       : const Text(""),
                 ],
-              ),
-              const Text(
-                "Software Engineer",
+              ):SizedBox(),
+               Text(
+                submission.position,
                 style: AppFontStyles.boldH5,
               ),
               const Row(
@@ -73,7 +71,7 @@ class JobWidget extends StatelessWidget {
                 ],
               ),
               Text(
-                "Damascus - Syria - Company",
+                submission.location ?? "Remote",
                 style: AppFontStyles.regularH6
                     .copyWith(color: AppColors.kGreyColor),
               ),
@@ -82,7 +80,8 @@ class JobWidget extends StatelessWidget {
 
                 children: [
                   Text(
-                    DateFormat.yMd().format(DateTime.now()),
+                    "${submission.submissionDate.year}/${submission.submissionDate.month}/${submission.submissionDate.day}",
+                    //DateFormat.yMd().format(DateTime.now()),
                     style: AppFontStyles.regularH6
                         .copyWith(color: AppColors.kGreyColor),
                   ),

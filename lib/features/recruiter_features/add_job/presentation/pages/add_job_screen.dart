@@ -199,7 +199,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
             PreferredGenderWidget(selectedPreferredGender: _selectedUserGender, onUserTypeSelected: (value){setState(() {
               _selectedUserGender=value;
             });
-            })  ,
+            }),
             SizedBox(
               height: heightBetweenFields*2,
             ),

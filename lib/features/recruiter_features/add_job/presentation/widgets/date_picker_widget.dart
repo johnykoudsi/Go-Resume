@@ -54,7 +54,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
       children: [
         Text(
           widget.label,
-          style: AppFontStyles.mediumH4,
+          style: AppFontStyles.mediumH6,
         ),
         const SizedBox(height: 8),
         Container(

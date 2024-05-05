@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_profile_image.dart';
 
 import '../../../../../generated/assets.dart';
@@ -50,11 +51,14 @@ class ProfileImageWidget extends StatelessWidget {
                     ),
                     SizedBox(width: screenWidth * 0.65),
                     !visitor ?
-                    SvgPicture.asset(
-                      Assets.svgEdit,
-                      width: screenWidth * 0.08,
-                      height: screenWidth * 0.08,
-                      color: Colors.white,
+                    GestureDetector(
+                      onTap: (){Navigator.pushNamed(context, AppRoutes.editApplicantProfile);},
+                      child: SvgPicture.asset(
+                        Assets.svgEdit,
+                        width: screenWidth * 0.08,
+                        height: screenWidth * 0.08,
+                        color: Colors.white,
+                      ),
                     ): const Text("")
                   ],
                 ),

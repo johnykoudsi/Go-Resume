@@ -67,7 +67,7 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: SizedBox(
-                          height: 160,
+                          height: 130,
                           child: ShimmerLoader()),
                     );
                   }
@@ -88,7 +88,7 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: SizedBox(
-                          height: 160,
+                          height: 130,
                           child: ShimmerLoader()),
                     );
                 }

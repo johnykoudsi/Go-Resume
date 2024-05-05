@@ -17,6 +17,8 @@ class AppRoutes {
   static const String allApplicants = "/all_applicants";
   static const String applicantProfile = "/applicant_profile";
   static const String companyProfile = "/company_profile";
+  static const String editApplicantProfile = "/edit_applicant_profile";
+  static const String editCompanyProfile = "/edit_company_profile";
 
 
 

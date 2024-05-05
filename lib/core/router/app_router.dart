@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/edit_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/all_applicants/presentation/pages/all_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/bottom_nav_bar/recruiter_bottom_nav_bar.dart';
@@ -64,6 +65,8 @@ class AppRouter {
           return const ApplicantProfileScreen();
         case AppRoutes.companyProfile:
           return const CompanyProfileScreen();
+        case AppRoutes.editApplicantProfile:
+          return const EditApplicantProfileScreen();
 
 
         default:
