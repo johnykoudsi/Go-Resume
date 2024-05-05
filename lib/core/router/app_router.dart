@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/all_applicants/presentation/pages/all_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/bottom_nav_bar/recruiter_bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/company_profile/presentation/pages/company_profile_screen.dart';
@@ -41,7 +43,17 @@ class AppRouter {
         case AppRoutes.myEducationAndCertificates:
           return const MyEducationAndCertificatesScreen();
         case AppRoutes.mySubmissions:
-          return const MySubmissionsScreen();
+          return MultiBlocProvider(
+            providers: [
+
+              BlocProvider(
+                create: (context) =>
+                MySubmissionsBloc()..add(ChangeToLoadingApiMySubmissionsEvent()),
+              ),
+
+            ],
+            child: const MySubmissionsScreen(),
+          );
         case AppRoutes.myNotifications:
           return const MyNotification();
         case AppRoutes.jobDetails:

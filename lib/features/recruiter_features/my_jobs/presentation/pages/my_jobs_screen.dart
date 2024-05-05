@@ -67,9 +67,9 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                   ]),
-              JobWidget(editable: true,),
-              JobWidget(editable: true,),
-              JobWidget(editable: true,),
+              // JobWidget(editable: true,),
+              // JobWidget(editable: true,),
+              // JobWidget(editable: true,),
             ],
           ),
         ),

@@ -3,13 +3,15 @@ import 'package:intl/intl.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/domain/entities/job_entity.dart';
 import '../../../../shared_features/job_details/presentation/pages/job_details_screen.dart';
 
 
 class JobWidget extends StatelessWidget {
   final bool editable;
+  final Job job;
   const JobWidget({super.key,
-     this.editable=false,
+     this.editable=false, required this.job,
   });
 
   @override
@@ -44,8 +46,8 @@ class JobWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    "#12",
+                   Text(
+                    job.id.toString(),
                     style: AppFontStyles.mediumH5,
                   ),
                   editable==true ?

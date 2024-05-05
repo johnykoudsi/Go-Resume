@@ -1,7 +1,6 @@
 part of 'my_submissions_bloc.dart';
 
-abstract class MySubmissionsState extends Equatable {
-  const MySubmissionsState();
+abstract class MySubmissionsState   {
 }
 
 class MySubmissionsInitial extends MySubmissionsState {
@@ -9,13 +8,28 @@ class MySubmissionsInitial extends MySubmissionsState {
   List<Object> get props => [];
 }
 
-class MySubmissionsDoneState extends MySubmissionsState {
-  MySubmissionsDoneState({required this.jobs});
+class MySubmissionsLoadedState extends MySubmissionsState {
+  List<Job> jobs;
+  bool hasReachedMax;
 
-  List<JobEntity> jobs;
+  MySubmissionsLoadedState(
+      {this.jobs = const <Job>[],
+        required this.hasReachedMax});
+
+  MySubmissionsLoadedState copyWith({
+    List<Job>? jobs,
+    bool? hasReachedMax,
+  }) {
+    return MySubmissionsLoadedState(
+      jobs: jobs ?? this.jobs,
+      hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+    );
+  }
+
   @override
-  List<Object> get props => [jobs];
+  List<Object?> get props => [jobs, hasReachedMax];
 }
+
 
 class MySubmissionsErrorState extends MySubmissionsState {
   MySubmissionsErrorState({required this.helperResponse});

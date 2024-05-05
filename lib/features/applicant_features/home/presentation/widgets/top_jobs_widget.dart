@@ -28,7 +28,7 @@ class TopJobsSectionWidget extends StatelessWidget {
                           .copyWith(color: AppColors.kMainColor100),
                     ))
               ]),
-          const JobWidget(),
+       //   const JobWidget(),
 
         ],
       ),

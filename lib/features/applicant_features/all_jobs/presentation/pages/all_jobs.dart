@@ -41,11 +41,11 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
       body: ListView(
         padding: const EdgeInsets.all(18),
         children: [
-          JobWidget(),
-          JobWidget(),
-          JobWidget(),
-          JobWidget(),
-          JobWidget(),
+          // JobWidget(),
+          // JobWidget(),
+          // JobWidget(),
+          // JobWidget(),
+          // JobWidget(),
         ],
       ),
     );

@@ -6,6 +6,8 @@ import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 
+import '../../../../../utility/constant_logic_validation.dart';
+
 
 class MySubmissionsDataSource {
   MySubmissionsDataSource(this.networkHelpers);
@@ -15,21 +17,23 @@ class MySubmissionsDataSource {
     required GetMySubmissionsEvent event,
   }) async {
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
-      url: EndPoints.getMySubmissions(page: 1, limit: 5),
+      url: EndPoints.getMySubmissions(
+        page: event.searchFilterProperties.page,
+        limit: kProductsGetLimit,
+      ),
       useUserToken: true,
     );
+    print(helperResponse.servicesResponse);
+
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        return jobEntityFromJson(helperResponse.response);
+        JobEntity data = jobEntityFromJson(helperResponse.response);
+        return data.jobs;
       } catch (e) {
-        return helperResponse.copyWith(
-          servicesResponse: ServicesResponseStatues.modelError,
-        );
+        return helperResponse.copyWith(servicesResponse: ServicesResponseStatues.modelError);
       }
     }
     return helperResponse;
   }
-
-
 
 }
