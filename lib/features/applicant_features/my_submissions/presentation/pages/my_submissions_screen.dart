@@ -7,10 +7,9 @@ import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dar
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
-
 import '../../../../../utility/global_widgets/shimmer.dart';
 import '../../../all_jobs/presentation/widgtes/job_widget.dart';
-import '../../domain/entities/job_entity.dart';
+import '../../domain/entities/my_submissions_entity.dart';
 
 class MySubmissionsScreen extends StatefulWidget {
   const MySubmissionsScreen({Key? key}) : super(key: key);
@@ -30,7 +29,7 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
           scrollController.offset) {
         context.read<MySubmissionsBloc>().add(
               GetMySubmissionsEvent(
-                searchFilterProperties: JobSearchFilter(),
+                searchFilterProperties: SubmissionsSearchFilter(),
               ),
             );
       }
@@ -61,10 +60,10 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
               padding: const EdgeInsets.all(18),
                 controller: scrollController,
               itemCount: state.hasReachedMax
-                  ? state.jobs.length
-                  : state.jobs.length + 2,
+                  ? state.submissions.length
+                  : state.submissions.length + 2,
                 itemBuilder: (BuildContext context, int index) {
-                  if (index >= state.jobs.length) {
+                  if (index >= state.submissions.length) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: SizedBox(
@@ -73,7 +72,7 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
                     );
                   }
                   return JobWidget(
-                    job: state.jobs[index],
+                    submission: state.submissions[index],
                   );
                 }
 

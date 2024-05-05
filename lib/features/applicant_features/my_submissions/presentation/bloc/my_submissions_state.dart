@@ -9,25 +9,25 @@ class MySubmissionsInitial extends MySubmissionsState {
 }
 
 class MySubmissionsLoadedState extends MySubmissionsState {
-  List<Job> jobs;
+  List<Submission> submissions;
   bool hasReachedMax;
 
   MySubmissionsLoadedState(
-      {this.jobs = const <Job>[],
+      {this.submissions = const <Submission>[],
         required this.hasReachedMax});
 
   MySubmissionsLoadedState copyWith({
-    List<Job>? jobs,
+    List<Submission>? jobs,
     bool? hasReachedMax,
   }) {
     return MySubmissionsLoadedState(
-      jobs: jobs ?? this.jobs,
+      submissions: jobs ?? this.submissions,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }
 
   @override
-  List<Object?> get props => [jobs, hasReachedMax];
+  List<Object?> get props => [submissions, hasReachedMax];
 }
 
 

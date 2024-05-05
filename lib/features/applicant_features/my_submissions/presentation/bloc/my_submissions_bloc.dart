@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/data/data_sources/my_submissions_data_source.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/data/repositories/my_submissions_repo_impl.dart';
-import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/domain/entities/job_entity.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/domain/entities/my_submissions_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/domain/use_cases/get_my_submissions_usecase.dart';
 
 import '../../../../../utility/constant_logic_validation.dart';
@@ -26,7 +26,7 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
 
       int getPage() {
         if (currentState is MySubmissionsLoadedState) {
-          return currentState.jobs.length ~/ kProductsGetLimit + 1;
+          return currentState.submissions.length ~/ kProductsGetLimit + 1;
         }
         return 0;
       }
@@ -38,12 +38,12 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
 
       getMySubmissions = await mySubmissionsUseCase.call(event);
 
-      if (getMySubmissions is List<Job>) {
+      if (getMySubmissions is List<Submission>) {
         if (getMySubmissions.isNotEmpty) {
           // copy previous state
           if (currentState is MySubmissionsLoadedState) {
             emit(currentState.copyWith(
-                jobs: List.of(currentState.jobs)..addAll(getMySubmissions),
+                jobs: List.of(currentState.submissions)..addAll(getMySubmissions),
                 hasReachedMax:
                 getMySubmissions.length < kProductsGetLimit ? true : false));
           }
@@ -51,7 +51,7 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
           // add loaded state
           else {
             emit(MySubmissionsLoadedState(
-              jobs: getMySubmissions,
+              submissions: getMySubmissions,
               hasReachedMax:
               getMySubmissions.length < kProductsGetLimit ? true : false,
             ));
@@ -64,7 +64,7 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
           // done but nothing is there
           else {
             emit(MySubmissionsLoadedState(
-              jobs: getMySubmissions,
+              submissions: getMySubmissions,
               hasReachedMax: true,
             ));
           }
@@ -80,7 +80,7 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
       emit(MySubmissionsInitial());
 
       add(GetMySubmissionsEvent(
-          searchFilterProperties: JobSearchFilter(page: 1)));
+          searchFilterProperties: SubmissionsSearchFilter(page: 1)));
     });
   }
 }
