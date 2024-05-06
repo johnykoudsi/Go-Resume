@@ -76,9 +76,10 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
                   child: IgnorePointer(
                     child: TextFormField(
                       controller: widget.controller,
-                      decoration: const InputDecoration(
+                      decoration:  InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Select a date',
+                        hintStyle: AppFontStyles.mediumH5.copyWith(color: AppColors.kGreyColor),
                       ),
                     ),
                   ),

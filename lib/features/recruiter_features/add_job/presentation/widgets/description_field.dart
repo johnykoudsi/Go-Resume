@@ -58,7 +58,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
         if (widget.label != null)
           Column(
             children: [
-              Text(widget.label!, style: AppFontStyles.mediumH4),
+              Text(widget.label!, style: AppFontStyles.mediumH6),
               const SizedBox(
                 height: 0,
               ),
@@ -99,7 +99,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.only(left: 15, bottom: 15, top: 15, right: 15), // Increase padding to give more height
                     hintText: widget.hintText,
-                    hintStyle: AppFontStyles.regularH4.copyWith(color: AppColors.kTextField2Grey),
+                    hintStyle: AppFontStyles.mediumH5.copyWith(color: AppColors.kGreyColor),
                     filled: true,
                     fillColor: Colors.white,
                     enabledBorder: const OutlineInputBorder(

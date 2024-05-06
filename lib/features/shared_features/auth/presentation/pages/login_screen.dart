@@ -34,8 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
         if (state is UserLoggedState) {
 
           Navigator.of(context).pushNamedAndRemoveUntil(
-              state.user.data.isCompany?
-              AppRoutes.recruiterBottomNavBar:AppRoutes.bottomNavBarScreen, (Route<dynamic> route) => false);
+            state.user.data.company==null?
+              AppRoutes.bottomNavBarScreen:AppRoutes.recruiterBottomNavBar, (Route<dynamic> route) => false);
         }
         if (state is UserErrorState) {
           DialogsWidgetsSnackBar.showSnackBarFromStatus(

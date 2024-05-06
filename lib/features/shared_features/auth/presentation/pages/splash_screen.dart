@@ -29,8 +29,8 @@ class _SplashScreenState extends State<SplashScreen> {
         print("listener");
         if (state is UserLoggedState) {
           Navigator.of(context).pushNamedAndRemoveUntil(
-            state.user.data.isCompany?
-              AppRoutes.recruiterBottomNavBar:AppRoutes.bottomNavBarScreen,
+              state.user.data.company==null?
+              AppRoutes.bottomNavBarScreen:AppRoutes.recruiterBottomNavBar,
                   (Route<dynamic> route) => false);
         }
         if (state is UserNotLoggedState) {

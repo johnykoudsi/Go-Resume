@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
@@ -26,8 +29,18 @@ class CompanyProfileScreen extends StatefulWidget {
   @override
   State<CompanyProfileScreen> createState() => _CompanyProfileScreenState();
 }
-
+String name="";
+String? bio="";
 class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
+  @override
+  void initState() {
+    final userBloc = context.read<UserBloc>().state;
+    if (userBloc is UserLoggedState) {
+      name=userBloc.user.data.fullName;
+
+    }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;

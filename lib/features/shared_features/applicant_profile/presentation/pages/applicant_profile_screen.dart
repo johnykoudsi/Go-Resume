@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
+import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
+import 'package:smart_recruitment_flutter_user/utility/constant_logic_validation.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../widgets/contact_info_widget.dart';
 import '../widgets/custom_profile_card_widget.dart';
@@ -20,10 +25,20 @@ class ApplicantProfileScreen extends StatefulWidget {
   @override
   State<ApplicantProfileScreen> createState() => _ApplicantProfileScreenState();
 }
-
+String name="";
+String? bio="";
 class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   @override
+  void initState() {
+    final userBloc = context.read<UserBloc>().state;
+    if (userBloc is UserLoggedState) {
+      name=userBloc.user.data.fullName;
+      bio=userBloc.user.data.applicant?.bio;
 
+    }
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -102,6 +117,8 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
       ),
 
     ];
+    return BlocBuilder<UserBloc, UserState>(
+  builder: (context, state) {
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
       body: SingleChildScrollView(
@@ -121,7 +138,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 ),
                 Padding(
                   padding:  EdgeInsets.only(top:screenHeight * 0.21 ),
-                  child:  ProfileImageWidget(visitor: widget.visitor,profileImage: 'assets/images/jpg/profile_image.jpg', viewsNumber: '55',),
+                  child:  ProfileImageWidget(visitor: widget.visitor,profileImage: 'assets/images/jpg/profile_image.jpg', viewsNumber: '55'),
                 ),
                 !widget.visitor ?
                 Positioned(
@@ -150,9 +167,17 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
               height: screenHeight * 0.02,
             ),
             Text(
-              "John Doe",
+              name,
               style: AppFontStyles.boldH2.copyWith(color: Colors.black),
             ),
+            SizedBox(
+              height: screenHeight * 0.02,
+            ),
+            bio != null ?
+            Text(
+              bio!,
+              style: AppFontStyles.boldH2.copyWith(color: Colors.black),
+            ):const SizedBox(),
             SizedBox(
               height: screenHeight * 0.02,
             ),
@@ -167,5 +192,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
         ),
       ),
     );
+  },
+);
   }
 }
