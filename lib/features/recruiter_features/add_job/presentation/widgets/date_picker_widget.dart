@@ -31,7 +31,8 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
             onDateTimeChanged: (DateTime newDate) {
               setState(() {
                 _selectedDate = newDate;
-                widget.controller.text = '${newDate.day}/${newDate.month}/${newDate.year}';
+                widget.controller.text =newDate.toString();
+                //'${newDate.day}/${newDate.month}/${newDate.year}';
               });
             },
           ),

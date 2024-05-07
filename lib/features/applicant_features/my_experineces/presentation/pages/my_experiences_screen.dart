@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../shared_features/applicant_profile/presentation/widgets/experience_widget.dart';
@@ -61,7 +62,8 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
           SizedBox(
             height: screenHeight * 0.015,
           ),
-          const CustomFloatingButtonWidget(
+           CustomFloatingButtonWidget(
+            onPressed: (){Navigator.pushNamed(context, AppRoutes.addExperience);},
             title: "New",
           ),
         ],

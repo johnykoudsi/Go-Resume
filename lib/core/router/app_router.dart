@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/pages/edit_profile_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_experineces/presentation/pages/add_experience_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/all_applicants/presentation/pages/all_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/bottom_nav_bar/recruiter_bottom_nav_bar.dart';
@@ -75,7 +77,15 @@ class AppRouter {
             ],
             child: const EditApplicantProfileScreen(),
           );
-
+        case AppRoutes.addExperience:
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => ExperienceActionsBloc(),
+              ),
+            ],
+            child: const AddExperienceScreen(),
+          );
 
         default:
           return const Scaffold(
