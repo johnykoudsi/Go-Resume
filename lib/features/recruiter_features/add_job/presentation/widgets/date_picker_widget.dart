@@ -25,7 +25,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         return SizedBox(
           height: MediaQuery.of(context).size.height * 0.3, // Adjust the height as needed
           child: CupertinoDatePicker(
-            minimumDate:_selectedDate ?? DateTime.now().add(const Duration(days: 1)), // Set minimum date to tomorrow
+           // minimumDate:_selectedDate ?? DateTime.now().add(const Duration(days: 1)), // Set minimum date to tomorrow
             mode: CupertinoDatePickerMode.date,
             initialDateTime: _selectedDate ?? DateTime.now().add(const Duration(days: 1)),
             onDateTimeChanged: (DateTime newDate) {
