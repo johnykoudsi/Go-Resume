@@ -1,54 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/features/applicant_features/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/add_job/presentation/widgets/date_picker_widget.dart';
 
-import '../../../../../core/router/app_routes.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../recruiter_features/add_job/presentation/widgets/description_field.dart';
-import '../../../../recruiter_features/add_job/presentation/widgets/preferred_gender_widget.dart';
+import '../bloc/education_actions_bloc.dart';
 
-class AddExperienceScreen extends StatefulWidget {
-  const AddExperienceScreen({Key? key}) : super(key: key);
+class AddEducationScreen extends StatefulWidget {
+  const AddEducationScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddExperienceScreen> createState() => _AddExperienceScreenState();
+  State<AddEducationScreen> createState() => _AddEducationScreenState();
 }
 
-class _AddExperienceScreenState extends State<AddExperienceScreen> {
-  TextEditingController positionController = TextEditingController();
-  TextEditingController companyController = TextEditingController();
+class _AddEducationScreenState extends State<AddEducationScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController universityController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
-  int workFieldId = 0;
-  bool currentlyIn = false;
+  TextEditingController gradeDateController = TextEditingController();
+  TextEditingController linkController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     final double heightBetweenFields = screenHeight * 0.015;
-    return BlocListener<ExperienceActionsBloc, ExperienceActionsState>(
+    return BlocListener<EducationActionsBloc, EducationActionsState>(
       listener: (context, state) {
-        if (state is ExperienceActionsResponseState) {
+        if (state is EducationActionsResponseState) {
           DialogsWidgetsSnackBar.showSnackBarFromStatus(
             context: context,
             helperResponse: state.helperResponse,
             popOnSuccess: true,
           );
-
         }
       },
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Add Experience",
+            "Add Education",
             style: AppFontStyles.boldH2,
           ),
         ),
@@ -58,10 +55,10 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
           children: [
             CustomTextField(
               action: TextInputAction.done,
-              controller: positionController,
-              label: "Position*",
+              controller: nameController,
+              label: "Specialization*",
               onlyNumber: false,
-              hintText: 'Example: Assistant Manager',
+              hintText: 'Example: Software Engineering',
               textInputType: TextInputType.visiblePassword,
               passwordBool: false,
             ),
@@ -73,7 +70,37 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               controller: descriptionController,
               label: "Description",
               onlyNumber: false,
-              hintText: 'Describe your work with a few words',
+              hintText: 'Describe your education with a few words',
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            CustomTextField(
+              action: TextInputAction.done,
+              controller: gradeDateController,
+              label: "Grade Percent",
+              onlyNumber: false,
+              hintText: 'Example: 81.2',
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            CustomTextField(
+              action: TextInputAction.done,
+              controller: universityController,
+              label: "University",
+              onlyNumber: false,
+              hintText: 'Example: Damascus University',
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            CustomTextField(
+              action: TextInputAction.done,
+              controller: linkController,
+              label: "Certificate Link",
+              onlyNumber: false,
+              hintText: 'https://certificatelink.com',
             ),
             SizedBox(
               height: heightBetweenFields,
@@ -85,22 +112,24 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
             ),
             DatePickerWidget(label: 'End Date*', controller: endDateController),
             SizedBox(
-              height: heightBetweenFields*5,
+              height: heightBetweenFields * 5,
             ),
-            BlocBuilder<ExperienceActionsBloc, ExperienceActionsState>(
+
+            BlocBuilder<EducationActionsBloc, EducationActionsState>(
               builder: (context, state) {
                 return ElevatedButtonWidget(
                   title: "Add",
-                  isLoading: state is ExperienceActionsLoadingState,
+                  isLoading: state is EducationActionsLoadingState,
                   onPressed: () {
-                    context.read<ExperienceActionsBloc>().add(
-                        AddExperienceEvent(
-                            position: positionController.text,
-                            description: descriptionController.text,
-                            startDate: startDateController.text,
-                            endDate: endDateController.text,
-                            workField: '1',
-                            company: companyController.text));
+                    context.read<EducationActionsBloc>().add(AddEducationEvent(
+                        description: descriptionController.text,
+                        startDate: startDateController.text,
+                        endDate: endDateController.text,
+                        name: nameController.text,
+                        university: universityController.text,
+                        grade: gradeDateController.text,
+                        link: linkController.text
+                    ));
                   },
                 );
               },

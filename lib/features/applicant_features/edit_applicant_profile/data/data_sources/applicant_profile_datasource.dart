@@ -15,13 +15,14 @@ class ApplicantProfileDataSource {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       useUserToken: true,
       url: EndPoints.updateApplicantProfile,
-      body: json.encode({
-        "full_name": updateApplicantProfileEvent.fullName,
-        "skills":[],
-        "gender":updateApplicantProfileEvent.gender,
-        "dob": updateApplicantProfileEvent.dob,
-        "bio": updateApplicantProfileEvent.bio,
-      }),
+      body: json.encode(updateApplicantProfileEvent.toJson()),
+      // json.encode({
+      //   // "full_name": updateApplicantProfileEvent.fullName,
+      //   // "skills":[],
+      //   // "gender":updateApplicantProfileEvent.gender,
+      //   // "dob": updateApplicantProfileEvent.dob,
+      //   // "bio": updateApplicantProfileEvent.bio,
+      // }),
     );
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {

@@ -15,13 +15,7 @@ class ExperienceActionsDataSource {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       useUserToken: true,
       url: EndPoints.addExperience,
-      body: json.encode({
-        "title":addExperienceEvent.position,
-        "description":addExperienceEvent.description,
-        "start_date":addExperienceEvent.startDate,
-        "end_date":addExperienceEvent.endDate,
-        "work_field_id":addExperienceEvent.workField,
-      }),
+      body: json.encode(addExperienceEvent.toJson()),
     );
     return helperResponse;
   }

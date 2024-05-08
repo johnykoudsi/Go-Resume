@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/pages/edit_profile_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_education_and_certificates/presentation/bloc/education_actions_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_education_and_certificates/presentation/pages/add_education_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_experineces/presentation/pages/add_experience_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
@@ -85,6 +87,15 @@ class AppRouter {
               ),
             ],
             child: const AddExperienceScreen(),
+          );
+        case AppRoutes.addEducation:
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => EducationActionsBloc(),
+              ),
+            ],
+            child: const AddEducationScreen(),
           );
 
         default:

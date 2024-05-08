@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../shared_features/applicant_profile/presentation/widgets/education_and_certificates_widget.dart';
@@ -55,13 +56,14 @@ class _MyEducationAndCertificatesScreenState
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const CustomFloatingButtonWidget(
+           const CustomFloatingButtonWidget(
             title: "AI",
           ),
           SizedBox(
             height: screenHeight * 0.015,
           ),
-          const CustomFloatingButtonWidget(
+           CustomFloatingButtonWidget(
+            onPressed: (){Navigator.pushNamed(context, AppRoutes.addEducation);},
             title: "New",
           ),
         ],

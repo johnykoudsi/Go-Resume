@@ -26,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
-        print("listener");
         if (state is UserLoggedState) {
           Navigator.of(context).pushNamedAndRemoveUntil(
               state.user.data.company==null?
