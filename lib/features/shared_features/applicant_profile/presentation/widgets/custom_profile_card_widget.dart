@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import 'contact_info_widget.dart';
 import 'education_and_certificates_widget.dart';
@@ -7,7 +8,7 @@ import 'skill_widget.dart';
 import 'experience_widget.dart';
 
 class CustomProfileCard extends StatelessWidget {
-  final List<ExperienceWidget>? jobs;
+  final List<Experience>? jobs;
   final List<SkillWidget>? skills;
   final List<EducationAndCertificatesWidget>? educationAndCertificates;
   final List<ContactInfoWidget>? contactInfo;
@@ -38,11 +39,11 @@ class CustomProfileCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                   vertical: screenHeight * 0.01),
               child: ExperienceWidget(
-                role: job.role,
-                startDate: job.startDate,
-                endDate: job.endDate,
-                company: job.company,
-                description: job.description,
+                role: job.title,
+                startDate: job.startDate != null ? '${job.startDate!.day}/${job.startDate!.month}/${job.startDate!.year}':"",
+                endDate: job.endDate != null ?'${job.endDate!.day}/${job.endDate!.month}/${job.endDate!.year}':"present",
+                company: job.company??"",
+                description: job.description??"",
               ),
             );
           }).toList(),

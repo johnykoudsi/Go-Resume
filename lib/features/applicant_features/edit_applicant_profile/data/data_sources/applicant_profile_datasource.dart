@@ -24,14 +24,6 @@ class ApplicantProfileDataSource {
       //   // "bio": updateApplicantProfileEvent.bio,
       // }),
     );
-    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
-      try {
-        return userFromJson(helperResponse.response);
-      } catch (e) {
-        return helperResponse.copyWith(
-            servicesResponse: ServicesResponseStatues.modelError);
-      }
-    }
     return helperResponse;
   }
 }

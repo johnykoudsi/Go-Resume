@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
@@ -25,6 +26,22 @@ class ApplicantProfileScreen extends StatefulWidget {
   @override
   State<ApplicantProfileScreen> createState() => _ApplicantProfileScreenState();
 }
+List<Experience>? jobs = [
+  // const ExperienceWidget(
+  //   role: "Software Engineer",
+  //   startDate: "5/2022",
+  //   endDate: "5/2023",
+  //   company: "Tech Company",
+  //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
+  // ),
+  // const ExperienceWidget(
+  //   role: "Another Role",
+  //   startDate: "6/2023",
+  //   endDate: "8/2024",
+  //   company: "Another Company",
+  //   description: "Another description goes here.",
+  // ),
+];
 String name="";
 String? bio="";
 class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
@@ -34,7 +51,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
     if (userBloc is UserLoggedState) {
       name=userBloc.user.data.fullName;
       bio=userBloc.user.data.applicant?.bio;
-
+jobs=userBloc.user.data.applicant?.experiences;
     }
     super.initState();
   }
@@ -42,22 +59,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    List<ExperienceWidget> jobs = [
-      const ExperienceWidget(
-        role: "Software Engineer",
-        startDate: "5/2022",
-        endDate: "5/2023",
-        company: "Tech Company",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
-      ),
-      const ExperienceWidget(
-        role: "Another Role",
-        startDate: "6/2023",
-        endDate: "8/2024",
-        company: "Another Company",
-        description: "Another description goes here.",
-      ),
-    ];
+
     List<SkillWidget> skills = [
       const SkillWidget(
         skillName: "Microsoft Word",

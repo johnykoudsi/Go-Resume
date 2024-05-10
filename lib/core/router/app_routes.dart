@@ -2,7 +2,7 @@
 
 class AppRoutes {
 
-  static const String login = "/l";
+  static const String login = "/login";
   static const String splashScreen = "/";
   static const String verificationCode = "/verification_code";
   static const String signup = "/signup";
