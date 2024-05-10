@@ -36,7 +36,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
     final double heightBetweenFields = screenHeight * 0.015;
     return BlocListener<ExperienceActionsBloc, ExperienceActionsState>(
       listener: (context, state) {
-        if (state is ExperienceActionsResponseState) {
+        if (state is ExperienceActionsErrorState) {
           DialogsWidgetsSnackBar.showSnackBarFromStatus(
             context: context,
             helperResponse: state.helperResponse,

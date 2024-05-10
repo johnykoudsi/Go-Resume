@@ -14,8 +14,13 @@ class ExperienceActionsLoadingState extends ExperienceActionsState {
   List<Object> get props => [];
 }
 
-class ExperienceActionsResponseState extends ExperienceActionsState {
-  ExperienceActionsResponseState({required this.helperResponse});
+class ExperienceActionsDoneState extends ExperienceActionsState {
+
+  @override
+  List<Object> get props => [];
+}
+class ExperienceActionsErrorState extends ExperienceActionsState {
+  ExperienceActionsErrorState({required this.helperResponse});
 
   HelperResponse helperResponse;
   @override
