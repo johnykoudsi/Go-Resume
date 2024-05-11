@@ -7,6 +7,7 @@ import 'package:smart_recruitment_core/features/auth/domain/entities/experience.
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/contact_info_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/education_and_certificates_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/experience_widget.dart';
@@ -60,7 +61,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 Padding(
                   padding: EdgeInsets.only(top: screenHeight * 0.21),
                   child: ProfileImageWidget(
-                    visitor: widget.visitor,
+                    visitor: !widget.visitor,
                     profileImage: 'assets/images/jpg/profile_image.jpg',
                     viewsNumber: "0",
                   ),
@@ -120,7 +121,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                   },
                 ),
               ),
-              onOperationPressed: () {},
+              onOperationPressed: () {Navigator.pushNamed(context, AppRoutes.myExperiences,arguments: user.applicant?.experiences);},
             ),
             const SizedBox(
               height: 18,

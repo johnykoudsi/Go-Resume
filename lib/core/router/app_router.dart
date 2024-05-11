@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
@@ -46,7 +47,10 @@ class AppRouter {
         case AppRoutes.mySkills:
           return const MySkillsScreen();
         case AppRoutes.myExperiences:
-          return const MyExperiencesScreen();
+          List<Experience> args = settings.arguments as List<Experience>;
+          return  MyExperiencesScreen(
+            experiences: args,
+          );
         case AppRoutes.myEducationAndCertificates:
           return const MyEducationAndCertificatesScreen();
         case AppRoutes.mySubmissions:
