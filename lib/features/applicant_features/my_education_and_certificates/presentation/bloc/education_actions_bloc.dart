@@ -2,6 +2,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_education_and_certificates/domain/use_cases/delete_education_usecase.dart';
 
 import '../../data/data_sources/education_actions_datasource.dart';
 import '../../data/repositories/education_actions_repo_impl.dart';
@@ -18,6 +19,16 @@ class EducationActionsBloc extends Bloc<EducationActionsEvent, EducationActionsS
       emit(EducationActionsLoadingState());
 
       AddEducationUsecase useCase = AddEducationUsecase(educationActionsRepoImpl);
+
+      final response = await useCase.call(event);
+
+      emit(EducationActionsResponseState(helperResponse: response));
+
+    });
+    on<DeleteEducationEvent>((event, emit) async {
+      emit(EducationActionsLoadingState());
+
+      DeleteEducationUsecase useCase = DeleteEducationUsecase(educationActionsRepoImpl);
 
       final response = await useCase.call(event);
 

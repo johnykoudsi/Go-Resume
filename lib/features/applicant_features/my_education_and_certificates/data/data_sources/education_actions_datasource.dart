@@ -18,4 +18,13 @@ class EducationActionsDataSource {
     );
     return helperResponse;
   }
+  Future deleteEducationDataSource(DeleteEducationEvent deleteEducationEvent) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      crud: "DELETE",
+      useUserToken: true,
+      url: EndPoints.deleteEducation(id: deleteEducationEvent.id),
+    );
+    print("kkkk"+helperResponse.response);
+    return helperResponse;
+  }
 }

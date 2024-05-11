@@ -16,5 +16,10 @@ class EducationActionsRepoImpl extends EducationActionsRepo {
     return await educationActionsDataSource.addEducationDataSource(addEducationEvent);
   }
 
+  @override
+  Future deleteEducation(DeleteEducationEvent deleteEducationEvent) async{
+    return await educationActionsDataSource.deleteEducationDataSource(deleteEducationEvent);
+  }
+
 
 }

@@ -9,7 +9,6 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_car
 
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../shared_features/applicant_profile/presentation/widgets/experience_widget.dart';
-import '../widgets/custom_experience_card.dart';
 
 class MyExperiencesScreen extends StatefulWidget {
   const MyExperiencesScreen({required this.experiences, Key? key})
@@ -27,7 +26,7 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
       appBar: AppBar(
         title: const Text(
           "My Experiences",
-          style: AppFontStyles.boldH2,
+          style: AppFontStyles.boldH3,
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
       ),
@@ -37,6 +36,7 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
           return Padding(
             padding: EdgeInsets.only(top: screenHeight * 0.02),
             child: CustomCard(
+              operation: "Delete",
               title: "Experience",
               content: Column(
                 children: [

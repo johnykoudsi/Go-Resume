@@ -6,12 +6,14 @@ class CustomCard extends StatelessWidget {
   final Widget content;
   final VoidCallback? onOperationPressed;
   final bool visitor;
+  final String? operation;
   const CustomCard({
     Key? key,
     required this.title,
     required this.content,
     this.onOperationPressed,
     this.visitor = false,
+     this.operation,
   }) : super(key: key);
 
   @override
@@ -45,7 +47,7 @@ class CustomCard extends StatelessWidget {
                   TextButton(
                     onPressed: onOperationPressed,
                     child: Text(
-                      "Manage",
+                      operation??"Manage",
                       style: AppFontStyles.boldH6.copyWith(color: Colors.red),
                     ),
                   )

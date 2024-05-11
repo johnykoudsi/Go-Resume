@@ -3,6 +3,14 @@ part of 'education_actions_bloc.dart';
 abstract class EducationActionsEvent extends Equatable {
   const EducationActionsEvent();
 }
+class DeleteEducationEvent extends EducationActionsEvent{
+  int id;
+  DeleteEducationEvent({
+    required this.id,
+});
+  @override
+  List<Object?> get props => [id];
+}
 class AddEducationEvent extends EducationActionsEvent {
   AddEducationEvent(
       {required this.name,

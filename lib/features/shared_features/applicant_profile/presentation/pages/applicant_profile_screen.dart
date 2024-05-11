@@ -126,17 +126,6 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
             const SizedBox(
               height: 18,
             ),
-            // CustomProfileCard(
-            //   title: "Skills",
-            //   operation: widget.visitor ? "" : "Manage",
-            //   skills: List.generate(user.applicant.skills, (index) => null),
-            //   onOperationPressed: () {
-            //     Navigator.of(context).pushNamed(AppRoutes.mySkills);
-            //   },
-            // ),
-            // SizedBox(
-            //   height: screenHeight * 0.02,
-            // ),
             CustomCard(
               title: "Education & Certificates",
               visitor: widget.visitor,
@@ -152,8 +141,8 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 ),
               ),
               onOperationPressed: () {
-                // Navigator.of(context)
-                //     .pushNamed(AppRoutes.myEducationAndCertificates);
+                Navigator.of(context)
+                    .pushNamed(AppRoutes.myEducationAndCertificates,arguments: user.applicant?.education);
               },
             ),
             const SizedBox(

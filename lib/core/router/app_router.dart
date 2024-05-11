@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
@@ -48,11 +49,22 @@ class AppRouter {
           return const MySkillsScreen();
         case AppRoutes.myExperiences:
           List<Experience> args = settings.arguments as List<Experience>;
-          return  MyExperiencesScreen(
+          return MyExperiencesScreen(
             experiences: args,
           );
         case AppRoutes.myEducationAndCertificates:
-          return const MyEducationAndCertificatesScreen();
+          List<Education> args = settings.arguments as List<Education>;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+              create: (context) => EducationActionsBloc(),),
+              BlocProvider(
+                create: (context) => UserBloc(),)
+            ],
+            child: MyEducationAndCertificatesScreen(
+              educations: args,
+            ),
+          );
         case AppRoutes.mySubmissions:
           return MultiBlocProvider(
             providers: [
