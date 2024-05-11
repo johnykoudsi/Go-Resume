@@ -16,17 +16,6 @@ class MyEducationAndCertificatesScreen extends StatefulWidget {
       _MyEducationAndCertificatesScreenState();
 }
 
-List<EducationAndCertificatesWidget> education_and_certificates = [
-  const EducationAndCertificatesWidget(
-    description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
-    startDate: '5/2008',
-    endDate: '6/2009',
-    specialization: 'Networking',
-    organization: 'Damascus University',
-  ),
-];
-
 class _MyEducationAndCertificatesScreenState
     extends State<MyEducationAndCertificatesScreen> {
   @override
@@ -40,19 +29,19 @@ class _MyEducationAndCertificatesScreenState
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
       ),
-      body: ListView.builder(
-        itemCount: education_and_certificates.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: EdgeInsets.only(top: screenHeight * 0.02),
-            child: CustomEducationAndCertificatesCard(
-              title: "Education & Certificates",
-              operation: "Delete",
-              education_and_certificates: education_and_certificates[index],
-            ),
-          );
-        },
-      ),
+      // body: ListView.builder(
+      //   itemCount: education_and_certificates.length,
+      //   itemBuilder: (BuildContext context, int index) {
+      //     return Padding(
+      //       padding: EdgeInsets.only(top: screenHeight * 0.02),
+      //       child: CustomEducationAndCertificatesCard(
+      //         title: "Education & Certificates",
+      //         operation: "Delete",
+      //         education_and_certificates: education_and_certificates[index],
+      //       ),
+      //     );
+      //   },
+      // ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

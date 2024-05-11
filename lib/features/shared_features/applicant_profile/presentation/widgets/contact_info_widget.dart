@@ -25,14 +25,13 @@ class ContactInfoWidget extends StatelessWidget {
             gradient: AppColors.kLinearColor,
             shape: BoxShape.circle,
           ),
-          child: Center(
-            child: SvgPicture.asset(
-              imagePath,
-              width: screenWidth * 0.07,
-              height: screenWidth * 0.07,
-              fit: BoxFit.contain,
-              color: Colors.white,
-            ),
+          padding: const EdgeInsets.all(8),
+          child: SvgPicture.asset(
+            imagePath,
+            width: screenWidth * 0.07,
+            height: screenWidth * 0.07,
+            fit: BoxFit.contain,
+            color: Colors.white,
           ),
         ),
       ],

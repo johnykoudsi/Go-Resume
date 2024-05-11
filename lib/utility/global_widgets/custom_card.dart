@@ -3,18 +3,16 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class CustomCard extends StatelessWidget {
   final String title;
-  final String operation;
   final Widget content;
   final VoidCallback? onOperationPressed;
-
+  final bool visitor;
   const CustomCard({
     Key? key,
     required this.title,
-    required this.operation,
     required this.content,
     this.onOperationPressed,
+    this.visitor = false,
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +20,16 @@ class CustomCard extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(25),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: screenSize.width * 0.04,
-            vertical: screenSize.height * 0.02,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 18,
+            vertical: 18,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,16 +39,16 @@ class CustomCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppFontStyles.boldH6,
+                    style: AppFontStyles.boldH5,
                   ),
-                  InkWell(
-                    onTap: onOperationPressed,
+                  if(!visitor)
+                  TextButton(
+                    onPressed: onOperationPressed,
                     child: Text(
-                      operation,
+                      "Manage",
                       style: AppFontStyles.boldH6.copyWith(color: Colors.red),
                     ),
                   )
-
                 ],
               ),
               SizedBox(height: screenSize.height * 0.02),

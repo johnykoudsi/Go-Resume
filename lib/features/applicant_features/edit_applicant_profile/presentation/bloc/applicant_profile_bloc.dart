@@ -18,6 +18,7 @@ part 'applicant_profile_state.dart';
 class ApplicantProfileBloc extends Bloc<ApplicantProfileEvent, ApplicantProfileState> {
   static final ApplicantProfileRepoImpl applicantProfileRepoImpl = ApplicantProfileRepoImpl(ApplicantProfileDataSource(NetworkHelpers()));
   static final UserRepoImpl userRepoImpl = UserRepoImpl(UserDataSource(NetworkHelpers()));
+  EditApplicantProfileUsecase applicantProfileUsecase = EditApplicantProfileUsecase(applicantProfileRepoImpl);
 
   ApplicantProfileBloc() : super(ApplicantProfileInit()) {
     on<ApplicantProfileEvent>((event, emit) {
@@ -26,10 +27,9 @@ class ApplicantProfileBloc extends Bloc<ApplicantProfileEvent, ApplicantProfileS
 
     on<UpdateApplicantProfileEvent>((event, emit) async {
       emit(ApplicantProfileLoading());
-      EditApplicantProfileUsecase applicantProfileUsecase = EditApplicantProfileUsecase(applicantProfileRepoImpl);
       final response = await applicantProfileUsecase.call(event);
 
-      if (response is User) {
+      if (response is WelcomeUser) {
         SaveUserLocalUsecase saveUserLocalUsecase = SaveUserLocalUsecase(userRepoImpl);
         saveUserLocalUsecase.call(response);
       } else {

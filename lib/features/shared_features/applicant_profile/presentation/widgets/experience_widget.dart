@@ -1,22 +1,15 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class ExperienceWidget extends StatelessWidget {
-  final String role;
-  final String startDate;
-  final String endDate;
-  final String company;
-  final String description;
 
-
+  final Experience experience;
   const ExperienceWidget({
     Key? key,
-    required this.role,
-    required this.startDate,
-    required this.endDate,
-    required this.company,
-    required this.description,
+    required this.experience
   }) : super(key: key);
 
   @override
@@ -30,7 +23,7 @@ class ExperienceWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              role,
+              experience.title,
               style: AppFontStyles.boldH6,
             ),
           ],
@@ -40,18 +33,18 @@ class ExperienceWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "$startDate - $endDate",
+              "${DateFormat.yM().format(experience.startDate)} - ${DateFormat.yM().format(experience.endDate)}",
               style: AppFontStyles.mediumH6,
             ),
             Text(
-              company,
+              experience.company,
               style: AppFontStyles.mediumH6,
             ),
           ],
         ),
         SizedBox(height: screenHeight*0.01),
         Text(
-          description,
+          experience.description,
           style: AppFontStyles.mediumH7.copyWith(color: AppColors.kGreyColor),
         ),
       ],

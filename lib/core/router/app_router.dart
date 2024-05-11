@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/pages/edit_profile_screen.dart';
@@ -51,12 +52,10 @@ class AppRouter {
         case AppRoutes.mySubmissions:
           return MultiBlocProvider(
             providers: [
-
               BlocProvider(
-                create: (context) =>
-                MySubmissionsBloc()..add(ChangeToLoadingApiMySubmissionsEvent()),
+                create: (context) => MySubmissionsBloc()
+                  ..add(ChangeToLoadingApiMySubmissionsEvent()),
               ),
-
             ],
             child: const MySubmissionsScreen(),
           );
@@ -66,8 +65,17 @@ class AppRouter {
           return const JobDetailsScreen();
         case AppRoutes.allApplicants:
           return const AllApplicantsScreen();
-        case AppRoutes.applicantProfile:
-          return const ApplicantProfileScreen();
+        // case AppRoutes.applicantProfile:
+        //   User user = settings.arguments as User;
+        //   return ApplicantProfileScreen(
+        //     user: user,
+        //   );
+        case AppRoutes.viewApplicantProfile:
+          User user = settings.arguments as User;
+          return ApplicantProfileScreen(
+            user: user,
+            visitor: true,
+          );
         case AppRoutes.companyProfile:
           return const CompanyProfileScreen();
         case AppRoutes.editApplicantProfile:

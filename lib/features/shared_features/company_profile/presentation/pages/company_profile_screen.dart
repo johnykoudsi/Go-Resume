@@ -45,63 +45,63 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    List<ExperienceWidget> jobs = [
-      const ExperienceWidget(
-        role: "Software Engineer",
-        startDate: "5/2022",
-        endDate: "5/2023",
-        company: "Tech Company",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
-      ),
-      const ExperienceWidget(
-        role: "Another Role",
-        startDate: "6/2023",
-        endDate: "8/2024",
-        company: "Another Company",
-        description: "Another description goes here.",
-      ),
-    ];
-    List<SkillWidget> skills = [
-      const SkillWidget(
-        skillName: "Microsoft Word",
-        imagePath: "assets/images/svg/case.svg",
-        description: "Computer Skill",
-      ),
-      const SkillWidget(
-        skillName: "Python",
-        imagePath: "assets/images/svg/case.svg",
-        description: "Programming Language",
-      ),
-      const SkillWidget(
-        skillName: "Scrum",
-        imagePath: "assets/images/svg/case.svg",
-        description: "Team Skill",
-      ),
-    ];
-    List<EducationAndCertificatesWidget> educationAndCertificates = [
-      const EducationAndCertificatesWidget(
-        specialization: "Bachelor of Science in Computer Science",
-        startDate: "2018",
-        endDate: "2022",
-        organization: "University of XYZ",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      ),
-      const EducationAndCertificatesWidget(
-        specialization: "Master of Business Administration",
-        startDate: "2022",
-        endDate: "2024",
-        organization: "ABC Business School",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      ),
-      const EducationAndCertificatesWidget(
-        specialization: "Certificate in Graphic Design",
-        startDate: "2020",
-        endDate: "2021",
-        organization: "Design Academy",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      ),
-    ];
+    // List<ExperienceWidget> jobs = [
+    //   const ExperienceWidget(
+    //     role: "Software Engineer",
+    //     startDate: "5/2022",
+    //     endDate: "5/2023",
+    //     company: "Tech Company",
+    //     description:
+    //         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
+    //   ),
+    //   const ExperienceWidget(
+    //     role: "Another Role",
+    //     startDate: "6/2023",
+    //     endDate: "8/2024",
+    //     company: "Another Company",
+    //     description: "Another description goes here.",
+    //   ),
+    // ];
+    // List<SkillWidget> skills = [
+    //   const SkillWidget(
+    //     skillName: "Microsoft Word",
+    //     imagePath: "assets/images/svg/case.svg",
+    //     description: "Computer Skill",
+    //   ),
+    //   const SkillWidget(
+    //     skillName: "Python",
+    //     imagePath: "assets/images/svg/case.svg",
+    //     description: "Programming Language",
+    //   ),
+    //   const SkillWidget(
+    //     skillName: "Scrum",
+    //     imagePath: "assets/images/svg/case.svg",
+    //     description: "Team Skill",
+    //   ),
+    // ];
+    // List<EducationAndCertificatesWidget> educationAndCertificates = [
+    //   const EducationAndCertificatesWidget(
+    //     specialization: "Bachelor of Science in Computer Science",
+    //     startDate: "2018",
+    //     endDate: "2022",
+    //     organization: "University of XYZ",
+    //     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    //   ),
+    //   const EducationAndCertificatesWidget(
+    //     specialization: "Master of Business Administration",
+    //     startDate: "2022",
+    //     endDate: "2024",
+    //     organization: "ABC Business School",
+    //     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    //   ),
+    //   const EducationAndCertificatesWidget(
+    //     specialization: "Certificate in Graphic Design",
+    //     startDate: "2020",
+    //     endDate: "2021",
+    //     organization: "Design Academy",
+    //     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    //   ),
+    // ];
     List<ContactInfoWidget> contacts = [
       const ContactInfoWidget(
         imagePath: "assets/images/svg/facebook.svg",
@@ -180,7 +180,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             ),
             const CustomCard(
                 title: "Description",
-                operation: "Manage",
                 content: Text(
                   "TechNex Solutions is a leading software development company at the forefront of innovation, dedicated to empowering businesses with cutting-edge technological solutions. With a passion for excellence and a commitment to client satisfaction, we leverage the latest advancements in software development to drive digital transformation and fuel growth for our clients worldwide.",
                   style: AppFontStyles.mediumH4,
@@ -190,7 +189,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             ),
             const CustomCard(
                 title: "Vision",
-                operation: "Manage",
                 content: Text(
                   "Our vision at TechNex Solutions is to redefine the boundaries of possibility through technology. We strive to be the catalysts of change, revolutionizing industries and empowering organizations to thrive in the digital age.",
                   style: AppFontStyles.mediumH4,
@@ -200,7 +198,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             ),
             const CustomCard(
                 title: "Benefits",
-                operation: "Manage",
                 content: Column(
                   children: [
                     DescriptionItemWidget(
@@ -220,7 +217,6 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             ),
             const CustomCard(
                 title: "Policies",
-                operation: "Manage",
                 content: Column(
                   children: [
                     DescriptionItemWidget(
@@ -234,10 +230,11 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
             SizedBox(
               height: screenHeight * 0.02,
             ),
-            CustomProfileCard(
-                title: "Contact Info",
-                operation: widget.visitor ? "" : "Manage",
-                contactInfo: contacts),
+            // CustomProfileCard(
+            //     title: "Contact Info",
+            //     operation: widget.visitor ? "" : "Manage",
+            //     contactInfo: contacts
+            // ),
             const TopJobsSectionWidget(),
           ],
         ),

@@ -51,7 +51,7 @@ class ProfileImageWidget extends StatelessWidget {
                           AppFontStyles.mediumH6.copyWith(color: Colors.white),
                     ),
                     SizedBox(width: screenWidth * 0.65),
-                    !visitor ?
+                    if(visitor)
                     GestureDetector(
                       onTap: (){Navigator.pushNamed(context, AppRoutes.editApplicantProfile);},
                       child: SvgPicture.asset(
@@ -60,7 +60,7 @@ class ProfileImageWidget extends StatelessWidget {
                         height: screenWidth * 0.08,
                         color: Colors.white,
                       ),
-                    ): const Text("")
+                    )
                   ],
                 ),
               ),

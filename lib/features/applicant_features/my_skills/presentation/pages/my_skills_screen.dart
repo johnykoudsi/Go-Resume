@@ -34,16 +34,16 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
         title: const Text("My Skills",style: AppFontStyles.boldH2,),
         iconTheme: const IconThemeData(size: 25,color: AppColors.fontColor),
       ),
-      body:  ListView.builder(
-        itemCount: skills.length,
-        itemBuilder: (BuildContext context, int index) {
-         return
-           Padding(
-             padding:  EdgeInsets.only(top: screenHeight*0.02),
-             child: CustomSkillsCard(title:"Skill",operation: "Delete",skill: skills[index],),
-           );
-        },
-      ),
+      // body:  ListView.builder(
+      //   itemCount: skills.length,
+      //   itemBuilder: (BuildContext context, int index) {
+      //    return
+      //      Padding(
+      //        padding:  EdgeInsets.only(top: screenHeight*0.02),
+      //        child: CustomSkillsCard(title:"Skill",operation: "Delete",skill: skills[index],),
+      //      );
+      //   },
+      // ),
       floatingActionButton: const CustomFloatingButtonWidget(title: "New",),
     );
   }

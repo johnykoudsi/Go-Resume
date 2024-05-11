@@ -52,7 +52,7 @@ class _EditApplicantProfileScreenState
         if (state is ApplicantProfileDoneState) {
 
           Navigator.of(context).pushNamedAndRemoveUntil(
-              state.user.data.company==null?
+              state.user.company==null?
               AppRoutes.applicantProfile:AppRoutes.companyProfile, (Route<dynamic> route) => false);
         }
         if (state is ApplicantProfileErrorState) {

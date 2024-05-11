@@ -31,10 +31,10 @@ class JobApplicantsWidget extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Navigator.push(context ,  MaterialPageRoute(
-            builder: (context) => const ApplicantProfileScreen(visitor: true), // or false based on your logic
-          ),
-          );
+          // Navigator.push(context ,  MaterialPageRoute(
+          //   builder: (context) => const ApplicantProfileScreen(visitor: true), // or false based on your logic
+          // ),
+          // );
         },
         child: Stack(
           children: [

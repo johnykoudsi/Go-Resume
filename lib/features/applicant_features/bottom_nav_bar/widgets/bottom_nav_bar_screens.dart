@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/favorite_companies/presentation/pages/favorite_companies_screen.dart';
 import '../../../shared_features/applicant_profile/presentation/pages/applicant_profile_screen.dart';
@@ -22,7 +24,17 @@ class GetSelectedScreenByIndex extends StatelessWidget {
         return const AllJobsScreen();
       }
       if (screenIndex == 2) {
-        return const ApplicantProfileScreen();
+        return BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            if (state is UserLoggedState) {
+              return ApplicantProfileScreen(
+                user: state.user.data,
+                visitor: false,
+              );
+            }
+            return const SizedBox();
+          },
+        );
       }
       if (screenIndex == 3) {
         return const FavoriteCompaniesScreen();

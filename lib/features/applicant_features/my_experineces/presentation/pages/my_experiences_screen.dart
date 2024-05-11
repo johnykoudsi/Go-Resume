@@ -17,16 +17,16 @@ class MyExperiencesScreen extends StatefulWidget {
   State<MyExperiencesScreen> createState() => _MyExperiencesScreenState();
 }
 
-List<ExperienceWidget> experiences = [
-  const ExperienceWidget(
-    description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
-    role: 'Engineer',
-    startDate: '5/2008',
-    endDate: '6/2009',
-    company: 'Google',
-  ),
-];
+// List<ExperienceWidget> experiences = [
+//   const ExperienceWidget(
+//     description:
+//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
+//     role: 'Engineer',
+//     startDate: '5/2008',
+//     endDate: '6/2009',
+//     company: 'Google',
+//   ),
+// ];
 
 class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
   @override
@@ -40,19 +40,19 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
       ),
-      body: ListView.builder(
-        itemCount: experiences.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Padding(
-            padding: EdgeInsets.only(top: screenHeight * 0.02),
-            child: CustomExperiencesCard(
-              title: "Experience",
-              operation: "Delete",
-              experience: experiences[index],
-            ),
-          );
-        },
-      ),
+      // body: ListView.builder(
+      //   itemCount: experiences.length,
+      //   itemBuilder: (BuildContext context, int index) {
+      //     return Padding(
+      //       padding: EdgeInsets.only(top: screenHeight * 0.02),
+      //       child: CustomExperiencesCard(
+      //         title: "Experience",
+      //         operation: "Delete",
+      //         experience: experiences[index],
+      //       ),
+      //     );
+      //   },
+      // ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

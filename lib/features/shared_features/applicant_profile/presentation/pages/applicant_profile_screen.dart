@@ -1,126 +1,45 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
-import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
-import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/contact_info_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/education_and_certificates_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/experience_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/profile_image_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
-import 'package:smart_recruitment_flutter_user/utility/constant_logic_validation.dart';
-import '../../../../../core/router/app_routes.dart';
-import '../widgets/contact_info_widget.dart';
-import '../widgets/custom_profile_card_widget.dart';
-import '../widgets/education_and_certificates_widget.dart';
-import '../widgets/profile_image_widget.dart';
-import '../widgets/skill_widget.dart';
-import '../widgets/experience_widget.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 
 class ApplicantProfileScreen extends StatefulWidget {
- final bool visitor;
-  const ApplicantProfileScreen({Key? key,  this.visitor=false,}) : super(key: key);
+  const ApplicantProfileScreen({
+    required this.user,
+    Key? key,
+    this.visitor = true,
+  }) : super(key: key);
+
+  final User user;
+  final bool visitor;
 
   @override
   State<ApplicantProfileScreen> createState() => _ApplicantProfileScreenState();
 }
-List<Experience>? jobs = [
-  // const ExperienceWidget(
-  //   role: "Software Engineer",
-  //   startDate: "5/2022",
-  //   endDate: "5/2023",
-  //   company: "Tech Company",
-  //   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam accumsan nibh non augue dignissim, quis fringilla nulla ullamcorper. Phasellus et augue eu nulla malesuada euismod.",
-  // ),
-  // const ExperienceWidget(
-  //   role: "Another Role",
-  //   startDate: "6/2023",
-  //   endDate: "8/2024",
-  //   company: "Another Company",
-  //   description: "Another description goes here.",
-  // ),
-];
-String name="";
-String? bio="";
+
 class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
+  late User user;
   @override
   void initState() {
-    final userBloc = context.read<UserBloc>().state;
-    if (userBloc is UserLoggedState) {
-      name=userBloc.user.data.fullName;
-      bio=userBloc.user.data.applicant?.bio;
-jobs=userBloc.user.data.applicant?.experiences;
-    }
+    user = widget.user;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
-    List<SkillWidget> skills = [
-      const SkillWidget(
-        skillName: "Microsoft Word",
-        imagePath: "assets/images/svg/case.svg",
-        description: "Computer Skill",
-      ),
-      const SkillWidget(
-        skillName: "Python",
-        imagePath: "assets/images/svg/case.svg",
-        description: "Programming Language",
-
-      ),
-      const SkillWidget(
-        skillName: "Scrum",
-        imagePath: "assets/images/svg/case.svg",
-        description: "Team Skill",
-      ),
-    ];
-    List<EducationAndCertificatesWidget> educationAndCertificates = [
-      const EducationAndCertificatesWidget(
-        specialization: "Bachelor of Science in Computer Science",
-        startDate: "2018",
-        endDate: "2022",
-        organization: "University of XYZ",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      ),
-      const EducationAndCertificatesWidget(
-        specialization: "Master of Business Administration",
-        startDate: "2022",
-        endDate: "2024",
-        organization: "ABC Business School",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      ),
-      const EducationAndCertificatesWidget(
-        specialization: "Certificate in Graphic Design",
-        startDate: "2020",
-        endDate: "2021",
-        organization: "Design Academy",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      ),
-    ];
-    List<ContactInfoWidget> contacts = [
-      const ContactInfoWidget(
-        imagePath: "assets/images/svg/facebook.svg",
-      ),
-      const ContactInfoWidget(
-        imagePath: "assets/images/svg/telegram.svg",
-      ),
-      const ContactInfoWidget(
-        imagePath: "assets/images/svg/phone.svg",
-      ),
-      const ContactInfoWidget(
-        imagePath: "assets/images/svg/whatsapp.svg",
-      ),
-      const ContactInfoWidget(
-        imagePath: "assets/images/svg/linkedin.svg",
-      ),
-
-    ];
-    return BlocBuilder<UserBloc, UserState>(
-  builder: (context, state) {
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
       body: SingleChildScrollView(
@@ -139,62 +58,126 @@ jobs=userBloc.user.data.applicant?.experiences;
                   ),
                 ),
                 Padding(
-                  padding:  EdgeInsets.only(top:screenHeight * 0.21 ),
-                  child:  ProfileImageWidget(visitor: widget.visitor,profileImage: 'assets/images/jpg/profile_image.jpg', viewsNumber: '55'),
-                ),
-                !widget.visitor ?
-                Positioned(
-                  bottom: screenHeight * 0.08,
-                  right: 4,
-                  child: Container(
-                    width: screenWidth * 0.1,
-                    height: screenWidth * 0.1,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        Assets.svgCamera,
-                        width: screenWidth * 0.07,
-                        height: screenWidth * 0.07,
-                        color: Colors.black,
-                      ),
-                    ),
+                  padding: EdgeInsets.only(top: screenHeight * 0.21),
+                  child: ProfileImageWidget(
+                    visitor: widget.visitor,
+                    profileImage: 'assets/images/jpg/profile_image.jpg',
+                    viewsNumber: "0",
                   ),
-                ): const Text(""),
+                ),
+                !widget.visitor
+                    ? Positioned(
+                        bottom: screenHeight * 0.08,
+                        right: 4,
+                        child: Container(
+                          width: screenWidth * 0.1,
+                          height: screenWidth * 0.1,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              Assets.svgCamera,
+                              width: screenWidth * 0.07,
+                              height: screenWidth * 0.07,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const Text(""),
               ],
             ),
             SizedBox(
               height: screenHeight * 0.02,
             ),
             Text(
-              name,
+              user.fullName,
               style: AppFontStyles.boldH2.copyWith(color: Colors.black),
             ),
-            SizedBox(
-              height: screenHeight * 0.02,
+            const SizedBox(
+              height: 18,
             ),
-            bio != null ?
             Text(
-              bio!,
+              user.applicant?.bio ?? "",
               style: AppFontStyles.boldH2.copyWith(color: Colors.black),
-            ):const SizedBox(),
-            SizedBox(
-              height: screenHeight * 0.02,
             ),
-            CustomProfileCard(title:"Experiences",operation: widget.visitor ?"":"Manage",jobs: jobs,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.myExperiences);},),
-            SizedBox(height: screenHeight*0.02,),
-            CustomProfileCard(title:"Skills",operation: widget.visitor ?"":"Manage",skills: skills,onOperationPressed: (){ Navigator.of(context).pushNamed(AppRoutes.mySkills);},),
-            SizedBox(height: screenHeight*0.02,),
-            CustomProfileCard(title:"Education & Certificates",operation: widget.visitor ?"":"Manage",educationAndCertificates: educationAndCertificates,onOperationPressed: (){Navigator.of(context).pushNamed(AppRoutes.myEducationAndCertificates);},),
-            SizedBox(height: screenHeight*0.02,),
-            CustomProfileCard(title:"Contact Info",operation: widget.visitor ?"":"Manage",contactInfo: contacts),
+            const SizedBox(
+              height: 18,
+            ),
+            CustomCard(
+              title: "Experiences",
+              visitor: widget.visitor,
+              content: Column(
+                children: List.generate(
+                  user.applicant?.experiences?.length ?? 0,
+                  (index) {
+                    Experience? e = user.applicant?.experiences?[index];
+                    return ExperienceWidget(
+                      experience: e!,
+                    );
+                  },
+                ),
+              ),
+              onOperationPressed: () {},
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            // CustomProfileCard(
+            //   title: "Skills",
+            //   operation: widget.visitor ? "" : "Manage",
+            //   skills: List.generate(user.applicant.skills, (index) => null),
+            //   onOperationPressed: () {
+            //     Navigator.of(context).pushNamed(AppRoutes.mySkills);
+            //   },
+            // ),
+            // SizedBox(
+            //   height: screenHeight * 0.02,
+            // ),
+            CustomCard(
+              title: "Education & Certificates",
+              visitor: widget.visitor,
+              content: Column(
+                children: List.generate(
+                  user.applicant?.education?.length ?? 0,
+                  (index) {
+                    Education? e = user.applicant?.education?[index];
+                    return EducationAndCertificatesWidget(
+                      education: e!,
+                    );
+                  },
+                ),
+              ),
+              onOperationPressed: () {
+                // Navigator.of(context)
+                //     .pushNamed(AppRoutes.myEducationAndCertificates);
+              },
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            CustomCard(
+              title: "Contact Info",
+              visitor: widget.visitor,
+              content: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ContactInfoWidget(imagePath: Assets.svgFacebook),
+                  ContactInfoWidget(imagePath: Assets.svgLinkedin),
+                  ContactInfoWidget(imagePath: Assets.svgWhatsapp),
+                  ContactInfoWidget(imagePath: Assets.svgPhone),
+                  ContactInfoWidget(imagePath: Assets.svgTelegram),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 18,
+            ),
           ],
         ),
       ),
     );
-  },
-);
   }
 }
