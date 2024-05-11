@@ -11,10 +11,10 @@ import '../../../../../utility/global_widgets/custom_floating_button_widget.dart
 import '../../../../shared_features/applicant_profile/presentation/widgets/experience_widget.dart';
 import '../widgets/custom_experience_card.dart';
 
-
 class MyExperiencesScreen extends StatefulWidget {
-  const MyExperiencesScreen({required this.experiences,Key? key}) : super(key: key);
-final List<Experience> experiences;
+  const MyExperiencesScreen({required this.experiences, Key? key})
+      : super(key: key);
+  final List<Experience> experiences;
   @override
   State<MyExperiencesScreen> createState() => _MyExperiencesScreenState();
 }
@@ -36,18 +36,14 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
         itemBuilder: (BuildContext context, int index1) {
           return Padding(
             padding: EdgeInsets.only(top: screenHeight * 0.02),
-           child:  CustomCard(
-              title: "Experiences",
+            child: CustomCard(
+              title: "Experience",
               content: Column(
-                children: List.generate(
-                     1,
-                      (index) {
-                    Experience? e = widget.experiences?[index1];
-                    return ExperienceWidget(
-                      experience: e!,
-                    );
-                  },
-                ),
+                children: [
+                  ExperienceWidget(
+                    experience: widget.experiences[index1],
+                  ),
+                ],
               ),
             ),
           );
@@ -62,8 +58,10 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
           SizedBox(
             height: screenHeight * 0.015,
           ),
-           CustomFloatingButtonWidget(
-            onPressed: (){Navigator.pushNamed(context, AppRoutes.addExperience);},
+          CustomFloatingButtonWidget(
+            onPressed: () {
+              Navigator.pushNamed(context, AppRoutes.addExperience);
+            },
             title: "New",
           ),
         ],
