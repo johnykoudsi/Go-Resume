@@ -15,5 +15,11 @@ class ExperienceActionsRepoImpl extends ExperienceActionsRepo {
     return await experienceActionsDataSource.addExperienceDataSource(addExperienceEvent);
   }
 
+  @override
+  Future deleteExperience(DeleteExperienceEvent deleteExperienceEvent) async{
+    return await experienceActionsDataSource.deleteExperienceDataSource(deleteExperienceEvent);
+
+  }
+
 
 }

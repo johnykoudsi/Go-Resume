@@ -19,4 +19,12 @@ class ExperienceActionsDataSource {
     );
     return helperResponse;
   }
+  Future deleteExperienceDataSource(DeleteExperienceEvent deleteExperienceEvent) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      crud: "DELETE",
+      useUserToken: true,
+      url: EndPoints.deleteExperience(id: deleteExperienceEvent.id),
+    );
+    return helperResponse;
+  }
 }

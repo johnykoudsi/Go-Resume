@@ -3,7 +3,14 @@ part of 'experience_actions_bloc.dart';
 abstract class ExperienceActionsEvent extends Equatable {
   const ExperienceActionsEvent();
 }
-
+class DeleteExperienceEvent extends ExperienceActionsEvent{
+  int id;
+  DeleteExperienceEvent({
+    required this.id,
+  });
+  @override
+  List<Object?> get props => [id];
+}
 class AddExperienceEvent extends ExperienceActionsEvent {
   AddExperienceEvent(
       {required this.position,

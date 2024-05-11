@@ -24,7 +24,6 @@ class EducationActionsDataSource {
       useUserToken: true,
       url: EndPoints.deleteEducation(id: deleteEducationEvent.id),
     );
-    print("kkkk"+helperResponse.response);
     return helperResponse;
   }
 }
