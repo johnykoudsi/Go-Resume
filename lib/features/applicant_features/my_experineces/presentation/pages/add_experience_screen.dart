@@ -36,13 +36,14 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
     final double heightBetweenFields = screenHeight * 0.015;
     return BlocListener<ExperienceActionsBloc, ExperienceActionsState>(
       listener: (context, state) {
-        if (state is ExperienceActionsErrorState) {
+        if (state is ExperienceActionsResponseState) {
           DialogsWidgetsSnackBar.showSnackBarFromStatus(
-            context: context,
-            helperResponse: state.helperResponse,
-            popOnSuccess: true,
+              context: context,
+              helperResponse: state.helperResponse,
+              popOnSuccess: true,
+              popOnSuccessCount: 2,
           );
-
+          context.read<UserBloc>().add(RefreshUserEvent());
         }
       },
       child: Scaffold(
@@ -85,7 +86,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
             ),
             DatePickerWidget(label: 'End Date*', controller: endDateController),
             SizedBox(
-              height: heightBetweenFields*5,
+              height: heightBetweenFields * 5,
             ),
             BlocBuilder<ExperienceActionsBloc, ExperienceActionsState>(
               builder: (context, state) {
@@ -93,6 +94,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                   title: "Add",
                   isLoading: state is ExperienceActionsLoadingState,
                   onPressed: () {
+                    FocusScope.of(context).unfocus();
                     context.read<ExperienceActionsBloc>().add(
                         AddExperienceEvent(
                             position: positionController.text,

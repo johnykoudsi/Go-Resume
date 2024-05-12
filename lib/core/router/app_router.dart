@@ -49,25 +49,15 @@ class AppRouter {
           return const MySkillsScreen();
         case AppRoutes.myExperiences:
           List<Experience> args = settings.arguments as List<Experience>;
-          return MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => ExperienceActionsBloc(),),
-                BlocProvider(
-                  create: (context) => UserBloc(),)
-              ],
-          child:  MyExperiencesScreen(
-            experiences: args,)
+          return BlocProvider(
+            create: (context) => ExperienceActionsBloc(),
+            child: MyExperiencesScreen(
+              experiences: args,),
           );
         case AppRoutes.myEducationAndCertificates:
           List<Education> args = settings.arguments as List<Education>;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-              create: (context) => EducationActionsBloc(),),
-              BlocProvider(
-                create: (context) => UserBloc(),)
-            ],
+          return BlocProvider(
+            create: (context) => EducationActionsBloc(),
             child: MyEducationAndCertificatesScreen(
               educations: args,
             ),
@@ -76,7 +66,8 @@ class AppRouter {
           return MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) => MySubmissionsBloc()
+                create: (context) =>
+                MySubmissionsBloc()
                   ..add(ChangeToLoadingApiMySubmissionsEvent()),
               ),
             ],
@@ -88,11 +79,11 @@ class AppRouter {
           return const JobDetailsScreen();
         case AppRoutes.allApplicants:
           return const AllApplicantsScreen();
-        // case AppRoutes.applicantProfile:
-        //   User user = settings.arguments as User;
-        //   return ApplicantProfileScreen(
-        //     user: user,
-        //   );
+      // case AppRoutes.applicantProfile:
+      //   User user = settings.arguments as User;
+      //   return ApplicantProfileScreen(
+      //     user: user,
+      //   );
         case AppRoutes.viewApplicantProfile:
           User user = settings.arguments as User;
           return ApplicantProfileScreen(

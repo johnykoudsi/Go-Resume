@@ -4,20 +4,22 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class CustomFloatingButtonWidget extends StatelessWidget {
   final String title;
-  final  void Function()? onPressed;
-  const CustomFloatingButtonWidget({Key? key, required this.title,this.onPressed
-  }) : super(key: key);
+  final void Function()? onPressed;
+  const CustomFloatingButtonWidget(
+      {Key? key, required this.title, this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return SizedBox(
-      width: screenWidth*0.17, // Adjust width as needed
-      height: screenWidth*0.17, // Adjust height as needed
+      width: screenWidth * 0.17, // Adjust width as needed
+      height: screenWidth * 0.17, // Adjust height as needed
       child: FloatingActionButton(
         heroTag: null,
         onPressed: onPressed,
-        backgroundColor: Colors.transparent, // Make the background color transparent
+        backgroundColor:
+            Colors.transparent, // Make the background color transparent
         elevation: 0, // Remove elevation
         shape: const CircleBorder(), // Set shape to circular
         child: Ink(

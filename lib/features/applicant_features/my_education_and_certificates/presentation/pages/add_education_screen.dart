@@ -27,11 +27,6 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
   TextEditingController gradeDateController = TextEditingController();
   TextEditingController linkController = TextEditingController();
 
-
-    void refreshUser(){
-      context.read<UserBloc>().add(RefreshUserEvent());
-    }
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -40,12 +35,13 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
     return BlocListener<EducationActionsBloc, EducationActionsState>(
       listener: (context, state) {
         if (state is EducationActionsResponseState) {
-          refreshUser();
           DialogsWidgetsSnackBar.showSnackBarFromStatus(
             context: context,
             helperResponse: state.helperResponse,
             popOnSuccess: true,
+            popOnSuccessCount: 2,
           );
+          context.read<UserBloc>().add(RefreshUserEvent());
         }
       },
       child: Scaffold(
@@ -127,6 +123,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
                   title: "Add",
                   isLoading: state is EducationActionsLoadingState,
                   onPressed: () {
+                    FocusScope.of(context).unfocus();
                     context.read<EducationActionsBloc>().add(AddEducationEvent(
                         description: descriptionController.text,
                         startDate: startDateController.text,

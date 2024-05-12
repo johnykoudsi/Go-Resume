@@ -12,7 +12,7 @@ class DialogsWidgetsSnackBar {
     required BuildContext context,
     Color color = Colors.red,
   }) {
-    ScaffoldMessenger.of(context).clearSnackBars();
+    // ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(
       behavior: SnackBarBehavior.floating,
@@ -47,7 +47,8 @@ class DialogsWidgetsSnackBar {
           Navigator.of(context).pop();
         }
       }
-      return DialogsWidgetsSnackBar.showScaffoldSnackBar(
+      return ;
+        DialogsWidgetsSnackBar.showScaffoldSnackBar(
           title: "${serviceValues.reverse[helperResponse.servicesResponse]}" ,
           color: AppColors.kGreenColor,
           context: context

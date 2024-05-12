@@ -27,11 +27,8 @@ class ExperienceActionsBloc
           AddExperienceUsecase(experienceActionsRepoImpl);
 
       final response = await useCase.call(event);
-      if (response is Experience) {
-        emit(ExperienceActionsDoneState());
-      } else {
-        emit(ExperienceActionsErrorState(helperResponse: response));
-      }
+
+      emit(ExperienceActionsResponseState(helperResponse: response));
     });
     on<DeleteExperienceEvent>((event, emit) async {
       emit(ExperienceActionsLoadingState());
@@ -40,7 +37,7 @@ class ExperienceActionsBloc
 
       final response = await useCase.call(event);
 
-      emit(ExperienceActionsErrorState(helperResponse: response));
+      emit(ExperienceActionsResponseState(helperResponse: response));
 
     });
   }

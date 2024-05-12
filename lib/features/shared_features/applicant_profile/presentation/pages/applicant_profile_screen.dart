@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
@@ -43,8 +45,11 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
-      body: SingleChildScrollView(
-        child: Column(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<UserBloc>().add(RefreshUserEvent());
+        },
+        child: ListView(
           children: [
             Stack(
               children: [
@@ -93,9 +98,11 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
             SizedBox(
               height: screenHeight * 0.02,
             ),
-            Text(
-              user.fullName,
-              style: AppFontStyles.boldH2.copyWith(color: Colors.black),
+            Center(
+              child: Text(
+                user.fullName,
+                style: AppFontStyles.boldH2.copyWith(color: Colors.black),
+              ),
             ),
             const SizedBox(
               height: 18,
@@ -121,7 +128,10 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                   },
                 ),
               ),
-              onOperationPressed: () {Navigator.pushNamed(context, AppRoutes.myExperiences,arguments: user.applicant?.experiences);},
+              onOperationPressed: () {
+                Navigator.pushNamed(context, AppRoutes.myExperiences,
+                    arguments: user.applicant?.experiences);
+              },
             ),
             const SizedBox(
               height: 18,
@@ -141,8 +151,9 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 ),
               ),
               onOperationPressed: () {
-                Navigator.of(context)
-                    .pushNamed(AppRoutes.myEducationAndCertificates,arguments: user.applicant?.education);
+                Navigator.of(context).pushNamed(
+                    AppRoutes.myEducationAndCertificates,
+                    arguments: user.applicant?.education);
               },
             ),
             const SizedBox(

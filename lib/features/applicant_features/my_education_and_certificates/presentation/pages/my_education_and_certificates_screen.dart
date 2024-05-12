@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes_no.dart';
+import 'package:smart_recruitment_core/utility/global_widgets/shimmer.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
@@ -43,7 +45,23 @@ class _MyEducationAndCertificatesScreenState
           return Padding(
             padding: EdgeInsets.only(top: screenHeight * 0.02),
             child: BlocConsumer<EducationActionsBloc, EducationActionsState>(
+              listener: (context, state) {
+                if (state is EducationActionsResponseState) {
+                  DialogsWidgetsSnackBar.showSnackBarFromStatus(
+                    context: context,
+                    helperResponse: state.helperResponse,
+                    popOnSuccess: true,
+                  );
+                  context.read<UserBloc>().add(RefreshUserEvent());
+                }
+              },
               builder: (context, state) {
+                if (state is EducationActionsLoadingState) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: AppShimmerLoader(),
+                  );
+                }
                 return CustomCard(
                   onOperationPressed: () {
                     DialogsWidgetsYesNo.showYesNoDialog(
@@ -66,22 +84,9 @@ class _MyEducationAndCertificatesScreenState
                   },
                   operation: "Delete",
                   title: "Education",
-                  content: Column(
-                    children: [
-                      EducationAndCertificatesWidget(
-                          education: widget.educations[index]),
-                    ],
-                  ),
+                  content: EducationAndCertificatesWidget(
+                      education: widget.educations[index]),
                 );
-              },
-              listener: (context, state) {
-                if (state is EducationActionsResponseState) {
-                  DialogsWidgetsSnackBar.showSnackBarFromStatus(
-                    context: context,
-                    helperResponse: state.helperResponse,
-                    popOnSuccess: true,
-                  );
-                }
               },
             ),
           );
