@@ -18,13 +18,16 @@ class AddExperienceEvent extends ExperienceActionsEvent {
       required this.startDate,
       required this.endDate,
       required this.workField,
-      required this.company});
+      required this.company,
+      required this.currentlyIn,
+      });
   String position;
   String company;
   String description;
   String workField;
   String startDate;
   String endDate;
+  String currentlyIn;
   Map<String, dynamic> toJson() {
     final json = {
       "title": position,
@@ -32,8 +35,8 @@ class AddExperienceEvent extends ExperienceActionsEvent {
       "start_date": startDate,
       "end_date": endDate,
       "work_field_id": workField,
-      "company": company,
-
+      "company_name": company,
+      "currently_in":currentlyIn,
     };
     json.removeWhere((key, value) => value==null||value ==""||value.isEmpty||value=="null");
     return json;

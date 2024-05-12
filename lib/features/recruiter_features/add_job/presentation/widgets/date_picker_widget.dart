@@ -7,8 +7,9 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 class DatePickerWidget extends StatefulWidget {
   final String label;
   final TextEditingController controller;
+  final String? Function(String?)? validator;
 
-  const DatePickerWidget({Key? key, required this.label, required this.controller}) : super(key: key);
+  const DatePickerWidget({Key? key, required this.label, required this.controller, this.validator}) : super(key: key);
 
   @override
   _DatePickerWidgetState createState() => _DatePickerWidgetState();
@@ -25,7 +26,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
         return SizedBox(
           height: MediaQuery.of(context).size.height * 0.3, // Adjust the height as needed
           child: CupertinoDatePicker(
-           // minimumDate:_selectedDate ?? DateTime.now().add(const Duration(days: 1)), // Set minimum date to tomorrow
+            // minimumDate:_selectedDate ?? DateTime.now().add(const Duration(days: 1)), // Set minimum date to tomorrow
             mode: CupertinoDatePickerMode.date,
             initialDateTime: _selectedDate ?? DateTime.now().add(const Duration(days: 1)),
             onDateTimeChanged: (DateTime newDate) {
@@ -62,6 +63,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 12.0),
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.kGreyColor),
+
             borderRadius: AppBorders.k8BorderRadius,
           ),
           child: Row(
@@ -74,13 +76,13 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
               Expanded(
                 child: InkWell(
                   onTap: () => _selectDate(context),
-                  child: IgnorePointer(
-                    child: TextFormField(
-                      controller: widget.controller,
-                      decoration:  InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Select a date',
-                        hintStyle: AppFontStyles.mediumH5.copyWith(color: AppColors.kGreyColor),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 12.0), // Adjust padding as needed
+                    child: Text(
+                      _selectedDate != null ? '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}' : 'Select a date',
+                      style: TextStyle(
+                        color: _selectedDate != null ? Colors.black : AppColors.kGreyColor,
+                        fontSize: 16.0, // Adjust font size as needed
                       ),
                     ),
                   ),
