@@ -19,6 +19,7 @@ class AddEducationScreen extends StatefulWidget {
 }
 
 class _AddEducationScreenState extends State<AddEducationScreen> {
+  static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
   TextEditingController universityController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -48,96 +49,112 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
         appBar: AppBar(
           title: const Text(
             "Add Education",
-            style: AppFontStyles.boldH2,
+            style: AppFontStyles.boldH3,
           ),
         ),
-        body: ListView(
+        body: Form(
+          key: _key,
+          child: ListView(
+            padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
+                screenWidth * 0.04, screenWidth * 0.03),
+            children: [
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: nameController,
+                label: "Specialization*",
+                onlyNumber: false,
+                hintText: 'Example: Software Engineering',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Specialization is required";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              DescriptionField(
+                action: TextInputAction.done,
+                controller: descriptionController,
+                label: "Description",
+                onlyNumber: false,
+                hintText: 'Describe your education with a few words',
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: gradeDateController,
+                label: "Grade Percent",
+                onlyNumber: true,
+                textInputType: TextInputType.number,
+                hintText: 'Example: 81.2',
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: universityController,
+                label: "University",
+                onlyNumber: false,
+                hintText: 'Example: Damascus University',
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: linkController,
+                label: "Certificate Link",
+                onlyNumber: false,
+                hintText: 'https://certificatelink.com',
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              DatePickerWidget(
+                  label: 'Start Date*', controller: startDateController),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              DatePickerWidget(label: 'End Date*', controller: endDateController),
+              SizedBox(
+                height: heightBetweenFields * 5,
+              ),
+            ],
+          ),
+        ),
+        bottomSheet: Padding(
           padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
-              screenWidth * 0.04, screenWidth * 0.03),
-          children: [
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: nameController,
-              label: "Specialization*",
-              onlyNumber: false,
-              hintText: 'Example: Software Engineering',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            DescriptionField(
-              action: TextInputAction.done,
-              controller: descriptionController,
-              label: "Description",
-              onlyNumber: false,
-              hintText: 'Describe your education with a few words',
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: gradeDateController,
-              label: "Grade Percent",
-              onlyNumber: false,
-              hintText: 'Example: 81.2',
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: universityController,
-              label: "University",
-              onlyNumber: false,
-              hintText: 'Example: Damascus University',
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: linkController,
-              label: "Certificate Link",
-              onlyNumber: false,
-              hintText: 'https://certificatelink.com',
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            DatePickerWidget(
-                label: 'Start Date*', controller: startDateController),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            DatePickerWidget(label: 'End Date*', controller: endDateController),
-            SizedBox(
-              height: heightBetweenFields * 5,
-            ),
-
-            BlocBuilder<EducationActionsBloc, EducationActionsState>(
-              builder: (context, state) {
-                return ElevatedButtonWidget(
-                  title: "Add",
-                  isLoading: state is EducationActionsLoadingState,
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    context.read<EducationActionsBloc>().add(AddEducationEvent(
-                        description: descriptionController.text,
-                        startDate: startDateController.text,
-                        endDate: endDateController.text,
-                        name: nameController.text,
-                        university: universityController.text,
-                        grade: gradeDateController.text,
-                        link: linkController.text
-                    ));
-                  },
-                );
-              },
-            ),
-          ],
+              screenWidth * 0.04, screenWidth * 0.1),
+          child: BlocBuilder<EducationActionsBloc, EducationActionsState>(
+            builder: (context, state) {
+              return ElevatedButtonWidget(
+                title: "Add",
+                isLoading: state is EducationActionsLoadingState,
+                onPressed: () {
+                  if(_key.currentState!.validate() &&
+                      startDateController.text != ""&&endDateController.text != ""){
+                  FocusScope.of(context).unfocus();
+                  context.read<EducationActionsBloc>().add(AddEducationEvent(
+                      description: descriptionController.text,
+                      startDate: startDateController.text,
+                      endDate: endDateController.text,
+                      name: nameController.text,
+                      university: universityController.text,
+                      grade: gradeDateController.text,
+                      link: linkController.text
+                  ));
+                  }
+                },
+              );
+            },
+          ),
         ),
       ),
     );

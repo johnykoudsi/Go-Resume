@@ -105,12 +105,6 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               DatePickerWidget(
                 label: 'Start Date*',
                 controller: startDateController,
-                validator: (value) {
-                  if (value == null) {
-                    return "Start Date is required";
-                  }
-                  return null;
-                },
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -120,14 +114,6 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                 child: DatePickerWidget(
                   label: 'End Date*',
                   controller: endDateController,
-                  validator: (value) {
-                    if (!_currentlyIn) {
-                      if (value == null) {
-                        return "End Date is required";
-                      }
-                    }
-                    return null;
-                  },
                 ),
               ),
               SizedBox(

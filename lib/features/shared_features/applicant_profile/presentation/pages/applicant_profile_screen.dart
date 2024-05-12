@@ -107,9 +107,12 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
             const SizedBox(
               height: 18,
             ),
-            Text(
-              user.applicant?.bio ?? "",
-              style: AppFontStyles.boldH2.copyWith(color: Colors.black),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                user.applicant?.bio ?? "",
+                style: AppFontStyles.boldH4.copyWith(color: Colors.black),
+              ),
             ),
             const SizedBox(
               height: 18,
