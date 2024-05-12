@@ -5,10 +5,10 @@ import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/features/recruiter_features/add_job/presentation/widgets/date_picker_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/date_picker_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/description_field.dart';
 
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
-import '../../../../recruiter_features/add_job/presentation/widgets/description_field.dart';
 import '../bloc/education_actions_bloc.dart';
 
 class AddEducationScreen extends StatefulWidget {
@@ -23,11 +23,10 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController universityController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  TextEditingController startDateController = TextEditingController();
-  TextEditingController endDateController = TextEditingController();
   TextEditingController gradeDateController = TextEditingController();
   TextEditingController linkController = TextEditingController();
-
+  DateTime? selectedStartDate;
+  DateTime? selectedEndDate;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -118,11 +117,26 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                  label: 'Start Date*', controller: startDateController),
+                label: 'Start Date*',
+                selectedDate: selectedStartDate,
+                onDateChange: (date) {
+                  setState(() {
+                    selectedStartDate = date;
+                  });
+                },
+              ),
               SizedBox(
                 height: heightBetweenFields,
               ),
-              DatePickerWidget(label: 'End Date*', controller: endDateController),
+              DatePickerWidget(
+                label: 'End Date*',
+                selectedDate: selectedEndDate,
+                onDateChange: (date) {
+                  setState(() {
+                    selectedEndDate = date;
+                  });
+                },
+              ),
               SizedBox(
                 height: heightBetweenFields * 5,
               ),
@@ -138,18 +152,18 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
                 title: "Add",
                 isLoading: state is EducationActionsLoadingState,
                 onPressed: () {
-                  if(_key.currentState!.validate() &&
-                      startDateController.text != ""&&endDateController.text != ""){
-                  FocusScope.of(context).unfocus();
-                  context.read<EducationActionsBloc>().add(AddEducationEvent(
-                      description: descriptionController.text,
-                      startDate: startDateController.text,
-                      endDate: endDateController.text,
-                      name: nameController.text,
-                      university: universityController.text,
-                      grade: gradeDateController.text,
-                      link: linkController.text
-                  ));
+                  if (_key.currentState!.validate() &&
+                      selectedStartDate != null &&
+                      selectedEndDate!= null) {
+                    FocusScope.of(context).unfocus();
+                    context.read<EducationActionsBloc>().add(AddEducationEvent(
+                        description: descriptionController.text,
+                        startDate: selectedStartDate.toString(),
+                        endDate: selectedEndDate.toString(),
+                        name: nameController.text,
+                        university: universityController.text,
+                        grade: gradeDateController.text,
+                        link: linkController.text));
                   }
                 },
               );

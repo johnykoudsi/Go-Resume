@@ -1,19 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
-
+import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_snackBar.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/applicant_features/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
-import 'package:smart_recruitment_flutter_user/features/recruiter_features/add_job/presentation/widgets/date_picker_widget.dart';
-
-import '../../../../../core/router/app_routes.dart';
-import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
-import '../../../../recruiter_features/add_job/presentation/widgets/description_field.dart';
-import '../../../../recruiter_features/add_job/presentation/widgets/preferred_gender_widget.dart';
-import '../widgets/custom_check_box.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/my_experineces/presentation/widgets/custom_check_box.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/date_picker_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/description_field.dart';
 
 class AddExperienceScreen extends StatefulWidget {
   const AddExperienceScreen({Key? key}) : super(key: key);
@@ -27,10 +22,10 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
   TextEditingController positionController = TextEditingController();
   TextEditingController companyController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  TextEditingController startDateController = TextEditingController();
-  TextEditingController endDateController = TextEditingController();
   int workFieldId = 0;
   bool _currentlyIn = false;
+  DateTime? selectedStartDate;
+  DateTime? selectedEndDate;
 
   @override
   Widget build(BuildContext context) {
@@ -104,17 +99,25 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               ),
               DatePickerWidget(
                 label: 'Start Date*',
-                controller: startDateController,
+                selectedDate: selectedStartDate,
+                onDateChange: (date) {
+                  setState(() {
+                    selectedStartDate = date;
+                  });
+                },
               ),
               SizedBox(
                 height: heightBetweenFields,
               ),
-              Visibility(
-                visible: !_currentlyIn,
-                child: DatePickerWidget(
-                  label: 'End Date*',
-                  controller: endDateController,
-                ),
+              if(!_currentlyIn)
+              DatePickerWidget(
+                label: 'End Date*',
+                selectedDate: selectedEndDate,
+                onDateChange: (date) {
+                  setState(() {
+                    selectedEndDate = date;
+                  });
+                },
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -140,17 +143,17 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                 title: "Add",
                 isLoading: state is ExperienceActionsLoadingState,
                 onPressed: () {
-                  if (_currentlyIn || endDateController.text != "") {
+                  if (_currentlyIn || selectedEndDate != null) {
                     if (_key.currentState!.validate() &&
-                        startDateController.text != "") {
+                        selectedStartDate != null) {
                       FocusScope.of(context).unfocus();
                       context.read<ExperienceActionsBloc>().add(
                           AddExperienceEvent(
                             currentlyIn: _currentlyIn.toString() == "true" ? "1":"0",
                               position: positionController.text,
                               description: descriptionController.text,
-                              startDate: startDateController.text,
-                              endDate: endDateController.text,
+                              startDate: selectedStartDate.toString(),
+                              endDate: selectedEndDate.toString(),
                               workField: '1',
                               company: companyController.text));
                     }
