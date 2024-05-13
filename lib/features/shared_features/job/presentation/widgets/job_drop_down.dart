@@ -2,40 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/enums.dart';
 
-class CustomDropdown extends StatefulWidget {
+class JobTypeDropdownList extends StatelessWidget {
   final String title;
-  final List<dynamic> items;
-  final dynamic? selectedItem;
-  final void Function(dynamic)? onChanged;
+  final dynamic selectedItem;
+  final void Function(JobTypes)? onChanged;
 
-  const CustomDropdown(
+  const JobTypeDropdownList(
       {Key? key,
       required this.title,
-      required this.items,
       required this.selectedItem,
       this.onChanged})
       : super(key: key);
 
   @override
-  _CustomDropdownState createState() => _CustomDropdownState();
-}
-
-class _CustomDropdownState extends State<CustomDropdown> {
-  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        PopupMenuButton<String>(
+        PopupMenuButton<JobTypes>(
           offset: const Offset(0, 50),
-          onSelected: widget.onChanged,
+          onSelected: onChanged,
           itemBuilder: (BuildContext context) {
-            return widget.items.map((item) {
-              return PopupMenuItem<String>(
+            return JobTypes.values.map((item) {
+              return PopupMenuItem<JobTypes>(
                 value: item,
                 child: Text(
-                  item.toString(),
+                  jobTypesUi.reverse[item] ?? "",
                   style: AppFontStyles.mediumH3, // Increase font size for items
                 ),
               );
@@ -55,7 +49,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.selectedItem ?? widget.title,
+                  jobTypesUi.reverse[selectedItem] ?? title,
                   style: AppFontStyles.mediumH3,
                 ),
                 const Icon(Icons.arrow_drop_down),

@@ -10,10 +10,11 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/bloc/add_job/add_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/benefits_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/compensation_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/description_field.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/job_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/preferred_gender_widget.dart';
-import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/searchable_drop_down_widget.dart';
 import 'benefits_screen.dart';
 
@@ -37,6 +38,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
   String? _selectedUserGender = "None";
   List<String> _selectedButtons = [];
   DateTime? selectedDate;
+  JobTypes? selectedJobType;
 
   void onSelect(String selected) {
     // Handle user selection here
@@ -176,15 +178,14 @@ class _AddJobScreenState extends State<AddJobScreen> {
               SizedBox(
                 height: heightBetweenFields * 2,
               ),
-              CustomDropdown(
+              CompensationDropdownList(
                 title: 'Compensation',
-                items: Compensation.values,
                 onChanged: (value) {
                   setState(() {
                     selectedCompensation = value;
                   });
                 },
-                selectedItem: '',
+                selectedItem: selectedCompensation,
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -215,16 +216,14 @@ class _AddJobScreenState extends State<AddJobScreen> {
               SizedBox(
                 height: heightBetweenFields * 2,
               ),
-              CustomDropdown(
+              JobTypeDropdownList(
                 title: 'Job Type',
-                items: const [
-                  'Full Time',
-                  'Part Time',
-                  'Freelance',
-                  'Outsourcing'
-                ],
-                onChanged: (value) {},
-                selectedItem: null,
+                onChanged: (value) {
+                  setState(() {
+                    selectedJobType = value;
+                  });
+                },
+                selectedItem: selectedJobType,
               ),
               SizedBox(
                 height: heightBetweenFields * 2,
