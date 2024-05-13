@@ -5,22 +5,54 @@ sealed class AddJobEvent extends Equatable {
 }
 
 final class AddNewJobEvent extends AddJobEvent {
-  AddNewJobEvent(
-      {required this.position,
-      required this.description,
-      required this.startDate,
-      required this.compensation,
-      required this.genderEnum,
-      required this.maxSalary,
-      required this.minSalary,
-      });
+  AddNewJobEvent({
+    required this.position,
+    required this.description,
+    required this.startDate,
+    required this.compensation,
+    required this.genderEnum,
+    required this.maxSalary,
+    required this.minSalary,
+    required this.workHours,
+    required this.jobTypes,
+    required this.experienceYears,
+    required this.workFieldId,
+    required this.benefits
+  });
   String position;
   String description;
-  DateTime startDate;
+  String startDate;
   GenderEnum genderEnum;
   num minSalary;
   num maxSalary;
   Compensation compensation;
+  JobTypes jobTypes;
+  num workHours;
+  num experienceYears;
+  int workFieldId;
+  List<int> benefits;
+  Map<String, String> toMapBody() {
+    Map<String, String> map = {
+      "position": position,
+      "description": description,
+      "start_date": startDate,
+      "gender": genderEnum.name,
+      "min_salary": minSalary.toString(),
+      "max_salary": maxSalary.toString(),
+      "compensation": compensation.name,
+      "type": jobTypes.name,
+      "work_hours": workHours.toString(),
+      "experience_years": experienceYears.toString(),
+      "work_field_id": workFieldId.toString(),
+    };
+    if (benefits.isNotEmpty) {
+      for (int i = 0; i < benefits.length; i++) {
+        map["benefits[$i]"] = benefits[i].toString();
+      }
+    }
+
+    return map;
+  }
   @override
   List<Object> get props => [
         position,
@@ -29,6 +61,11 @@ final class AddNewJobEvent extends AddJobEvent {
         genderEnum,
         minSalary,
         maxSalary,
-        compensation
+        compensation,
+        jobTypes,
+        workHours,
+        experienceYears,
+        workFieldId,
+        benefits
       ];
 }

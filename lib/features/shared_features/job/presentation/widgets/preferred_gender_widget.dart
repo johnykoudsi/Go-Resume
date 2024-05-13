@@ -20,19 +20,19 @@ class PreferredGenderWidget extends StatelessWidget {
           groupValue: selectedPreferredGender,
           onChanged: onUserTypeSelected,
         ),
-        const Text('Male',style: AppFontStyles.mediumH4,),
+        const Text('Male',style: AppFontStyles.mediumH5,),
         Radio<String>(
           value: 'Female',
           groupValue: selectedPreferredGender,
           onChanged: onUserTypeSelected,
         ),
-        const Text('Female',style: AppFontStyles.mediumH4,),
+        const Text('Female',style: AppFontStyles.mediumH5,),
         Radio<String>(
           value: 'None',
           groupValue: selectedPreferredGender,
           onChanged: onUserTypeSelected,
         ),
-        const Text('None',style: AppFontStyles.mediumH4,),
+        const Text('None',style: AppFontStyles.mediumH5,),
       ],
     );
   }

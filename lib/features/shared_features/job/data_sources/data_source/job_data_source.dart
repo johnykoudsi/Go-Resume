@@ -9,8 +9,9 @@ class JobDataSource {
 
   Future addNewJob(AddNewJobEvent addNewJobEvent) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      useUserToken: true,
       url: EndPoints.addNewJob,
-      body: json.encode({}),
+      body: json.encode(addNewJobEvent.toMapBody()),
     );
     return helperResponse;
   }

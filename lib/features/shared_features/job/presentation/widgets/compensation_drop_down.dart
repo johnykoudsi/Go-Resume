@@ -31,7 +31,7 @@ class CompensationDropdownList extends StatelessWidget {
                 value: item,
                 child: Text(
                   compensationTypesUi.reverse[item] ?? "",
-                  style: AppFontStyles.mediumH3, // Increase font size for items
+                  style: AppFontStyles.mediumH5, // Increase font size for items
                 ),
               );
             }).toList();
@@ -51,7 +51,7 @@ class CompensationDropdownList extends StatelessWidget {
               children: [
                 Text(
                   compensationTypesUi.reverse[selectedItem] ?? title,
-                  style: AppFontStyles.mediumH3,
+                  style: AppFontStyles.mediumH5,
                 ),
                 const Icon(Icons.arrow_drop_down),
               ],

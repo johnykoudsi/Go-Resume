@@ -34,13 +34,13 @@ class BenefitsWidget extends StatelessWidget {
               children: [
                 Text(
                   "Benefits",
-                  style: AppFontStyles.mediumH3,
+                  style: AppFontStyles.mediumH5,
                 ),
               ],
             ),
             Text(
               description,
-              style: AppFontStyles.mediumH4.copyWith(color: AppColors.kGreyColor),
+              style: AppFontStyles.mediumH5.copyWith(color: AppColors.kGreyColor),
             ),
           ],
         ),

@@ -16,13 +16,6 @@ class ApplicantProfileDataSource {
       useUserToken: true,
       url: EndPoints.updateApplicantProfile,
       body: json.encode(updateApplicantProfileEvent.toJson()),
-      // json.encode({
-      //   // "full_name": updateApplicantProfileEvent.fullName,
-      //   // "skills":[],
-      //   // "gender":updateApplicantProfileEvent.gender,
-      //   // "dob": updateApplicantProfileEvent.dob,
-      //   // "bio": updateApplicantProfileEvent.bio,
-      // }),
     );
     return helperResponse;
   }

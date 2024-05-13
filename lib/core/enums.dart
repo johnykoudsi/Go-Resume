@@ -3,8 +3,8 @@
 import 'package:smart_recruitment_core/utility/enums.dart';
 
 enum GenderEnum{
-  male,
-  female,
+  m,
+  f,
   none,
 }
 enum Compensation{
