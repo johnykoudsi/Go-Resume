@@ -9,8 +9,6 @@ import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/preferred_gender_widget.dart';
-
-import '../../../../../core/router/app_routes.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../bloc/applicant_profile_bloc.dart';
 

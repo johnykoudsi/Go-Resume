@@ -15,7 +15,6 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
     this.facebook,
     this.linkedin,
     this.email,
-    this.skills,
   });
   DateTime? dob;
   GenderEnum? gender;
@@ -26,7 +25,6 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
   String? facebook;
   String? linkedin;
   String? email;
-  List<Skill>? skills;
 
   Map<String, dynamic> toJson() {
     final json = {
@@ -40,14 +38,6 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
       "linkedin": linkedin,
       "email": email,
     };
-    print(json["dob"]);
-
-    if (skills != null && skills!.isNotEmpty) {
-      for (int i = 0; i < skills!.length; i++) {
-        json["skills[$i]"] = skills![i].id.toString();
-      }
-    }
-
     json.removeWhere(
         (key, value) => value == "" || value == null || value == "null");
     return json;
@@ -57,7 +47,6 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
   List<Object?> get props => [
         dob,
         gender,
-        skills,
         bio,
         fullName,
         websiteLink,

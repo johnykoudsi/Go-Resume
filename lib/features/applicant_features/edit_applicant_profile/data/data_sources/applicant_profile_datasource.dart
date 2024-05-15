@@ -1,11 +1,7 @@
 import 'dart:convert';
-
-import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
-import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/networking/endpoints.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
-
-import '../../presentation/bloc/applicant_profile_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/applicant_features/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 
 class ApplicantProfileDataSource {
   ApplicantProfileDataSource(this.networkHelpers);

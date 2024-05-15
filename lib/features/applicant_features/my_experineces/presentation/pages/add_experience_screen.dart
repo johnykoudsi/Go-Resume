@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_snackBar.dart';
+import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
@@ -41,7 +42,10 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
             popOnSuccess: true,
             popOnSuccessCount: 2,
           );
-          context.read<UserBloc>().add(RefreshUserEvent());
+          if (state.helperResponse.servicesResponse ==
+              ServicesResponseStatues.success) {
+            context.read<UserBloc>().add(RefreshUserEvent());
+          }
         }
       },
       child: Scaffold(
@@ -109,16 +113,16 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               SizedBox(
                 height: heightBetweenFields,
               ),
-              if(!_currentlyIn)
-              DatePickerWidget(
-                label: 'End Date*',
-                selectedDate: selectedEndDate,
-                onDateChange: (date) {
-                  setState(() {
-                    selectedEndDate = date;
-                  });
-                },
-              ),
+              if (!_currentlyIn)
+                DatePickerWidget(
+                  label: 'End Date*',
+                  selectedDate: selectedEndDate,
+                  onDateChange: (date) {
+                    setState(() {
+                      selectedEndDate = date;
+                    });
+                  },
+                ),
               SizedBox(
                 height: heightBetweenFields,
               ),
@@ -149,7 +153,8 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                       FocusScope.of(context).unfocus();
                       context.read<ExperienceActionsBloc>().add(
                           AddExperienceEvent(
-                            currentlyIn: _currentlyIn.toString() == "true" ? "1":"0",
+                              currentlyIn:
+                                  _currentlyIn.toString() == "true" ? "1" : "0",
                               position: positionController.text,
                               description: descriptionController.text,
                               startDate: selectedStartDate.toString(),
