@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
+import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/preferred_gender_widget.dart';
@@ -22,7 +24,7 @@ class EditApplicantProfileScreen extends StatefulWidget {
 
 class _EditApplicantProfileScreenState
     extends State<EditApplicantProfileScreen> {
-  String? _selectedUserGender = "None";
+  GenderEnum? _selectedUserGender = GenderEnum.m;
   TextEditingController nameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
   DateTime? selectedDate;
@@ -33,7 +35,11 @@ class _EditApplicantProfileScreenState
       nameController.text = userBloc.user.data.fullName;
       bioController.text = userBloc.user.data.applicant?.bio ?? "";
       selectedDate = userBloc.user.data.applicant?.dob;
-      _selectedUserGender = userBloc.user.data.applicant?.gender ?? "None";
+      _selectedUserGender = userBloc.user.data.applicant?.gender == "m"
+          ? GenderEnum.m
+          : userBloc.user.data.applicant?.gender == "f"
+              ? GenderEnum.f
+              : GenderEnum.none;
     }
     super.initState();
   }
@@ -45,18 +51,16 @@ class _EditApplicantProfileScreenState
     final double heightBetweenFields = screenHeight * 0.015;
     return BlocListener<ApplicantProfileBloc, ApplicantProfileState>(
       listener: (context, state) {
-        if (state is ApplicantProfileDoneState) {
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              state.user.company == null
-                  ? AppRoutes.applicantProfile
-                  : AppRoutes.companyProfile,
-              (Route<dynamic> route) => false);
-        }
-        if (state is ApplicantProfileErrorState) {
+        if (state is ApplicantProfileResponseState) {
           DialogsWidgetsSnackBar.showSnackBarFromStatus(
-              context: context,
-              helperResponse: state.helperResponse,
-              showServerError: true);
+            context: context,
+            helperResponse: state.helperResponse,
+            showServerError: true,
+            popOnSuccess: true,
+          );
+          if(state.helperResponse.servicesResponse == ServicesResponseStatues.success){
+            context.read<UserBloc>().add(RefreshUserEvent());
+          }
         }
       },
       child: Scaffold(
@@ -123,17 +127,15 @@ class _EditApplicantProfileScreenState
                     context
                         .read<ApplicantProfileBloc>()
                         .add(UpdateApplicantProfileEvent(
-                          dob: selectedDate.toString(),
+                          dob: selectedDate,
                           gender: _selectedUserGender,
-                          resume: null,
                           bio: bioController.text,
                           fullName: nameController.text,
-                          websiteLink: null,
-                          instagram: null,
-                          facebook: null,
-                          linkedin: null,
-                          mobile: '',
-                          email: null,
+                          // websiteLink: null,
+                          // instagram: null,
+                          // facebook: null,
+                          // linkedin: null,
+                          // email: null,
                         ));
                   },
                 );

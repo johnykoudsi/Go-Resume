@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes_no.dart';
+import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/shimmer.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
@@ -35,8 +36,9 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
             helperResponse: state.helperResponse,
             popOnSuccess: true,
           );
-          context.read<UserBloc>().add(RefreshUserEvent());
-        }
+          if(state.helperResponse.servicesResponse == ServicesResponseStatues.success){
+            context.read<UserBloc>().add(RefreshUserEvent());
+          }        }
       },
       child: Scaffold(
         appBar: AppBar(
@@ -95,7 +97,7 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             const CustomFloatingButtonWidget(
-              title: "AI",
+              icon: Icon(Icons.auto_fix_high_rounded),
             ),
             SizedBox(
               height: screenHeight * 0.015,
@@ -104,7 +106,7 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
               onPressed: () {
                 Navigator.pushNamed(context, AppRoutes.addExperience);
               },
-              title: "New",
+              icon: const Icon(Icons.add),
             ),
           ],
         ),

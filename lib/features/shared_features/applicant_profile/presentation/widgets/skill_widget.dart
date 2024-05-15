@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/skill.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class SkillWidget extends StatelessWidget {
-  final String skillName;
-  final String description;
-  final String imagePath;
+  final Skill skill;
 
   const SkillWidget({
     Key? key,
-    required this.skillName,
-    required this.description,
-    required this.imagePath,
+    required this.skill,
+
   }) : super(key: key);
 
   @override
@@ -20,7 +18,7 @@ class SkillWidget extends StatelessWidget {
     return Row(
       children: [
         SvgPicture.asset(
-          imagePath,
+          skill.icon,
           width: screenWidth * 0.07,
           height: screenWidth * 0.07,
           color: Colors.black,
@@ -30,13 +28,13 @@ class SkillWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              skillName,
+              skill.name,
               style: AppFontStyles.boldH6,
             ),
-            Text(
-              description,
-              style: AppFontStyles.mediumH6,
-            ),
+            // Text(
+            //   description,
+            //   style: AppFontStyles.mediumH6,
+            // ),
           ],
         ),
       ],

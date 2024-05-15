@@ -32,9 +32,8 @@ class _AddJobScreenState extends State<AddJobScreen> {
   TextEditingController maximumSalaryController = TextEditingController();
   TextEditingController workHoursController = TextEditingController();
 
-  GenderEnum selectedGender = GenderEnum.m;
+  GenderEnum selectedGender = GenderEnum.none;
   Compensation? selectedCompensation;
-  String? _selectedUserGender = "None";
   List<String> _selectedButtons = [];
   DateTime? selectedDate;
   JobTypes? selectedJobType;
@@ -236,10 +235,10 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   style: AppFontStyles.mediumH5,
                 ),
                 PreferredGenderWidget(
-                    selectedPreferredGender: _selectedUserGender,
+                    selectedPreferredGender: selectedGender,
                     onUserTypeSelected: (value) {
                       setState(() {
-                        _selectedUserGender = value;
+                        selectedGender = value??GenderEnum.none;
                       });
                     }),
                 SizedBox(

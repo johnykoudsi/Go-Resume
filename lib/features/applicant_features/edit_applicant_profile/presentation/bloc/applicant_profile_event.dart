@@ -2,55 +2,68 @@ part of 'applicant_profile_bloc.dart';
 
 abstract class ApplicantProfileEvent extends Equatable {
   const ApplicantProfileEvent();
-
-
 }
+
 class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
   UpdateApplicantProfileEvent({
-    required this.dob,
-    required this.gender,
-    required this.resume,
-    required this.bio,
-    required this.fullName,
-    required this.websiteLink,
-    required this.instagram,
-    required this.facebook,
-    required this.linkedin,
-    required this.mobile,
-    required this.email,
+    this.dob,
+    this.gender,
+    this.bio,
+    this.fullName,
+    this.websiteLink,
+    this.instagram,
+    this.facebook,
+    this.linkedin,
+    this.email,
+    this.skills,
   });
-  dynamic dob;
-  dynamic gender;
-  dynamic resume;
-  dynamic bio;
-  String fullName;
-  dynamic websiteLink;
-  dynamic instagram;
-  dynamic facebook;
-  dynamic linkedin;
-  String mobile;
-  dynamic email;
+  DateTime? dob;
+  GenderEnum? gender;
+  String? bio;
+  String? fullName;
+  String? websiteLink;
+  String? instagram;
+  String? facebook;
+  String? linkedin;
+  String? email;
+  List<Skill>? skills;
 
   Map<String, dynamic> toJson() {
     final json = {
-      "dob": dob,
-      "gender": gender,
-      "resume": resume,
+      "dob": dob != null ? DateFormat('yyyy-MM-dd').format(dob!) : null,
+      "gender": gender?.name,
       "bio": bio,
       "full_name": fullName,
       "website_link": websiteLink,
       "instagram": instagram,
       "facebook": facebook,
       "linkedin": linkedin,
-      "mobile": mobile,
       "email": email,
     };
-    json.removeWhere((key, value) => value==null||value ==""||value.isEmpty||value=="null");
+    print(json["dob"]);
+
+    if (skills != null && skills!.isNotEmpty) {
+      for (int i = 0; i < skills!.length; i++) {
+        json["skills[$i]"] = skills![i].id.toString();
+      }
+    }
+
+    json.removeWhere(
+        (key, value) => value == "" || value == null || value == "null");
     return json;
   }
 
-
   @override
-  List<Object?> get props =>
-      [dob, gender, resume, bio,fullName,websiteLink,instagram,facebook,linkedin,mobile,email];
+  List<Object?> get props => [
+        dob,
+        gender,
+        skills,
+        bio,
+        fullName,
+        websiteLink,
+        instagram,
+        facebook,
+        linkedin,
+        email
+      ];
 }

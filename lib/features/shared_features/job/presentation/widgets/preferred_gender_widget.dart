@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/enums.dart';
 
 class PreferredGenderWidget extends StatelessWidget {
-  final String? selectedPreferredGender;
-  final void Function(String?) onUserTypeSelected;
+  final GenderEnum? selectedPreferredGender;
+  final void Function(GenderEnum?) onUserTypeSelected;
 
   const PreferredGenderWidget({super.key,
     required this.selectedPreferredGender,
@@ -15,20 +16,20 @@ class PreferredGenderWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Radio<String>(
-          value: 'Male',
+        Radio<GenderEnum>(
+          value: GenderEnum.m,
           groupValue: selectedPreferredGender,
           onChanged: onUserTypeSelected,
         ),
         const Text('Male',style: AppFontStyles.mediumH5,),
-        Radio<String>(
-          value: 'Female',
+        Radio<GenderEnum>(
+          value: GenderEnum.f,
           groupValue: selectedPreferredGender,
           onChanged: onUserTypeSelected,
         ),
         const Text('Female',style: AppFontStyles.mediumH5,),
-        Radio<String>(
-          value: 'None',
+        Radio<GenderEnum>(
+          value:  GenderEnum.none,
           groupValue: selectedPreferredGender,
           onChanged: onUserTypeSelected,
         ),

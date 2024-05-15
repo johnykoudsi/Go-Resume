@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/skill.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
@@ -14,6 +15,7 @@ import 'package:smart_recruitment_flutter_user/features/shared_features/applican
 import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/education_and_certificates_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/experience_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/profile_image_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_profile/presentation/widgets/skill_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 
@@ -134,6 +136,28 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
               onOperationPressed: () {
                 Navigator.pushNamed(context, AppRoutes.myExperiences,
                     arguments: user.applicant?.experiences);
+              },
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            CustomCard(
+              title: "Skills",
+              visitor: widget.visitor,
+              content: Column(
+                children: List.generate(
+                  user.applicant?.skills?.length ?? 0,
+                      (index) {
+                    Skill? s = user.applicant?.skills?[index];
+                    return SkillWidget(
+                      skill: s!,
+                    );
+                  },
+                ),
+              ),
+              onOperationPressed: () {
+                Navigator.pushNamed(context, AppRoutes.mySkills,
+                    arguments: user.applicant?.skills);
               },
             ),
             const SizedBox(
