@@ -4,6 +4,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/recruiter_features/pinned_applicants/presentation/pages/pinned_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/company_profile/presentation/pages/company_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/bloc/add_job/add_job_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/bloc/benefits/benefits_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/pages/add_job_screen.dart';
 import '../../../shared_features/more/presentation/pages/more_screen.dart';
 import '../../my_jobs/presentation/pages/my_jobs_screen.dart';
@@ -24,8 +25,16 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
         return const PinnedApplicantsScreen();
       }
       if (screenIndex == 2) {
-        return BlocProvider(
-          create: (context) => AddJobBloc(),
+        return MultiBlocProvider(
+
+          providers: [
+            BlocProvider(
+              create: (context) => AddJobBloc(),
+            ),
+            BlocProvider(
+              create: (context) => BenefitsBloc(),
+            ),
+          ],
           child: const AddJobScreen(),
         );
       }

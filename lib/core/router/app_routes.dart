@@ -22,6 +22,7 @@ class AppRoutes {
   static const String editCompanyProfile = "/edit_company_profile";
   static const String addExperience = "/add_experience";
   static const String addEducation = "/add_education";
+  static const String benefitsScreen = "/get_benefits";
 
 
 

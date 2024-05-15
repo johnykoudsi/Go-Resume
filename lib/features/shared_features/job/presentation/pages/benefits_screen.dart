@@ -2,26 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/domain/entities/benefits_entity.dart';
 
-class ButtonSelectionScreen extends StatefulWidget {
-  final List<String> items;
-  final void Function(List<String>) onSelectionChanged;
-  final List<String> initiallySelectedItems;
+class BenefitsScreen extends StatefulWidget {
+  final List<String>? items;
+  final void Function(List<String>)? onSelectionChanged;
+  final List<String>? initiallySelectedItems;
+  final List<BenefitEntity>benefits;
 
 
-  const ButtonSelectionScreen({Key? key, required this.items, required this.onSelectionChanged, required this.initiallySelectedItems}) : super(key: key);
+  const BenefitsScreen({Key? key,  this.items,  this.onSelectionChanged,  this.initiallySelectedItems, required this.benefits}) : super(key: key);
 
   @override
-  _ButtonSelectionScreenState createState() => _ButtonSelectionScreenState();
+  _BenefitsScreenState createState() => _BenefitsScreenState();
 }
 
-class _ButtonSelectionScreenState extends State<ButtonSelectionScreen> {
+class _BenefitsScreenState extends State<BenefitsScreen> {
   List<String> _selectedItems = [];
 
   @override
   void initState() {
     super.initState();
-    _selectedItems = List.from(widget.initiallySelectedItems);
+    //_selectedItems = List.from(widget.benefits);
   }
 
   void _toggleSelection(String item) {
@@ -34,7 +36,7 @@ class _ButtonSelectionScreenState extends State<ButtonSelectionScreen> {
     });
 
     // Call the callback function with the updated selected items
-    widget.onSelectionChanged(_selectedItems);
+  //  widget.onSelectionChanged!(_selectedItems);
   }
 
   @override
@@ -49,9 +51,9 @@ class _ButtonSelectionScreenState extends State<ButtonSelectionScreen> {
           mainAxisSpacing: 0,
           crossAxisSpacing: 0,
         ),
-        itemCount: widget.items.length,
+        itemCount: widget.benefits.length,
         itemBuilder: (BuildContext context, int index) {
-          String item = widget.items[index];
+          String item = widget.benefits[index].name;
           return GestureDetector(
             onTap: () => _toggleSelection(item),
             child: Padding(

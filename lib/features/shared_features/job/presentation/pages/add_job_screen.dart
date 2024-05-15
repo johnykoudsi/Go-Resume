@@ -7,7 +7,9 @@ import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_wi
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
+import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/bloc/add_job/add_job_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/bloc/benefits/benefits_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/benefits_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/compensation_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/date_picker_widget.dart';
@@ -15,6 +17,7 @@ import 'package:smart_recruitment_flutter_user/features/shared_features/job/pres
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/job_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/widgets/preferred_gender_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../../utility/global_widgets/shimmer.dart';
 import 'benefits_screen.dart';
 
 class AddJobScreen extends StatefulWidget {
@@ -48,7 +51,15 @@ class _AddJobScreenState extends State<AddJobScreen> {
       _selectedButtons = selectedItems;
     });
   }
+  @override
+  void initState() {
+    search();
+    super.initState();
+  }
 
+  void search() {
+    context.read<BenefitsBloc>().add(GetBenefitsEvent());
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -117,31 +128,40 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
-                BenefitsWidget(
-                  onPressed: () {
-                    // Navigate to ButtonSelectionScreen and pass the list of items
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ButtonSelectionScreen(
-                          items: const [
-                            '14 Paid Vacation Days',
-                            'Free Mobile Line',
-                            'Friday’s Pizza',
-                            'Paid Trips',
-                            'Seasonal Bonuses',
-                            'Flexible Time'
-                          ],
-                          initiallySelectedItems:
-                              _selectedButtons, // Pass initially selected buttons
-                          onSelectionChanged: _handleButtonSelection,
-                        ),
-                      ),
-                    );
+                BlocBuilder<BenefitsBloc, BenefitsState>(
+                  builder: (context, state) {
+                    if (state is BenefitsInitial) {
+                      return ShimmerLoader(
+                        height: screenHeight * 0.02,
+                        width: screenWidth * 0.4,
+                      );
+                    }if(state is BenefitsDoneState){
+                      return BenefitsWidget(
+                        onPressed: () {
+                          // Navigate to ButtonSelectionScreen and pass the list of items
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider(
+                                create: (context) => BenefitsBloc(),
+                                child: BenefitsScreen(
+                                  initiallySelectedItems:
+                                  _selectedButtons, // Pass initially selected buttons
+                                  onSelectionChanged: _handleButtonSelection,
+                                  benefits: state.benefits,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        description: _selectedButtons.isEmpty
+                            ? "Add some benefits that your company will provide for the position you're offering."
+                            : _selectedButtons.join(', '),
+                      );
+
+                    }else{return SizedBox();}
+
                   },
-                  description: _selectedButtons.isEmpty
-                      ? "Add some benefits that your company will provide for the position you're offering."
-                      : _selectedButtons.join(', '),
                 ),
                 SizedBox(
                   height: heightBetweenFields * 2,
@@ -238,7 +258,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                     selectedPreferredGender: selectedGender,
                     onUserTypeSelected: (value) {
                       setState(() {
-                        selectedGender = value??GenderEnum.none;
+                        selectedGender = value ?? GenderEnum.none;
                       });
                     }),
                 SizedBox(
@@ -258,7 +278,6 @@ class _AddJobScreenState extends State<AddJobScreen> {
                       isLoading: state is AddJobLoadingState,
                       title: "Submit",
                       onPressed: () {
-
                         if (!_key.currentState!.validate() &&
                             selectedDate != null) {
                           return;
