@@ -47,13 +47,11 @@ class DialogsWidgetsSnackBar {
           Navigator.of(context).pop();
         }
       }
-      return ;
-        DialogsWidgetsSnackBar.showScaffoldSnackBar(
+      return    DialogsWidgetsSnackBar.showScaffoldSnackBar(
           title: "${serviceValues.reverse[helperResponse.servicesResponse]}" ,
           color: AppColors.kGreenColor,
           context: context
       );
-
     }
     if(showServerError){
       if (helperResponse.servicesResponse == ServicesResponseStatues.networkError){
