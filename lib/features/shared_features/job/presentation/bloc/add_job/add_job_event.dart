@@ -36,7 +36,7 @@ final class AddNewJobEvent extends AddJobEvent {
       "position": position,
       "description": description,
       "start_date": startDate,
-      "gender": genderEnum.name,
+      "gender":genderEnum.name,
       "min_salary": minSalary.toString(),
       "max_salary": maxSalary.toString(),
       "compensation": compensation.name,
@@ -45,12 +45,15 @@ final class AddNewJobEvent extends AddJobEvent {
       "experience_years": experienceYears.toString(),
       "work_field_id": workFieldId.toString(),
     };
+
     if (benefits.isNotEmpty) {
       for (int i = 0; i < benefits.length; i++) {
         map["benefits[$i]"] = benefits[i].toString();
       }
     }
 
+    // Remove entries with null or empty values
+    map.removeWhere((key, value) => value == null || value.isEmpty || value=="none");
     return map;
   }
   @override

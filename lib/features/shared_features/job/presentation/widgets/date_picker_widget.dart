@@ -9,12 +9,14 @@ class DatePickerWidget extends StatelessWidget {
   final String label;
   final Function(DateTime) onDateChange;
   final DateTime? selectedDate;
+  final DateTime? minDate;
+  final DateTime? maxDate;
 
   const DatePickerWidget({
     Key? key,
     required this.label,
     required this.selectedDate,
-    required this.onDateChange,
+    required this.onDateChange, this.minDate, this.maxDate,
   }) : super(key: key);
 
   Future<void> _selectDate(BuildContext context) async {
@@ -26,8 +28,8 @@ class DatePickerWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height *
               0.3, // Adjust the height as needed
           child: CupertinoDatePicker(
-            // minimumDate: DateTime.now().add(const Duration(days: 1)),
-            maximumDate: DateTime.now().add(const Duration(days: 360)),
+             minimumDate:minDate,
+            maximumDate: maxDate,
             mode: CupertinoDatePickerMode.date,
             initialDateTime: selectedDate,
             onDateTimeChanged: onDateChange,

@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import '../../features/shared_features/job/domain/entities/work_field_entity.dart';
 
 class SearchableDropDownWidget extends StatefulWidget {
-  final List<String> items; // List of dropdown options
-  final String selectedItem; // Pre-selected item (optional)
-  final Function onSelect;
-  final String title;// Callback function for selection
+  final List<WorkFieldEntity> items; // List of dropdown options
+  final WorkFieldEntity? selectedItem; // Pre-selected item (optional)
+  final Function(WorkFieldEntity) onSelect;
+  final String title; // Title for the dropdown
 
-  const SearchableDropDownWidget(
-      {required this.items,
-      required this.selectedItem,
-      required this.onSelect, required this.title});
+  const SearchableDropDownWidget({
+    required this.items,
+    required this.selectedItem,
+    required this.onSelect,
+    required this.title,
+  });
 
   @override
   _SearchableDropDownWidgetState createState() =>
@@ -21,10 +24,15 @@ class SearchableDropDownWidget extends StatefulWidget {
 }
 
 class _SearchableDropDownWidgetState extends State<SearchableDropDownWidget> {
-
   final ScrollController _scrollController = ScrollController();
-  String? selectedValue;
+  WorkFieldEntity? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    selectedValue = widget.selectedItem;
+  }
 
   @override
   void dispose() {
@@ -37,30 +45,31 @@ class _SearchableDropDownWidgetState extends State<SearchableDropDownWidget> {
     return SingleChildScrollView(
       controller: _scrollController,
       child: DropdownButtonHideUnderline(
-        child: DropdownButton2<String>(
+        child: DropdownButton2<WorkFieldEntity>(
           iconStyleData: const IconStyleData(
             iconDisabledColor: Colors.black,
-            iconEnabledColor: Colors.black
+            iconEnabledColor: Colors.black,
           ),
           isExpanded: true,
-          hint:  Text(
+          hint: Text(
             widget.title,
-              style: AppFontStyles.mediumH3,
+            style: AppFontStyles.mediumH5,
           ),
           items: widget.items
-              .map((item) => DropdownMenuItem(
-                    value: item,
-                    child: Text(
-                      item, style: AppFontStyles.mediumH3,
-      
-                    ),
-                  ))
+              .map((item) => DropdownMenuItem<WorkFieldEntity>(
+            value: item,
+            child: Text(
+              item.name,
+              style: AppFontStyles.mediumH5,
+            ),
+          ))
               .toList(),
           value: selectedValue,
           onChanged: (value) {
             setState(() {
               selectedValue = value;
             });
+            widget.onSelect(value!);
           },
           buttonStyleData: ButtonStyleData(
             padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
@@ -76,7 +85,6 @@ class _SearchableDropDownWidgetState extends State<SearchableDropDownWidget> {
             maxHeight: 200,
           ),
           menuItemStyleData: const MenuItemStyleData(
-
             height: 50,
           ),
           dropdownSearchData: DropdownSearchData(
@@ -91,16 +99,17 @@ class _SearchableDropDownWidgetState extends State<SearchableDropDownWidget> {
                 left: 8,
               ),
               child: TextFormField(
-                onTap: (){
-                  _scrollController.animateTo(100, duration: const Duration(milliseconds: 300), curve: Curves.ease);
+                onTap: () {
+                  _scrollController.animateTo(100,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.ease);
                 },
                 expands: true,
                 maxLines: null,
                 controller: textEditingController,
                 decoration: InputDecoration(
                   enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black),
-      
+                    borderSide: BorderSide(color: AppColors.kBackGroundColor),
                   ),
                   isDense: true,
                   contentPadding: const EdgeInsets.symmetric(
@@ -116,10 +125,10 @@ class _SearchableDropDownWidgetState extends State<SearchableDropDownWidget> {
               ),
             ),
             searchMatchFn: (item, searchValue) {
-              return item.value.toString().contains(searchValue);
+              return item.value!.name.toLowerCase().contains(searchValue.toLowerCase());
             },
           ),
-          //This to clear the search value when you close the menu
+          // This to clear the search value when you close the menu
           onMenuStateChange: (isOpen) {
             if (!isOpen) {
               textEditingController.clear();

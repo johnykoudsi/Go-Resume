@@ -3,6 +3,8 @@ import 'package:smart_recruitment_flutter_user/features/shared_features/job/doma
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/bloc/add_job/add_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/shared_features/job/presentation/bloc/benefits/benefits_bloc.dart';
 
+import '../../presentation/bloc/work_fields/work_fields_bloc.dart';
+
 class JobRepoImpl extends JobRepo {
   JobDataSource jobDataSource;
   JobRepoImpl(this.jobDataSource);
@@ -15,6 +17,11 @@ class JobRepoImpl extends JobRepo {
   @override
   Future getBenefits(GetBenefitsEvent getBenefitsEvent) {
     return jobDataSource.getBenefits(event: getBenefitsEvent);
+  }
+
+  @override
+  Future getWorkFields(GetWorkFieldsEvent getWorkFieldsEvent) {
+    return jobDataSource.getWorkFields(event: getWorkFieldsEvent);
   }
 
 }
