@@ -79,6 +79,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
       listener: (context, state) {
         if (state is AddJobResponseState) {
           DialogsWidgetsSnackBar.showSnackBarFromStatus(
+            showServerError: true,
             context: context,
             helperResponse: state.helperResponse,
             popOnSuccess: false,
@@ -117,7 +118,6 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   height: heightBetweenFields,
                 ),
                 DatePickerWidget(
-                  minDate: DateTime.now().add(const Duration(days: 1)),
                   maxDate: DateTime.now().add(const Duration(days: 360)),
                   label: 'Select Date',
                   selectedDate: selectedDate,
