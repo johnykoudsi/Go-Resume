@@ -14,7 +14,6 @@ class AddSkillEvent extends SkillActionsEvent {
         map["skills[$i]"] = skills[i].id.toString();
       }
     }
-    map.removeWhere((key, value) => value == "" || value.isEmpty || value == "null");
     return map;
   }
 

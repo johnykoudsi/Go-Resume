@@ -13,11 +13,20 @@ class SkillActionsDataSource {
   final NetworkHelpers networkHelpers;
 
   Future addSkillDataSource(AddSkillEvent addSkillEvent) async {
-    HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
-      useUserToken: true,
-      url: EndPoints.updateApplicantProfile,
-      body: addSkillEvent.toJson(),
-    );
+    late HelperResponse helperResponse;
+    if (addSkillEvent.toJson().isEmpty) {
+      helperResponse = await NetworkHelpers.postDataHelper(
+        useUserToken: true,
+        url: EndPoints.updateApplicantProfile,
+        body: json.encode({"skills": []}),
+      );
+    } else {
+      helperResponse = await NetworkHelpers.postDataWithFile(
+        useUserToken: true,
+        url: EndPoints.updateApplicantProfile,
+        body: addSkillEvent.toJson(),
+      );
+    }
     print(helperResponse.response);
     return helperResponse;
   }
@@ -34,7 +43,6 @@ class SkillActionsDataSource {
         return List<Skill>.from(
           data.map((x) => Skill.fromJson(x)),
         );
-
       } catch (e) {
         return helperResponse.copyWith(
             servicesResponse: ServicesResponseStatues.modelError);
