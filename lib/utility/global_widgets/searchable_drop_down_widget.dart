@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import '../../features/shared_features/job/domain/entities/work_field_entity.dart';
+import 'package:smart_recruitment_flutter_user/features/job/domain/entities/work_field_entity.dart';
 
 class SearchableDropDownWidget extends StatefulWidget {
   final List<WorkFieldEntity> items; // List of dropdown options
