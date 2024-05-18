@@ -8,7 +8,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/wo
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/add_job_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/my_jobs_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/company_profile_screen.dart';
-import '../../../shared_features/more/presentation/pages/more_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/more/presentation/pages/more_screen.dart';
 
 
 class GetSelectedRecruiterScreenByIndex extends StatelessWidget {

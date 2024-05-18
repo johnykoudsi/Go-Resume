@@ -4,9 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes_no.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
-import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_bottom_nav_bar/widgets/CustomNavigatorWidget.dart';
-import 'package:smart_recruitment_flutter_user/features/shared_features/company_bottom_nav_bar/widgets/recruiter_bottom_nav_bar_screens.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/applicant_bottom_nav_bar/widgets/CustomNavigatorWidget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
+
+import 'widgets/recruiter_bottom_nav_bar_screens.dart';
 
 
 

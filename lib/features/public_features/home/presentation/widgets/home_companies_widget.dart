@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/features/get_user_features/all_companies/presentation/widgets/company_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/get_user_features/widgets/company_widget.dart';
 
 class HomeCompaniesSectionWidget extends StatelessWidget {
   const HomeCompaniesSectionWidget({super.key});

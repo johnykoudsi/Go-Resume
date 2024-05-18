@@ -8,7 +8,7 @@ import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_item_widget.dart';
-import 'package:smart_recruitment_flutter_user/features/shared_features/home/presentation/widgets/top_jobs_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/home/presentation/widgets/top_jobs_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import '../../../../../core/router/app_routes.dart';

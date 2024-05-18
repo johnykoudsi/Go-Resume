@@ -24,9 +24,9 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/p
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/pages/add_experience_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/pages/my_experiences_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presentation/pages/my_skills_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/shared_features/applicant_bottom_nav_bar/bottom_nav_bar.dart';
-import 'package:smart_recruitment_flutter_user/features/shared_features/company_bottom_nav_bar/recruiter_bottom_nav_bar.dart';
-import 'package:smart_recruitment_flutter_user/features/shared_features/my_notifications/presentation/pages/my_notifications_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/applicant_bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/company_bottom_nav_bar/recruiter_bottom_nav_bar.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/pages/my_notifications_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {

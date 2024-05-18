@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
-import 'package:smart_recruitment_flutter_user/features/shared_features/home/presentation/widgets/carousel_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/home/presentation/widgets/carousel_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 import '../../../../../core/router/app_routes.dart';
