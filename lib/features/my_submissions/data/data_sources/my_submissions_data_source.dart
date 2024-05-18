@@ -19,7 +19,7 @@ class MySubmissionsDataSource {
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
       url: EndPoints.getMySubmissions(
         page: event.searchFilterProperties.page,
-        limit: kProductsGetLimit,
+        limit: kGetLimit,
       ),
       useUserToken: true,
     );

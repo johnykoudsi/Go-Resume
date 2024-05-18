@@ -12,7 +12,7 @@ GlobalKey<NavigatorState>();
 
 UserBloc globalUserBloc = UserBloc();
 
-const int kProductsGetLimit = 10;
+const int kGetLimit = 10;
 const int kTagGetLimit = 20;
 
 const double mapRadius = 200;

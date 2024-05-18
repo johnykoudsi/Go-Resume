@@ -25,7 +25,7 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
 
       int getPage() {
         if (currentState is MySubmissionsLoadedState) {
-          return currentState.submissions.length ~/ kProductsGetLimit + 1;
+          return currentState.submissions.length ~/ kGetLimit + 1;
         }
         return 0;
       }
@@ -44,7 +44,7 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
             emit(currentState.copyWith(
                 jobs: List.of(currentState.submissions)..addAll(getMySubmissions),
                 hasReachedMax:
-                getMySubmissions.length < kProductsGetLimit ? true : false));
+                getMySubmissions.length < kGetLimit ? true : false));
           }
 
           // add loaded state
@@ -52,7 +52,7 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
             emit(MySubmissionsLoadedState(
               submissions: getMySubmissions,
               hasReachedMax:
-              getMySubmissions.length < kProductsGetLimit ? true : false,
+              getMySubmissions.length < kGetLimit ? true : false,
             ));
           }
         } else {
@@ -68,7 +68,8 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
             ));
           }
         }
-      } else {
+      }
+      else {
         print("Server ${(getMySubmissions as HelperResponse).response}");
 
         emit(MySubmissionsErrorState(helperResponse: getMySubmissions));
