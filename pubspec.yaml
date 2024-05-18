@@ -23,7 +23,6 @@ dependencies:
   get_it: ^7.6.7
   equatable: ^2.0.5
   shared_preferences: ^2.2.2
-  firebase_core: ^2.27.1
   firebase_messaging: ^14.7.20
   flutter_local_notifications: ^17.0.0
   easy_localization: ^3.0.5
@@ -34,6 +33,7 @@ dependencies:
   pinput: ^2.2.21
   dropdown_search: ^5.0.6
   dropdown_button2: ^2.3.9
+  firebase_core: ^2.31.0
 
 
 

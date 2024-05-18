@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "640262866764",
+    "project_id": "go-resume-30a5c",
+    "storage_bucket": "go-resume-30a5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640262866764:android:9195459b8f6ce7b882b1e9",
+        "android_client_info": {
+          "package_name": "com.example.smart_recruitment_flutter_user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF4-cpAaGOV8nY-EMiz068C1IFFttfvqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

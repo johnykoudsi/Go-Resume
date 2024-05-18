@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,11 +8,15 @@ import 'package:smart_recruitment_core/utility/app_bloc_observer.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_core/utility/theme/app_style.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
+import 'package:smart_recruitment_flutter_user/firebase/firebase_notifications.dart';
+import 'package:smart_recruitment_flutter_user/firebase_options.dart';
 import 'core/router/app_router.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseNotifications().initNotifications();
   Bloc.observer = MyBlocObserver();
-
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       // statusBarColor: AppColors.kSecondColor, // status bar color
       statusBarIconBrightness: Brightness.light, // status bar icons' color
