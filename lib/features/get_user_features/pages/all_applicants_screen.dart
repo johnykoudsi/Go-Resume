@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_applicants_widget.dart';
-import '../../../../../core/router/app_routes.dart';
-import '../../../../../generated/assets.dart';
-import '../../../../../utility/global_widgets/search_text_field.dart';
+import '../../../core/router/app_routes.dart';
+import '../../../generated/assets.dart';
+import '../../../utility/global_widgets/search_text_field.dart';
 
 class AllApplicantsScreen extends StatefulWidget {
   const AllApplicantsScreen({Key? key}) : super(key: key);
