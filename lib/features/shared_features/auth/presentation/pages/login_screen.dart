@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -126,14 +127,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 BlocBuilder<UserBloc, UserState>(
                   builder: (context, state) {
-                    return ElevatedButtonWidget(
+                    return ElevatedButtonWidget (
                       title: "Login",
                       isLoading: state is UserLoading,
-                      onPressed: () {
+                      onPressed: () async{
+                        // final _firebaseMessaging = FirebaseMessaging.instance;
+                        // await _firebaseMessaging.requestPermission();
+                        // String? fcmToken = await _firebaseMessaging.getToken();
                         if (_key.currentState!.validate()) {
                           context.read<UserBloc>().add(LoginUserEvent(
                             password: passwordController.text,
                             phoneNumber: phoneController.text,
+                      //      fcm_token: fcmToken
                           ));
                         }
                       },
