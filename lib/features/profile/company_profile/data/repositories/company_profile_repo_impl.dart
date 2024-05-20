@@ -1,14 +1,14 @@
 
-import 'package:smart_recruitment_flutter_user/features/profile/company_profile/data/data_sources/policies_actions_datasource.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/data/data_sources/company_profile_datasource.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 
-import '../../domain/repositories/policies_actions_repo.dart';
+import '../../domain/repositories/company_profile_repo.dart';
 
 
-class PoliciesActionsRepoImpl extends PoliciesActionsRepo {
-  PoliciesActionsRepoImpl(this.policiesActionsDataSource);
+class CompanyProfileRepoImpl extends CompanyProfileRepo {
+  CompanyProfileRepoImpl(this.policiesActionsDataSource);
 
-  PoliciesActionsDataSource policiesActionsDataSource;
+  CompanyProfileDataSource policiesActionsDataSource;
 
   @override
   Future addPolicy(AddPolicyEvent addPolicyEvent) async {

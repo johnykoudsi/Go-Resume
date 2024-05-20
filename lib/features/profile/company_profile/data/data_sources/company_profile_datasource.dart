@@ -7,8 +7,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/p
 import '../../presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 
 
-class PoliciesActionsDataSource {
-  PoliciesActionsDataSource(this.networkHelpers);
+class CompanyProfileDataSource {
+  CompanyProfileDataSource(this.networkHelpers);
   final NetworkHelpers networkHelpers;
 
   Future addPolicyDataSource(AddPolicyEvent addPolicyEvent) async {
