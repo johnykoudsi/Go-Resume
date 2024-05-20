@@ -23,6 +23,8 @@ class AppRoutes {
   static const String addExperience = "/add_experience";
   static const String addEducation = "/add_education";
   static const String benefitsScreen = "/get_benefits";
+  static const String myPolicies= "/my_policies";
+  static const String addPolicy= "/add_policy";
 
 
 

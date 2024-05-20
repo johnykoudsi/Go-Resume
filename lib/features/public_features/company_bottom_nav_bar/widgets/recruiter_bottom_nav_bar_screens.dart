@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/get_user_features/pages/pinned_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/add_job/add_job_bloc.dart';
@@ -43,7 +44,22 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
         );
       }
       if (screenIndex == 3) {
-        return const CompanyProfileScreen();
+        return BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            if (state is UserLoggedState) {
+              if (state.isRefreshing) {
+                return const Center(child: CircularProgressIndicator());
+              }
+            }
+            if (state is UserLoggedState) {
+              return CompanyProfileScreen(
+                user: state.user.data,
+                visitor: false,
+              );
+            }
+            return const SizedBox();
+          },
+        );
       }
       if (screenIndex == 4) {
         return const MoreScreen();

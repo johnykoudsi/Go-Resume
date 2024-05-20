@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/policy.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/skill.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
@@ -15,6 +16,7 @@ import 'package:smart_recruitment_flutter_user/features/my_submissions/presentat
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/company_profile_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/my_policies_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/pages/edit_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/education_actions_bloc.dart';
@@ -27,6 +29,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presen
 import 'package:smart_recruitment_flutter_user/features/public_features/applicant_bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/company_bottom_nav_bar/recruiter_bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/pages/my_notifications_screen.dart';
+import '../../features/profile/company_profile/presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
+import '../../features/profile/company_profile/presentation/pages/add_policy_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
@@ -93,7 +97,11 @@ class AppRouter {
             visitor: true,
           );
         case AppRoutes.companyProfile:
-          return const CompanyProfileScreen();
+          User user = settings.arguments as User;
+          return  CompanyProfileScreen(
+            user: user,
+            visitor: true,
+          );
         case AppRoutes.editApplicantProfile:
           return MultiBlocProvider(
             providers: [
@@ -129,7 +137,22 @@ class AppRouter {
         //       benefits: args,
         //     ),
         //   );
-
+        case AppRoutes.myPolicies:
+          List<Policy>? args = settings.arguments as List<Policy>?;
+          return BlocProvider(
+            create: (context) => PoliciesActionsBloc(),
+            child: MyPoliciesScreen(
+              policies: args,),
+          );
+        case AppRoutes.addPolicy:
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => PoliciesActionsBloc(),
+              ),
+            ],
+            child: const AddPolicyScreen(),
+          );
       default:
           return const Scaffold(
             body: Center(
