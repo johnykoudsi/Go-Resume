@@ -16,8 +16,10 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/j
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/company_profile_bloc/company_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/all_companies.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/company_profile_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/edit_company_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/my_policies_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/pages/edit_profile_screen.dart';
@@ -117,6 +119,15 @@ class AppRouter {
               ),
             ],
             child: const EditApplicantProfileScreen(),
+          );
+        case AppRoutes.editCompanyProfile:
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => CompanyProfileBloc(),
+              ),
+            ],
+            child: const EditCompanyProfileScreen(),
           );
         case AppRoutes.addExperience:
           return MultiBlocProvider(

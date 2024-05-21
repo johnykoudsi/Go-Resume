@@ -15,10 +15,11 @@ class ProfileImageWidget extends StatelessWidget {
   final bool visitor;
   final String profileImage;
   final String viewsNumber;
+  final bool isCompany;
    const ProfileImageWidget({Key? key,
   required this.profileImage,
   required this.viewsNumber,
-    this.visitor=false,
+    this.visitor=false, required this.isCompany,
   }) : super(key: key);
 
   @override
@@ -51,9 +52,15 @@ class ProfileImageWidget extends StatelessWidget {
                           AppFontStyles.mediumH6.copyWith(color: Colors.white),
                     ),
                     SizedBox(width: screenWidth * 0.65),
-                    if(visitor)
+                    if(!visitor)
                     GestureDetector(
-                      onTap: (){Navigator.pushNamed(context, AppRoutes.editApplicantProfile);},
+                      onTap: (){
+                        if(isCompany){
+                          Navigator.pushNamed(context, AppRoutes.editCompanyProfile);
+                        }else{
+                          Navigator.pushNamed(context, AppRoutes.editApplicantProfile);
+                        }
+                        },
                       child: SvgPicture.asset(
                         Assets.svgEdit,
                         width: screenWidth * 0.08,

@@ -46,136 +46,129 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
         onRefresh: () async {
           context.read<UserBloc>().add(RefreshUserEvent());
         },
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: screenHeight * 0.35,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/jpg/cover_image.jpg'),
-                        fit: BoxFit.cover,
-                      ),
+        child: ListView(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: screenHeight * 0.35,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/jpg/cover_image.jpg'),
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: screenHeight * 0.21),
-                    child: ProfileImageWidget(
-                      visitor: widget.visitor,
-                      profileImage: Assets.jpgCompanyProfile,
-                      viewsNumber: '55',
-                    ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: screenHeight * 0.21),
+                  child: ProfileImageWidget(
+                    isCompany: user.company!= null ? true :false,
+                    visitor: widget.visitor,
+                    profileImage: Assets.jpgCompanyProfile,
+                    viewsNumber: '55',
                   ),
-                  !widget.visitor
-                      ? Positioned(
-                          bottom: screenHeight * 0.08,
-                          right: 4,
-                          child: Container(
-                            width: screenWidth * 0.1,
-                            height: screenWidth * 0.1,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                            ),
-                            child: Center(
-                              child: SvgPicture.asset(
-                                Assets.svgCamera,
-                                width: screenWidth * 0.07,
-                                height: screenWidth * 0.07,
-                                color: Colors.black,
-                              ),
+                ),
+                !widget.visitor
+                    ? Positioned(
+                        bottom: screenHeight * 0.08,
+                        right: 4,
+                        child: Container(
+                          width: screenWidth * 0.1,
+                          height: screenWidth * 0.1,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              Assets.svgCamera,
+                              width: screenWidth * 0.07,
+                              height: screenWidth * 0.07,
+                              color: Colors.black,
                             ),
                           ),
-                        )
-                      : const Text(""),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              Text(
+                        ),
+                      )
+                    : const Text(""),
+              ],
+            ),
+            SizedBox(
+              height: screenHeight * 0.02,
+            ),
+            Center(
+              child: Text(
                 user.fullName,
                 style: AppFontStyles.boldH2.copyWith(color: Colors.black),
               ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              // const CustomCard(
-              //     title: "Description",
-              //     content: Text(
-              //       "TechNex Solutions is a leading software development company at the forefront of innovation, dedicated to empowering businesses with cutting-edge technological solutions. With a passion for excellence and a commitment to client satisfaction, we leverage the latest advancements in software development to drive digital transformation and fuel growth for our clients worldwide.",
-              //       style: AppFontStyles.mediumH4,
-              //     )),
-              user.company!.about != ''?
-              Column(
-                children: [
-                  CustomCard(
-                    title: "About Us",
-                    visitor: widget.visitor,
-                    content:
-                    Text(
-                      user.company!.about,
-                      style: AppFontStyles.mediumH5,
-                    ),
-                    onOperationPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.myExperiences,
-                          arguments: user.applicant?.experiences);
-                    },
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.02,
-                  ),
-                ],
-              ):const SizedBox.shrink(),
-           user.company!.vision != ''?
-              Column(
-                children: [
-                   CustomCard(
-                      title: "Vision",
-                      content: Text(
-                        user.company!.vision,
-                        style: AppFontStyles.mediumH5,
-                      )),
-                  SizedBox(
-                    height: screenHeight * 0.02,
-                  ),
-                ],
-              ):const SizedBox.shrink(),
-
-              CustomCard(
-                title: "Policies",
-                visitor: widget.visitor,
-                content: Column(
-                  children: List.generate(
-                    user.company?.policies?.length ?? 0,
-                        (index) {
-                      Policy? p = user.company?.policies?[index];
-                      return DescriptionItemWidget(
-                        description: p!.description,
-                      );
-                    },
+            ),
+            SizedBox(
+              height: screenHeight * 0.02,
+            ),
+            user.company!.about != ''?
+            Column(
+              children: [
+                CustomCard(
+                  operation: "",
+                  title: "About Us",
+                  visitor: widget.visitor,
+                  content:
+                  Text(
+                    user.company!.about,
+                    style: AppFontStyles.mediumH5,
                   ),
                 ),
-                onOperationPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.myPolicies,
-                      arguments: user.company?.policies);
-                },
-              ),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
+              ],
+            ):const SizedBox.shrink(),
+         user.company!.vision != ''?
+            Column(
+              children: [
+                 CustomCard(
+                   operation: "",
+                    title: "Vision",
+                    content: Text(
+                      user.company!.vision,
+                      style: AppFontStyles.mediumH5,
+                    )),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
+              ],
+            ):const SizedBox.shrink(),
 
-              SizedBox(
-                height: screenHeight * 0.02,
+            CustomCard(
+              title: "Policies",
+              visitor: widget.visitor,
+              content: Column(
+                children: List.generate(
+                  user.company?.policies?.length ?? 0,
+                      (index) {
+                    Policy? p = user.company?.policies?[index];
+                    return DescriptionItemWidget(
+                      description: p!.description,
+                    );
+                  },
+                ),
               ),
-              // CustomProfileCard(
-              //     title: "Contact Info",
-              //     operation: widget.visitor ? "" : "Manage",
-              //     contactInfo: contacts
-              // ),
-              const TopJobsSectionWidget(),
-            ],
-          ),
+              onOperationPressed: () {
+                Navigator.pushNamed(context, AppRoutes.myPolicies,
+                    arguments: user.company?.policies);
+              },
+            ),
+
+            SizedBox(
+              height: screenHeight * 0.02,
+            ),
+            // CustomProfileCard(
+            //     title: "Contact Info",
+            //     operation: widget.visitor ? "" : "Manage",
+            //     contactInfo: contacts
+            // ),
+            const TopJobsSectionWidget(),
+          ],
         ),
       ),
     );

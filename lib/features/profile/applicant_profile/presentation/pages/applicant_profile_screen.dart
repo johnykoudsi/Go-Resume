@@ -68,6 +68,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 Padding(
                   padding: EdgeInsets.only(top: screenHeight * 0.21),
                   child: ProfileImageWidget(
+                    isCompany: user.company !=null?true:false,
                     visitor: !widget.visitor,
                     profileImage: 'assets/images/jpg/profile_image.jpg',
                     viewsNumber: "0",

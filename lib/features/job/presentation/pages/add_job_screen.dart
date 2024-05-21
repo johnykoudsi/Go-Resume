@@ -128,7 +128,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   },
                 ),
                 SizedBox(
-                  height: heightBetweenFields * 2,
+                  height: heightBetweenFields,
                 ),
                 BlocBuilder<BenefitsBloc, BenefitsState>(
                   builder: (context, state) {
@@ -162,7 +162,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                                 .join(', '),
                       );
                     } else {
-                      return SizedBox();
+                      return SizedBox.shrink();
                     }
                   },
                 ),
