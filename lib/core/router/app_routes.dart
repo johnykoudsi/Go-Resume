@@ -25,8 +25,6 @@ class AppRoutes {
   static const String benefitsScreen = "/get_benefits";
   static const String myPolicies= "/my_policies";
   static const String addPolicy= "/add_policy";
-
-
-
+  static const String allCompanyScreen= "/allCompanyScreen";
 
 }

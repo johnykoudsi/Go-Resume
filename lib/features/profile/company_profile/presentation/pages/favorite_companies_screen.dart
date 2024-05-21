@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smart_recruitment_flutter_user/features/get_user_features/widgets/company_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/widget/company_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
-import '../../../../../core/router/app_routes.dart';
+import '../../../../../../../core/router/app_routes.dart';
 class FavoriteCompaniesScreen extends StatelessWidget {
   const FavoriteCompaniesScreen({super.key});
 
@@ -30,7 +30,8 @@ class FavoriteCompaniesScreen extends StatelessWidget {
         crossAxisSpacing: 16,
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const CompanyWidget();
+          return const SizedBox();
+          // return const CompanyWidget();
         },
       ),
     );

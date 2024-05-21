@@ -4,11 +4,11 @@ import 'package:smart_recruitment_flutter_user/features/profile/company_profile/
 import '../repositories/company_profile_repo.dart';
 
 class DeletePolicyUsecase {
-  final CompanyProfileRepo policiesActionsRepo;
+  final CompanyProfileRepo companyProfileRepo;
 
-  DeletePolicyUsecase(this.policiesActionsRepo);
+  DeletePolicyUsecase(this.companyProfileRepo);
 
   Future call(DeletePolicyEvent deletePolicyEvent) async {
-    return await policiesActionsRepo.deletePolicy(deletePolicyEvent);
+    return await companyProfileRepo.deletePolicy(deletePolicyEvent);
   }
 }

@@ -16,6 +16,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/j
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/all_companies.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/company_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/my_policies_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
@@ -53,13 +54,16 @@ class AppRouter {
           return const RecruiterBottomNavBar();
         case AppRoutes.mySkills:
           List<Skill> args = settings.arguments as List<Skill>;
-          return MySkillsScreen(skills: args,);
+          return MySkillsScreen(
+            skills: args,
+          );
         case AppRoutes.myExperiences:
           List<Experience> args = settings.arguments as List<Experience>;
           return BlocProvider(
             create: (context) => ExperienceActionsBloc(),
             child: MyExperiencesScreen(
-              experiences: args,),
+              experiences: args,
+            ),
           );
         case AppRoutes.myEducationAndCertificates:
           List<Education> args = settings.arguments as List<Education>;
@@ -73,8 +77,7 @@ class AppRouter {
           return MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (context) =>
-                MySubmissionsBloc()
+                create: (context) => MySubmissionsBloc()
                   ..add(ChangeToLoadingApiMySubmissionsEvent()),
               ),
             ],
@@ -84,14 +87,16 @@ class AppRouter {
           return const MyNotification();
         case AppRoutes.jobDetails:
           JobEntity args = settings.arguments as JobEntity;
-          return JobDetailsScreen(jobEntity: args,);
+          return JobDetailsScreen(
+            jobEntity: args,
+          );
         case AppRoutes.allApplicants:
           return const AllApplicantsScreen();
-      // case AppRoutes.applicantProfile:
-      //   User user = settings.arguments as User;
-      //   return ApplicantProfileScreen(
-      //     user: user,
-      //   );
+        // case AppRoutes.applicantProfile:
+        //   User user = settings.arguments as User;
+        //   return ApplicantProfileScreen(
+        //     user: user,
+        //   );
         case AppRoutes.viewApplicantProfile:
           User user = settings.arguments as User;
           return ApplicantProfileScreen(
@@ -100,7 +105,7 @@ class AppRouter {
           );
         case AppRoutes.companyProfile:
           User user = settings.arguments as User;
-          return  CompanyProfileScreen(
+          return CompanyProfileScreen(
             user: user,
             visitor: true,
           );
@@ -144,7 +149,8 @@ class AppRouter {
           return BlocProvider(
             create: (context) => PoliciesActionsBloc(),
             child: MyPoliciesScreen(
-              policies: args,),
+              policies: args,
+            ),
           );
         case AppRoutes.addPolicy:
           return MultiBlocProvider(
@@ -155,7 +161,9 @@ class AppRouter {
             ],
             child: const AddPolicyScreen(),
           );
-      default:
+        case AppRoutes.allCompanyScreen:
+          return const AllCompaniesScreen();
+        default:
           return const Scaffold(
             body: Center(
               child: Text(

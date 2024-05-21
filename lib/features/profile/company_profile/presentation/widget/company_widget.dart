@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class CompanyWidget extends StatelessWidget {
-  const CompanyWidget({super.key});
-
+  const CompanyWidget({required this.user,super.key});
+  final User user;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -42,8 +43,8 @@ class CompanyWidget extends StatelessWidget {
             ),
             Column(
               children: [
-                const Text(
-                  "Tech Company",
+                Text(
+                  user.fullName??'',
                   style: AppFontStyles.mediumH5,
                 ),
                 Text(
