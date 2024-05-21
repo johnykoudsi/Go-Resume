@@ -183,7 +183,7 @@ class _EditCompanyProfileScreenState
               height: heightBetweenFields,
             ),
             SizedBox(
-              height: heightBetweenFields*4,
+              height: screenHeight * 0.1,
             ),
             BlocBuilder<CompanyProfileBloc,CompanyProfileState>(
               builder: (context, state) {
@@ -207,6 +207,9 @@ class _EditCompanyProfileScreenState
                   },
                 );
               },
+            ),
+            SizedBox(
+              height: screenHeight * 0.05,
             ),
           ],
         ),

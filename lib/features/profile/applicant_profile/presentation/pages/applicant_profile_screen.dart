@@ -69,12 +69,12 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                   padding: EdgeInsets.only(top: screenHeight * 0.21),
                   child: ProfileImageWidget(
                     isCompany: user.company !=null?true:false,
-                    visitor: !widget.visitor,
+                    visitor: widget.visitor,
                     profileImage: 'assets/images/jpg/profile_image.jpg',
                     viewsNumber: "0",
                   ),
                 ),
-                !widget.visitor
+                widget.visitor
                     ? Positioned(
                         bottom: screenHeight * 0.08,
                         right: 4,
@@ -114,12 +114,13 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 user.applicant?.bio ?? "",
-                style: AppFontStyles.boldH4.copyWith(color: Colors.black),
+                style: AppFontStyles.boldH5.copyWith(color: Colors.black),
               ),
             ),
+            user.applicant?.bio != null ?
             const SizedBox(
               height: 18,
-            ),
+            ):const SizedBox.shrink(),
             CustomCard(
               title: "Experiences",
               visitor: widget.visitor,

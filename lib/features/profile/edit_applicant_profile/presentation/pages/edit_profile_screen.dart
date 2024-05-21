@@ -25,6 +25,11 @@ class _EditApplicantProfileScreenState
   GenderEnum? _selectedUserGender = GenderEnum.m;
   TextEditingController nameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
+  TextEditingController facebookController = TextEditingController();
+  TextEditingController instagramController = TextEditingController();
+  TextEditingController linkedinController = TextEditingController();
+  TextEditingController websiteController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   DateTime? selectedDate;
   @override
   void initState() {
@@ -38,6 +43,11 @@ class _EditApplicantProfileScreenState
           : userBloc.user.data.applicant?.gender == "f"
               ? GenderEnum.f
               : GenderEnum.none;
+      facebookController.text = userBloc.user.data.facebook;
+      instagramController.text = userBloc.user.data.instagram;
+      linkedinController.text = userBloc.user.data.linkedin;
+      websiteController.text = userBloc.user.data.websiteLink;
+      websiteController.text = userBloc.user.data.email;
     }
     super.initState();
   }
@@ -84,6 +94,67 @@ class _EditApplicantProfileScreenState
             SizedBox(
               height: heightBetweenFields,
             ),
+            CustomTextField(
+              action: TextInputAction.done,
+              controller: emailController,
+              label: "Email",
+              onlyNumber: false,
+              hintText: 'example@gmail.com',
+              textInputType: TextInputType.visiblePassword,
+              passwordBool: false,
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            CustomTextField(
+              action: TextInputAction.done,
+              controller: linkedinController,
+              label: "LinkedIn",
+              onlyNumber: false,
+              hintText: 'https://www.linkedin.com/example',
+              textInputType: TextInputType.visiblePassword,
+              passwordBool: false,
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            CustomTextField(
+              action: TextInputAction.done,
+              controller: websiteController,
+              label: "Website",
+              onlyNumber: false,
+              hintText: 'https://www.example.com',
+              textInputType: TextInputType.visiblePassword,
+              passwordBool: false,
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            CustomTextField(
+              action: TextInputAction.done,
+              controller: instagramController,
+              label: "Instagram",
+              onlyNumber: false,
+              hintText: 'https://www.instagram.com/example',
+              textInputType: TextInputType.visiblePassword,
+              passwordBool: false,
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            CustomTextField(
+              action: TextInputAction.done,
+              controller: facebookController,
+              label: "Facebook",
+              onlyNumber: false,
+              hintText: 'https://www.facebook.com/example',
+              textInputType: TextInputType.visiblePassword,
+              passwordBool: false,
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+
             DatePickerWidget(
               label: 'Date Of Birth',
               selectedDate: selectedDate,
@@ -114,7 +185,7 @@ class _EditApplicantProfileScreenState
                   });
                 }),
             SizedBox(
-              height: screenHeight * 0.35,
+              height: screenHeight * 0.1,
             ),
             BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
               builder: (context, state) {
@@ -129,15 +200,18 @@ class _EditApplicantProfileScreenState
                           gender: _selectedUserGender,
                           bio: bioController.text,
                           fullName: nameController.text,
-                          // websiteLink: null,
-                          // instagram: null,
-                          // facebook: null,
-                          // linkedin: null,
-                          // email: null,
+                      websiteLink: websiteController.text,
+                      instagram: instagramController.text,
+                      facebook: facebookController.text,
+                      linkedin: linkedinController.text,
+                      email: emailController.text,
                         ));
                   },
                 );
               },
+            ),
+            SizedBox(
+              height: screenHeight * 0.05,
             ),
           ],
         ),
