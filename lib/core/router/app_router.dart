@@ -17,6 +17,8 @@ import 'package:smart_recruitment_flutter_user/features/my_submissions/presentat
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/company_profile_bloc/company_profile_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_cities/get_all_cities_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_countries/get_all_countries_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/all_companies.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/company_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/edit_company_profile_screen.dart';
@@ -125,6 +127,12 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) => CompanyProfileBloc(),
+              ),
+              BlocProvider(
+                create: (context) => GetAllCountriesBloc(),
+              ),
+              BlocProvider(
+                create: (context) => GetAllCitiesBloc(),
               ),
             ],
             child: const EditCompanyProfileScreen(),

@@ -4,10 +4,13 @@ import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity
 import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/networking/endpoints.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/domain/entities/country_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/company_profile_bloc/company_profile_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_cities/get_all_cities_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_compny/get_all_company_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
 
+import '../../presentation/bloc/get_all_countries/get_all_countries_bloc.dart';
 import '../../presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 
 
@@ -60,6 +63,44 @@ class CompanyProfileDataSource {
       url: EndPoints.updateCompanyProfile,
       body: json.encode(updateCompanyProfileEvent.toJson()),
     );
+    return helperResponse;
+  }
+
+  Future getCountries({
+    required GetCountriesEvent event,
+  }) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: EndPoints.getCountries,
+      useUserToken: true,
+    );
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        return welcomeCountriesFromJson(helperResponse.response);
+      } catch (e) {
+        return helperResponse.copyWith(
+          servicesResponse: ServicesResponseStatues.modelError,
+        );
+      }
+    }
+    return helperResponse;
+  }
+
+  Future getCities({
+    required GetCitiesEvent event,
+  }) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: EndPoints.getCities(countryCode: event.countryCode),
+      useUserToken: true,
+    );
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        return welcomeCountriesFromJson(helperResponse.response);
+      } catch (e) {
+        return helperResponse.copyWith(
+          servicesResponse: ServicesResponseStatues.modelError,
+        );
+      }
+    }
     return helperResponse;
   }
 }

@@ -9,8 +9,14 @@ import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/preferred_gender_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_cities/get_all_cities_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_countries/get_all_countries_bloc.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../domain/entities/City_entity.dart';
+import '../../domain/entities/country_entity.dart';
 import '../bloc/company_profile_bloc/company_profile_bloc.dart';
+import '../widget/country_city_drop_down.dart';
 
 class EditCompanyProfileScreen extends StatefulWidget {
   const EditCompanyProfileScreen({Key? key}) : super(key: key);
@@ -20,8 +26,7 @@ class EditCompanyProfileScreen extends StatefulWidget {
       _EditCompanyProfileScreenState();
 }
 
-class _EditCompanyProfileScreenState
-    extends State<EditCompanyProfileScreen> {
+class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
   GenderEnum? _selectedUserGender = GenderEnum.m;
   TextEditingController nameController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
@@ -34,6 +39,7 @@ class _EditCompanyProfileScreenState
   TextEditingController emailController = TextEditingController();
   @override
   void initState() {
+    context.read<GetAllCountriesBloc>().add(GetCountriesEvent());
     final userBloc = context.read<UserBloc>().state;
     if (userBloc is UserLoggedState) {
       nameController.text = userBloc.user.data.fullName;
@@ -45,11 +51,23 @@ class _EditCompanyProfileScreenState
       linkedinController.text = userBloc.user.data.linkedin;
       websiteController.text = userBloc.user.data.websiteLink;
       websiteController.text = userBloc.user.data.email;
-
     }
     super.initState();
   }
+  Country? _selectedCountry;
+  City? _selectedCity;
 
+  void _handleSelectedCountries(Country selectedCountry) {
+    setState(() {
+      _selectedCountry = selectedCountry;
+    });
+  }
+
+  void _handleSelectedCities(City selectedCities) {
+    setState(() {
+      _selectedCity = selectedCities;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -64,7 +82,8 @@ class _EditCompanyProfileScreenState
             showServerError: true,
             popOnSuccess: true,
           );
-          if(state.helperResponse.servicesResponse == ServicesResponseStatues.success){
+          if (state.helperResponse.servicesResponse ==
+              ServicesResponseStatues.success) {
             context.read<UserBloc>().add(RefreshUserEvent());
           }
         }
@@ -179,31 +198,68 @@ class _EditCompanyProfileScreenState
               onlyNumber: false,
               hintText: 'Describe your company methods',
             ),
-            SizedBox(
-              height: heightBetweenFields,
+            BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
+              builder: (countryContext, countryState) {
+                return BlocBuilder<GetAllCitiesBloc, GetAllCitiesState>(
+                  builder: (cityContext, cityState) {
+                    if(countryState is GetAllCountriesInitial){
+                      return ShimmerLoader(height: 100,);
+                    }
+                    if(countryState is GetCountriesDoneState){
+                      return
+                        CountryCityDropDown(
+                          cityLoading: cityState is GetCitiesLoadingState,
+                          title: '',
+                          countries: [],
+                          onCountrySelect: _handleSelectedCountries,
+                          cities: [],
+                          onCitySelect: _handleSelectedCities,
+                        );
+                    }
+                  else{return SizedBox.shrink();}
+                  },
+                );
+              },
             ),
+            // BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
+            //     builder: (context, state) {
+            //       if (state is Coun) {
+            //         return ShimmerLoader(
+            //           height: screenHeight * 0.05,
+            //           width: screenWidth * 0.4,
+            //         );
+            //       }
+            //       else if(state is WorkFieldsDoneState){
+            //         return SearchableDropDownWidget(
+            //           items: state.workFields,
+            //           selectedItem: _selectedWorkField,
+            //           onSelect: _handleSelectedWorkField,
+            //           title: 'Work Field',
+            //         );
+            //       }
+            //       else{return const SizedBox();}
+            //     }
+            // ),
             SizedBox(
               height: screenHeight * 0.1,
             ),
-            BlocBuilder<CompanyProfileBloc,CompanyProfileState>(
+            BlocBuilder<CompanyProfileBloc, CompanyProfileState>(
               builder: (context, state) {
                 return ElevatedButtonWidget(
                   title: "Edit",
                   isLoading: state is CompanyProfileLoading,
                   onPressed: () {
-                    context
-                        .read<CompanyProfileBloc>()
-                        .add(UpdateCompanyProfileEvent(
-                      fullName: nameController.text,
-                      websiteLink: websiteController.text,
-                      instagram: instagramController.text,
-                      facebook: facebookController.text,
-                      linkedin: linkedinController.text,
-                      email: emailController.text,
-                      about: aboutController.text,
-                      vision: visionController.text,
-                      mission: missionController.text
-                    ));
+                    context.read<CompanyProfileBloc>().add(
+                        UpdateCompanyProfileEvent(
+                            fullName: nameController.text,
+                            websiteLink: websiteController.text,
+                            instagram: instagramController.text,
+                            facebook: facebookController.text,
+                            linkedin: linkedinController.text,
+                            email: emailController.text,
+                            about: aboutController.text,
+                            vision: visionController.text,
+                            mission: missionController.text));
                   },
                 );
               },
