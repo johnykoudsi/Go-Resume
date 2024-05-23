@@ -58,6 +58,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
   City? _selectedCity;
 
   void _handleSelectedCountries(Country selectedCountry) {
+    context.read<GetAllCitiesBloc>().add(GetCitiesEvent(countryCode: selectedCountry.countryCode));
     setState(() {
       _selectedCountry = selectedCountry;
     });
@@ -107,6 +108,29 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               hintText: 'ESoft',
               textInputType: TextInputType.visiblePassword,
               passwordBool: false,
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
+              builder: (countryContext, countryState) {
+                    if(countryState is GetAllCountriesInitial){
+                      return ShimmerLoader(
+                        height: screenHeight * 0.05,
+                        width: screenWidth,
+                      );
+                    }
+                    if(countryState is GetCountriesDoneState){
+                      return
+                        CountryCityDropDown(
+                          title: '',
+                          countries: countryState.countries,
+                          onCountrySelect: _handleSelectedCountries,
+                          onCitySelect: _handleSelectedCities,
+                        );
+                    }
+                    else{return SizedBox.shrink();}
+              },
             ),
             SizedBox(
               height: heightBetweenFields,
@@ -197,29 +221,6 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               label: "Mission",
               onlyNumber: false,
               hintText: 'Describe your company methods',
-            ),
-            BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
-              builder: (countryContext, countryState) {
-                return BlocBuilder<GetAllCitiesBloc, GetAllCitiesState>(
-                  builder: (cityContext, cityState) {
-                    if(countryState is GetAllCountriesInitial){
-                      return ShimmerLoader(height: 100,);
-                    }
-                    if(countryState is GetCountriesDoneState){
-                      return
-                        CountryCityDropDown(
-                          cityLoading: cityState is GetCitiesLoadingState,
-                          title: '',
-                          countries: [],
-                          onCountrySelect: _handleSelectedCountries,
-                          cities: [],
-                          onCitySelect: _handleSelectedCities,
-                        );
-                    }
-                  else{return SizedBox.shrink();}
-                  },
-                );
-              },
             ),
             // BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
             //     builder: (context, state) {

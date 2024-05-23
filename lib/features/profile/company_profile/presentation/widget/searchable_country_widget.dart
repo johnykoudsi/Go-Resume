@@ -31,7 +31,7 @@ class _SearchableCountryWidgetState extends State<SearchableCountryWidget> {
 
   @override
   void initState() {
-    super.initState();
+super.initState();
     selectedValue = widget.selectedItem;
   }
 
@@ -101,6 +101,7 @@ class _SearchableCountryWidgetState extends State<SearchableCountryWidget> {
               ),
               child: TextFormField(
                 onTap: () {
+
                   _scrollController.animateTo(100,
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.ease);
