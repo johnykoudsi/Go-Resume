@@ -62,7 +62,21 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
         );
       }
       if (screenIndex == 4) {
-        return const MoreScreen();
+        return BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            if (state is UserLoggedState) {
+              if (state.isRefreshing) {
+                return const Center(child: CircularProgressIndicator());
+              }
+            }
+            if (state is UserLoggedState) {
+              return MoreScreen(
+                user: state.user.data,
+              );
+            }
+            return const SizedBox();
+          },
+        );
       }
       return const Scaffold(
         body: Center(

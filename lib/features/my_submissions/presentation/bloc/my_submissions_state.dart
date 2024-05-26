@@ -9,15 +9,15 @@ class MySubmissionsInitial extends MySubmissionsState {
 }
 
 class MySubmissionsLoadedState extends MySubmissionsState {
-  List<Submission> submissions;
+  List<JobEntity> submissions;
   bool hasReachedMax;
 
   MySubmissionsLoadedState(
-      {this.submissions = const <Submission>[],
+      {this.submissions = const <JobEntity>[],
         required this.hasReachedMax});
 
   MySubmissionsLoadedState copyWith({
-    List<Submission>? jobs,
+    List<JobEntity>? jobs,
     bool? hasReachedMax,
   }) {
     return MySubmissionsLoadedState(

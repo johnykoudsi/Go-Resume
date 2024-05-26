@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
+import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/data/data_sources/my_submissions_data_source.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/data/repositories/my_submissions_repo_impl.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/domain/entities/my_submissions_entity.dart';
@@ -37,7 +38,7 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
 
       getMySubmissions = await mySubmissionsUseCase.call(event);
 
-      if (getMySubmissions is List<Submission>) {
+      if (getMySubmissions is List<JobEntity>) {
         if (getMySubmissions.isNotEmpty) {
           // copy previous state
           if (currentState is MySubmissionsLoadedState) {

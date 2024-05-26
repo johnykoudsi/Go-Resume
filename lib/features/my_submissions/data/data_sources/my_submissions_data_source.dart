@@ -7,6 +7,7 @@ import 'package:smart_recruitment_flutter_user/features/my_submissions/domain/en
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 
 import '../../../../../utility/constant_logic_validation.dart';
+import '../../../job/domain/entities/job_entity.dart';
 
 
 class MySubmissionsDataSource {
@@ -25,12 +26,14 @@ class MySubmissionsDataSource {
     );
     print(helperResponse.servicesResponse);
 
+
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        MySubmissionsEntity data = mySubmissionsEntityFromJson(helperResponse.response);
-        return data.submissions;
+        final data = json.decode(helperResponse.response)["data"];
+        return  List<JobEntity>.from(data.map((x) => JobEntity.fromJson(x)));
       } catch (e) {
-        return helperResponse.copyWith(servicesResponse: ServicesResponseStatues.modelError);
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
       }
     }
     return helperResponse;
