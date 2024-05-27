@@ -14,6 +14,7 @@ import 'package:smart_recruitment_flutter_user/features/get_user_features/pages/
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_details_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/saved_jobs_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
@@ -190,6 +191,8 @@ class AppRouter {
           );
         case AppRoutes.allCompanyScreen:
           return const AllCompaniesScreen();
+        case AppRoutes.savedJobs:
+          return const SavedJobsScreen();
         default:
           return const Scaffold(
             body: Center(

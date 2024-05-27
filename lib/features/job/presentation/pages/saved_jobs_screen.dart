@@ -12,28 +12,29 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_tex
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
 import '../../../../utility/app_strings.dart';
+import '../bloc/get_saved_jobs/get_saved_jobs_bloc.dart';
 
-class AllJobsScreen extends StatefulWidget {
-  const AllJobsScreen({super.key});
+class SavedJobsScreen extends StatefulWidget {
+  const SavedJobsScreen({super.key});
 
   @override
-  State<AllJobsScreen> createState() => _AllJobsScreenState();
+  State<SavedJobsScreen> createState() => _SavedJobsScreenState();
 }
 
-class _AllJobsScreenState extends State<AllJobsScreen> {
+class _SavedJobsScreenState extends State<SavedJobsScreen> {
   TextEditingController searchController = TextEditingController();
   ScrollController scrollController = ScrollController();
-  GetAllJobsBloc getAllJobsBloc = GetAllJobsBloc();
+  GetSavedJobsBloc getSavedJobsBloc = GetSavedJobsBloc();
 
   @override
   void initState() {
-    getAllJobsBloc.add(ChangeToLoadingAllJobsEvent());
+    getSavedJobsBloc.add(ChangeToLoadingSavedJobsEvent());
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
-        getAllJobsBloc.add(
-          GetAllJobsSearchEvent(
-            searchFilter: AllJobsSearchFilter(),
+        getSavedJobsBloc.add(
+          GetSavedJobsSearchEvent(
+            searchFilter: SavedJobsSearchFilter(),
           ),
         );
       }
@@ -44,10 +45,10 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: getAllJobsBloc,
+      value: getSavedJobsBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppStrings.jobs),
+          title: Text(AppStrings.savedJobs),
           centerTitle: false,
           actions: [
             IconButton(
@@ -68,11 +69,11 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            context.read<GetAllJobsBloc>().add(ChangeToLoadingAllJobsEvent());
+            context.read<GetSavedJobsBloc>().add(ChangeToLoadingSavedJobsEvent());
           },
-          child: BlocBuilder<GetAllJobsBloc, GetAllJobsState>(
+          child: BlocBuilder<GetSavedJobsBloc, GetSavedJobsState>(
             builder: (context, state) {
-              if (state is GetAllJobsLoadedState) {
+              if (state is GetSavedJobsLoadedState) {
                 return ListView.builder(
                     padding: const EdgeInsets.all(18),
                     controller: scrollController,
@@ -94,7 +95,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
                       );
                     });
               }
-              if (state is GetAllJobsLoadingState) {
+              if (state is GetSavedJobsLoadingState) {
                 return ListView.builder(
                     padding: const EdgeInsets.all(18),
                     controller: scrollController,
@@ -112,8 +113,8 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
                   title: "Refresh",
                   onPressed: () {
                     context
-                        .read<GetAllJobsBloc>()
-                        .add(ChangeToLoadingAllJobsEvent());
+                        .read<GetSavedJobsBloc>()
+                        .add(ChangeToLoadingSavedJobsEvent());
 
                     //search(userS);
                   },

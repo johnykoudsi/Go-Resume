@@ -8,6 +8,7 @@ import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes_no.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
+import 'package:smart_recruitment_flutter_user/utility/app_strings.dart';
 
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../generated/assets.dart';
@@ -41,21 +42,19 @@ class _MoreScreenState extends State<MoreScreen> {
           Stack(
             children: [
               const EmployeeOnRoad(),
-
-               MoreItemsWidget(iconPath: Assets.svgMySubmissions, text:user.company == null ? 'My Submissions'.tr():"My Jobs".tr(), topPadding: screenHeight*0.55,onTap:user.company == null ? (){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);}:(){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);},),
-
-
-              MoreItemsWidget(iconPath: Assets.svgNotification, text: 'Notifications'.tr(), topPadding: screenHeight*0.65,onTap: (){Navigator.of(context).pushNamed(AppRoutes.myNotifications);}),
-              MoreItemsWidget(iconPath: Assets.svgLanguage, text: 'Language'.tr(), topPadding: screenHeight*0.75,   onTap: () {
+               MoreItemsWidget(iconPath: Assets.svgMySubmissions, text:user.company == null ? AppStrings.mySubmission:AppStrings.myJobs, topPadding: screenHeight*0.55,onTap:user.company == null ? (){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);}:(){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);},),
+              MoreItemsWidget(iconPath: Assets.svgPin,text:AppStrings.savedJobs, topPadding: screenHeight*0.65,onTap:(){Navigator.of(context).pushNamed(AppRoutes.savedJobs);}),
+              MoreItemsWidget(iconPath: Assets.svgNotification, text: AppStrings.notifications, topPadding: screenHeight*0.75,onTap: (){Navigator.of(context).pushNamed(AppRoutes.myNotifications);}),
+              MoreItemsWidget(iconPath: Assets.svgLanguage, text: AppStrings.language, topPadding: screenHeight*0.85,   onTap: () {
                 LanguageDialog.showLanguageBottomSheet(context);
               },),
-              MoreItemsWidget(iconPath: Assets.svgUpdate, text: 'Update'.tr(), topPadding: screenHeight*0.85,),
+              MoreItemsWidget(iconPath: Assets.svgUpdate, text: AppStrings.update, topPadding: screenHeight*0.95,),
               GestureDetector(
                 onTap: () {
                   DialogsWidgetsYesNo.showYesNoDialog(
-                      title: "Are you sure you want to sign out?".tr(),
-                      noTitle: "Cancel".tr(),
-                      yesTitle: "Sign out",
+                      title: AppStrings.signOutQuestion,
+                      noTitle: AppStrings.cancel,
+                      yesTitle: AppStrings.signOut,
                       onYesTap: () {
                         context.read<UserBloc>().add(LogoutEvent());
                         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -69,7 +68,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20),
-                  child: MoreItemsWidget(iconPath: Assets.svgSignOut, text: 'Sign out'.tr(), topPadding: screenHeight*0.95,),
+                  child: MoreItemsWidget(iconPath: Assets.svgSignOut, text: AppStrings.signOut, topPadding: screenHeight*1.05,),
                 ),
               ),
             ],

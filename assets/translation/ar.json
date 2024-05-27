@@ -1,17 +1,20 @@
 {
   "Home": "الرئيسية",
-  "Jobs": "الوظائف",
+  "jobs": "الوظائف",
   "Profile": "البروفايل",
   "Favourite": "المفضلة",
   "More": "المزيد",
   "Search": "البحث",
-  "My Submissions": "طلباتي",
-  "Notifications": "الاشعارات",
-  "Language": "اللغة",
-  "Update": "تحديث",
+  "mySubmission": "طلباتي",
+  "myJobs": "فرص العمل",
+  "savedJobs": "الأعمال المحفوظة",
+  "notifications": "الاشعارات",
+  "language": "اللغة",
+  "update": "تحديث",
   "Sign out": "تسجيل الخروج",
-  "Are you sure you want to sign out?": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-  "Cancel": "الغاء"
+  "signOutQuestion": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "cancel": "الغاء",
+  "signOut": "تسجيل الخروج"
 
 
 

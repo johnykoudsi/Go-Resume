@@ -19,6 +19,5 @@ class ApplyForJobBloc extends Bloc<ApplyForJobEvent, ApplyForJobState> {
         final response = await applyForJobUseCase.call(event);
         emit(ApplyForJobResponseState(helperResponse: response));
       });
-
   }
 }
