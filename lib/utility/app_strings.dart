@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 
 class AppStrings{
+
   //more
   static String mySubmission = 'mySubmissions'.tr();
   static String myJobs = 'myJobs'.tr();

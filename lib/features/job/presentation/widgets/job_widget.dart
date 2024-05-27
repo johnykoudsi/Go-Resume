@@ -47,10 +47,8 @@ class JobWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Spacer(),
-                        editable == true
-                            ? IconButton(
+                             IconButton(
                                 onPressed: () {}, icon: const Icon(Icons.edit))
-                            : const Text(""),
                       ],
                     )
                   : SizedBox(),

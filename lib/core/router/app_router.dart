@@ -13,6 +13,7 @@ import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/
 import 'package:smart_recruitment_flutter_user/features/get_user_features/pages/all_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_details_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/saved_jobs_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
@@ -97,6 +98,9 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) => ApplyForJobBloc()
+              ),
+              BlocProvider(
+                  create: (context) => ToggleJobBloc()
               ),
             ],
             child:JobDetailsScreen(
