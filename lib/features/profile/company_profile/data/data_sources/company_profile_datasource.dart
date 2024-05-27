@@ -8,10 +8,12 @@ import 'package:smart_recruitment_flutter_user/features/profile/company_profile/
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/company_profile_bloc/company_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_cities/get_all_cities_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_compny/get_all_company_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/toggle_company/toggle_company_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
 
 import '../../domain/entities/City_entity.dart';
 import '../../presentation/bloc/get_all_countries/get_all_countries_bloc.dart';
+import '../../presentation/bloc/get_favorite_companies/get_favorite_companies_bloc.dart';
 import '../../presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 
 
@@ -19,6 +21,23 @@ class CompanyProfileDataSource {
   CompanyProfileDataSource(this.networkHelpers);
   final NetworkHelpers networkHelpers;
 
+  Future toggleCompany(ToggleCompanyApiEvent toggleCompanyApiEvent) async {
+
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      useUserToken: true,
+      url: EndPoints.favoriteCompanyToggle(id: toggleCompanyApiEvent.id),
+    );
+    return helperResponse;
+  }
+  Future getCompanyStatus({
+    required GetCompanyStatusEvent event,
+  }) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: EndPoints.getCompanyStatus(id: event.id),
+      useUserToken: true,
+    );
+    return helperResponse;
+  }
   Future addPolicyDataSource(AddPolicyEvent addPolicyEvent) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       useUserToken: true,
@@ -58,6 +77,29 @@ class CompanyProfileDataSource {
     }
     return helperResponse;
   }
+  Future getFavoriteCompaniesDataSource(GetFavoriteCompaniesSearchEvent getFavoriteCompaniesSearchEvent) async {
+    String queryString =
+        Uri(queryParameters: getFavoriteCompaniesSearchEvent.searchFilter.toJson()).query;
+
+    String urlWithParams = "${EndPoints.getFavoriteCompanies}?$queryString";
+
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: urlWithParams,
+      useUserToken: true,
+    );
+
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final data = json.decode(helperResponse.response)["data"];
+        return  List<User>.from(data.map((x) => User.fromJson(x)));
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
+    return helperResponse;
+  }
+
   Future editCompanyProfileDataSource(UpdateCompanyProfileEvent updateCompanyProfileEvent) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       useUserToken: true,

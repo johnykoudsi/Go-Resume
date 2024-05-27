@@ -16,4 +16,13 @@ class AppStrings{
   //job
   static String jobs = 'jobs'.tr();
 
+  //company
+  static String company = 'company'.tr();
+  static String favoriteCompanies = 'favoriteCompanies'.tr();
+
+  //other
+  static String refresh = 'refresh'.tr();
+
+
+
 }

@@ -3,6 +3,7 @@ import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 
 class CompanyWidget extends StatelessWidget {
   const CompanyWidget({required this.user,super.key});
@@ -21,7 +22,12 @@ class CompanyWidget extends StatelessWidget {
           borderRadius: AppBorders.k15BorderRadius,
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, AppRoutes.companyProfile,  arguments: {
+          'user': user,
+          'visitor': true,
+        },);
+      },
       child: Container(
         padding: const EdgeInsets.all(18),
         height: 170,

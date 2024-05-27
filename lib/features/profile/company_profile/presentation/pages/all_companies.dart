@@ -11,6 +11,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/company_profile/
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
+import '../../../../../utility/app_strings.dart';
+
 class AllCompaniesScreen extends StatefulWidget {
   const AllCompaniesScreen({super.key});
 
@@ -44,7 +46,7 @@ class _AllCompaniesScreenState extends State<AllCompaniesScreen> {
       value: getAllCompanyBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Companies".tr()),
+          title: Text(AppStrings.company),
           centerTitle: false,
           actions: [
             IconButton(
