@@ -12,6 +12,7 @@ import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/
 import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/verification_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/get_user_features/pages/all_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_details_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
@@ -91,8 +92,15 @@ class AppRouter {
           return const MyNotification();
         case AppRoutes.jobDetails:
           JobEntity args = settings.arguments as JobEntity;
-          return JobDetailsScreen(
-            jobEntity: args,
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => ApplyForJobBloc()
+              ),
+            ],
+            child:JobDetailsScreen(
+              jobEntity: args,
+            )
           );
         case AppRoutes.allApplicants:
           return const AllApplicantsScreen();

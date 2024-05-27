@@ -58,15 +58,15 @@ class JobWidget extends StatelessWidget {
                 jobEntity.position,
                 style: AppFontStyles.boldH5,
               ),
-              const Row(
+               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "4,500,000 SYP",
+                    jobEntity.maxSalary.toString()+"  SYP",
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
-                    "Remote",
+                    jobEntity.type.name??"Remote",
                     style: AppFontStyles.mediumH5,
                   ),
                 ],

@@ -6,8 +6,10 @@ import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_wi
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/top_applicants_widget.dart';
 
+import '../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../widgets/description_item_widget.dart';
 
 class JobDetailsScreen extends StatelessWidget {
@@ -17,7 +19,18 @@ class JobDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
+    return BlocListener<ApplyForJobBloc, ApplyForJobState>(
+      listener: (context, state) {
+        if (state is ApplyForJobResponseState) {
+          DialogsWidgetsSnackBar.showSnackBarFromStatus(
+            context: context,
+            helperResponse: state.helperResponse,
+            popOnSuccess: false,
+          );
+          context.read<UserBloc>().add(RefreshUserEvent());
+        }
+      },
+  child: Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
       ),
@@ -186,9 +199,18 @@ class JobDetailsScreen extends StatelessWidget {
               builder: (context, state) {
                 if (state is UserLoggedState) {
                   if (state.user.data.applicant != null) {
-                    return ElevatedButtonWidget(
-                      title: "Apply",
-                      onPressed: () {},
+                    return BlocBuilder<ApplyForJobBloc, ApplyForJobState>(
+                      builder: (context2, state2) {
+                        return ElevatedButtonWidget(
+                          isLoading: state2  is ApplyForJobLoadingState,
+                          title: "Apply",
+                          onPressed: () {
+                            context2
+                                .read<ApplyForJobBloc>()
+                                .add(ApplyForJobApiEvent(id: jobEntity.id));
+                          },
+                        );
+                      },
                     );
                   }
                   if (state.user.data.company != null) {
@@ -214,6 +236,7 @@ class JobDetailsScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+);
   }
 }

@@ -6,6 +6,7 @@ import 'package:smart_recruitment_flutter_user/features/job/domain/entities/bene
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/work_field_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/add_job/add_job_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/benefits/benefits_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_all_jobs/get_all_jobs_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/constant_logic_validation.dart';
@@ -25,7 +26,14 @@ class JobDataSource {
     );
     return helperResponse;
   }
+  Future applyForJob(ApplyForJobApiEvent applyForJobApiEvent) async {
 
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      useUserToken: true,
+      url: EndPoints.applyForJob(id: applyForJobApiEvent.id),
+    );
+    return helperResponse;
+  }
   Future getBenefits({
     required GetBenefitsEvent event,
   }) async {
