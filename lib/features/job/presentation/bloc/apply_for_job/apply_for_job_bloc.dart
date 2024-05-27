@@ -14,17 +14,11 @@ class ApplyForJobBloc extends Bloc<ApplyForJobEvent, ApplyForJobState> {
     final JobRepoImpl jobRepoImpl =
     JobRepoImpl(JobDataSource(NetworkHelpers()));
     ApplyForJobUseCase applyForJobUseCase = ApplyForJobUseCase(jobRepoImpl);
-
-    on<ApplyForJobEvent>((event, emit) {
       on<ApplyForJobApiEvent>((event, emit) async {
         emit(ApplyForJobLoadingState());
-
-
         final response = await applyForJobUseCase.call(event);
-
         emit(ApplyForJobResponseState(helperResponse: response));
-
       });
-    });
+
   }
 }
