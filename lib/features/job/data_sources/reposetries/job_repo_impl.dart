@@ -4,6 +4,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/ad
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/benefits/benefits_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_all_jobs/get_all_jobs_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_job_applicants/get_job_applicants_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_saved_jobs/get_saved_jobs_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/work_fields/work_fields_bloc.dart';
@@ -50,5 +51,11 @@ class JobRepoImpl extends JobRepo {
   @override
   Future getJobStatus(GetJobStatusEvent getJobStatusEvent) {
     return jobDataSource.getJobStatus(event: getJobStatusEvent);
+  }
+
+  @override
+  Future getJobApplicants(GetJobApplicantsSearchEvent getJobApplicantsSearchEvent) {
+    return jobDataSource.getJobApplicants(getJobApplicantsSearchEvent);
+
   }
 }

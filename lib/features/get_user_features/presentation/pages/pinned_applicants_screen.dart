@@ -42,10 +42,10 @@ class _PinnedApplicantsScreenState extends State<PinnedApplicantsScreen> {
       body: ListView(
         padding: const EdgeInsets.all(18),
         children: const [
-          JobApplicantsWidget(),
-          JobApplicantsWidget(),
-          JobApplicantsWidget(),
-          JobApplicantsWidget(),
+        //  JobApplicantsWidget(),
+       //   JobApplicantsWidget(),
+        //  JobApplicantsWidget(),
+        //  JobApplicantsWidget(),
 
         ],
       ),

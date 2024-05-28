@@ -93,7 +93,7 @@ class _AllCompaniesScreenState extends State<AllCompaniesScreen> {
               return SomethingWrongWidget(
                 svgPath: Assets.svgNoInternet,
                 elevatedButtonWidget: ElevatedButtonWidget(
-                  title: "Refresh",
+                  title: AppStrings.refresh,
                   onPressed: () {
                     getAllCompanyBloc.add(ChangeToLoadingAllCompanyEvent());
                   },

@@ -10,10 +10,10 @@ import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/
 import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/signup-screen.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/splash_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/verification_screen.dart';
-import 'package:smart_recruitment_flutter_user/features/get_user_features/pages/all_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_details_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/saved_jobs_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
@@ -38,6 +38,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presen
 import 'package:smart_recruitment_flutter_user/features/public_features/applicant_bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/company_bottom_nav_bar/recruiter_bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/pages/my_notifications_screen.dart';
+import '../../features/get_user_features/presentation/pages/all_applicants_screen.dart';
 import '../../features/profile/company_profile/presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 import '../../features/profile/company_profile/presentation/pages/add_policy_screen.dart';
 import 'app_routes.dart';
@@ -197,6 +198,11 @@ class AppRouter {
           return const AllCompaniesScreen();
         case AppRoutes.savedJobs:
           return const SavedJobsScreen();
+        case AppRoutes.jobApplicants:
+          JobEntity args = settings.arguments as JobEntity;
+          return JobApplicantsScreen(
+           jobEntity : args,
+          );
         default:
           return const Scaffold(
             body: Center(

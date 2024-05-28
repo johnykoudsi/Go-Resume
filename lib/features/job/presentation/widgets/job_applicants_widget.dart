@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
@@ -8,7 +9,8 @@ import '../../../../../generated/assets.dart';
 
 class JobApplicantsWidget extends StatelessWidget {
   final bool canReject;
-  const JobApplicantsWidget({Key? key, this.canReject = true})
+  User user;
+  JobApplicantsWidget({Key? key, this.canReject = true,required this.user})
       : super(key: key);
 
   @override

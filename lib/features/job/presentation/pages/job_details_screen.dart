@@ -68,7 +68,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                       return CircularProgressIndicator();
                     }
                     else{
-                      print("hhhhh"+state.toString());
 
                       return
                         SvgPicture.asset(
@@ -242,6 +241,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 ],
               ),
               DescriptionItemWidget(description: widget.jobEntity.description),
+              TopApplicantsWidget(jobEntity: widget.jobEntity,),
               const SizedBox(
                 height: 100,
               ),
@@ -274,7 +274,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   screenWidth * 0.01), // Rounded corners
                             ),
                           ),
-                          const TopApplicantsWidget(),
+                           TopApplicantsWidget(jobEntity: widget.jobEntity,
+                           ),
                         ],
                       );
                     }

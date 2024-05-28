@@ -26,7 +26,8 @@ class CompanyWidget extends StatelessWidget {
         Navigator.pushNamed(context, AppRoutes.companyProfile,  arguments: {
           'user': user,
           'visitor': true,
-        },);
+        },
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(18),
