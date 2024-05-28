@@ -74,7 +74,7 @@ class GetJobApplicantsBloc extends Bloc<GetJobApplicantsEvent, GetJobApplicantsS
     on<ChangeToLoadingJobApplicantsEvent>((event, emit) async {
       emit(GetJobApplicantsLoadingState());
 
-      add(GetJobApplicantsSearchEvent(searchFilter: JobApplicantsSearchFilter(page: 1)));
+      add(GetJobApplicantsSearchEvent(searchFilter: JobApplicantsSearchFilter(page: 1), jobId: event.jobId));
     });
   }
 }

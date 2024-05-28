@@ -141,7 +141,7 @@ class JobDataSource {
     String queryString =
         Uri(queryParameters: getJobApplicantsSearchEvent.searchFilter.toJson()).query;
 
-    String urlWithParams = "${EndPoints.getCompanies}?$queryString";
+    String urlWithParams = "${EndPoints.getJobApplicants(id: getJobApplicantsSearchEvent.jobId)}?$queryString";
 
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
       url: urlWithParams,

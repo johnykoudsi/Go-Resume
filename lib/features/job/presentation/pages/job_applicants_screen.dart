@@ -30,12 +30,13 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
 
   @override
   void initState() {
-    getJobApplicantsBloc.add(ChangeToLoadingJobApplicantsEvent());
+    getJobApplicantsBloc.add(ChangeToLoadingJobApplicantsEvent(jobId:widget.jobEntity.id));
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
         getJobApplicantsBloc.add(
           GetJobApplicantsSearchEvent(
+            jobId: widget.jobEntity.id,
             searchFilter: JobApplicantsSearchFilter(),
           ),
         );
@@ -79,7 +80,7 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            getJobApplicantsBloc.add(ChangeToLoadingJobApplicantsEvent());
+            getJobApplicantsBloc.add(ChangeToLoadingJobApplicantsEvent(jobId:widget.jobEntity.id));
           },
           child: Padding(
             padding: const EdgeInsets.all(18.0),
@@ -112,7 +113,7 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
                           title: AppStrings.refresh,
                           onPressed: () {
                             getJobApplicantsBloc
-                                .add(ChangeToLoadingJobApplicantsEvent());
+                                .add(ChangeToLoadingJobApplicantsEvent(jobId:widget.jobEntity.id));
                           },
                         ),
                       );

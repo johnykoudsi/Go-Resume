@@ -4,8 +4,8 @@ sealed class GetJobApplicantsEvent extends Equatable {
   const GetJobApplicantsEvent();
 }
 class GetJobApplicantsSearchEvent extends GetJobApplicantsEvent {
-  GetJobApplicantsSearchEvent({required this.searchFilter});
-
+  GetJobApplicantsSearchEvent({required this.searchFilter,required this.jobId});
+  int jobId;
   JobApplicantsSearchFilter searchFilter;
 
   @override
@@ -13,12 +13,12 @@ class GetJobApplicantsSearchEvent extends GetJobApplicantsEvent {
 }
 
 class ChangeToLoadingJobApplicantsEvent extends GetJobApplicantsEvent {
-  ChangeToLoadingJobApplicantsEvent({this.searchFilter});
-
+  ChangeToLoadingJobApplicantsEvent({this.searchFilter,required this.jobId});
+  int jobId;
   JobApplicantsSearchFilter? searchFilter;
 
   @override
-  List<Object?> get props => [searchFilter];
+  List<Object?> get props => [searchFilter,jobId];
 }
 
 class JobApplicantsSearchFilter {
