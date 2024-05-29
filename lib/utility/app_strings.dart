@@ -21,6 +21,7 @@ class AppStrings{
   //company
   static String company = 'company'.tr();
   static String favoriteCompanies = 'favoriteCompanies'.tr();
+  static String pinnedApplicants = 'pinnedApplicants'.tr();
 
   //other
   static String refresh = 'refresh'.tr();

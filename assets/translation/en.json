@@ -18,6 +18,7 @@
   "companies": "Companies",
   "favoriteCompanies": "Favorite Companies",
   "refresh": "Refresh",
-  "applicantFor": "Applicants For "
+  "applicantFor": "Applicants For ",
+  "pinnedApplicants": "Pinned Applicants"
 
 }
