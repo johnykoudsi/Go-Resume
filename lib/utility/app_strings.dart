@@ -16,6 +16,7 @@ class AppStrings{
   //job
   static String jobs = 'jobs'.tr();
   static String applicantFor = 'applicantFor'.tr();
+  static String allApplicants = 'allApplicants'.tr();
 
 
   //company

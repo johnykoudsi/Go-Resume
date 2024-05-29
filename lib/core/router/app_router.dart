@@ -109,7 +109,7 @@ class AppRouter {
             )
           );
         case AppRoutes.allApplicants:
-          return const AllApplicantsScreen();
+          return  AllApplicantsScreen();
         // case AppRoutes.applicantProfile:
         //   User user = settings.arguments as User;
         //   return ApplicantProfileScreen(
