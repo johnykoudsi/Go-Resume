@@ -10,6 +10,12 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/preferred_gender_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../../utility/global_widgets/shimmer.dart';
+import '../../../company_profile/domain/entities/City_entity.dart';
+import '../../../company_profile/domain/entities/country_entity.dart';
+import '../../../company_profile/presentation/bloc/get_all_cities/get_all_cities_bloc.dart';
+import '../../../company_profile/presentation/bloc/get_all_countries/get_all_countries_bloc.dart';
+import '../../../company_profile/presentation/widget/country_city_drop_down.dart';
 import '../bloc/applicant_profile_bloc.dart';
 
 class EditApplicantProfileScreen extends StatefulWidget {
@@ -51,7 +57,21 @@ class _EditApplicantProfileScreenState
     }
     super.initState();
   }
+  Country? _selectedCountry;
+  City? _selectedCity;
 
+  void _handleSelectedCountries(Country selectedCountry) {
+    context.read<GetAllCitiesBloc>().add(GetCitiesEvent(countryCode: selectedCountry.countryCode));
+    setState(() {
+      _selectedCountry = selectedCountry;
+    });
+  }
+
+  void _handleSelectedCities(City selectedCities) {
+    setState(() {
+      _selectedCity = selectedCities;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -90,6 +110,29 @@ class _EditApplicantProfileScreenState
               hintText: 'Example: John Due',
               textInputType: TextInputType.visiblePassword,
               passwordBool: false,
+            ),
+            SizedBox(
+              height: heightBetweenFields,
+            ),
+            BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
+              builder: (countryContext, countryState) {
+                if(countryState is GetAllCountriesInitial){
+                  return ShimmerLoader(
+                    height: screenHeight * 0.05,
+                    width: screenWidth,
+                  );
+                }
+                if(countryState is GetCountriesDoneState){
+                  return
+                    CountryCityDropDown(
+                      title: '',
+                      countries: countryState.countries,
+                      onCountrySelect: _handleSelectedCountries,
+                      onCitySelect: _handleSelectedCities,
+                    );
+                }
+                else{return SizedBox.shrink();}
+              },
             ),
             SizedBox(
               height: heightBetweenFields,

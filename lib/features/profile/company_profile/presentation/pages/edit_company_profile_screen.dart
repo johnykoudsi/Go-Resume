@@ -12,6 +12,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_cities/get_all_cities_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_countries/get_all_countries_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
+import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../domain/entities/City_entity.dart';
 import '../../domain/entities/country_entity.dart';
@@ -91,8 +92,8 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Edit Profile",
+          title:  Text(
+            AppStrings.editProfile,
             style: AppFontStyles.boldH2,
           ),
         ),

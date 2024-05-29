@@ -133,6 +133,12 @@ class AppRouter {
               BlocProvider(
                 create: (context) => ApplicantProfileBloc(),
               ),
+              BlocProvider(
+                create: (context) => GetAllCountriesBloc(),
+              ),
+              BlocProvider(
+                create: (context) => GetAllCitiesBloc(),
+              ),
             ],
             child: const EditApplicantProfileScreen(),
           );
