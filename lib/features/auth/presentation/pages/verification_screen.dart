@@ -48,29 +48,28 @@ class _CodeVerificationScreenPagePageState
       appBar: AppBar(),
       body: BlocListener<UserBloc, UserState>(
         listener: (context, state) {
-          if(state is UserLoggedState){
+          if (state is UserLoggedState) {
             Navigator.of(context).pushNamedAndRemoveUntil(
-                widget.signUpEvent.isCompany==false?
-              AppRoutes.bottomNavBarScreen:AppRoutes.recruiterBottomNavBar
-
-                ,(Route<dynamic> route) => false);
+                widget.signUpEvent.isCompany == false
+                    ? AppRoutes.bottomNavBarScreen
+                    : AppRoutes.recruiterBottomNavBar,
+                (Route<dynamic> route) => false);
           }
-          if(state is UserErrorState){
+          if (state is UserErrorState) {
             DialogsWidgetsSnackBar.showSnackBarFromStatus(
                 context: context,
                 helperResponse: state.helperResponse,
-                showServerError: true
-            );
+                showServerError: true);
           }
         },
-        child:  SafeArea(
+        child: SafeArea(
           child: ListView(
             padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
                 screenWidth * 0.04, screenWidth * 0.03),
             children: [
               SizedBox(height: screenHeight * 0.1),
               Center(
-                child:ShaderMask(
+                child: ShaderMask(
                   blendMode: BlendMode.srcIn,
                   shaderCallback: (Rect bounds) {
                     return AppColors.kLinearColor.createShader(bounds);
@@ -100,7 +99,8 @@ class _CodeVerificationScreenPagePageState
                       Text(
                         widget.signUpEvent.phoneNumber,
                         textAlign: TextAlign.center,
-                        style: AppFontStyles.mediumH3.copyWith(color: AppColors.kMainColor100),
+                        style: AppFontStyles.mediumH3
+                            .copyWith(color: AppColors.kMainColor100),
                       ),
                       // const Text(
                       //   " for verification.",
@@ -109,7 +109,6 @@ class _CodeVerificationScreenPagePageState
                       // ),
                     ],
                   ),
-
                   SizedBox(
                     height: screenHeight * 0.05,
                   ),
@@ -121,7 +120,7 @@ class _CodeVerificationScreenPagePageState
                 controller: controller,
                 focusNode: focusNode,
                 androidSmsAutofillMethod:
-                AndroidSmsAutofillMethod.smsUserConsentApi,
+                    AndroidSmsAutofillMethod.smsUserConsentApi,
                 defaultPinTheme: PinPutTheme.defaultPinTheme,
                 showCursor: true,
                 cursor: PinPutTheme.cursor,
@@ -138,11 +137,11 @@ class _CodeVerificationScreenPagePageState
                     onPressed: controller.text.isEmpty
                         ? null
                         : () {
-                      widget.signUpEvent.verificationCode =
-                          controller.text;
+                            widget.signUpEvent.verificationCode =
+                                controller.text;
 
-                      context.read<UserBloc>().add(widget.signUpEvent);
-                    },
+                            context.read<UserBloc>().add(widget.signUpEvent);
+                          },
                   );
                 },
               ),
@@ -162,7 +161,8 @@ class _CodeVerificationScreenPagePageState
                       ),
                       Text(
                         "Resend Code",
-                        style: AppFontStyles.mediumH4.copyWith(color: AppColors.kMainColor100),
+                        style: AppFontStyles.mediumH4
+                            .copyWith(color: AppColors.kMainColor100),
                       ),
                     ],
                   ),
@@ -174,6 +174,5 @@ class _CodeVerificationScreenPagePageState
         ),
       ),
     );
-
   }
 }
