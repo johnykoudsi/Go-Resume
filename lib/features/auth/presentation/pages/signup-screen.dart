@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_phone_number_widget.dart';
 import '../../../../../../core/router/app_routes.dart';
 import '../widgets/user_type_widget.dart';
 
@@ -22,7 +24,7 @@ class _SignupScreenState extends State<SignupScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController repeatPasswordController = TextEditingController();
   String? _selectedUserType = "Applicant";
-
+  PhoneNumber? phoneNumberValue;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -62,22 +64,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     SizedBox(
                       height: screenHeight * 0.05,
                     ),
-                    CustomTextField(
-                      action: TextInputAction.done,
-                      controller: phoneController,
+                    PhoneTextField(
+                      phoneNumberController: phoneController,
                       label: "Phone Number*",
-                      onlyNumber: false,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Number is required";
-                        }
-                        else if (value.length!=12) {
-                          return "Number Must be 12 Characters";
-                        }
-                        return null;
+                      onPhoneNumberChanged: (PhoneNumber value) {
+                        phoneNumberValue = value;
                       },
-                      hintText: 'Example: +96347924893',
-                      textInputType: TextInputType.phone,
                     ),
                     SizedBox(
                       height: heightBetweenFields,
@@ -161,25 +153,30 @@ class _SignupScreenState extends State<SignupScreen> {
                 SizedBox(
                   height: screenHeight * 0.05,
                 ),
-
-                     ElevatedButtonWidget(
-                      title: "Signup",
-                      onPressed: () {
-                        if (_key.currentState!.validate()) {
-                          context.read<UserBloc>().add(SendSMSEvent(
-                              phoneNumber: phoneController.text));
-                          Navigator.of(context).pushNamed(
-                              AppRoutes.verificationCode,
-                              arguments: SignUpEvent(
-                                password: passwordController.text,
-                                phoneNumber: phoneController.text,
-                                fullName: nameController.text,
-                                verificationCode: "0000",
-                                isCompany: _selectedUserType=="Applicant"?false:true,
-                              ));
-                        }
-                      }),
-
+                ElevatedButtonWidget(
+                    title: "Signup",
+                    onPressed: () {
+                      if (!_key.currentState!.validate()) {
+                        return;
+                      }
+                      context.read<UserBloc>().add(
+                            SendSMSEvent(
+                              phoneNumber: phoneNumberValue!.phoneNumber!
+                                  .replaceAll("+", ""),
+                            ),
+                          );
+                      Navigator.of(context).pushNamed(
+                          AppRoutes.verificationCode,
+                          arguments: SignUpEvent(
+                            password: passwordController.text,
+                            phoneNumber: phoneNumberValue!.phoneNumber!
+                                .replaceAll("+", ""),
+                            fullName: nameController.text,
+                            verificationCode: "0000",
+                            isCompany:
+                                _selectedUserType == "Applicant" ? false : true,
+                          ));
+                    }),
                 SizedBox(
                   height: screenHeight * 0.05,
                 ),
