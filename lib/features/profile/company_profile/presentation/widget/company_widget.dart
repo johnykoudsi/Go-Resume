@@ -6,7 +6,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 
 class CompanyWidget extends StatelessWidget {
-  const CompanyWidget({required this.user,super.key});
+  const CompanyWidget({required this.user, super.key});
   final User user;
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,10 @@ class CompanyWidget extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        Navigator.pushNamed(context, AppRoutes.companyProfile,  arguments: {
-          'user': user,
-          'visitor': true,
-        },
+        Navigator.pushNamed(
+          context,
+          AppRoutes.companyProfile,
+          arguments: user,
         );
       },
       child: Container(
@@ -40,23 +40,23 @@ class CompanyWidget extends StatelessWidget {
               width: 70,
               height: 70,
               decoration: const BoxDecoration(
-                color: AppColors.kBackGroundColor,
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: NetworkImage("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg/1200px-M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg"),
-                  fit: BoxFit.cover
-                )
-              ),
+                  color: AppColors.kBackGroundColor,
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: NetworkImage(
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg/1200px-M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg"),
+                      fit: BoxFit.cover)),
             ),
             Column(
               children: [
                 Text(
-                  user.fullName??'',
+                  user.fullName ?? '',
                   style: AppFontStyles.mediumH5,
                 ),
                 Text(
                   "Damascus - Syria",
-                  style: AppFontStyles.regularH6.copyWith(color: AppColors.kGreyColor),
+                  style: AppFontStyles.regularH6
+                      .copyWith(color: AppColors.kGreyColor),
                 ),
               ],
             ),

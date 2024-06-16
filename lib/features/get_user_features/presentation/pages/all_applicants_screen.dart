@@ -14,9 +14,8 @@ import '../../../../utility/global_widgets/search_text_field.dart';
 import '../../../job/presentation/widgets/job_applicants_widget.dart';
 import '../bloc/get_All_applicants/get_all_applicants_bloc.dart';
 
-
 class AllApplicantsScreen extends StatefulWidget {
-   const AllApplicantsScreen({Key? key}) : super(key: key);
+  const AllApplicantsScreen({Key? key}) : super(key: key);
 
   @override
   State<AllApplicantsScreen> createState() => _AllApplicantsScreenState();
@@ -69,9 +68,8 @@ class _AllApplicantsScreenState extends State<AllApplicantsScreen> {
                 ))
           ],
           toolbarHeight: screenHeight * 0.15,
-          title:  Text(
-            AppStrings.allApplicants
-            ,
+          title: Text(
+            AppStrings.allApplicants,
             style: AppFontStyles.boldH2,
             maxLines: 2,
           ),

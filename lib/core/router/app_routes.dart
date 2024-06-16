@@ -1,7 +1,4 @@
-
-
 class AppRoutes {
-
   static const String login = "/login";
   static const String splashScreen = "/";
   static const String verificationCode = "/verification_code";
@@ -10,7 +7,8 @@ class AppRoutes {
   static const String recruiterBottomNavBar = "/recruiter_bottom_nav_bar";
   static const String mySkills = "/my_skills";
   static const String myExperiences = "/my_experiences";
-  static const String myEducationAndCertificates = "/my_education_and_certificates";
+  static const String myEducationAndCertificates =
+      "/my_education_and_certificates";
   static const String mySubmissions = "/my_submissions";
   static const String myNotifications = "/my_notifications";
   static const String jobDetails = "/job_details";
@@ -23,10 +21,9 @@ class AppRoutes {
   static const String addExperience = "/add_experience";
   static const String addEducation = "/add_education";
   static const String benefitsScreen = "/get_benefits";
-  static const String myPolicies= "/my_policies";
-  static const String addPolicy= "/add_policy";
-  static const String allCompanyScreen= "/allCompanyScreen";
-  static const String savedJobs= "/savedJobs";
-  static const String jobApplicants= "/jobApplicants";
-
+  static const String myPolicies = "/my_policies";
+  static const String addPolicy = "/add_policy";
+  static const String allCompanyScreen = "/allCompanyScreen";
+  static const String savedJobs = "/savedJobs";
+  static const String jobApplicants = "/jobApplicants";
 }

@@ -96,20 +96,15 @@ class AppRouter {
         case AppRoutes.jobDetails:
           JobEntity args = settings.arguments as JobEntity;
           return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => ApplyForJobBloc()
-              ),
-              BlocProvider(
-                  create: (context) => ToggleJobBloc()
-              ),
-            ],
-            child:JobDetailsScreen(
-              jobEntity: args,
-            )
-          );
+              providers: [
+                BlocProvider(create: (context) => ApplyForJobBloc()),
+                BlocProvider(create: (context) => ToggleJobBloc()),
+              ],
+              child: JobDetailsScreen(
+                jobEntity: args,
+              ));
         case AppRoutes.allApplicants:
-          return  const AllApplicantsScreen();
+          return const AllApplicantsScreen();
         // case AppRoutes.applicantProfile:
         //   User user = settings.arguments as User;
         //   return ApplicantProfileScreen(
@@ -207,7 +202,7 @@ class AppRouter {
         case AppRoutes.jobApplicants:
           JobEntity args = settings.arguments as JobEntity;
           return JobApplicantsScreen(
-           jobEntity : args,
+            jobEntity: args,
           );
         default:
           return const Scaffold(

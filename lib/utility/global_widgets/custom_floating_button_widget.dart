@@ -12,6 +12,8 @@ class CustomFloatingButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return FloatingActionButton(
+      key: UniqueKey(),
+      heroTag: null,
       onPressed: onPressed,
       backgroundColor: AppColors.kSecondColor,
       child: icon,

@@ -34,9 +34,11 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
             helperResponse: state.helperResponse,
             popOnSuccess: true,
           );
-          if(state.helperResponse.servicesResponse == ServicesResponseStatues.success){
+          if (state.helperResponse.servicesResponse ==
+              ServicesResponseStatues.success) {
             context.read<UserBloc>().add(RefreshUserEvent());
-          }        }
+          }
+        }
       },
       child: Scaffold(
         appBar: AppBar(
@@ -94,8 +96,11 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const CustomFloatingButtonWidget(
-              icon: Icon(Icons.auto_fix_high_rounded),
+            CustomFloatingButtonWidget(
+              icon: const Icon(Icons.auto_fix_high_rounded),
+              onPressed: (){
+
+              },
             ),
             SizedBox(
               height: screenHeight * 0.015,
