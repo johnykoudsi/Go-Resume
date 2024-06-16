@@ -23,10 +23,11 @@ class Assets {
   static const String svgNotification = 'assets/images/svg/Notification.svg';
   static const String svgPhone = 'assets/images/svg/phone.svg';
   static const String svgPin = 'assets/images/svg/pin.svg';
-  static const String svgSave = 'assets/images/svg/save.svg';
-  static const String svgSaveFill = 'assets/images/svg/save_fill.svg';
   static const String svgProfile = 'assets/images/svg/Profile.svg';
   static const String svgRoad = 'assets/images/svg/road.svg';
+  static const String svgSave = 'assets/images/svg/save.svg';
+  static const String svgSaveFill = 'assets/images/svg/save_fill.svg';
+  static const String svgSearch = 'assets/images/svg/search.svg';
   static const String svgSignOut = 'assets/images/svg/sign_out.svg';
   static const String svgSplashScreenEmployee = 'assets/images/svg/splash_screen_employee.svg';
   static const String svgStar = 'assets/images/svg/star.svg';

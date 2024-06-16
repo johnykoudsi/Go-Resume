@@ -37,6 +37,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/p
 import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presentation/pages/my_skills_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/applicant_bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/company_bottom_nav_bar/recruiter_bottom_nav_bar.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/bloc/my_notifications_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/bloc/my_notifications_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/pages/my_notifications_screen.dart';
 import '../../features/get_user_features/presentation/pages/all_applicants_screen.dart';
 import '../../features/profile/company_profile/presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
@@ -92,7 +94,15 @@ class AppRouter {
             child: const MySubmissionsScreen(),
           );
         case AppRoutes.myNotifications:
-          return const MyNotification();
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => MyNotificationsBloc()
+                  ..add(ChangeToLoadingApiMyNotificationsEvent()),
+              ),
+            ],
+            child: const MyNotification(),
+          );
         case AppRoutes.jobDetails:
           JobEntity args = settings.arguments as JobEntity;
           return MultiBlocProvider(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/widgets/notifications_list.dart';
 
 import '../widgets/notification_widget.dart';
 
@@ -32,18 +33,19 @@ final List<NotificationWidget> notifications =[
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
       ),
-      body: ListView.builder(
-        itemCount: notifications.length,
-        itemBuilder: (BuildContext context, int index) {
-         return
-           NotificationWidget(
-             imagePath: notifications[index].imagePath,
-             notificationTitle: notifications[index].notificationTitle,
-             notificationDetails: notifications[index].notificationDetails,
-             notificationDate: notifications[index].notificationDate,
-           );
-        },
-      ),
+      body: NotificationsList(),
+      // body: ListView.builder(
+      //   itemCount: notifications.length,
+      //   itemBuilder: (BuildContext context, int index) {
+      //    return
+      //      NotificationWidget(
+      //        imagePath: notifications[index].imagePath,
+      //        notificationTitle: notifications[index].notificationTitle,
+      //        notificationDetails: notifications[index].notificationDetails,
+      //        notificationDate: notifications[index].notificationDate,
+      //      );
+      //   },
+      // ),
     );
   }
 }
