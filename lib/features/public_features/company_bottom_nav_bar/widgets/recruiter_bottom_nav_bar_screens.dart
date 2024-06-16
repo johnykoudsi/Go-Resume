@@ -25,7 +25,7 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
         return const MyJobsScreen();
       }
       if (screenIndex == 1) {
-        return  PinnedApplicantsScreen();
+        return  const PinnedApplicantsScreen();
       }
       if (screenIndex == 2) {
         return MultiBlocProvider(

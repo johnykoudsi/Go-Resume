@@ -3,7 +3,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
-import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/widget/company_widget.dart';
 
 class HomeCompaniesSectionWidget extends StatelessWidget {
   const HomeCompaniesSectionWidget({super.key});
@@ -40,7 +39,7 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
           itemCount: 2,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return SizedBox();
+            return const SizedBox();
             // return const CompanyWidget();
           },
         ),

@@ -38,7 +38,7 @@ class AddExperienceEvent extends ExperienceActionsEvent {
       "company_name": company,
       "currently_in":currentlyIn,
     };
-    json.removeWhere((key, value) => value==null||value ==""||value.isEmpty||value=="null");
+    json.removeWhere((key, value) => value ==""||value.isEmpty||value=="null");
     return json;
   }
   @override

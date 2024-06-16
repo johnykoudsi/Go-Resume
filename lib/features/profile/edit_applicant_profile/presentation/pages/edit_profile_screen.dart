@@ -131,7 +131,7 @@ class _EditApplicantProfileScreenState
                       onCitySelect: _handleSelectedCities,
                     );
                 }
-                else{return SizedBox.shrink();}
+                else{return const SizedBox.shrink();}
               },
             ),
             SizedBox(

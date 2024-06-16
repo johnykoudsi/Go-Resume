@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/policy.dart';
@@ -13,7 +11,6 @@ import 'package:smart_recruitment_flutter_user/features/public_features/home/pre
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import '../../../../../core/router/app_routes.dart';
-import '../../../applicant_profile/presentation/widgets/contact_info_widget.dart';
 import '../../../applicant_profile/presentation/widgets/profile_image_widget.dart';
 
 class CompanyProfileScreen extends StatefulWidget {

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/networking/endpoints.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
-import 'package:smart_recruitment_flutter_user/features/my_submissions/domain/entities/my_submissions_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 
 import '../../../../../utility/constant_logic_validation.dart';

@@ -53,7 +53,7 @@ final class AddNewJobEvent extends AddJobEvent {
     }
 
     // Remove entries with null or empty values
-    map.removeWhere((key, value) => value == null || value.isEmpty || value=="none");
+    map.removeWhere((key, value) => value.isEmpty || value=="none");
     return map;
   }
   @override

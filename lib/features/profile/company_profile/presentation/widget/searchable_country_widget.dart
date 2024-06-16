@@ -12,7 +12,7 @@ class SearchableCountryWidget extends StatefulWidget {
   final Function(Country) onSelect;
   final String title; // Title for the dropdown
 
-  const SearchableCountryWidget({
+  const SearchableCountryWidget({super.key, 
     required this.items,
     required this.selectedItem,
     required this.onSelect,

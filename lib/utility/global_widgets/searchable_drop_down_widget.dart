@@ -11,7 +11,7 @@ class SearchableDropDownWidget extends StatefulWidget {
   final Function(WorkFieldEntity) onSelect;
   final String title; // Title for the dropdown
 
-  const SearchableDropDownWidget({
+  const SearchableDropDownWidget({super.key, 
     required this.items,
     required this.selectedItem,
     required this.onSelect,

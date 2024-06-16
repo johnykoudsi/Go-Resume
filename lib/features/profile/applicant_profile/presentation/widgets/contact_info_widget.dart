@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
-import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class ContactInfoWidget extends StatelessWidget {
 

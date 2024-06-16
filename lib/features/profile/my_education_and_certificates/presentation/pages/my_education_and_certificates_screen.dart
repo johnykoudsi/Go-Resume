@@ -14,7 +14,6 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_education_and
 import '../../../../../utility/global_widgets/custom_card.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
-import '../widgets/custom_education_and_certificates_card.dart';
 
 class MyEducationAndCertificatesScreen extends StatefulWidget {
   const MyEducationAndCertificatesScreen({Key? key, required this.educations})

@@ -5,7 +5,6 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
-import '../pages/job_details_screen.dart';
 
 class JobWidget extends StatelessWidget {
   final bool editable;
@@ -46,12 +45,12 @@ class JobWidget extends StatelessWidget {
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Spacer(),
+                        const Spacer(),
                              IconButton(
                                 onPressed: () {}, icon: const Icon(Icons.edit))
                       ],
                     )
-                  : SizedBox(),
+                  : const SizedBox(),
               Text(
                 jobEntity.position,
                 style: AppFontStyles.boldH5,
@@ -60,7 +59,7 @@ class JobWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    jobEntity.maxSalary.toString()+"  SYP",
+                    "${jobEntity.maxSalary}  SYP",
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(

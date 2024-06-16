@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
-import 'package:smart_recruitment_flutter_user/features/job/domain/entities/work_field_entity.dart';
 
 import '../../domain/entities/City_entity.dart';
 
@@ -13,7 +12,7 @@ class SearchableCityWidget extends StatefulWidget {
   final Function(City) onSelect;
   final String title; // Title for the dropdown
 
-  const SearchableCityWidget({
+  const SearchableCityWidget({super.key, 
     required this.items,
     required this.selectedItem,
     required this.onSelect,

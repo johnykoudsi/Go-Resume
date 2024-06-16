@@ -1,14 +1,11 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
-
-import '../../../../../utility/constant_logic_validation.dart';
-
-import '../../../data/data_sources/get_user_features_dataSource.dart';
-import '../../../data/repositories/get_user_features_repo_impl.dart';
-import '../../../domain/use_cases/get_all_applicants_usecase.dart';
-
+import 'package:smart_recruitment_flutter_user/features/get_user_features/data/data_sources/get_user_features_dataSource.dart';
+import 'package:smart_recruitment_flutter_user/features/get_user_features/data/repositories/get_user_features_repo_impl.dart';
+import 'package:smart_recruitment_flutter_user/features/get_user_features/domain/use_cases/get_all_applicants_usecase.dart';
+import 'package:smart_recruitment_flutter_user/utility/constant_logic_validation.dart';
 part 'get_all_applicants_event.dart';
 part 'get_all_applicants_state.dart';
 

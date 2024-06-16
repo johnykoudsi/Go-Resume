@@ -1,6 +1,4 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
-import 'package:smart_recruitment_flutter_user/utility/constant_logic_validation.dart';
 class FirebaseNotifications{
   //create instance of FBM
   final _firebaseMessaging = FirebaseMessaging.instance;

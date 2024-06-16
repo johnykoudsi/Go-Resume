@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:smart_recruitment_core/features/auth/domain/entities/skill.dart';
-import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/networking/endpoints.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';

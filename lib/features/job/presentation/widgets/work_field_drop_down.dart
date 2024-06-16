@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
-import 'package:smart_recruitment_core/utility/theme/app_style.dart';
 
 class WorkFieldDropDownListWidget extends StatelessWidget {
   WorkFieldDropDownListWidget(
@@ -13,7 +12,7 @@ class WorkFieldDropDownListWidget extends StatelessWidget {
       : super(key: key);
 
   Function(Object?)? onChanged;
-  dynamic? value;
+  dynamic value;
   String hint;
   List<dynamic>? dropDownValues;
 

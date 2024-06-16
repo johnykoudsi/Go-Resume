@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +23,7 @@ class DescriptionField extends StatefulWidget {
   final String? initValue;
   final String? label;
 
-  const DescriptionField({
+  const DescriptionField({super.key, 
     this.label,
     this.initValue,
     this.action = TextInputAction.none,

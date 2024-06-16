@@ -5,7 +5,6 @@ import 'package:smart_recruitment_flutter_user/features/public_features/home/pre
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 import '../../../../../core/router/app_routes.dart';
-import '../widgets/job_widget.dart';
 
 
 class MyJobsScreen extends StatefulWidget {

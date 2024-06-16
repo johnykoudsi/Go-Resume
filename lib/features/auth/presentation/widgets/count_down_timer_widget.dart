@@ -4,6 +4,8 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 class CountdownTimer extends StatefulWidget {
+  const CountdownTimer({super.key});
+
   @override
   _CountdownTimerState createState() => _CountdownTimerState();
 }
@@ -19,7 +21,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (_secondsRemaining > 0) {
           _secondsRemaining--;

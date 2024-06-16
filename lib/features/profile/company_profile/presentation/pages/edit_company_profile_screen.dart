@@ -6,9 +6,7 @@ import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
-import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
-import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/preferred_gender_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_cities/get_all_cities_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_countries/get_all_countries_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
@@ -28,7 +26,7 @@ class EditCompanyProfileScreen extends StatefulWidget {
 }
 
 class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
-  GenderEnum? _selectedUserGender = GenderEnum.m;
+  final GenderEnum _selectedUserGender = GenderEnum.m;
   TextEditingController nameController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
   TextEditingController visionController = TextEditingController();
@@ -130,7 +128,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
                           onCitySelect: _handleSelectedCities,
                         );
                     }
-                    else{return SizedBox.shrink();}
+                    else{return const SizedBox.shrink();}
               },
             ),
             SizedBox(

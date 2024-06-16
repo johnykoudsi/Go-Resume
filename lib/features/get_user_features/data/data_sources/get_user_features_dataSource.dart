@@ -1,12 +1,10 @@
 import 'dart:convert';
-
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/networking/endpoints.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
+import 'package:smart_recruitment_flutter_user/features/get_user_features/presentation/bloc/get_All_applicants/get_all_applicants_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/get_user_features/presentation/bloc/get_pinned_applicants/get_pinned_applicants_bloc.dart';
-
-import '../../presentation/bloc/get_all_applicants/get_all_applicants_bloc.dart';
 
 class GetUserFeaturesDataSource{
   GetUserFeaturesDataSource(this.networkHelpers);

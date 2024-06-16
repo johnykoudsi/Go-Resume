@@ -11,7 +11,6 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/ap
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/top_applicants_widget.dart';
 
-import '../../../../core/router/app_routes.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../widgets/description_item_widget.dart';
@@ -62,10 +61,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   },
                   builder: (context, state) {
                     if(state is ToggleJobLoadingState){
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                     if(state is ToggleJobErrorState){
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                     else{
 

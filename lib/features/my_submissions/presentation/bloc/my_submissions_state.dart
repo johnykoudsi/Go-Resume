@@ -21,7 +21,7 @@ class MySubmissionsLoadedState extends MySubmissionsState {
     bool? hasReachedMax,
   }) {
     return MySubmissionsLoadedState(
-      submissions: jobs ?? this.submissions,
+      submissions: jobs ?? submissions,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
     );
   }

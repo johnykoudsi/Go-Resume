@@ -3,7 +3,6 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
-import 'job_applicants_widget.dart';
 
 class TopApplicantsWidget extends StatelessWidget {
   JobEntity jobEntity;

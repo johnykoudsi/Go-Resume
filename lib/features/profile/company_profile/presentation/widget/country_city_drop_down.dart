@@ -14,7 +14,7 @@ class CountryCityDropDown extends StatefulWidget {
   final Function(Country) onCountrySelect;
   final Function(City) onCitySelect;
   final String title;
-  CountryCityDropDown({
+  const CountryCityDropDown({super.key, 
     required this.title,
     required this.countries,
     this.selectedCountry,
@@ -44,7 +44,7 @@ class _CountryCityDropDownState extends State<CountryCityDropDown> {
         BlocBuilder<GetAllCitiesBloc, GetAllCitiesState>(
           builder: (cityContext, cityState) {
             if(cityState is GetAllCitiesInitial){
-            return  SizedBox.shrink();
+            return  const SizedBox.shrink();
             }
             if(cityState is GetCitiesLoadingState){
              return ShimmerLoader(
@@ -59,7 +59,7 @@ class _CountryCityDropDownState extends State<CountryCityDropDown> {
                 onSelect: widget.onCitySelect,
                 title: 'City',
               );
-            }else{return SizedBox.shrink();}
+            }else{return const SizedBox.shrink();}
           },
         ),
       ],

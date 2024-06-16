@@ -16,7 +16,7 @@ import '../bloc/get_All_applicants/get_all_applicants_bloc.dart';
 
 
 class AllApplicantsScreen extends StatefulWidget {
-   AllApplicantsScreen({Key? key}) : super(key: key);
+   const AllApplicantsScreen({Key? key}) : super(key: key);
 
   @override
   State<AllApplicantsScreen> createState() => _AllApplicantsScreenState();
