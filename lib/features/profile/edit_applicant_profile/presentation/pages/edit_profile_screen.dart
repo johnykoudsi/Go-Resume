@@ -28,6 +28,7 @@ class EditApplicantProfileScreen extends StatefulWidget {
 
 class _EditApplicantProfileScreenState
     extends State<EditApplicantProfileScreen> {
+  static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   GenderEnum? _selectedUserGender = GenderEnum.m;
   TextEditingController nameController = TextEditingController();
   TextEditingController bioController = TextEditingController();
@@ -100,167 +101,177 @@ class _EditApplicantProfileScreenState
             style: AppFontStyles.boldH2,
           ),
         ),
-        body: ListView(
-          padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
-              screenWidth * 0.04, screenWidth * 0.03),
-          children: [
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: nameController,
-              label: "Full Name",
-              onlyNumber: false,
-              hintText: 'Example: John Due',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
-              builder: (countryContext, countryState) {
-                if(countryState is GetAllCountriesInitial){
-                  return ShimmerLoader(
-                    height: screenHeight * 0.05,
-                    width: screenWidth,
-                  );
-                }
-                if(countryState is GetCountriesDoneState){
-                  return
-                    CountryCityDropDown(
-                      title: '',
-                      countries: countryState.countries,
-                      onCountrySelect: _handleSelectedCountries,
-                      onCitySelect: _handleSelectedCities,
+        body: Form(
+          key: _key,
+          child: ListView(
+            padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
+                screenWidth * 0.04, screenWidth * 0.03),
+            children: [
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: nameController,
+                label: "Full Name*",
+                onlyNumber: false,
+                hintText: 'Example: John Due',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Full Name is required";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
+                builder: (countryContext, countryState) {
+                  if(countryState is GetAllCountriesInitial){
+                    return ShimmerLoader(
+                      height: screenHeight * 0.05,
+                      width: screenWidth,
                     );
-                }
-                else{return const SizedBox.shrink();}
-              },
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: emailController,
-              label: "Email",
-              onlyNumber: false,
-              hintText: 'example@gmail.com',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: linkedinController,
-              label: "LinkedIn",
-              onlyNumber: false,
-              hintText: 'https://www.linkedin.com/example',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: websiteController,
-              label: "Website",
-              onlyNumber: false,
-              hintText: 'https://www.example.com',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: instagramController,
-              label: "Instagram",
-              onlyNumber: false,
-              hintText: 'https://www.instagram.com/example',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: facebookController,
-              label: "Facebook",
-              onlyNumber: false,
-              hintText: 'https://www.facebook.com/example',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
+                  }
+                  if(countryState is GetCountriesDoneState){
+                    return
+                      CountryCityDropDown(
+                        title: '',
+                        countries: countryState.countries,
+                        onCountrySelect: _handleSelectedCountries,
+                        onCitySelect: _handleSelectedCities,
+                      );
+                  }
+                  else{return const SizedBox.shrink();}
+                },
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: emailController,
+                label: "Email",
+                onlyNumber: false,
+                hintText: 'example@gmail.com',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: linkedinController,
+                label: "LinkedIn",
+                onlyNumber: false,
+                hintText: 'https://www.linkedin.com/example',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: websiteController,
+                label: "Website",
+                onlyNumber: false,
+                hintText: 'https://www.example.com',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: instagramController,
+                label: "Instagram",
+                onlyNumber: false,
+                hintText: 'https://www.instagram.com/example',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: facebookController,
+                label: "Facebook",
+                onlyNumber: false,
+                hintText: 'https://www.facebook.com/example',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
 
-            DatePickerWidget(
-              label: 'Date Of Birth',
-              selectedDate: selectedDate,
-              onDateChange: (date) {
-                setState(() {
-                  selectedDate = date;
-                });
-              },
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            DescriptionField(
-              action: TextInputAction.done,
-              controller: bioController,
-              label: "Bio",
-              onlyNumber: false,
-              hintText: 'Describe your self with a few words',
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            PreferredGenderWidget(
-                selectedPreferredGender: _selectedUserGender,
-                onUserTypeSelected: (value) {
+              DatePickerWidget(
+                label: 'Date Of Birth',
+                selectedDate: selectedDate,
+                onDateChange: (date) {
                   setState(() {
-
-                    _selectedUserGender = value;
-                    print("jjjj"+_selectedUserGender.toString());
+                    selectedDate = date;
                   });
-                }),
-            SizedBox(
-              height: screenHeight * 0.1,
-            ),
-            BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
-              builder: (context, state) {
-                return ElevatedButtonWidget(
-                  title: "Edit",
-                  isLoading: state is ApplicantProfileLoading,
-                  onPressed: () {
-                    context
-                        .read<ApplicantProfileBloc>()
-                        .add(UpdateApplicantProfileEvent(
-                          dob: selectedDate,
-                          gender:_selectedUserGender ?? GenderEnum.none,
-                          bio: bioController.text,
-                          fullName: nameController.text,
-                      websiteLink: websiteController.text,
-                      instagram: instagramController.text,
-                      facebook: facebookController.text,
-                      linkedin: linkedinController.text,
-                      email: emailController.text,
-                        ));
-                  },
-                );
-              },
-            ),
-            SizedBox(
-              height: screenHeight * 0.05,
-            ),
-          ],
+                },
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              DescriptionField(
+                action: TextInputAction.done,
+                controller: bioController,
+                label: "Bio",
+                onlyNumber: false,
+                hintText: 'Describe your self with a few words',
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              PreferredGenderWidget(
+                  selectedPreferredGender: _selectedUserGender,
+                  onUserTypeSelected: (value) {
+                    setState(() {
+                      _selectedUserGender = value;
+                    });
+                  }),
+              SizedBox(
+                height: screenHeight * 0.1,
+              ),
+              BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
+                builder: (context, state) {
+                  return ElevatedButtonWidget(
+                    title: "Edit",
+                    isLoading: state is ApplicantProfileLoading,
+                    onPressed: () {
+                      if (!_key.currentState!.validate()) {
+                        return;
+                      }
+                      context
+                          .read<ApplicantProfileBloc>()
+                          .add(UpdateApplicantProfileEvent(
+                            dob: selectedDate,
+                            gender:_selectedUserGender ?? GenderEnum.none,
+                            bio: bioController.text,
+                            fullName: nameController.text,
+                        websiteLink: websiteController.text,
+                        instagram: instagramController.text,
+                        facebook: facebookController.text,
+                        linkedin: linkedinController.text,
+                        email: emailController.text,
+                          ));
+                    },
+                  );
+                },
+              ),
+              SizedBox(
+                height: screenHeight * 0.05,
+              ),
+            ],
+          ),
         ),
       ),
     );
