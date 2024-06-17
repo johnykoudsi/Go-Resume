@@ -39,7 +39,7 @@ class _MoreScreenState extends State<MoreScreen> {
           Stack(
             children: [
               const EmployeeOnRoad(),
-               MoreItemsWidget(iconPath: Assets.svgMySubmissions, text:user.company == null ? AppStrings.mySubmission:AppStrings.myJobs, topPadding: screenHeight*0.55,onTap:user.company == null ? (){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);}:(){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);},),
+               MoreItemsWidget(iconPath: Assets.svgMySubmissions, text:user.company == null ? AppStrings.mySubmissions:AppStrings.myJobs, topPadding: screenHeight*0.55,onTap:user.company == null ? (){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);}:(){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);},),
               MoreItemsWidget(iconPath: Assets.svgSave,text:AppStrings.savedJobs, topPadding: screenHeight*0.65,onTap:(){Navigator.of(context).pushNamed(AppRoutes.savedJobs);}),
               MoreItemsWidget(iconPath: Assets.svgNotification, text: AppStrings.notifications, topPadding: screenHeight*0.75,onTap: (){Navigator.of(context).pushNamed(AppRoutes.myNotifications);}),
               MoreItemsWidget(iconPath: Assets.svgLanguage, text: AppStrings.language, topPadding: screenHeight*0.85,   onTap: () {

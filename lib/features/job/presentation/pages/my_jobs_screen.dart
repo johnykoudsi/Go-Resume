@@ -5,6 +5,7 @@ import 'package:smart_recruitment_flutter_user/features/public_features/home/pre
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 import '../../../../../core/router/app_routes.dart';
+import '../../../../utility/app_strings.dart';
 
 
 class MyJobsScreen extends StatefulWidget {
@@ -21,13 +22,13 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text(
-        //   "Home",
-        //   style: Theme.of(context)
-        //       .appBarTheme
-        //       .titleTextStyle!
-        //       .copyWith(color: Colors.white),
-        // ),
+        title: Text(
+          AppStrings.myJobs,
+          style: Theme.of(context)
+              .appBarTheme
+              .titleTextStyle!
+              .copyWith(color: Colors.white),
+        ),
         centerTitle: false,
         actions: [
           IconButton(

@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 class AppStrings{
 
   //more
-  static String mySubmission = 'mySubmissions'.tr();
+  static String mySubmissions = 'mySubmissions'.tr();
   static String myJobs = 'myJobs'.tr();
   static String savedJobs = 'savedJobs'.tr();
   static String notifications = 'notifications'.tr();
@@ -17,6 +17,7 @@ class AppStrings{
   static String jobs = 'jobs'.tr();
   static String applicantFor = 'applicantFor'.tr();
   static String allApplicants = 'allApplicants'.tr();
+  static String position = 'position'.tr();
 
 
   //company
@@ -28,6 +29,7 @@ class AppStrings{
   static String refresh = 'refresh'.tr();
   static String editProfile = 'editProfile'.tr();
   static String noData = 'noData'.tr();
+  static String isRequired = 'isRequired'.tr();
 
 
 

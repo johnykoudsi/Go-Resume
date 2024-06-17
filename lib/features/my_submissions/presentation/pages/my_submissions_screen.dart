@@ -6,7 +6,9 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
+import '../../../../utility/app_strings.dart';
 import '../../domain/entities/my_submissions_entity.dart';
 
 class MySubmissionsScreen extends StatefulWidget {
@@ -45,8 +47,8 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "My Submissions",
+        title:  Text(
+          AppStrings.mySubmissions,
           style: AppFontStyles.boldH2,
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
@@ -54,7 +56,11 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
       body: BlocBuilder<MySubmissionsBloc, MySubmissionsState>(
         builder: (context, state) {
           if(state is MySubmissionsLoadedState){
-            return ListView.builder(
+            return
+              state.submissions.isEmpty ?
+                  const NoDataWidget()
+                  :
+              ListView.builder(
               padding: const EdgeInsets.all(18),
                 controller: scrollController,
               itemCount: state.hasReachedMax
