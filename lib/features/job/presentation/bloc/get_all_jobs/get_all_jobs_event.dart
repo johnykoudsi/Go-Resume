@@ -38,7 +38,7 @@ class AllJobsSearchFilter {
   num? maxSalary;
   int? workFieldId;
   // in:contract,full_time,part_time,task_based,out_sourcing
-  String? type;
+  JobTypes? type;
   String? sort;
 
   AllJobsSearchFilter copyWith({
@@ -48,7 +48,7 @@ class AllJobsSearchFilter {
     num? maxSalary,
     int? workFieldId,
     // in:contract,full_time,part_time,task_based,out_sourcing
-    String? type,
+    JobTypes? type,
     String? sort,
   }) =>
       AllJobsSearchFilter(
@@ -69,9 +69,10 @@ class AllJobsSearchFilter {
       "filter[minSalary]": minSalary.toString(),
       "filter[maxSalary]": maxSalary.toString(),
       "filter[work_field_id]": workFieldId.toString(),
-      "filter[type]": type,
+      "filter[type]": type != JobTypes.none ? type?.name : null,
       "sort": sort
-    }..removeWhere((key, value) => value == null || value == "null" || value == "");
+    }..removeWhere(
+        (key, value) => value == null || value == "null" || value == "");
     ;
     return map;
   }

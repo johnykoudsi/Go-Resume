@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
+import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/job/data_sources/data_source/job_data_source.dart';
 import 'package:smart_recruitment_flutter_user/features/job/data_sources/reposetries/job_repo_impl.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';

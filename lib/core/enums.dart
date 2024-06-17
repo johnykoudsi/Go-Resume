@@ -12,6 +12,7 @@ enum Compensation{
   salary,
 }
 enum JobTypes{
+  none,
   contract,
   full_time,
   part_time,
@@ -20,6 +21,7 @@ enum JobTypes{
 }
 
 final EnumValues jobTypesUi = EnumValues({
+  "None": JobTypes.none,
   "Contract": JobTypes.contract,
   "FullTime": JobTypes.full_time,
   "PartTime": JobTypes.part_time,
