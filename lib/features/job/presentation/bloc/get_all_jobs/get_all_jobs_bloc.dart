@@ -73,7 +73,9 @@ class GetAllJobsBloc extends Bloc<GetAllJobsEvent, GetAllJobsState> {
     on<ChangeToLoadingAllJobsEvent>((event, emit) async {
       emit(GetAllJobsLoadingState());
 
-      add(GetAllJobsSearchEvent(searchFilter: AllJobsSearchFilter(page: 1)));
+      add(GetAllJobsSearchEvent(
+          searchFilter:
+              event.searchFilter?.copyWith(page: 1) ?? AllJobsSearchFilter()));
     });
   }
 }

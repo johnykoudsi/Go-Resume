@@ -23,21 +23,56 @@ class ChangeToLoadingAllJobsEvent extends GetAllJobsEvent {
 }
 
 class AllJobsSearchFilter {
-  AllJobsSearchFilter({this.page = 1});
+  AllJobsSearchFilter({
+    this.page = 1,
+    this.maxSalary,
+    this.minSalary,
+    this.search,
+    this.sort,
+    this.type,
+    this.workFieldId,
+  });
   int page;
+  String? search;
+  num? minSalary;
+  num? maxSalary;
+  int? workFieldId;
+  // in:contract,full_time,part_time,task_based,out_sourcing
+  String? type;
+  String? sort;
 
   AllJobsSearchFilter copyWith({
     int? page,
+    String? search,
+    num? minSalary,
+    num? maxSalary,
+    int? workFieldId,
+    // in:contract,full_time,part_time,task_based,out_sourcing
+    String? type,
+    String? sort,
   }) =>
       AllJobsSearchFilter(
         page: page ?? this.page,
+        search: search ?? this.search,
+        minSalary: minSalary ?? this.minSalary,
+        maxSalary: maxSalary ?? this.maxSalary,
+        workFieldId: workFieldId ?? this.workFieldId,
+        type: type ?? this.type,
+        sort: sort ?? this.sort,
       );
 
-  Map<String, String> toJson() {
-    Map<String, String> map = {
+  Map<String, String?> toJson() {
+    Map<String, String?> map = {
       "page": page.toString(),
       "per_page": kGetLimit.toString(),
-    }..removeWhere((key, value) => value.isEmpty);
+      "filter[search]": search,
+      "filter[minSalary]": minSalary.toString(),
+      "filter[maxSalary]": maxSalary.toString(),
+      "filter[work_field_id]": workFieldId.toString(),
+      "filter[type]": type,
+      "sort": sort
+    }..removeWhere((key, value) => value == null || value == "null" || value == "");
+    ;
     return map;
   }
 }

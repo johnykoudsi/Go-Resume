@@ -7,6 +7,7 @@ import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_all_jobs/get_all_jobs_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
@@ -23,6 +24,8 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
   TextEditingController searchController = TextEditingController();
   ScrollController scrollController = ScrollController();
   GetAllJobsBloc getAllJobsBloc = GetAllJobsBloc();
+  bool searchDeleteIcon = false;
+  AllJobsSearchFilter jobFilter = AllJobsSearchFilter();
 
   @override
   void initState() {
@@ -32,7 +35,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
           scrollController.offset) {
         getAllJobsBloc.add(
           GetAllJobsSearchEvent(
-            searchFilter: AllJobsSearchFilter(),
+            searchFilter: jobFilter,
           ),
         );
       }
@@ -58,10 +61,29 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
           bottom: PreferredSize(
             preferredSize: const Size(double.infinity, 75),
             child: SearchTextField(
-              onClear: () {},
-              onSend: (value) {},
+              onClear: () {
+                setState(() {
+                  searchDeleteIcon = false;
+                  searchController.clear();
+                });
+                getAllJobsBloc.add(
+                  ChangeToLoadingAllJobsEvent(
+                    searchFilter: jobFilter.copyWith(search: null),
+                  ),
+                );
+              },
+              onSend: (value) {
+                setState(() {
+                  searchDeleteIcon = true;
+                });
+                getAllJobsBloc.add(
+                  ChangeToLoadingAllJobsEvent(
+                    searchFilter: jobFilter.copyWith(search: value),
+                  ),
+                );
+              },
               searchController: searchController,
-              showSearchDeleteIcon: false,
+              showSearchDeleteIcon: searchDeleteIcon,
             ),
           ),
         ),
@@ -71,7 +93,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
           },
           child: BlocBuilder<GetAllJobsBloc, GetAllJobsState>(
             builder: (context, state) {
-              if (state is GetAllJobsLoadedState) {
+              if (state is GetAllJobsLoadedState && state.jobList.isNotEmpty) {
                 return ListView.builder(
                     padding: const EdgeInsets.all(18),
                     controller: scrollController,
@@ -92,6 +114,9 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
                         jobEntity: state.jobList[index],
                       );
                     });
+              }
+              if(state is GetAllJobsLoadedState ){
+                return const NoDataWidget();
               }
               if (state is GetAllJobsLoadingState) {
                 return ListView.builder(
