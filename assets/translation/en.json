@@ -22,6 +22,8 @@
   "pinnedApplicants": "Pinned Applicants",
   "allApplicants": "All Applicants",
   "editProfile": "Edit Profile",
-  "noData": "No Data"
+  "noData": "No Data",
+  "position": "Position",
+  "isRequired": " is required"
 
 }

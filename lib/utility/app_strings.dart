@@ -17,6 +17,7 @@ class AppStrings{
   static String jobs = 'jobs'.tr();
   static String applicantFor = 'applicantFor'.tr();
   static String allApplicants = 'allApplicants'.tr();
+  static String position = 'position'.tr();
 
 
   //company
@@ -28,6 +29,7 @@ class AppStrings{
   static String refresh = 'refresh'.tr();
   static String editProfile = 'editProfile'.tr();
   static String noData = 'noData'.tr();
+  static String isRequired = 'isRequired'.tr();
 
 
 

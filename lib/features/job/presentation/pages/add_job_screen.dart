@@ -14,6 +14,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/preferred_gender_widget.dart';
+import 'package:smart_recruitment_flutter_user/utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../../utility/global_widgets/searchable_drop_down_widget.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
@@ -101,11 +102,11 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 CustomTextField(
                   action: TextInputAction.done,
                   controller: positionController,
-                  label: "Position",
+                  label: "${AppStrings.position}*",
                   onlyNumber: false,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Position is required";
+                      return AppStrings.position+AppStrings.isRequired;
                     }
                     return null;
                   },
@@ -117,7 +118,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 ),
                 DatePickerWidget(
                   maxDate: DateTime.now().add(const Duration(days: 360)),
-                  label: 'Select Date',
+                  label: 'Select Date*',
                   selectedDate: selectedDate,
                   onDateChange: (date) {
                     setState(() {
@@ -171,7 +172,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   isMoney: true,
                   action: TextInputAction.done,
                   controller: minimumSalaryController,
-                  label: "Minimum Salary",
+                  label: "Minimum Salary*",
                   onlyNumber: false,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -189,7 +190,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   isMoney: true,
                   action: TextInputAction.done,
                   controller: maximumSalaryController,
-                  label: "Maximum Salary",
+                  label: "Maximum Salary*",
                   onlyNumber: false,
                   validator: (value) {
                     if (value == null || value.isEmpty) {

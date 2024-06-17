@@ -77,7 +77,7 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: descriptionController,
-                label: "Description",
+                label: "Description*",
                 onlyNumber: false,
                 hintText: 'Example: Smoking is not allowed',
                 textInputType: TextInputType.visiblePassword,

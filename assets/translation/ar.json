@@ -22,7 +22,9 @@
   "pinnedApplicants": "المتقدمون المحفوظون",
   "allApplicants": "جميع المتقدمين",
   "editProfile": "تعديل الملف الشخصي",
-  "noData": "لا يوجد بيانات"
+  "noData": "لا يوجد بيانات",
+  "position": "المنصب الوظيفي",
+  "isRequired": " مطلوب "
 
 
 
