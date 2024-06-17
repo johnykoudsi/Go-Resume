@@ -10,6 +10,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../job/presentation/widgets/description_item_widget.dart';
@@ -46,7 +47,10 @@ class _MyPoliciesScreenState extends State<MyPoliciesScreen> {
           ),
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
         ),
-        body: ListView.builder(
+        body:
+        widget.policies!.isEmpty ?
+            const NoDataWidget():
+        ListView.builder(
           itemCount: widget.policies != null ? widget.policies!.length:0,
           itemBuilder: (BuildContext context, int index) {
             return Padding(

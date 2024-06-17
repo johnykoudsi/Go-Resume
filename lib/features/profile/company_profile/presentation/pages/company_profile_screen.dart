@@ -13,6 +13,7 @@ import 'package:smart_recruitment_flutter_user/features/public_features/home/pre
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/back_button_circular.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../applicant_profile/presentation/widgets/profile_image_widget.dart';
 
@@ -147,8 +148,11 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 CustomCard(
                   title: "Policies",
                   visitor: widget.visitor,
-                  content: Column(
-                    children: List.generate(
+                  content: user.company!.policies!.isEmpty?
+                  const NoDataWidget(small: true,):
+                  Column(
+                    children:
+                    List.generate(
                       user.company?.policies?.length ?? 0,
                       (index) {
                         Policy? p = user.company?.policies?[index];
