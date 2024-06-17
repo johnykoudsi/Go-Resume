@@ -95,7 +95,7 @@ class _NotificationsListState extends State<NotificationsList> {
                                   backgroundColor: Colors.black,
                                   child: CircleAvatar(
                                     radius: 35,
-                                    foregroundImage: AssetImage(Assets.pngGoResumeLogo),
+                                    foregroundImage: AssetImage(Assets.pngJobSearch),
                                   ),
                                 ),
                               ),
@@ -154,7 +154,7 @@ class _NotificationsListState extends State<NotificationsList> {
                               backgroundColor: Colors.black,
                               child: CircleAvatar(
                                 radius: 35,
-                                foregroundImage: AssetImage(Assets.pngGoResumeLogo),
+                                foregroundImage: AssetImage(Assets.pngJobSearch),
                               ),
                             ),
                           ),
@@ -225,7 +225,7 @@ class NotificationItemWidget extends StatelessWidget {
                 backgroundColor: Colors.black,
                 child: CircleAvatar(
                   radius: 35,
-                  foregroundImage: AssetImage(Assets.pngGoResumeLogo),
+                  foregroundImage: AssetImage(Assets.pngJobSearch),
                 ),
               ),
             ),
