@@ -39,6 +39,8 @@ class _EditApplicantProfileScreenState
   DateTime? selectedDate;
   @override
   void initState() {
+    context.read<GetAllCountriesBloc>().add(GetCountriesEvent());
+
     final userBloc = context.read<UserBloc>().state;
     if (userBloc is UserLoggedState) {
       nameController.text = userBloc.user.data.fullName;
