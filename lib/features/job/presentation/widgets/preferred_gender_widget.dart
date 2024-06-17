@@ -17,23 +17,25 @@ class PreferredGenderWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Radio<GenderEnum>(
+          toggleable: true,
           value: GenderEnum.m,
           groupValue: selectedPreferredGender,
           onChanged: onUserTypeSelected,
         ),
         const Text('Male',style: AppFontStyles.mediumH5,),
         Radio<GenderEnum>(
+          toggleable: true,
           value: GenderEnum.f,
           groupValue: selectedPreferredGender,
           onChanged: onUserTypeSelected,
         ),
         const Text('Female',style: AppFontStyles.mediumH5,),
-        Radio<GenderEnum>(
-          value:  GenderEnum.none,
-          groupValue: selectedPreferredGender,
-          onChanged: onUserTypeSelected,
-        ),
-        const Text('None',style: AppFontStyles.mediumH5,),
+        // Radio<GenderEnum>(
+        //   value:  GenderEnum.none,
+        //   groupValue: selectedPreferredGender,
+        //   onChanged: onUserTypeSelected,
+        // ),
+        // const Text('None',style: AppFontStyles.mediumH5,),
       ],
     );
   }

@@ -11,6 +11,7 @@ import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/widgets/experience_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 
@@ -48,7 +49,9 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
           ),
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
         ),
-        body: ListView.builder(
+        body: widget.experiences.isEmpty?
+             const NoDataWidget()
+            :ListView.builder(
           itemCount: widget.experiences.length,
           itemBuilder: (BuildContext context, int index) {
             return Padding(

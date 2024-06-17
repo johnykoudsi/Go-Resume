@@ -12,6 +12,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/applicant_profil
 import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presentation/bloc/get_skills_bloc/get_skills_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presentation/bloc/skill_actions_bloc/skill_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presentation/widget/all_skills_drop_down.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 
 class MySkillsScreen extends StatefulWidget {
   const MySkillsScreen({required this.skills, Key? key}) : super(key: key);
@@ -60,7 +61,11 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
             iconTheme:
                 const IconThemeData(size: 25, color: AppColors.fontColor),
           ),
-          body: ListView.builder(
+          body:
+          currentSkills.isEmpty?
+               NoDataWidget()
+              :
+          ListView.builder(
             padding: const EdgeInsets.all(18),
             itemCount: currentSkills.length,
             itemBuilder: (BuildContext context, int index) {

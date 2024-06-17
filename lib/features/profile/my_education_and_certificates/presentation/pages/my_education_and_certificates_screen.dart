@@ -10,6 +10,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/widgets/education_and_certificates_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/education_actions_bloc.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 
 import '../../../../../utility/global_widgets/custom_card.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
@@ -38,7 +39,11 @@ class _MyEducationAndCertificatesScreenState
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
       ),
-      body: ListView.builder(
+      body:
+      widget.educations.isEmpty?
+           NoDataWidget()
+          :
+      ListView.builder(
         itemCount: widget.educations.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(

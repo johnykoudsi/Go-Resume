@@ -226,7 +226,9 @@ class _EditApplicantProfileScreenState
                 selectedPreferredGender: _selectedUserGender,
                 onUserTypeSelected: (value) {
                   setState(() {
+
                     _selectedUserGender = value;
+                    print("jjjj"+_selectedUserGender.toString());
                   });
                 }),
             SizedBox(
@@ -242,7 +244,7 @@ class _EditApplicantProfileScreenState
                         .read<ApplicantProfileBloc>()
                         .add(UpdateApplicantProfileEvent(
                           dob: selectedDate,
-                          gender: _selectedUserGender,
+                          gender:_selectedUserGender ?? GenderEnum.none,
                           bio: bioController.text,
                           fullName: nameController.text,
                       websiteLink: websiteController.text,

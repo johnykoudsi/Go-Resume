@@ -16,6 +16,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/applicant_profil
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/widgets/skill_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 
 class ApplicantProfileScreen extends StatefulWidget {
   const ApplicantProfileScreen({
@@ -122,7 +123,10 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
             CustomCard(
               title: "Experiences",
               visitor: widget.visitor,
-              content: Column(
+              content:
+              user.applicant!.experiences!.isEmpty?
+               const NoDataWidget(small: true,):
+              Column(
                 children: List.generate(
                   user.applicant?.experiences?.length ?? 0,
                   (index) {
@@ -144,7 +148,10 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
             CustomCard(
               title: "Skills",
               visitor: widget.visitor,
-              content: Column(
+              content:
+              user.applicant!.skills!.isEmpty?
+              const NoDataWidget(small: true,):
+              Column(
                 children: List.generate(
                   user.applicant?.skills?.length ?? 0,
                       (index) {
@@ -166,7 +173,10 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
             CustomCard(
               title: "Education & Certificates",
               visitor: widget.visitor,
-              content: Column(
+              content:
+              user.applicant!.education!.isEmpty?
+              const NoDataWidget(small: true,):
+              Column(
                 children: List.generate(
                   user.applicant?.education?.length ?? 0,
                   (index) {

@@ -21,6 +21,7 @@
   "applicantFor": "Applicants For ",
   "pinnedApplicants": "Pinned Applicants",
   "allApplicants": "All Applicants",
-  "editProfile": "Edit Profile"
+  "editProfile": "Edit Profile",
+  "noData": "No Data"
 
 }

@@ -21,7 +21,9 @@
   "applicantFor": "المتقدمون لمنصب ",
   "pinnedApplicants": "المتقدمون المحفوظون",
   "allApplicants": "جميع المتقدمين",
-  "editProfile": "تعديل الملف الشخصي"
+  "editProfile": "تعديل الملف الشخصي",
+  "noData": "لا يوجد بيانات"
+
 
 
 }

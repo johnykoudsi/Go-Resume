@@ -27,6 +27,7 @@ class AppStrings{
   //other
   static String refresh = 'refresh'.tr();
   static String editProfile = 'editProfile'.tr();
+  static String noData = 'noData'.tr();
 
 
 
