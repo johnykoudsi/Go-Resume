@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
@@ -17,6 +19,9 @@ import 'package:smart_recruitment_flutter_user/features/profile/applicant_profil
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 
 class ApplicantProfileScreen extends StatefulWidget {
   const ApplicantProfileScreen({
@@ -39,7 +44,19 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
     user = widget.user;
     super.initState();
   }
+  void openWhatsapp(
+      {required BuildContext context, required String number}) async {
+    var whatsapp = number; //+92xx enter like this
+    var whatsappURlAndroid = "whatsapp://send?phone=$whatsapp";
+    var whatsappURLIos = "https://wa.me/$whatsapp}";
 
+    if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
+      await launchUrl(Uri.parse(whatsappURlAndroid));
+    } else {
+      DialogsWidgetsSnackBar.showScaffoldSnackBar(
+          title: "Whatsapp not installed", context: context);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -197,16 +214,78 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
               height: 18,
             ),
             CustomCard(
+              operation: "",
               title: "Contact Info",
               visitor: widget.visitor,
-              content: const Row(
+              content:  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ContactInfoWidget(imagePath: Assets.svgFacebook),
-                  ContactInfoWidget(imagePath: Assets.svgLinkedin),
-                  ContactInfoWidget(imagePath: Assets.svgWhatsapp),
-                  ContactInfoWidget(imagePath: Assets.svgPhone),
-                  ContactInfoWidget(imagePath: Assets.svgTelegram),
+                  ContactInfoWidget(
+                      onTap: (){
+                        try {
+                          launchUrl(
+                              Uri(
+                                scheme: "https",
+                                path: user.facebook,
+                              ),
+                              mode: LaunchMode.externalApplication);
+                          {
+                            throw 'Could not launch ${user.facebook}';
+                          }
+                        } catch (e) {
+                          print(e);
+                        }
+                      },
+                      imagePath: Assets.svgFacebook),
+                  ContactInfoWidget(
+                      onTap: () {
+                        try {
+                          launchUrl(
+                              Uri(
+                                scheme: "https",
+                                path: user.linkedin,
+                              ),
+                              mode: LaunchMode.externalApplication);
+                          {
+                            throw 'Could not launch ${user.linkedin}';
+                          }
+                        } catch (e) {
+                          print(e);
+                        }
+                      },
+                      imagePath: Assets.svgLinkedin),
+                  ContactInfoWidget(
+                      onTap: () {
+                        openWhatsapp(
+                          context: context,
+                          number: user.mobile,
+                        );
+                      },
+                      imagePath: Assets.svgWhatsapp),
+                  ContactInfoWidget(
+                      onTap: () {
+                        try {
+                          launchUrl(Uri(scheme: "tel", path: user.mobile));
+                          {
+                            throw 'Could not launch ${user.mobile}';
+                          }
+                        } catch (e) {
+                          print(e);
+                        }
+                      },
+                      imagePath: Assets.svgPhone),
+                  ContactInfoWidget(
+                      onTap: () {
+                        try {
+                          launchUrl(Uri(scheme: "mailto", path: user.email));
+                          {
+                            throw 'Could not launch ${user.email}';
+                          }
+                        } catch (e) {
+                          print(e);
+                        }
+                      },
+                      imagePath: Assets.svgGmail),
                 ],
               ),
             ),
