@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 class AppStrings{
 
   //more
-  static String mySubmission = 'mySubmissions'.tr();
+  static String mySubmissions = 'mySubmissions'.tr();
   static String myJobs = 'myJobs'.tr();
   static String savedJobs = 'savedJobs'.tr();
   static String notifications = 'notifications'.tr();
