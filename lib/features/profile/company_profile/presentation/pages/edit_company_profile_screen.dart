@@ -26,6 +26,8 @@ class EditCompanyProfileScreen extends StatefulWidget {
 }
 
 class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
+  static final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   final GenderEnum _selectedUserGender = GenderEnum.m;
   TextEditingController nameController = TextEditingController();
   TextEditingController aboutController = TextEditingController();
@@ -95,179 +97,191 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
             style: AppFontStyles.boldH2,
           ),
         ),
-        body: ListView(
-          padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
-              screenWidth * 0.04, screenWidth * 0.03),
-          children: [
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: nameController,
-              label: "Name",
-              onlyNumber: false,
-              hintText: 'ESoft',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
-              builder: (countryContext, countryState) {
-                    if(countryState is GetAllCountriesInitial){
-                      return ShimmerLoader(
-                        height: screenHeight * 0.05,
-                        width: screenWidth,
-                      );
-                    }
-                    if(countryState is GetCountriesDoneState){
-                      return
-                        CountryCityDropDown(
-                          title: '',
-                          countries: countryState.countries,
-                          onCountrySelect: _handleSelectedCountries,
-                          onCitySelect: _handleSelectedCities,
+        body: Form(
+          key: _key,
+          child: ListView(
+            padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
+                screenWidth * 0.04, screenWidth * 0.03),
+            children: [
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: nameController,
+                label: "Name*",
+                onlyNumber: false,
+                hintText: 'ESoft',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Name is required";
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
+                builder: (countryContext, countryState) {
+                      if(countryState is GetAllCountriesInitial){
+                        return ShimmerLoader(
+                          height: screenHeight * 0.05,
+                          width: screenWidth,
                         );
-                    }
-                    else{return const SizedBox.shrink();}
-              },
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: emailController,
-              label: "Email",
-              onlyNumber: false,
-              hintText: 'company@gmail.com',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: linkedinController,
-              label: "LinkedIn",
-              onlyNumber: false,
-              hintText: 'https://www.linkedin.com/company',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: websiteController,
-              label: "Website",
-              onlyNumber: false,
-              hintText: 'https://www.companywebsite.com',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: instagramController,
-              label: "Instagram",
-              onlyNumber: false,
-              hintText: 'https://www.instagram.com/company',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            CustomTextField(
-              action: TextInputAction.done,
-              controller: facebookController,
-              label: "Facebook",
-              onlyNumber: false,
-              hintText: 'https://www.facebook.com/company',
-              textInputType: TextInputType.visiblePassword,
-              passwordBool: false,
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            DescriptionField(
-              action: TextInputAction.done,
-              controller: aboutController,
-              label: "About",
-              onlyNumber: false,
-              hintText: 'Describe your company with a few words',
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            DescriptionField(
-              action: TextInputAction.done,
-              controller: visionController,
-              label: "Vision",
-              onlyNumber: false,
-              hintText: 'Describe your company goals',
-            ),
-            SizedBox(
-              height: heightBetweenFields,
-            ),
-            DescriptionField(
-              action: TextInputAction.done,
-              controller: missionController,
-              label: "Mission",
-              onlyNumber: false,
-              hintText: 'Describe your company methods',
-            ),
-            // BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
-            //     builder: (context, state) {
-            //       if (state is Coun) {
-            //         return ShimmerLoader(
-            //           height: screenHeight * 0.05,
-            //           width: screenWidth * 0.4,
-            //         );
-            //       }
-            //       else if(state is WorkFieldsDoneState){
-            //         return SearchableDropDownWidget(
-            //           items: state.workFields,
-            //           selectedItem: _selectedWorkField,
-            //           onSelect: _handleSelectedWorkField,
-            //           title: 'Work Field',
-            //         );
-            //       }
-            //       else{return const SizedBox();}
-            //     }
-            // ),
-            SizedBox(
-              height: screenHeight * 0.1,
-            ),
-            BlocBuilder<CompanyProfileBloc, CompanyProfileState>(
-              builder: (context, state) {
-                return ElevatedButtonWidget(
-                  title: "Edit",
-                  isLoading: state is CompanyProfileLoading,
-                  onPressed: () {
-                    context.read<CompanyProfileBloc>().add(
-                        UpdateCompanyProfileEvent(
-                            fullName: nameController.text,
-                            websiteLink: websiteController.text,
-                            instagram: instagramController.text,
-                            facebook: facebookController.text,
-                            linkedin: linkedinController.text,
-                            email: emailController.text,
-                            about: aboutController.text,
-                            vision: visionController.text,
-                            mission: missionController.text));
-                  },
-                );
-              },
-            ),
-            SizedBox(
-              height: screenHeight * 0.05,
-            ),
-          ],
+                      }
+                      if(countryState is GetCountriesDoneState){
+                        return
+                          CountryCityDropDown(
+                            title: '',
+                            countries: countryState.countries,
+                            onCountrySelect: _handleSelectedCountries,
+                            onCitySelect: _handleSelectedCities,
+                          );
+                      }
+                      else{return const SizedBox.shrink();}
+                },
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: emailController,
+                label: "Email",
+                onlyNumber: false,
+                hintText: 'company@gmail.com',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: linkedinController,
+                label: "LinkedIn",
+                onlyNumber: false,
+                hintText: 'https://www.linkedin.com/company',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: websiteController,
+                label: "Website",
+                onlyNumber: false,
+                hintText: 'https://www.companywebsite.com',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: instagramController,
+                label: "Instagram",
+                onlyNumber: false,
+                hintText: 'https://www.instagram.com/company',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              CustomTextField(
+                action: TextInputAction.done,
+                controller: facebookController,
+                label: "Facebook",
+                onlyNumber: false,
+                hintText: 'https://www.facebook.com/company',
+                textInputType: TextInputType.visiblePassword,
+                passwordBool: false,
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              DescriptionField(
+                action: TextInputAction.done,
+                controller: aboutController,
+                label: "About",
+                onlyNumber: false,
+                hintText: 'Describe your company with a few words',
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              DescriptionField(
+                action: TextInputAction.done,
+                controller: visionController,
+                label: "Vision",
+                onlyNumber: false,
+                hintText: 'Describe your company goals',
+              ),
+              SizedBox(
+                height: heightBetweenFields,
+              ),
+              DescriptionField(
+                action: TextInputAction.done,
+                controller: missionController,
+                label: "Mission",
+                onlyNumber: false,
+                hintText: 'Describe your company methods',
+              ),
+              // BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
+              //     builder: (context, state) {
+              //       if (state is Coun) {
+              //         return ShimmerLoader(
+              //           height: screenHeight * 0.05,
+              //           width: screenWidth * 0.4,
+              //         );
+              //       }
+              //       else if(state is WorkFieldsDoneState){
+              //         return SearchableDropDownWidget(
+              //           items: state.workFields,
+              //           selectedItem: _selectedWorkField,
+              //           onSelect: _handleSelectedWorkField,
+              //           title: 'Work Field',
+              //         );
+              //       }
+              //       else{return const SizedBox();}
+              //     }
+              // ),
+              SizedBox(
+                height: screenHeight * 0.1,
+              ),
+              BlocBuilder<CompanyProfileBloc, CompanyProfileState>(
+                builder: (context, state) {
+                  return ElevatedButtonWidget(
+                    title: "Edit",
+                    isLoading: state is CompanyProfileLoading,
+                    onPressed: () {
+                      if (!_key.currentState!.validate()) {
+                        return;
+                      }
+                      context.read<CompanyProfileBloc>().add(
+                          UpdateCompanyProfileEvent(
+                              fullName: nameController.text,
+                              websiteLink: websiteController.text,
+                              instagram: instagramController.text,
+                              facebook: facebookController.text,
+                              linkedin: linkedinController.text,
+                              email: emailController.text,
+                              about: aboutController.text,
+                              vision: visionController.text,
+                              mission: missionController.text));
+                    },
+                  );
+                },
+              ),
+              SizedBox(
+                height: screenHeight * 0.05,
+              ),
+            ],
+          ),
         ),
       ),
     );
