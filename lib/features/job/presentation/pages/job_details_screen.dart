@@ -24,11 +24,11 @@ class JobDetailsScreen extends StatefulWidget {
 }
 
 class _JobDetailsScreenState extends State<JobDetailsScreen> {
-  ToggleJobBloc toggleJobBloc = ToggleJobBloc();
-
   @override
   void initState() {
-    toggleJobBloc.add(GetJobStatusEvent(id: widget.jobEntity.id));
+    context
+        .read<ToggleJobBloc>()
+        .add(GetJobStatusEvent(id: widget.jobEntity.id));
     super.initState();
   }
 
@@ -51,46 +51,23 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
         appBar: AppBar(
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
           actions: [
-            IconButton(
-                onPressed: () {
-                  // Navigator.pushNamed(context, AppRoutes.myNotifications);
-                },
-                icon: BlocConsumer<ToggleJobBloc, ToggleJobState>(
-                  listener: (BuildContext context, ToggleJobState state) {
-                    if(state is ToggleJobLoadedState){
-                      print("kjjjjjj");
-                    }
-                  },
-                  builder: (context, state) {
-                    if(state is ToggleJobLoadingState){
-                      return const CircularProgressIndicator();
-                    }
-                    if(state is ToggleJobErrorState){
-                      return const CircularProgressIndicator();
-                    }
-                    if(state is ToggleJobInitial){
-                      return const CircularProgressIndicator();
-                    }
-                    if(state is ToggleJobLoadedState){
-                      return
-                        SvgPicture.asset(
-                          Assets.svgSave,
-                          color: AppColors.kMainColor100,
-                          width: screenWidth * 0.07,
-                          height: screenWidth * 0.07,
-                        );
-                    }
-                    else{
-                   return    SvgPicture.asset(
-                     Assets.svgSave,
-                     color: AppColors.kMainColor100,
-                     width: screenWidth * 0.07,
-                     height: screenWidth * 0.07,
-                   );
-                    }
-
-                  },
-                ))
+            IconButton(onPressed: () {
+              context
+                  .read<ToggleJobBloc>()
+                  .add(ToggleJobApiEvent(id: widget.jobEntity.id));
+            }, icon: BlocBuilder<ToggleJobBloc, ToggleJobState>(
+              builder: (context, state) {
+                if (state is ToggleJobLoadedState) {
+                  return SvgPicture.asset(
+                    Assets.svgSave,
+                    color: AppColors.kMainColor100,
+                    width: screenWidth * 0.07,
+                    height: screenWidth * 0.07,
+                  );
+                }
+                return const CircularProgressIndicator();
+              },
+            ))
           ],
         ),
         body: Padding(
@@ -252,7 +229,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 ],
               ),
               DescriptionItemWidget(description: widget.jobEntity.description),
-              TopApplicantsWidget(jobEntity: widget.jobEntity,),
+              TopApplicantsWidget(
+                jobEntity: widget.jobEntity,
+              ),
               const SizedBox(
                 height: 100,
               ),
@@ -285,8 +264,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   screenWidth * 0.01), // Rounded corners
                             ),
                           ),
-                           TopApplicantsWidget(jobEntity: widget.jobEntity,
-                           ),
+                          TopApplicantsWidget(
+                            jobEntity: widget.jobEntity,
+                          ),
                         ],
                       );
                     }
