@@ -3,8 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dart';
+import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
+import 'package:smart_recruitment_core/utility/theme/app_style.dart';
+import 'package:smart_recruitment_core/utility/theme/color_style.dart';
+import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_all_jobs/get_all_jobs_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/filter_spacing_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/handle_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_type_filter_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
@@ -43,6 +50,14 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
     super.initState();
   }
 
+  void search() {
+    getAllJobsBloc.add(
+      ChangeToLoadingAllJobsEvent(
+        searchFilter: jobFilter,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -66,21 +81,15 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
                   searchDeleteIcon = false;
                   searchController.clear();
                 });
-                getAllJobsBloc.add(
-                  ChangeToLoadingAllJobsEvent(
-                    searchFilter: jobFilter.copyWith(search: null),
-                  ),
-                );
+                jobFilter = jobFilter.copyWith(search: null);
+                search();
               },
               onSend: (value) {
                 setState(() {
                   searchDeleteIcon = true;
                 });
-                getAllJobsBloc.add(
-                  ChangeToLoadingAllJobsEvent(
-                    searchFilter: jobFilter.copyWith(search: value),
-                  ),
-                );
+                jobFilter = jobFilter.copyWith(search: value);
+                search();
               },
               searchController: searchController,
               showSearchDeleteIcon: searchDeleteIcon,
@@ -115,7 +124,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
                       );
                     });
               }
-              if(state is GetAllJobsLoadedState ){
+              if (state is GetAllJobsLoadedState) {
                 return const NoDataWidget();
               }
               if (state is GetAllJobsLoadingState) {
@@ -145,6 +154,117 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
               );
             },
           ),
+        ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // Filter FAB
+            FloatingActionButton(
+              heroTag: "asdasdasd",
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    shape: AppBorders.k10TopBorderRectangle,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                        builder: (BuildContext context,
+                            void Function(void Function()) setState) {
+                          return SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const HandleWidget(),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 18),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      JobTypeFilterWidget(
+                                        onChanged: (value) {
+                                          Navigator.of(context).pop();
+                                          setState(() {
+                                            jobFilter =
+                                                jobFilter.copyWith(type: value);
+                                          });
+                                          search();
+                                        },
+                                        value: jobFilter.type ?? JobTypes.none,
+                                      ),
+                                      const FilterSpacing(),
+                                      // PropertyServiceFilterExploreWidget(
+                                      //   onChanged: (value) {
+                                      //     Navigator.of(context).pop();
+                                      //     setState(() {
+                                      //       propertiesSearchFilter =
+                                      //           propertiesSearchFilter.copyWith(
+                                      //               propertyService: value);
+                                      //     });
+                                      //     search();
+                                      //   },
+                                      //   value: propertiesSearchFilter
+                                      //       .propertyService,
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    });
+              },
+              backgroundColor: AppColors.kMainColor100,
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  Assets.svgSearch,
+                  color: AppColors.kBackGroundColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            // Sort FAB
+            // FloatingActionButton(
+            //   onPressed: () {
+            //     FocusManager.instance.primaryFocus?.unfocus();
+            //     showModalBottomSheet(
+            //         context: context,
+            //         isScrollControlled: true,
+            //         shape: AppBorders.k10TopBorderRectangle,
+            //         builder: (BuildContext context) {
+            //           return StatefulBuilder(
+            //             builder: (BuildContext context,
+            //                 void Function(void Function()) setState) {
+            //               return SortsFilterWidget(
+            //                 value: propertiesSearchFilter.propertySorts,
+            //                 onChanged: (value) {
+            //                   Navigator.of(context).pop();
+            //                   setState(() {
+            //                     propertiesSearchFilter = propertiesSearchFilter
+            //                         .copyWith(propertySorts: value);
+            //                   });
+            //                   search();
+            //                 },
+            //               );
+            //             },
+            //           );
+            //         });
+            //   },
+            //   backgroundColor: AppColors.kMainColor100,
+            //   child: SizedBox(
+            //     child: SvgPicture.asset(
+            //       Assets.svgFilter,
+            //       color: AppColors.kBackGroundColor,
+            //     ),
+            //   ),
+            // ),
+          ],
         ),
       ),
     );
