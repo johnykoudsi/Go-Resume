@@ -24,7 +24,39 @@
   "editProfile": "تعديل الملف الشخصي",
   "noData": "لا يوجد بيانات",
   "position": "المنصب الوظيفي",
-  "isRequired": " مطلوب "
+  "isRequired": " مطلوب ",
+  "welcome": "أهلاً",
+  "enterPhoneNumber": "أدخل رقم هاتفك لتسجيل الدخول",
+  "phoneNumber": "رقم الهاتف",
+  "password": "كلمة المرور",
+  "login": "تسجيل الدخول",
+  "dontHaveAccount": "لا تملك حساب؟",
+  "signup": "انشاء حساب",
+  "enterInformation": "أدخل معلوماتك لانشاء حساب",
+  "fullName": "الاسم الكامل",
+  "repeatPassword": "اعادة كلمة المرور",
+  "doesNotMatch": "غير مطابق",
+  "applicant": "باحث عن عمل",
+  "companyRecruiter": "موظِّف لشركة",
+  "haveAccount": "لديك حساب؟",
+  "verifyNumber": "قم بتأكيد رقمك",
+  "enterFourDigits": "الرجاء ادخال الرمز المكون من 4 أرقام",
+  "verify": "تأكيد",
+  "didNotReceiveCode": "لم تحصل على رمز؟",
+  "resendCode": "اعادة ارسال الرمز"
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

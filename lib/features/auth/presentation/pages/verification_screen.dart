@@ -9,6 +9,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 
+import '../../../../utility/app_strings.dart';
 import '../widgets/count_down_timer_widget.dart';
 import '../widgets/pin_input_widget.dart';
 
@@ -74,8 +75,8 @@ class _CodeVerificationScreenPagePageState
                   shaderCallback: (Rect bounds) {
                     return AppColors.kLinearColor.createShader(bounds);
                   },
-                  child: const Text(
-                    "Verify Your Number",
+                  child:  Text(
+                    AppStrings.verifyNumber,
                     style: AppFontStyles.boldH1,
                   ),
                 ),
@@ -83,8 +84,8 @@ class _CodeVerificationScreenPagePageState
               SizedBox(height: screenHeight * 0.05),
               Column(
                 children: [
-                  const Text(
-                    "Please enter the 4-digit code sent to",
+                   Text(
+                    AppStrings.enterFourDigits,
                     textAlign: TextAlign.center,
                     style: AppFontStyles.mediumH3,
                   ),
@@ -132,7 +133,7 @@ class _CodeVerificationScreenPagePageState
               BlocBuilder<UserBloc, UserState>(
                 builder: (context, state) {
                   return ElevatedButtonWidget(
-                    title: 'Verify'.tr(),
+                    title: AppStrings.verify,
                     isLoading: state is UserLoading,
                     onPressed: controller.text.isEmpty
                         ? null
@@ -155,12 +156,12 @@ class _CodeVerificationScreenPagePageState
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Didn’t receive any code? ",
+                       Text(
+                        "${AppStrings.didNotReceiveCode} ",
                         style: AppFontStyles.mediumH4,
                       ),
                       Text(
-                        "Resend Code",
+                        AppStrings.resendCode,
                         style: AppFontStyles.mediumH4
                             .copyWith(color: AppColors.kMainColor100),
                       ),

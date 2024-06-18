@@ -24,6 +24,26 @@
   "editProfile": "Edit Profile",
   "noData": "No Data",
   "position": "Position",
-  "isRequired": " is required"
+  "isRequired": " is required",
+  "welcome": "Welcome",
+  "enterPhoneNumber": "Enter your phone number to login",
+  "phoneNumber": "Phone Number",
+  "password": "Password",
+  "enterValidPassword": "Please Enter a Valid Password",
+  "login": "Login",
+  "dontHaveAccount": "Don't have account?",
+  "signup": "Signup",
+  "enterInformation": "Enter your information to signup",
+  "fullName": "Full Name",
+  "repeatPassword": "Repeat Password",
+  "doesNotMatch": "Doesn't match",
+  "applicant": "Applicant",
+  "companyRecruiter": "Company Recruiter",
+  "haveAccount": "Already have account?",
+  "verifyNumber": "Verify Your Number",
+  "enterFourDigits": "Please enter the 4-digit code sent to",
+  "verify": "Verify",
+  "didNotReceiveCode": "Did not receive any code?",
+  "resendCode": "Resend Code"
 
 }

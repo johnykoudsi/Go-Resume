@@ -31,6 +31,31 @@ class AppStrings{
   static String noData = 'noData'.tr();
   static String isRequired = 'isRequired'.tr();
 
+  //login
+  static String login = 'login'.tr();
+  static String welcome = 'welcome'.tr();
+  static String enterPhoneNumber = 'enterPhoneNumber'.tr();
+  static String phoneNumber = 'phoneNumber'.tr();
+  static String password = 'password'.tr();
+  static String enterValidPassword = 'enterValidPassword'.tr();
+  static String dontHaveAccount = 'dontHaveAccount'.tr();
+
+  //signup
+  static String signup = 'signup'.tr();
+  static String enterInformation = 'enterInformation'.tr();
+  static String fullName = 'fullName'.tr();
+  static String repeatPassword = 'repeatPassword'.tr();
+  static String doesNotMatch = 'doesNotMatch'.tr();
+  static String applicant = 'applicant'.tr();
+  static String companyRecruiter = 'companyRecruiter'.tr();
+  static String haveAccount = 'haveAccount'.tr();
+
+ //verification
+  static String verifyNumber = 'verifyNumber'.tr();
+  static String enterFourDigits = 'enterFourDigits'.tr();
+  static String verify = 'verify'.tr();
+  static String didNotReceiveCode = 'didNotReceiveCode'.tr();
+  static String resendCode = 'resendCode'.tr();
 
 
 

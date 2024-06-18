@@ -10,6 +10,7 @@ import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_phone_number_widget.dart';
 
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../utility/app_strings.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -64,13 +65,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     shaderCallback: (Rect bounds) {
                       return AppColors.kLinearColor.createShader(bounds);
                     },
-                    child: const Text(
-                      "Welcome",
+                    child:  Text(
+                      AppStrings.welcome,
                       style: AppFontStyles.boldH1,
                     ),
                   ),
-                  const Text(
-                    "Enter your phone number to login",
+                   Text(
+                    AppStrings.enterPhoneNumber,
                     style: AppFontStyles.mediumH6,
                   ),
                   Column(
@@ -82,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       PhoneTextField(
                         phoneNumberController: phoneController,
-                        label: "Phone Number*",
+                        label: "${AppStrings.phoneNumber}*",
                         onPhoneNumberChanged: (PhoneNumber value) {
                           phoneNumberValue = value;
                         },
@@ -93,15 +94,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       CustomTextField(
                         action: TextInputAction.done,
                         controller: passwordController,
-                        label: "Password",
+                        label: "${AppStrings.password}*",
                         onlyNumber: false,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Password is required";
+                            return AppStrings.password+AppStrings.isRequired;
                           }
                           RegExp regex = RegExp(r'^(?=.*?[a-z]).{8,}$');
                           if (!regex.hasMatch(value)) {
-                            return 'Please Enter valid password';
+                            return AppStrings.enterValidPassword;
                           }
                           return null;
                         },
@@ -121,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   BlocBuilder<UserBloc, UserState>(
                     builder: (context, state) {
                       return ElevatedButtonWidget(
-                        title: "Login",
+                        title: AppStrings.login,
                         isLoading: state is UserLoading,
                         onPressed: () async {
                           // final _firebaseMessaging = FirebaseMessaging.instance;
@@ -146,8 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Don't have account?",
+                       Text(
+                        AppStrings.dontHaveAccount,
                         style: AppFontStyles.mediumH5,
                       ),
                       GestureDetector(
@@ -156,7 +157,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context, AppRoutes.signup);
                           },
                           child: Text(
-                            " Signup",
+                            " ${AppStrings.signup}",
                             style: AppFontStyles.mediumH5
                                 .copyWith(color: AppColors.kMainColor100),
                           ))

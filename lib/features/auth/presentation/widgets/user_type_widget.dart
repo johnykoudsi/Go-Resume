@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
+import '../../../../utility/app_strings.dart';
+
 class UserTypeWidget extends StatelessWidget {
   final String? selectedUserType;
   final void Function(String?) onUserTypeSelected;
@@ -20,13 +22,13 @@ class UserTypeWidget extends StatelessWidget {
           groupValue: selectedUserType,
           onChanged: onUserTypeSelected,
         ),
-        const Text('Applicant',style: AppFontStyles.mediumH5,),
+         Text(AppStrings.applicant,style: AppFontStyles.mediumH5,),
         Radio<String>(
           value: 'Company Recruiter',
           groupValue: selectedUserType,
           onChanged: onUserTypeSelected,
         ),
-        const Text('Company Recruiter',style: AppFontStyles.mediumH5,),
+         Text(AppStrings.companyRecruiter,style: AppFontStyles.mediumH5,),
       ],
     );
   }
