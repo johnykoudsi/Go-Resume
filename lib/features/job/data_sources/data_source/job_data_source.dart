@@ -43,6 +43,15 @@ class JobDataSource {
       useUserToken: true,
       url: EndPoints.saveJobToggle(id: toggleJobApiEvent.id),
     );
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isSaved = json.decode(helperResponse.response)["data"]["is_saved"];
+        return isSaved;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
     return helperResponse;
   }
   Future getJobStatus({

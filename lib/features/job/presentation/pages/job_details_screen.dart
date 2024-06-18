@@ -58,12 +58,22 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
             }, icon: BlocBuilder<ToggleJobBloc, ToggleJobState>(
               builder: (context, state) {
                 if (state is ToggleJobLoadedState) {
-                  return SvgPicture.asset(
-                    Assets.svgSave,
-                    color: AppColors.kMainColor100,
-                    width: screenWidth * 0.07,
-                    height: screenWidth * 0.07,
-                  );
+                  if(state.isSaved ==false){
+                    return SvgPicture.asset(
+                      Assets.svgSave,
+                      color: AppColors.kMainColor100,
+                      width: screenWidth * 0.07,
+                      height: screenWidth * 0.07,
+                    );
+                  }if(state.isSaved ==true){
+                    return SvgPicture.asset(
+                      Assets.svgSaveFill,
+                      color: AppColors.kMainColor100,
+                      width: screenWidth * 0.07,
+                      height: screenWidth * 0.07,
+                    );
+                  }
+
                 }
                 return const CircularProgressIndicator();
               },

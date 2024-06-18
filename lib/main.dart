@@ -11,7 +11,9 @@ import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_core/utility/theme/app_style.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'core/router/app_router.dart';
+import 'firebase/firebase_notifications.dart';
 import 'firebase/flutter_notifications.dart';
+import 'firebase_options.dart';
 
 FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
 
@@ -37,9 +39,8 @@ Future<void> main() async{
   const AndroidInitializationSettings('@drawable/app_icon');
   FirebaseMessaging.instance.requestPermission();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await FirebaseNotifications().initNotifications();
+   //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+   //await FirebaseNotifications().initNotifications();
   Bloc.observer = MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       // statusBarColor: AppColors.kSecondColor, // status bar color
