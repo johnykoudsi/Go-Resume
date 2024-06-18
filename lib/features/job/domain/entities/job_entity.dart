@@ -17,6 +17,7 @@ class JobEntity {
   int maxSalary;
   int minSalary;
   String position;
+  String status;
   int experienceYears;
   int workHours;
   String compensation;
@@ -37,6 +38,7 @@ class JobEntity {
     this.maxSalary = 0,
     this.minSalary = 0,
     this.position = "",
+    this.status = "",
     this.experienceYears = 0,
     this.workHours = 0,
     this.compensation = "",
@@ -66,6 +68,7 @@ class JobEntity {
         maxSalary: json["max_salary"] ?? 0,
         minSalary: json["min_salary"] ?? 0,
         position: json["position"] ?? "",
+        status: json["status"] ?? "",
         experienceYears: json["experience_years"] ?? 0,
         workHours: json["work_hours"] ?? 0,
         compensation: json["compensation"] ?? "",
