@@ -13,6 +13,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/handle_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_type_filter_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/sorts_filter_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
@@ -81,7 +82,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
                   searchDeleteIcon = false;
                   searchController.clear();
                 });
-                jobFilter = jobFilter.copyWith(search: null);
+                jobFilter = jobFilter.copyWith(search: '');
                 search();
               },
               onSend: (value) {
@@ -230,40 +231,40 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
               height: 18,
             ),
             // Sort FAB
-            // FloatingActionButton(
-            //   onPressed: () {
-            //     FocusManager.instance.primaryFocus?.unfocus();
-            //     showModalBottomSheet(
-            //         context: context,
-            //         isScrollControlled: true,
-            //         shape: AppBorders.k10TopBorderRectangle,
-            //         builder: (BuildContext context) {
-            //           return StatefulBuilder(
-            //             builder: (BuildContext context,
-            //                 void Function(void Function()) setState) {
-            //               return SortsFilterWidget(
-            //                 value: propertiesSearchFilter.propertySorts,
-            //                 onChanged: (value) {
-            //                   Navigator.of(context).pop();
-            //                   setState(() {
-            //                     propertiesSearchFilter = propertiesSearchFilter
-            //                         .copyWith(propertySorts: value);
-            //                   });
-            //                   search();
-            //                 },
-            //               );
-            //             },
-            //           );
-            //         });
-            //   },
-            //   backgroundColor: AppColors.kMainColor100,
-            //   child: SizedBox(
-            //     child: SvgPicture.asset(
-            //       Assets.svgFilter,
-            //       color: AppColors.kBackGroundColor,
-            //     ),
-            //   ),
-            // ),
+            FloatingActionButton(
+              onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: AppBorders.k10TopBorderRectangle,
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                        builder: (BuildContext context,
+                            void Function(void Function()) setState) {
+                          return SortsFilterWidget(
+                            value: jobFilter.sort??JobSorts.none,
+                            onChanged: (value) {
+                              Navigator.of(context).pop();
+                              setState(() {
+                                jobFilter =
+                                    jobFilter.copyWith(sort: value);
+                              });
+                              search();
+                            },
+                          );
+                        },
+                      );
+                    });
+              },
+              backgroundColor: AppColors.kMainColor100,
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  Assets.svgFilter,
+                  color: AppColors.kBackGroundColor,
+                ),
+              ),
+            ),
           ],
         ),
       ),

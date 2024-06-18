@@ -31,10 +31,11 @@ class CompanyProfileDataSource {
   Future getCompanyStatus({
     required GetCompanyStatusEvent event,
   }) async {
-    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
-      url: EndPoints.getCompanyStatus(id: event.id),
-      useUserToken: true,
-    );
+    HelperResponse helperResponse = HelperResponse(servicesResponse: ServicesResponseStatues.modelError);
+    // await NetworkHelpers.getDeleteDataHelper(
+    //   url: EndPoints.getCompanyStatus(id: event.id),
+    //   useUserToken: true,
+    // );
     return helperResponse;
   }
   Future addPolicyDataSource(AddPolicyEvent addPolicyEvent) async {

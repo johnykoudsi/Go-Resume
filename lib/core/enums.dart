@@ -19,14 +19,23 @@ enum JobTypes{
   task_based,
   out_sourcing
 }
-
+enum JobSorts{
+  none,
+  expected_salary,
+  created_at
+}
+final EnumValues jobSortsUi = EnumValues({
+  "None": JobSorts.none,
+  "Expected salary": JobSorts.expected_salary,
+  "New To Old": JobSorts.created_at,
+});
 final EnumValues jobTypesUi = EnumValues({
   "None": JobTypes.none,
   "Contract": JobTypes.contract,
-  "FullTime": JobTypes.full_time,
-  "PartTime": JobTypes.part_time,
-  "Task Based": JobTypes.task_based,
-  "Out Sourcing": JobTypes.out_sourcing,
+  "Full time": JobTypes.full_time,
+  "Part time": JobTypes.part_time,
+  "Task based": JobTypes.task_based,
+  "Outsourcing": JobTypes.out_sourcing,
 });
 final EnumValues compensationTypesUi = EnumValues({
   "Hourly Pay": Compensation.hourly_pay,

@@ -39,7 +39,7 @@ class AllJobsSearchFilter {
   int? workFieldId;
   // in:contract,full_time,part_time,task_based,out_sourcing
   JobTypes? type;
-  String? sort;
+  JobSorts? sort;
 
   AllJobsSearchFilter copyWith({
     int? page,
@@ -49,7 +49,7 @@ class AllJobsSearchFilter {
     int? workFieldId,
     // in:contract,full_time,part_time,task_based,out_sourcing
     JobTypes? type,
-    String? sort,
+    JobSorts? sort,
   }) =>
       AllJobsSearchFilter(
         page: page ?? this.page,
@@ -70,7 +70,7 @@ class AllJobsSearchFilter {
       "filter[maxSalary]": maxSalary.toString(),
       "filter[work_field_id]": workFieldId.toString(),
       "filter[type]": type != JobTypes.none ? type?.name : null,
-      "sort": sort
+      "sort":  sort != JobSorts.none ? sort?.name : null,
     }..removeWhere(
         (key, value) => value == null || value == "null" || value == "");
     ;

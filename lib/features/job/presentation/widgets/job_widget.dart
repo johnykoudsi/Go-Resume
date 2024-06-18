@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 
@@ -63,13 +64,13 @@ class JobWidget extends StatelessWidget {
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
-                    jobEntity.type.name??"Remote",
+                    jobTypesUi.reverse[jobEntity.type] ?? '',
                     style: AppFontStyles.mediumH5,
                   ),
                 ],
               ),
               Text(
-                jobEntity.type.name ?? "Remote",
+                jobTypesUi.reverse[jobEntity.type] ?? '',
                 style: AppFontStyles.regularH6
                     .copyWith(color: AppColors.kGreyColor),
               ),
