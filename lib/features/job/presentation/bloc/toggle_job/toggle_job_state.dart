@@ -14,18 +14,17 @@ class ToggleJobLoadingState extends ToggleJobState {
 }
 class ToggleJobLoadedState extends ToggleJobState {
   bool isSaved;
-
   ToggleJobLoadedState(
       {
         required this.isSaved});
 
-  ToggleJobLoadedState copyWith({
-    bool? isSaved,
-  }) {
-    return ToggleJobLoadedState(
-      isSaved: isSaved ?? this.isSaved,
-    );
-  }
+  // ToggleJobLoadedState copyWith({
+  //   bool? isSaved,
+  // }) {
+  //   return ToggleJobLoadedState(
+  //     isSaved: isSaved ?? this.isSaved,
+  //   );
+  // }
 
   @override
   List<Object?> get props => [isSaved];

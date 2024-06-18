@@ -49,9 +49,18 @@ class JobDataSource {
     required GetJobStatusEvent event,
   }) async {
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
-      url: EndPoints.getJobStatus(id: event.id),
+      url: EndPoints.isJobSaved(id: event.id),
       useUserToken: true,
     );
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isSaved = json.decode(helperResponse.response)["data"]["is_saved"];
+        return isSaved;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
     return helperResponse;
   }
   Future getBenefits({

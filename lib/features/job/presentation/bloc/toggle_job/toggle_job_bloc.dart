@@ -30,9 +30,10 @@ class ToggleJobBloc extends Bloc<ToggleJobEvent, ToggleJobState> {
         emit(ToggleJobLoadingState());
         dynamic isSavedResponse;
         isSavedResponse = await getJobStatusUseCase.call(event);
-        if (isSavedResponse is bool) {
-          emit(ToggleJobLoadedState(isSaved: isSavedResponse));
-        }else{emit(ToggleJobErrorState(helperResponse: isSavedResponse));}
+       // if (isSavedResponse is int) {
+          bool isSaved = isSavedResponse==0?false:true;
+          emit(ToggleJobLoadedState(isSaved: false));
+      //  }
       });
 
   }
