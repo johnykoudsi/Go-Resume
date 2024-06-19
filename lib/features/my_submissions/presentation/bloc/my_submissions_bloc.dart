@@ -22,7 +22,6 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
       if (currentState is MySubmissionsLoadedState && currentState.hasReachedMax) {
         return;
       }
-
       int getPage() {
         if (currentState is MySubmissionsLoadedState) {
           return currentState.submissions.length ~/ kGetLimit + 1;

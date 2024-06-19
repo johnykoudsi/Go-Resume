@@ -1,8 +1,13 @@
+import 'dart:io';
+import 'dart:math';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
@@ -10,6 +15,7 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_p
 
 import '../../../../../generated/assets.dart';
 import '../../../company_profile/presentation/bloc/toggle_company/toggle_company_bloc.dart';
+import '../../../edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 
 class ProfileImageWidget extends StatefulWidget {
   final int? userId;
@@ -34,6 +40,27 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
     with SingleTickerProviderStateMixin {
   double _size = 0.07;
   late AnimationController _controller;
+  final ImagePicker _picker = ImagePicker();
+  List<File>? _profileImage;
+
+  Future<void> _pickProfileImage() async {
+//     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+//     if(pickedFile==null){return;}
+//     _profileImage?.add(File(pickedFile.path));
+//     final im = File(pickedFile.path);
+// print("kkkkk");
+// print(im.toString());
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: false);
+    setState(() {
+      if (result != null) {
+        _profileImage = result.paths.map((path) => File(path!)).toList();
+      } else {}
+    });
+    context
+        .read<ApplicantProfileBloc>()
+        .add(UpdateApplicantProfileEvent(profileImage: _profileImage));
+  }
 
   @override
   void initState() {
@@ -51,6 +78,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
       });
     });
   }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -165,19 +193,22 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
                   ? Positioned(
                       bottom: 2,
                       right: 0,
-                      child: Container(
-                        width: screenWidth * 0.09,
-                        height: screenWidth * 0.09,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            Assets.svgCamera,
-                            width: screenWidth * 0.06,
-                            height: screenWidth * 0.06,
-                            color: Colors.black,
+                      child: GestureDetector(
+                        onTap: _pickProfileImage,
+                        child: Container(
+                          width: screenWidth * 0.09,
+                          height: screenWidth * 0.09,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: SvgPicture.asset(
+                              Assets.svgCamera,
+                              width: screenWidth * 0.06,
+                              height: screenWidth * 0.06,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),

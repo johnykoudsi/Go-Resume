@@ -15,6 +15,7 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
     this.facebook,
     this.linkedin,
     this.email,
+    this.profileImage,
   });
   DateTime? dob;
   GenderEnum? gender;
@@ -25,22 +26,24 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
   String? facebook;
   String? linkedin;
   String? email;
+  List<File>? profileImage;
 
-  Map<String, dynamic> toJson() {
-    final json = {
-      "dob": dob != null ? DateFormat('yyyy-MM-dd').format(dob!) : null,
-      "gender": gender?.name,
-      "bio": bio,
-      "full_name": fullName,
-      "website_link": websiteLink,
-      "instagram": instagram,
-      "facebook": facebook,
-      "linkedin": linkedin,
-      "email": email,
+  Map<String, String> toMapBody() {
+
+    Map<String, String> map = {
+      "dob": dob != null ? DateFormat('yyyy-MM-dd').format(dob!) : "",
+      "gender": gender?.name ?? "",
+      "bio": bio??"",
+      "full_name": fullName??"",
+      "website_link": websiteLink??"",
+      "instagram": instagram??"",
+      "facebook": facebook??"",
+      "linkedin": linkedin??"",
+      "email": email??"",
     };
-    json.removeWhere(
+    map.removeWhere(
         (key, value) => value == "" || value == null || value == "null");
-    return json;
+    return map;
   }
 
   @override
@@ -53,6 +56,7 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
         instagram,
         facebook,
         linkedin,
-        email
+        email,
+        profileImage
       ];
 }

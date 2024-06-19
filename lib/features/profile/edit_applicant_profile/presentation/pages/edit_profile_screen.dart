@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
@@ -38,6 +42,7 @@ class _EditApplicantProfileScreenState
   TextEditingController websiteController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   DateTime? selectedDate;
+
   @override
   void initState() {
     context.read<GetAllCountriesBloc>().add(GetCountriesEvent());
@@ -56,7 +61,7 @@ class _EditApplicantProfileScreenState
       instagramController.text = userBloc.user.data.instagram;
       linkedinController.text = userBloc.user.data.linkedin;
       websiteController.text = userBloc.user.data.websiteLink;
-      websiteController.text = userBloc.user.data.email;
+      emailController.text = userBloc.user.data.email;
     }
     super.initState();
   }

@@ -123,23 +123,27 @@ class AppRouter {
         //   );
         case AppRoutes.viewApplicantProfile:
           User user = settings.arguments as User;
-          return ApplicantProfileScreen(
-            user: user,
-            visitor: true,
-          );
+          return MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => ApplicantProfileBloc()),
+              ],
+              child: ApplicantProfileScreen(
+                user: user,
+                visitor: true,
+              ));
+
         case AppRoutes.companyProfile:
           User user = settings.arguments as User;
           return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => ToggleCompanyBloc(),
-              ),
-            ],
-            child: CompanyProfileScreen(
-              user: user,
-              visitor: true,
-            )
-          );
+              providers: [
+                BlocProvider(
+                  create: (context) => ToggleCompanyBloc(),
+                ),
+              ],
+              child: CompanyProfileScreen(
+                user: user,
+                visitor: true,
+              ));
 
         case AppRoutes.editApplicantProfile:
           return MultiBlocProvider(

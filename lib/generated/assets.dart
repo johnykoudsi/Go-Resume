@@ -9,6 +9,7 @@ class Assets {
   static const String jsonNoDataWidget = 'assets/json/no_data_widget.json';
   static const String pngGoResumeLogo = 'assets/images/png/go_resume_logo.png';
   static const String pngJobSearch = 'assets/images/png/job_search.png';
+  static const String pngRandomUser = 'assets/images/png/random_user.png';
   static const String svgAdd = 'assets/images/svg/add.svg';
   static const String svgCamera = 'assets/images/svg/camera.svg';
   static const String svgCase = 'assets/images/svg/case.svg';

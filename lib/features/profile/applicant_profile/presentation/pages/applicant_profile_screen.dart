@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/skill.dart';
@@ -16,6 +19,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/applicant_profil
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/widgets/experience_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/widgets/profile_image_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/widgets/skill_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
@@ -39,6 +43,7 @@ class ApplicantProfileScreen extends StatefulWidget {
 
 class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   late User user;
+
   @override
   void initState() {
     user = widget.user;
@@ -61,6 +66,11 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    return BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
+  builder: (context, applicantProfileState) {
+    if(applicantProfileState is ApplicantProfileLoading){
+      return CircularProgressIndicator();
+    }
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
       body: RefreshIndicator(
@@ -86,7 +96,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                   child: ProfileImageWidget(
                     isCompany: user.company !=null?true:false,
                     visitor: widget.visitor,
-                    profileImage: 'assets/images/jpg/profile_image.jpg',
+                    profileImage: user.profileImage,
                     viewsNumber: "0",
                     //userId: user.id,
                   ),
@@ -297,5 +307,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
         ),
       ),
     );
+  },
+);
   }
 }

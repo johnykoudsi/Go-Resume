@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../generated/assets.dart';
+
 class CircularProfileImage extends StatelessWidget {
   final double width;
   final double height;
@@ -15,14 +17,22 @@ class CircularProfileImage extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(
-            color:borderColor, width: screenWidth * 0.005),
-        image:   DecorationImage(
-          image: AssetImage(
-              image),
+        border: Border.all(color: borderColor, width: screenWidth * 0.005),
+      ),
+      child: ClipOval(
+        child: FadeInImage(
+          placeholder: const AssetImage(Assets.pngRandomUser),
+          image: NetworkImage(image),
           fit: BoxFit.cover,
+          imageErrorBuilder: (context, error, stackTrace) {
+            return Image.asset(
+              Assets.pngRandomUser,
+              fit: BoxFit.cover,
+            );
+          },
         ),
       ),
     );
+
   }
 }
