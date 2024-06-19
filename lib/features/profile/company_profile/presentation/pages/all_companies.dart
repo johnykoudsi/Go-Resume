@@ -11,6 +11,7 @@ import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
 import '../../../../../utility/app_strings.dart';
+import '../../../../../utility/global_widgets/no_data_widget.dart';
 
 class AllCompaniesScreen extends StatefulWidget {
   const AllCompaniesScreen({super.key});
@@ -62,6 +63,9 @@ class _AllCompaniesScreenState extends State<AllCompaniesScreen> {
           child: BlocBuilder<GetAllCompanyBloc, GetAllCompanyState>(
             builder: (context, state) {
               if (state is GetAllCompanyLoadedState) {
+                if(state.companyList.isEmpty){
+                  return const NoDataWidget();
+                }
                 return AlignedGridView.count(
                   padding: const EdgeInsets.all(18),
                   crossAxisCount: 2,

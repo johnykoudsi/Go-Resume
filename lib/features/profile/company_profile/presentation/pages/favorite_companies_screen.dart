@@ -7,6 +7,7 @@ import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dar
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/widget/company_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
 import '../../../../../utility/app_strings.dart';
@@ -62,6 +63,9 @@ class _FavoriteCompaniesScreenState extends State<FavoriteCompaniesScreen> {
           child: BlocBuilder<GetFavoriteCompaniesBloc, GetFavoriteCompaniesState>(
             builder: (context, state) {
               if (state is GetFavoriteCompaniesLoadedState) {
+                if(state.companyList.isEmpty){
+                  return const NoDataWidget();
+                }
                 return AlignedGridView.count(
                   padding: const EdgeInsets.all(18),
                   crossAxisCount: 2,
