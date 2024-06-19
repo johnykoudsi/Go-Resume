@@ -88,6 +88,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                     visitor: widget.visitor,
                     profileImage: 'assets/images/jpg/profile_image.jpg',
                     viewsNumber: "0",
+                    //userId: user.id,
                   ),
                 ),
                 widget.visitor

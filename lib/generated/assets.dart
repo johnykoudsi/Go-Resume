@@ -35,6 +35,7 @@ class Assets {
   static const String svgSignOut = 'assets/images/svg/sign_out.svg';
   static const String svgSplashScreenEmployee = 'assets/images/svg/splash_screen_employee.svg';
   static const String svgStar = 'assets/images/svg/star.svg';
+  static const String svgStarFill = 'assets/images/svg/star_fill.svg';
   static const String svgTelegram = 'assets/images/svg/telegram.svg';
   static const String svgUpdate = 'assets/images/svg/update.svg';
   static const String svgWhatsapp = 'assets/images/svg/whatsapp.svg';

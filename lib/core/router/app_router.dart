@@ -22,6 +22,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/applicant_profil
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/company_profile_bloc/company_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_cities/get_all_cities_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/get_all_countries/get_all_countries_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/toggle_company/toggle_company_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/all_companies.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/company_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/edit_company_profile_screen.dart';
@@ -128,10 +129,18 @@ class AppRouter {
           );
         case AppRoutes.companyProfile:
           User user = settings.arguments as User;
-          return CompanyProfileScreen(
-            user: user,
-            visitor: true,
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => ToggleCompanyBloc(),
+              ),
+            ],
+            child: CompanyProfileScreen(
+              user: user,
+              visitor: true,
+            )
           );
+
         case AppRoutes.editApplicantProfile:
           return MultiBlocProvider(
             providers: [

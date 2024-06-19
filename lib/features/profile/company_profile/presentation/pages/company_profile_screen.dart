@@ -9,6 +9,7 @@ import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_item_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/toggle_company/toggle_company_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/home/presentation/widgets/top_jobs_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/back_button_circular.dart';
@@ -68,6 +69,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                     Padding(
                       padding: EdgeInsets.only(top: screenHeight * 0.21),
                       child: ProfileImageWidget(
+                        userId: user.company?.id,
                         isCompany: user.company != null ? true : false,
                         visitor: widget.visitor,
                         profileImage: Assets.jpgCompanyProfile,

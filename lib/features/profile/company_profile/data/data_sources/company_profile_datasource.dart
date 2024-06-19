@@ -26,18 +26,36 @@ class CompanyProfileDataSource {
       useUserToken: true,
       url: EndPoints.favoriteCompanyToggle(id: toggleCompanyApiEvent.id),
     );
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isFavorite = json.decode(helperResponse.response)["data"]["is_favorite"];
+        return isFavorite;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
     return helperResponse;
   }
   Future getCompanyStatus({
     required GetCompanyStatusEvent event,
   }) async {
-    HelperResponse helperResponse = HelperResponse(servicesResponse: ServicesResponseStatues.modelError);
-    // await NetworkHelpers.getDeleteDataHelper(
-    //   url: EndPoints.getCompanyStatus(id: event.id),
-    //   useUserToken: true,
-    // );
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: EndPoints.isCompanyFavorite(id: event.id),
+      useUserToken: true,
+    );
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isFavorite = json.decode(helperResponse.response)["data"]["is_favorite"];
+        return isFavorite;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
     return helperResponse;
   }
+
   Future addPolicyDataSource(AddPolicyEvent addPolicyEvent) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       useUserToken: true,

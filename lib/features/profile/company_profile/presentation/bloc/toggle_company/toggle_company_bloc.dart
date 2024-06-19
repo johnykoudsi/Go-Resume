@@ -23,17 +23,15 @@ class ToggleCompanyBloc extends Bloc<ToggleCompanyEvent, ToggleCompanyState> {
       emit(ToggleCompanyLoadingState());
       dynamic isFavoriteResponse;
       isFavoriteResponse = await toggleCompanyUseCase.call(event);
-      if (isFavoriteResponse is bool) {
-        emit(ToggleCompanyLoadedState(isFavorite: isFavoriteResponse));
-      }else{emit(ToggleCompanyErrorState(helperResponse: isFavoriteResponse));}
+      emit(ToggleCompanyLoadedState(isFavorite: isFavoriteResponse));
+
     });
     on<GetCompanyStatusEvent>((event, emit) async {
       emit(ToggleCompanyLoadingState());
       dynamic isFavoriteResponse;
       isFavoriteResponse = await getCompanyStatusUseCase.call(event);
-      if (isFavoriteResponse is bool) {
-        emit(ToggleCompanyLoadedState(isFavorite: isFavoriteResponse));
-      }else{emit(ToggleCompanyErrorState(helperResponse: isFavoriteResponse));}
+      bool isFavorite = isFavoriteResponse == 0 ? false : true;
+      emit(ToggleCompanyLoadedState(isFavorite: isFavorite));
     });
 
   }
