@@ -43,7 +43,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
   List<File>? _profileImage;
   Future<void> _pickProfileImage() async {
     FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: false);
+        await FilePicker.platform.pickFiles(allowMultiple: false,type: FileType.image);
     setState(() {
       if (result != null) {
         _profileImage = result.paths.map((path) => File(path!)).toList();

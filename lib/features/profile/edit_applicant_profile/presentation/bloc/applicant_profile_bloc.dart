@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -15,10 +14,14 @@ import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_p
 part 'applicant_profile_event.dart';
 part 'applicant_profile_state.dart';
 
-class ApplicantProfileBloc extends Bloc<ApplicantProfileEvent, ApplicantProfileState> {
-  static final ApplicantProfileRepoImpl applicantProfileRepoImpl = ApplicantProfileRepoImpl(ApplicantProfileDataSource(NetworkHelpers()));
-  static final UserRepoImpl userRepoImpl = UserRepoImpl(UserDataSource(NetworkHelpers()));
-  EditApplicantProfileUsecase applicantProfileUsecase = EditApplicantProfileUsecase(applicantProfileRepoImpl);
+class ApplicantProfileBloc
+    extends Bloc<ApplicantProfileEvent, ApplicantProfileState> {
+  static final ApplicantProfileRepoImpl applicantProfileRepoImpl =
+      ApplicantProfileRepoImpl(ApplicantProfileDataSource(NetworkHelpers()));
+  static final UserRepoImpl userRepoImpl =
+      UserRepoImpl(UserDataSource(NetworkHelpers()));
+  EditApplicantProfileUsecase applicantProfileUsecase =
+      EditApplicantProfileUsecase(applicantProfileRepoImpl);
 
   ApplicantProfileBloc() : super(ApplicantProfileInit()) {
     on<ApplicantProfileEvent>((event, emit) {
@@ -27,12 +30,8 @@ class ApplicantProfileBloc extends Bloc<ApplicantProfileEvent, ApplicantProfileS
 
     on<UpdateApplicantProfileEvent>((event, emit) async {
       emit(ApplicantProfileLoading());
-
       final response = await applicantProfileUsecase.call(event);
-
       emit(ApplicantProfileResponseState(helperResponse: response));
-
     });
   }
-
 }

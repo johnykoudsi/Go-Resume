@@ -47,7 +47,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   List<File>? _coverImage;
   Future<void> _pickCoverImage() async {
     FilePickerResult? result =
-    await FilePicker.platform.pickFiles(allowMultiple: false);
+    await FilePicker.platform.pickFiles(allowMultiple: false,type: FileType.image);
     setState(() {
       if (result != null) {
         _coverImage = result.paths.map((path) => File(path!)).toList();
@@ -79,11 +79,23 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
+    return BlocConsumer<ApplicantProfileBloc, ApplicantProfileState>(
+      listener: (context, applicantProfileState){
+        //context.read<UserBloc>().add(RefreshUserEvent());
+          if (applicantProfileState is ApplicantProfileResponseState) {
+            print("jjjjjjjjjjjjj");
+            DialogsWidgetsSnackBar.showSnackBarFromStatus(
+              showServerError: true,
+              context: context,
+              helperResponse: applicantProfileState.helperResponse,
+              popOnSuccess: false,
+            );
+          }
+      },
   builder: (context, applicantProfileState) {
     if(applicantProfileState is ApplicantProfileLoading){
-      context.read<UserBloc>().add(RefreshUserEvent());
-      //return const Center(child: CircularProgressIndicator());
+      //context.read<UserBloc>().add(RefreshUserEvent());
+      return const Center(child: CircularProgressIndicator());
     }
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
