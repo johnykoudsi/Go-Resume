@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/toggle_company/toggle_company_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/favorite_companies_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/all_jobs.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
@@ -31,9 +32,17 @@ class GetSelectedScreenByIndex extends StatelessWidget {
               }
             }
             if (state is UserLoggedState) {
-              return ApplicantProfileScreen(
-                user: state.user.data,
-                visitor: false,
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => ToggleCompanyBloc(),
+                  ),
+
+                ],
+                child:  ApplicantProfileScreen(
+                  user: state.user.data,
+                  visitor: false,
+                ),
               );
             }
             return const SizedBox();

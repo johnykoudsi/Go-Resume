@@ -32,8 +32,7 @@ class ProfileImageWidget extends StatefulWidget {
 
 class _ProfileImageWidgetState extends State<ProfileImageWidget>
     with SingleTickerProviderStateMixin {
-  bool _isAnimating = true;
-  double _size = 0.08;
+  double _size = 0.07;
   late AnimationController _controller;
 
   @override
@@ -43,12 +42,12 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
         .read<ToggleCompanyBloc>()
         .add(GetCompanyStatusEvent(id: widget.userId ?? 0));
     _controller = AnimationController(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     )..repeat(reverse: true);
     _controller.addListener(() {
       setState(() {
-        _size = 0.08 + 0.02 * _controller.value;
+        _size = 0.07 + 0.02 * _controller.value;
       });
     });
   }
@@ -123,7 +122,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
                                 width: 30, height: 30, Assets.svgStarFill);
                           } else {
                             return AnimatedContainer(
-                              duration: Duration(milliseconds: 300),
+                              duration: const Duration(milliseconds: 300),
                               width: screenWidth * _size,
                               height: screenWidth * _size,
                               child: SvgPicture.asset(
