@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -43,7 +44,19 @@ class ApplicantProfileScreen extends StatefulWidget {
 
 class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   late User user;
-
+  List<File>? _coverImage;
+  Future<void> _pickCoverImage() async {
+    FilePickerResult? result =
+    await FilePicker.platform.pickFiles(allowMultiple: false);
+    setState(() {
+      if (result != null) {
+        _coverImage = result.paths.map((path) => File(path!)).toList();
+      } else {}
+    });
+    context
+        .read<ApplicantProfileBloc>()
+        .add(UpdateApplicantProfileEvent(coverImage: _coverImage));
+  }
   @override
   void initState() {
     user = widget.user;
@@ -69,7 +82,8 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
     return BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
   builder: (context, applicantProfileState) {
     if(applicantProfileState is ApplicantProfileLoading){
-      return CircularProgressIndicator();
+      context.read<UserBloc>().add(RefreshUserEvent());
+      //return const Center(child: CircularProgressIndicator());
     }
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
@@ -81,16 +95,23 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
           children: [
             Stack(
               children: [
-                Container(
-                  width: double.infinity,
-                  height: screenHeight * 0.35,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/jpg/cover_image.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+        SizedBox(
+          width: double.infinity,
+          height: screenHeight * 0.35,
+          child: FadeInImage(
+            fadeInDuration: const Duration(milliseconds: 100),
+            fadeOutDuration: const Duration(milliseconds: 100),
+            placeholder: const AssetImage(Assets.jpgCoverImage),
+            image: NetworkImage(user.coverImage),
+            fit: BoxFit.cover,
+            imageErrorBuilder: (context, error, stackTrace) {
+              return Image.asset(
+                Assets.jpgCoverImage,
+                fit: BoxFit.cover,
+              );
+            },
+          ),
+        ),
                 Padding(
                   padding: EdgeInsets.only(top: screenHeight * 0.21),
                   child: ProfileImageWidget(
@@ -101,23 +122,26 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                     //userId: user.id,
                   ),
                 ),
-                widget.visitor
+                !widget.visitor!
                     ? Positioned(
                         bottom: screenHeight * 0.08,
                         right: 4,
-                        child: Container(
-                          width: screenWidth * 0.1,
-                          height: screenWidth * 0.1,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: SvgPicture.asset(
-                              Assets.svgCamera,
-                              width: screenWidth * 0.07,
-                              height: screenWidth * 0.07,
-                              color: Colors.black,
+                        child: GestureDetector(
+                          onTap: _pickCoverImage,
+                          child: Container(
+                            width: screenWidth * 0.1,
+                            height: screenWidth * 0.1,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(
+                                Assets.svgCamera,
+                                width: screenWidth * 0.07,
+                                height: screenWidth * 0.07,
+                                color: Colors.black,
+                              ),
                             ),
                           ),
                         ),

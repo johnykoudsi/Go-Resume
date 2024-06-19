@@ -42,7 +42,6 @@ class GetSelectedScreenByIndex extends StatelessWidget {
                   BlocProvider(
                     create: (context) => ApplicantProfileBloc(),
                   ),
-
                 ],
                 child:  ApplicantProfileScreen(
                   user: state.user.data,

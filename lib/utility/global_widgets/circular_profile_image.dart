@@ -21,6 +21,8 @@ class CircularProfileImage extends StatelessWidget {
       ),
       child: ClipOval(
         child: FadeInImage(
+          fadeInDuration: const Duration(milliseconds: 100),
+          fadeOutDuration: const Duration(milliseconds: 100),
           placeholder: const AssetImage(Assets.pngRandomUser),
           image: NetworkImage(image),
           fit: BoxFit.cover,

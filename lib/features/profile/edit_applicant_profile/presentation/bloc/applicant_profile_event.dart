@@ -16,6 +16,7 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
     this.linkedin,
     this.email,
     this.profileImage,
+    this.coverImage,
   });
   DateTime? dob;
   GenderEnum? gender;
@@ -27,6 +28,7 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
   String? linkedin;
   String? email;
   List<File>? profileImage;
+  List<File>? coverImage;
 
   Map<String, String> toMapBody() {
 
@@ -57,6 +59,7 @@ class UpdateApplicantProfileEvent extends ApplicantProfileEvent {
         facebook,
         linkedin,
         email,
-        profileImage
+        profileImage,
+        coverImage
       ];
 }

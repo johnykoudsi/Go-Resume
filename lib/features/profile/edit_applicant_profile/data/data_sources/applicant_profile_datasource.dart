@@ -8,27 +8,33 @@ class ApplicantProfileDataSource {
   final NetworkHelpers networkHelpers;
 
   Future editApplicantProfileDataSource(UpdateApplicantProfileEvent updateApplicantProfileEvent) async {
-    if(updateApplicantProfileEvent.profileImage == null){
+    if(updateApplicantProfileEvent.profileImage != null ){
+      HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
+          url: EndPoints.updateApplicantProfile,
+          useUserToken: true,
+          body: updateApplicantProfileEvent.toMapBody(),
+          files: updateApplicantProfileEvent.profileImage!,
+          keyName: 'profile_image'
+      );
+      return helperResponse;
+    }
+    else if(updateApplicantProfileEvent.coverImage != null ){
+      HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
+          url: EndPoints.updateApplicantProfile,
+          useUserToken: true,
+          body: updateApplicantProfileEvent.toMapBody(),
+          files: updateApplicantProfileEvent.coverImage!,
+          keyName: 'cover_image'
+      );
+      return helperResponse;
+    }
+    else{
       HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
         useUserToken: true,
         url: EndPoints.updateApplicantProfile,
         body: json.encode(updateApplicantProfileEvent.toMapBody()),
       );
       return helperResponse;
-    }else{
-      print("jjjjjj");
-      print(updateApplicantProfileEvent.profileImage.toString());
-      HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
-        url: EndPoints.updateApplicantProfile,
-        useUserToken: true,
-        body: updateApplicantProfileEvent.toMapBody(),
-        files: updateApplicantProfileEvent.profileImage!,
-        keyName: 'profile_image'
-      );
-      print(helperResponse);
-      return helperResponse;
     }
-
-
   }
 }

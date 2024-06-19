@@ -40,16 +40,8 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
     with SingleTickerProviderStateMixin {
   double _size = 0.07;
   late AnimationController _controller;
-  final ImagePicker _picker = ImagePicker();
   List<File>? _profileImage;
-
   Future<void> _pickProfileImage() async {
-//     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-//     if(pickedFile==null){return;}
-//     _profileImage?.add(File(pickedFile.path));
-//     final im = File(pickedFile.path);
-// print("kkkkk");
-// print(im.toString());
     FilePickerResult? result =
         await FilePicker.platform.pickFiles(allowMultiple: false);
     setState(() {
