@@ -17,13 +17,6 @@ class _MyNotificationState extends State<MyNotification> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-final List<NotificationWidget> notifications =[
-  const NotificationWidget(imagePath: 'assets/images/jpg/profile_image.jpg', notificationTitle: 'Application Update', notificationDetails: "Lorem ipsum dolor sit amet", notificationDate: '22/4/2023',),
-  const NotificationWidget(imagePath: 'assets/images/jpg/profile_image.jpg', notificationTitle: 'Application Update', notificationDetails: "Lorem ipsum dolor sit amet", notificationDate: '22/4/2023',),
-  const NotificationWidget(imagePath: 'assets/images/jpg/profile_image.jpg', notificationTitle: 'Application Update', notificationDetails: "Lorem ipsum dolor sit amet", notificationDate: '22/4/2023',),
-  const NotificationWidget(imagePath: 'assets/images/jpg/profile_image.jpg', notificationTitle: 'Application Update', notificationDetails: "Lorem ipsum dolor sit amet", notificationDate: '22/4/2023',),
-];
-
 
     return Scaffold(
       appBar: AppBar(

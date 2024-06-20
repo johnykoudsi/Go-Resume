@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
+import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/bloc/my_notifications_bloc.dart';
 
 import '../../../../../generated/assets.dart';
@@ -23,6 +24,7 @@ class _NotificationsListState extends State<NotificationsList> {
 
   @override
   void initState() {
+
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
@@ -193,7 +195,7 @@ class NotificationItemWidget extends StatelessWidget {
   NotificationItemWidget(
       {required this.notification, Key? key, required this.index})
       : super(key: key);
-  NotificationModel notification;
+  NotificationEntity notification;
   int index;
 
   @override
@@ -204,7 +206,7 @@ class NotificationItemWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color:
-        (index % 2 == 1) ? AppColors.kBackGroundColor : AppColors.kGreyColor,
+        (index % 2 == 1) ? AppColors.kBackGroundColor : Colors.grey,
       ),
       child: Padding(
         padding: EdgeInsets.only(
@@ -237,11 +239,11 @@ class NotificationItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    notification.notification.head,
-                    style: Theme.of(context).textTheme.headline4,
+                    notification.title,
+                    style: AppFontStyles.boldH3,
                   ),
                   Text(
-                    notification.notification.body,
+                    notification.body??"",
                     style: Theme.of(context).textTheme.headline5,
                   ),
                 ],

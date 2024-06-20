@@ -1,65 +1,159 @@
 // To parse this JSON data, do
 //
-//     final welcomeToMyNotifications = welcomeToMyNotificationsFromJson(jsonString);
+//     final welcomeNotifications = welcomeNotificationsFromJson(jsonString);
 
 import 'dart:convert';
 
+WelcomeNotifications welcomeNotificationsFromJson(String str) => WelcomeNotifications.fromJson(json.decode(str));
 
-WelcomeToMyNotifications welcomeToMyNotificationsFromJson(String str) => WelcomeToMyNotifications.fromJson(json.decode(str));
+String welcomeNotificationsToJson(WelcomeNotifications data) => json.encode(data.toJson());
 
-class WelcomeToMyNotifications {
-  WelcomeToMyNotifications({
-    this.notificationModel = const[]
+class WelcomeNotifications {
+  int currentPage;
+  List<NotificationEntity> data;
+  String firstPageUrl;
+  int from;
+  int lastPage;
+  String lastPageUrl;
+  List<Link> links;
+  dynamic nextPageUrl;
+  String path;
+  int perPage;
+  dynamic prevPageUrl;
+  int to;
+  int total;
+
+  WelcomeNotifications({
+    required this.currentPage,
+    required this.data,
+    required this.firstPageUrl,
+    required this.from,
+    required this.lastPage,
+    required this.lastPageUrl,
+    required this.links,
+    required this.nextPageUrl,
+    required this.path,
+    required this.perPage,
+    required this.prevPageUrl,
+    required this.to,
+    required this.total,
   });
-  List<NotificationModel> notificationModel;
-  factory WelcomeToMyNotifications.fromJson(Map<String, dynamic> json) => WelcomeToMyNotifications(
-      notificationModel: List<NotificationModel>.from(json["data"]["data"].map((x) => NotificationModel.fromJson(x)))
 
+  factory WelcomeNotifications.fromJson(Map<String, dynamic> json) => WelcomeNotifications(
+    currentPage: json["current_page"],
+    data: List<NotificationEntity>.from(json["data"].map((x) => NotificationEntity.fromJson(x))),
+    firstPageUrl: json["first_page_url"],
+    from: json["from"],
+    lastPage: json["last_page"],
+    lastPageUrl: json["last_page_url"],
+    links: List<Link>.from(json["links"].map((x) => Link.fromJson(x))),
+    nextPageUrl: json["next_page_url"],
+    path: json["path"],
+    perPage: json["per_page"],
+    prevPageUrl: json["prev_page_url"],
+    to: json["to"],
+    total: json["total"],
   );
-}
-class NotificationModel {
-  int id;
 
+  Map<String, dynamic> toJson() => {
+    "current_page": currentPage,
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "first_page_url": firstPageUrl,
+    "from": from,
+    "last_page": lastPage,
+    "last_page_url": lastPageUrl,
+    "links": List<dynamic>.from(links.map((x) => x.toJson())),
+    "next_page_url": nextPageUrl,
+    "path": path,
+    "per_page": perPage,
+    "prev_page_url": prevPageUrl,
+    "to": to,
+    "total": total,
+  };
+}
+
+class NotificationEntity {
+  int id;
+  String title;
+  dynamic body;
+  dynamic image;
+  DateTime createdAt;
+  DateTime updatedAt;
+  Pivot pivot;
+
+  NotificationEntity({
+    required this.id,
+    required this.title,
+    required this.body,
+    required this.image,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.pivot,
+  });
+
+  factory NotificationEntity.fromJson(Map<String, dynamic> json) => NotificationEntity(
+    id: json["id"],
+    title: json["title"],
+    body: json["body"],
+    image: json["image"],
+    createdAt: DateTime.parse(json["created_at"]),
+    updatedAt: DateTime.parse(json["updated_at"]),
+    pivot: Pivot.fromJson(json["pivot"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "title": title,
+    "body": body,
+    "image": image,
+    "created_at": createdAt.toIso8601String(),
+    "updated_at": updatedAt.toIso8601String(),
+    "pivot": pivot.toJson(),
+  };
+}
+
+class Pivot {
   int userId;
   int notificationId;
-  UserNotification notification;
 
-  NotificationModel({
-    required this.id,
+  Pivot({
     required this.userId,
     required this.notificationId,
-    required this.notification,
   });
 
-  factory NotificationModel.fromJson(Map<String, dynamic> json) => NotificationModel(
-    id: json["id"],
-    userId: json["user_id"]??-1,
-    notificationId: json["notification_id"]??-1,
-    notification: UserNotification.fromJson(json["notification"]),
+  factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
+    userId: json["user_id"],
+    notificationId: json["notification_id"],
   );
 
+  Map<String, dynamic> toJson() => {
+    "user_id": userId,
+    "notification_id": notificationId,
+  };
 }
 
-class UserNotification {
-  int id;
-  String head;
-  String body;
-  dynamic createdAt;
+class Link {
+  String? url;
+  String label;
+  bool active;
 
-  UserNotification({
-    required this.id,
-    required this.head,
-    required this.body,
-    required this.createdAt,
+  Link({
+    required this.url,
+    required this.label,
+    required this.active,
   });
 
-  factory UserNotification.fromJson(Map<String, dynamic> json) => UserNotification(
-    id: json["id"],
-    head: json["title"]??"",
-    body: json["body"]??"",
-    createdAt: json["created_at"],
+  factory Link.fromJson(Map<String, dynamic> json) => Link(
+    url: json["url"],
+    label: json["label"],
+    active: json["active"],
   );
 
+  Map<String, dynamic> toJson() => {
+    "url": url,
+    "label": label,
+    "active": active,
+  };
 }
 class NotificationsSearchFilter {
   NotificationsSearchFilter({this.page = 1});

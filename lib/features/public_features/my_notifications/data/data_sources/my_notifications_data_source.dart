@@ -22,13 +22,14 @@ class MyNotificationsDataSource {
       ),
       useUserToken: true,
     );
+    print("jjjjjjj");
     print(helperResponse.servicesResponse);
 
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        final data = json.decode(helperResponse.response)["data"];
-        return  List<NotificationModel>.from(data.map((x) => NotificationModel.fromJson(x)));
+        final data = welcomeNotificationsFromJson(helperResponse.response);
+        return  data.data;
       } catch (e) {
         return helperResponse.copyWith(
             servicesResponse: ServicesResponseStatues.modelError);

@@ -38,7 +38,7 @@ class MyNotificationsBloc extends Bloc<MyNotificationsEvent, MyNotificationsStat
 
       getMyNotifications = await myNotificationsUseCase.call(event);
 
-      if (getMyNotifications is List<NotificationModel>) {
+      if (getMyNotifications is List<NotificationEntity>) {
         if (getMyNotifications.isNotEmpty) {
           // copy previous state
           if (currentState is MyNotificationsLoadedState) {

@@ -13,34 +13,32 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'core/router/app_router.dart';
 import 'firebase/firebase_notifications.dart';
 import 'firebase/flutter_notifications.dart';
+import 'firebase/notification.dart';
 import 'firebase_options.dart';
 
-FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
+// FlutterNotificationsClass flutterNotifications = FlutterNotificationsClass();
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print('Handling a background message ${message.messageId}');
-  flutterNotifications.flutterLocalNotificationsPlugin.show(
-      message.data.hashCode,
-      message.data['title'],
-      message.data['body'],
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          FlutterNotificationsClass.channel.id,
-          FlutterNotificationsClass.channel.name,
-          enableVibration: true,
-        ),
-      ));
-}
+// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
+//   print('Handling a background message ${message.messageId}');
+//   flutterNotifications.flutterLocalNotificationsPlugin.show(
+//       message.data.hashCode,
+//       message.data['title'],
+//       message.data['body'],
+//       NotificationDetails(
+//         android: AndroidNotificationDetails(
+//           FlutterNotificationsClass.channel.id,
+//           FlutterNotificationsClass.channel.name,
+//           enableVibration: true,
+//         ),
+//       ));
+// }
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   const AndroidInitializationSettings('@drawable/app_icon');
-  FirebaseMessaging.instance.requestPermission();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-   //await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-   //await FirebaseNotifications().initNotifications();
   Bloc.observer = MyBlocObserver();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       // statusBarColor: AppColors.kSecondColor, // status bar color
@@ -68,15 +66,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final NotificationSetUp _noti = NotificationSetUp();
+
   // This widget is the root of your application.
   @override
   void initState() {
+    _noti.configurePushNotifications(context);
+    _noti.eventListenerCallback(context);
     NetworkHelpers.globalUserBloc = UserBloc();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return BlocProvider.value(
       value: NetworkHelpers.globalUserBloc..add(CheckUserFromLocalStorage()),
       child: MaterialApp(
