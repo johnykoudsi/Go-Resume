@@ -14,6 +14,7 @@ import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_profile_image.dart';
 
 import '../../../../../generated/assets.dart';
+import '../../../company_profile/presentation/bloc/company_profile_bloc/company_profile_bloc.dart';
 import '../../../company_profile/presentation/bloc/toggle_company/toggle_company_bloc.dart';
 import '../../../edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 
@@ -49,9 +50,16 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
         _profileImage = result.paths.map((path) => File(path!)).toList();
       } else {}
     });
-    context
-        .read<ApplicantProfileBloc>()
-        .add(UpdateApplicantProfileEvent(profileImage: _profileImage));
+    if(!widget.isCompany){
+      context
+          .read<ApplicantProfileBloc>()
+          .add(UpdateApplicantProfileEvent(profileImage: _profileImage));
+    }else{
+      context
+          .read<CompanyProfileBloc>()
+          .add(UpdateCompanyProfileEvent(profileImage: _profileImage));
+    }
+
   }
 
   @override

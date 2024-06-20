@@ -9,6 +9,7 @@ import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_item_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/company_profile_bloc/company_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/toggle_company/toggle_company_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/home/presentation/widgets/top_jobs_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
@@ -16,6 +17,7 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/back_butto
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import '../../../../../core/router/app_routes.dart';
+import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../applicant_profile/presentation/widgets/profile_image_widget.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
@@ -43,6 +45,21 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    return BlocConsumer<CompanyProfileBloc, CompanyProfileState>(
+  listener: (context, companyProfileState) {
+    if (companyProfileState is CompanyProfileResponseState) {
+      DialogsWidgetsSnackBar.showSnackBarFromStatus(
+        showServerError: true,
+        context: context,
+        helperResponse: companyProfileState.helperResponse,
+        popOnSuccess: false,
+      );
+    }  },
+  builder: (context, companyProfileState) {
+    if(companyProfileState is CompanyProfileLoading){
+      //context.read<UserBloc>().add(RefreshUserEvent());
+      return const Center(child: CircularProgressIndicator());
+    }
     return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
       body: Stack(
@@ -186,5 +203,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
         ],
       ),
     );
+  },
+);
   }
 }

@@ -119,12 +119,34 @@ class CompanyProfileDataSource {
   }
 
   Future editCompanyProfileDataSource(UpdateCompanyProfileEvent updateCompanyProfileEvent) async {
-    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
-      useUserToken: true,
-      url: EndPoints.updateCompanyProfile,
-      body: json.encode(updateCompanyProfileEvent.toJson()),
-    );
-    return helperResponse;
+    if(updateCompanyProfileEvent.profileImage != null ){
+      HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
+          url: EndPoints.updateCompanyProfile,
+          useUserToken: true,
+          body: updateCompanyProfileEvent.toMapBody(),
+          files: updateCompanyProfileEvent.profileImage!,
+          keyName: 'profile_image'
+      );
+      return helperResponse;
+    }
+    else if(updateCompanyProfileEvent.coverImage != null ){
+      HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
+          url: EndPoints.updateCompanyProfile,
+          useUserToken: true,
+          body: updateCompanyProfileEvent.toMapBody(),
+          files: updateCompanyProfileEvent.coverImage!,
+          keyName: 'cover_image'
+      );
+      return helperResponse;
+    }
+    else{
+      HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+        useUserToken: true,
+        url: EndPoints.updateCompanyProfile,
+        body: json.encode(updateCompanyProfileEvent.toMapBody()),
+      );
+      return helperResponse;
+    }
   }
 
   Future getCountries({

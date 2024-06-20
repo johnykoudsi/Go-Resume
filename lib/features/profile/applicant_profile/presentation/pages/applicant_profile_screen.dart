@@ -83,7 +83,6 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
       listener: (context, applicantProfileState){
         //context.read<UserBloc>().add(RefreshUserEvent());
           if (applicantProfileState is ApplicantProfileResponseState) {
-            print("jjjjjjjjjjjjj");
             DialogsWidgetsSnackBar.showSnackBarFromStatus(
               showServerError: true,
               context: context,

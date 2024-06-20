@@ -7,6 +7,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/be
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/work_fields/work_fields_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/add_job_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/my_jobs_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/company_profile_bloc/company_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/toggle_company/toggle_company_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/company_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/more/presentation/pages/more_screen.dart';
@@ -58,6 +59,8 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
                 providers: [
                   BlocProvider(
                     create: (context) => ToggleCompanyBloc(),
+                  ),     BlocProvider(
+                    create: (context) => CompanyProfileBloc(),
                   ),
                 ],
                 child:  CompanyProfileScreen(

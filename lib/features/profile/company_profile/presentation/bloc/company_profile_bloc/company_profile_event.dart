@@ -14,7 +14,9 @@ class UpdateCompanyProfileEvent extends CompanyProfileEvent {
     this.fullName,
     this.vision,
     this.mission,
-    this.culture
+    this.culture,
+    this.profileImage,
+    this.coverImage
   });
   String? about;
   String? websiteLink;
@@ -26,25 +28,27 @@ class UpdateCompanyProfileEvent extends CompanyProfileEvent {
   String? culture;
   String? vision;
   String? mission;
+  List<File>? profileImage;
+  List<File>? coverImage;
 
-  Map<String, dynamic> toJson() {
-    final json = {
-      "full_name": fullName,
-      "website_link": websiteLink,
-      "instagram": instagram,
-      "facebook": facebook,
-      "linkedin": linkedin,
-      "email": email,
-      "about":about,
-      "culture":culture,
-      "vision":vision,
-      "mission":mission,
+  Map<String, String> toMapBody() {
+
+    Map<String, String> map = {
+      "full_name": fullName??"",
+      "website_link": websiteLink??"",
+      "instagram": instagram??"",
+      "facebook": facebook??"",
+      "linkedin": linkedin??"",
+      "email": email??"",
+      "about":about??"",
+      "culture":culture??"",
+      "vision":vision??"",
+      "mission":mission??"",
     };
-    json.removeWhere(
+    map.removeWhere(
             (key, value) => value == "" || value == null || value == "null");
-    return json;
+    return map;
   }
-
   @override
   List<Object?> get props => [
     fullName,
@@ -56,6 +60,8 @@ class UpdateCompanyProfileEvent extends CompanyProfileEvent {
     about,
     culture,
     vision,
-    mission
+    mission,
+    profileImage,
+    coverImage
   ];
 }
