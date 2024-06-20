@@ -26,4 +26,5 @@ class AppRoutes {
   static const String allCompanyScreen = "/allCompanyScreen";
   static const String savedJobs = "/savedJobs";
   static const String jobApplicants = "/jobApplicants";
+  static const String myJobs = "/my_jobs";
 }

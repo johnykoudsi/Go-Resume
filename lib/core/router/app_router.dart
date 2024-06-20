@@ -15,6 +15,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/ap
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_details_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/my_jobs_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/saved_jobs_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/bloc/my_submissions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/presentation/pages/my_submissions_screen.dart';
@@ -144,7 +145,11 @@ class AppRouter {
                 user: user,
                 visitor: true,
               ));
-
+        case AppRoutes.myJobs:
+          User user = settings.arguments as User;
+          return MyJobsScreen(
+            user: user,
+          );
         case AppRoutes.editApplicantProfile:
           return MultiBlocProvider(
             providers: [

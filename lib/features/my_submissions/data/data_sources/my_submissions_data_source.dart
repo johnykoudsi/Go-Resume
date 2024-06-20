@@ -26,10 +26,7 @@ class MySubmissionsDataSource {
     print(helperResponse.servicesResponse);
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        print("jjjjj");
         final data = json.decode(helperResponse.response)["data"];
-        print("jjjjj");
-        print(data.toString());
         return  List<JobEntity>.from(data.map((x) => JobEntity.fromJson(x)));
       } catch (e) {
         return helperResponse.copyWith(

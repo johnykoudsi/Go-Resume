@@ -1,79 +1,272 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
+import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
+import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dart';
+import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/home/presentation/widgets/carousel_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 import '../../../../../core/router/app_routes.dart';
+import '../../../../core/enums.dart';
 import '../../../../utility/app_strings.dart';
+import '../../../../utility/global_widgets/no_data_widget.dart';
+import '../../../../utility/global_widgets/shimmer.dart';
+import '../bloc/get_all_jobs/get_all_jobs_bloc.dart';
+import '../widgets/filter_spacing_widget.dart';
+import '../widgets/handle_widget.dart';
+import '../widgets/job_type_filter_widget.dart';
+import '../widgets/job_widget.dart';
+import '../widgets/sorts_filter_widget.dart';
 
 
 class MyJobsScreen extends StatefulWidget {
-  const MyJobsScreen({super.key});
-
+  const MyJobsScreen({super.key, required this.user});
+  final User user;
   @override
   State<MyJobsScreen> createState() => _MyJobsScreenState();
 }
 
 class _MyJobsScreenState extends State<MyJobsScreen> {
+
   TextEditingController searchController = TextEditingController();
+  ScrollController scrollController = ScrollController();
+  GetAllJobsBloc getAllJobsBloc = GetAllJobsBloc();
+  bool searchDeleteIcon = false;
+  AllJobsSearchFilter jobFilter = AllJobsSearchFilter();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppStrings.myJobs,
-          style: Theme.of(context)
-              .appBarTheme
-              .titleTextStyle!
-              .copyWith(color: Colors.white),
-        ),
-        centerTitle: false,
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.myNotifications);
-              },
-              icon: SvgPicture.asset(
-                Assets.svgNotification,
-                color: Colors.white,
-              ))
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size(double.infinity, 75),
-          child: SearchTextField(
-            onClear: () {},
-            onSend: (value) {},
-            searchController: searchController,
-            showSearchDeleteIcon: false,
+  void initState() {
+    jobFilter=jobFilter.copyWith(companyId: widget.user.company?.id);
+    getAllJobsBloc.add(ChangeToLoadingAllJobsEvent(searchFilter: jobFilter));
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.offset) {
+        getAllJobsBloc.add(
+          GetAllJobsSearchEvent(
+            searchFilter: jobFilter,
           ),
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(gradient: AppColors.kLinearWideColor),
-        ),
+        );
+      }
+    });    super.initState();
+  }
+  void search() {
+    getAllJobsBloc.add(
+      ChangeToLoadingAllJobsEvent(
+        searchFilter: jobFilter,
       ),
-      body: ListView(
-        children: const [
-          CarouselSliderWidget(),
-          SizedBox(
-            height: 12,
-          ),
-        Padding(
-          padding: EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                  ]),
-              // JobWidget(editable: true,),
-              // JobWidget(editable: true,),
-              // JobWidget(editable: true,),
-            ],
+    );
+  }
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider.value(
+      value: getAllJobsBloc,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(AppStrings.myJobs),
+          centerTitle: false,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.myNotifications);
+                },
+                icon: SvgPicture.asset(Assets.svgNotification))
+          ],
+          bottom: PreferredSize(
+            preferredSize: const Size(double.infinity, 75),
+            child: SearchTextField(
+              onClear: () {
+                setState(() {
+                  searchDeleteIcon = false;
+                  searchController.clear();
+                });
+                jobFilter = jobFilter.copyWith(search: '');
+                search();
+              },
+              onSend: (value) {
+                setState(() {
+                  searchDeleteIcon = true;
+                });
+                jobFilter = jobFilter.copyWith(search: value);
+                search();
+              },
+              searchController: searchController,
+              showSearchDeleteIcon: searchDeleteIcon,
+            ),
           ),
         ),
-        ],
+        body: RefreshIndicator(
+          onRefresh: () async {
+            context.read<GetAllJobsBloc>().add(ChangeToLoadingAllJobsEvent());
+          },
+          child: BlocBuilder<GetAllJobsBloc, GetAllJobsState>(
+            builder: (context, state) {
+              if (state is GetAllJobsLoadedState && state.jobList.isNotEmpty) {
+                return ListView.builder(
+                    padding: const EdgeInsets.all(18),
+                    controller: scrollController,
+                    itemCount: state.hasReachedMax
+                        ? state.jobList.length
+                        : state.jobList.length + 2,
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index >= state.jobList.length) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: SizedBox(
+                            height: 130,
+                            child: ShimmerLoader(),
+                          ),
+                        );
+                      }
+                      return JobWidget(
+                        jobEntity: state.jobList[index],
+                      );
+                    });
+              }
+              if (state is GetAllJobsLoadedState) {
+                return const NoDataWidget();
+              }
+              if (state is GetAllJobsLoadingState) {
+                return ListView.builder(
+                    padding: const EdgeInsets.all(18),
+                    controller: scrollController,
+                    itemCount: 8,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        child: SizedBox(height: 130, child: ShimmerLoader()),
+                      );
+                    });
+              }
+              return SomethingWrongWidget(
+                svgPath: Assets.svgNoInternet,
+                elevatedButtonWidget: ElevatedButtonWidget(
+                  title: "Refresh",
+                  onPressed: () {
+                    context
+                        .read<GetAllJobsBloc>()
+                        .add(ChangeToLoadingAllJobsEvent());
+
+                    //search(userS);
+                  },
+                ),
+              );
+            },
+          ),
+        ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // Filter FAB
+            FloatingActionButton(
+              heroTag: "asdasdasd",
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context,
+                    shape: AppBorders.k10TopBorderRectangle,
+                    isScrollControlled: true,
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                        builder: (BuildContext context,
+                            void Function(void Function()) setState) {
+                          return SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const HandleWidget(),
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.symmetric(vertical: 18),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      JobTypeFilterWidget(
+                                        onChanged: (value) {
+                                          Navigator.of(context).pop();
+                                          setState(() {
+                                            jobFilter =
+                                                jobFilter.copyWith(type: value);
+                                          });
+                                          search();
+                                        },
+                                        value: jobFilter.type ?? JobTypes.none,
+                                      ),
+                                      const FilterSpacing(),
+                                      // PropertyServiceFilterExploreWidget(
+                                      //   onChanged: (value) {
+                                      //     Navigator.of(context).pop();
+                                      //     setState(() {
+                                      //       propertiesSearchFilter =
+                                      //           propertiesSearchFilter.copyWith(
+                                      //               propertyService: value);
+                                      //     });
+                                      //     search();
+                                      //   },
+                                      //   value: propertiesSearchFilter
+                                      //       .propertyService,
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    });
+              },
+              backgroundColor: AppColors.kMainColor100,
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  Assets.svgSearch,
+                  color: AppColors.kBackGroundColor,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 18,
+            ),
+            // Sort FAB
+            FloatingActionButton(
+              onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: AppBorders.k10TopBorderRectangle,
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                        builder: (BuildContext context,
+                            void Function(void Function()) setState) {
+                          return SortsFilterWidget(
+                            value: jobFilter.sort??JobSorts.none,
+                            onChanged: (value) {
+                              Navigator.of(context).pop();
+                              setState(() {
+                                jobFilter =
+                                    jobFilter.copyWith(sort: value);
+                              });
+                              search();
+                            },
+                          );
+                        },
+                      );
+                    });
+              },
+              backgroundColor: AppColors.kMainColor100,
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  Assets.svgFilter,
+                  color: AppColors.kBackGroundColor,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -113,8 +113,6 @@ class JobDataSource {
   Future getAllJobs({required GetAllJobsSearchEvent event}) async {
     String queryString =
         Uri(queryParameters: event.searchFilter.toJson()).query;
-
-    print(queryString);
     String urlWithParams = "${EndPoints.getJobVacancies}?$queryString";
 
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(

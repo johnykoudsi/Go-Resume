@@ -13,6 +13,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/company_profile/
 import 'package:smart_recruitment_flutter_user/features/public_features/more/presentation/pages/more_screen.dart';
 
 import '../../../get_user_features/presentation/pages/pinned_applicants_screen.dart';
+import '../../../job/presentation/pages/company_home_page_screen.dart';
 
 
 class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
@@ -24,7 +25,7 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       if (screenIndex == 0) {
-        return const MyJobsScreen();
+        return const CompanyHomePageScreen();
       }
       if (screenIndex == 1) {
         return  const PinnedApplicantsScreen();

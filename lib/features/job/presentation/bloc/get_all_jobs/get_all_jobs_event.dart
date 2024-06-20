@@ -31,6 +31,7 @@ class AllJobsSearchFilter {
     this.sort,
     this.type,
     this.workFieldId,
+    this.companyId
   });
   int page;
   String? search;
@@ -40,6 +41,7 @@ class AllJobsSearchFilter {
   // in:contract,full_time,part_time,task_based,out_sourcing
   JobTypes? type;
   JobSorts? sort;
+  int? companyId;
 
   AllJobsSearchFilter copyWith({
     int? page,
@@ -50,6 +52,7 @@ class AllJobsSearchFilter {
     // in:contract,full_time,part_time,task_based,out_sourcing
     JobTypes? type,
     JobSorts? sort,
+    int? companyId,
   }) =>
       AllJobsSearchFilter(
         page: page ?? this.page,
@@ -59,6 +62,7 @@ class AllJobsSearchFilter {
         workFieldId: workFieldId ?? this.workFieldId,
         type: type ?? this.type,
         sort: sort ?? this.sort,
+        companyId: companyId ?? this.companyId
       );
 
   Map<String, String?> toJson() {
@@ -71,6 +75,7 @@ class AllJobsSearchFilter {
       "filter[work_field_id]": workFieldId.toString(),
       "filter[type]": type != JobTypes.none ? type?.name : null,
       "sort":  sort != JobSorts.none ? sort?.name : null,
+      "filter[company_id]":  companyId.toString(),
     }..removeWhere(
         (key, value) => value == null || value == "null" || value == "");
     ;
