@@ -69,6 +69,8 @@ class MyNotificationsBloc extends Bloc<MyNotificationsEvent, MyNotificationsStat
             ));
           }
         }
+      }if(getMyNotifications == 0){
+        emit(MyNotificationsLoadedState(hasReachedMax: true,notifications: []));
       }
       else {
         print("Server ${(getMyNotifications as HelperResponse).response}");

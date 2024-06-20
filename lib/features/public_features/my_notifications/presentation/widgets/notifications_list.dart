@@ -6,6 +6,7 @@ import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dar
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/bloc/my_notifications_bloc.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 
 import '../../../../../generated/assets.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
@@ -49,17 +50,9 @@ class _NotificationsListState extends State<NotificationsList> {
     return BlocBuilder<MyNotificationsBloc, MyNotificationsState>(
         builder: (context, state) {
           if (state is MyNotificationsLoadedState) {
+            print(state.notifications.toString());
             if(state.notifications.isEmpty){
-              return SomethingWrongWidget(
-                title: "No notification found !".tr(),
-                svgPath: Assets.svgSearch,
-                elevatedButtonWidget: ElevatedButtonWidget(
-                  title: "Refresh".tr(),
-                  onPressed: () {
-                    search();
-                  },
-                ),
-              );
+              return const NoDataWidget();
             }
             return RefreshIndicator(
               onRefresh: () async{

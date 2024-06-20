@@ -22,14 +22,18 @@ class MyNotificationsDataSource {
       ),
       useUserToken: true,
     );
-    print("jjjjjjj");
     print(helperResponse.servicesResponse);
-
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
+        int total = json.decode(helperResponse.response)["total"];
+        if (total == 0) {
+          return 0;
+        }
+
         final data = welcomeNotificationsFromJson(helperResponse.response);
-        return  data.data;
+
+        return data.data;
       } catch (e) {
         return helperResponse.copyWith(
             servicesResponse: ServicesResponseStatues.modelError);
@@ -37,5 +41,4 @@ class MyNotificationsDataSource {
     }
     return helperResponse;
   }
-
 }
