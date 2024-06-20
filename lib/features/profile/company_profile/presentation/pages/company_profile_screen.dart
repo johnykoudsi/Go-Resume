@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -34,7 +37,19 @@ class CompanyProfileScreen extends StatefulWidget {
 
 class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
   late User user;
-  @override
+  List<File>? _coverImage;
+  Future<void> _pickCoverImage() async {
+    FilePickerResult? result =
+    await FilePicker.platform.pickFiles(allowMultiple: false,type: FileType.image);
+    setState(() {
+      if (result != null) {
+        _coverImage = result.paths.map((path) => File(path!)).toList();
+      } else {}
+    });
+    context
+        .read<CompanyProfileBloc>()
+        .add(UpdateCompanyProfileEvent(coverImage: _coverImage));
+  }
   @override
   void initState() {
     user = widget.user;
@@ -89,7 +104,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                         userId: user.company?.id,
                         isCompany: user.company != null ? true : false,
                         visitor: widget.visitor,
-                        profileImage: Assets.jpgCompanyProfile,
+                        profileImage: user.profileImage,
                         viewsNumber: '55',
                       ),
                     ),
@@ -97,19 +112,22 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                         ? Positioned(
                             bottom: screenHeight * 0.08,
                             right: 4,
-                            child: Container(
-                              width: screenWidth * 0.1,
-                              height: screenWidth * 0.1,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                                shape: BoxShape.circle,
-                              ),
-                              child: Center(
-                                child: SvgPicture.asset(
-                                  Assets.svgCamera,
-                                  width: screenWidth * 0.07,
-                                  height: screenWidth * 0.07,
-                                  color: Colors.black,
+                            child: GestureDetector(
+                              onTap: _pickCoverImage,
+                              child: Container(
+                                width: screenWidth * 0.1,
+                                height: screenWidth * 0.1,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: SvgPicture.asset(
+                                    Assets.svgCamera,
+                                    width: screenWidth * 0.07,
+                                    height: screenWidth * 0.07,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
