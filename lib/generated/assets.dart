@@ -7,7 +7,10 @@ class Assets {
   static const String jpgCompanyProfile = 'assets/images/jpg/company_profile.jpg';
   static const String jpgCoverImage = 'assets/images/jpg/cover_image.jpg';
   static const String jpgProfileImage = 'assets/images/jpg/profile_image.jpg';
+  static const String jsonGreenRobot = 'assets/json/green_robot.json';
+  static const String jsonJobDone = 'assets/json/job_done.json';
   static const String jsonNoDataWidget = 'assets/json/no_data_widget.json';
+  static const String jsonTextGeneration = 'assets/json/text_generation.json';
   static const String pngGoResumeLogo = 'assets/images/png/go_resume_logo.png';
   static const String pngJobSearch = 'assets/images/png/job_search.png';
   static const String pngRandomUser = 'assets/images/png/random_user.png';

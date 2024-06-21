@@ -21,12 +21,12 @@ enum JobTypes{
 }
 enum JobSorts{
   none,
-  expected_salary,
+  min_salary,
   created_at
 }
 final EnumValues jobSortsUi = EnumValues({
   "None": JobSorts.none,
-  "Expected salary": JobSorts.expected_salary,
+  "Salary": JobSorts.min_salary,
   "New To Old": JobSorts.created_at,
 });
 final EnumValues jobTypesUi = EnumValues({

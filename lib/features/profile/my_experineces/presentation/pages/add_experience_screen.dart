@@ -9,25 +9,44 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_generation/experience_generation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/widgets/custom_check_box.dart';
-
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 
 class AddExperienceScreen extends StatefulWidget {
-  const AddExperienceScreen({Key? key}) : super(key: key);
-
+  const AddExperienceScreen({this.arguments, Key? key}) : super(key: key);
+  final DisplayGenerationScreenArguments? arguments;
   @override
   State<AddExperienceScreen> createState() => _AddExperienceScreenState();
 }
 
 class _AddExperienceScreenState extends State<AddExperienceScreen> {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  TextEditingController positionController = TextEditingController();
-  TextEditingController companyController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  late TextEditingController positionController;
+  late TextEditingController companyController;
+  late TextEditingController descriptionController;
   int workFieldId = 0;
   bool _currentlyIn = false;
   DateTime? selectedStartDate;
   DateTime? selectedEndDate;
+
+  @override
+  void initState() {
+    final arg = widget.arguments;
+    if (arg != null) {
+      final event = arg.event as PostExperienceGenerationEvent;
+      positionController =
+          TextEditingController(text: event.specialization);
+      companyController = TextEditingController(text: event.company);
+      descriptionController = TextEditingController(text: arg.generation);
+    } else {
+      positionController = TextEditingController();
+      companyController = TextEditingController();
+      descriptionController = TextEditingController();
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +117,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                 label: "Description",
                 onlyNumber: false,
                 hintText: 'Describe your work with a few words',
+
               ),
               SizedBox(
                 height: heightBetweenFields,

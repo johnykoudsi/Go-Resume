@@ -49,60 +49,62 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
           ),
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
         ),
-        body: widget.experiences.isEmpty?
-             const NoDataWidget()
-            :ListView.builder(
-          itemCount: widget.experiences.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.02),
-              child: BlocBuilder<ExperienceActionsBloc, ExperienceActionsState>(
-                builder: (context, state) {
-                  if (state is ExperienceActionsLoadingState) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: AppShimmerLoader(),
-                    );
-                  }
-                  return CustomCard(
-                    onOperationPressed: () {
-                      DialogsWidgetsYesNo.showYesNoDialog(
-                        title: "Are you sure you want to delete this item.",
-                        noTitle: "No",
-                        yesTitle: "Yes",
-                        isLoading: state is ExperienceActionsLoadingState,
-                        onYesTap: () {
-                          Navigator.of(context).pop();
-                          context
-                              .read<ExperienceActionsBloc>()
-                              .add(DeleteExperienceEvent(
-                                id: widget.experiences[index].id,
-                              ));
-                        },
-                        onNoTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        context: context,
-                      );
-                    },
-                    operation: "Delete",
-                    title: "Experience",
-                    content: ExperienceWidget(
-                      experience: widget.experiences[index],
+        body: widget.experiences.isEmpty
+            ? const NoDataWidget()
+            : ListView.builder(
+                itemCount: widget.experiences.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: EdgeInsets.only(top: screenHeight * 0.02),
+                    child: BlocBuilder<ExperienceActionsBloc,
+                        ExperienceActionsState>(
+                      builder: (context, state) {
+                        if (state is ExperienceActionsLoadingState) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: AppShimmerLoader(),
+                          );
+                        }
+                        return CustomCard(
+                          onOperationPressed: () {
+                            DialogsWidgetsYesNo.showYesNoDialog(
+                              title:
+                                  "Are you sure you want to delete this item.",
+                              noTitle: "No",
+                              yesTitle: "Yes",
+                              isLoading: state is ExperienceActionsLoadingState,
+                              onYesTap: () {
+                                Navigator.of(context).pop();
+                                context
+                                    .read<ExperienceActionsBloc>()
+                                    .add(DeleteExperienceEvent(
+                                      id: widget.experiences[index].id,
+                                    ));
+                              },
+                              onNoTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              context: context,
+                            );
+                          },
+                          operation: "Delete",
+                          title: "Experience",
+                          content: ExperienceWidget(
+                            experience: widget.experiences[index],
+                          ),
+                        );
+                      },
                     ),
                   );
                 },
               ),
-            );
-          },
-        ),
         floatingActionButton: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CustomFloatingButtonWidget(
               icon: const Icon(Icons.auto_fix_high_rounded),
-              onPressed: (){
-
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.experienceAIGeneration);
               },
             ),
             SizedBox(

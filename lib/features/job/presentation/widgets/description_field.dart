@@ -66,7 +66,7 @@ class _DescriptionFieldState extends State<DescriptionField> {
         LayoutBuilder(
           builder: (context, constraints) {
             return SizedBox(
-              height: 100,
+              height: 150,
               child: TextSelectionTheme(
                 data: TextSelectionThemeData(
                   selectionColor: AppColors.fontColor.withOpacity(0.3),

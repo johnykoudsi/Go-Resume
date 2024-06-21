@@ -36,13 +36,14 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_education_and
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/pages/my_education_and_certificates_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/pages/add_experience_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/pages/experience_generation_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/pages/my_experiences_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presentation/pages/my_skills_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/applicant_bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/company_bottom_nav_bar/recruiter_bottom_nav_bar.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/bloc/my_notifications_bloc.dart';
-import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/bloc/my_notifications_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/pages/my_notifications_screen.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 import '../../features/get_user_features/presentation/pages/all_applicants_screen.dart';
 import '../../features/profile/company_profile/presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 import '../../features/profile/company_profile/presentation/pages/add_policy_screen.dart';
@@ -186,13 +187,17 @@ class AppRouter {
             child: const EditCompanyProfileScreen(),
           );
         case AppRoutes.addExperience:
+          DisplayGenerationScreenArguments args =
+              settings.arguments as DisplayGenerationScreenArguments;
           return MultiBlocProvider(
             providers: [
               BlocProvider(
                 create: (context) => ExperienceActionsBloc(),
               ),
             ],
-            child: const AddExperienceScreen(),
+            child: AddExperienceScreen(
+              arguments: args,
+            ),
           );
         case AppRoutes.addEducation:
           return MultiBlocProvider(
@@ -240,20 +245,32 @@ class AppRouter {
                 create: (context) => ToggleCompanyBloc(),
               ),
             ],
-            child:  ApplicantProfileScreen(user: args),
+            child: ApplicantProfileScreen(user: args),
           );
+
+        case AppRoutes.experienceAIGeneration:
+          return const ExperienceGenerationScreen();
+
+        case AppRoutes.displayGenerationScreen:
+          DisplayGenerationScreenArguments args =
+              settings.arguments as DisplayGenerationScreenArguments;
+
+          return DisplayGenerationScreen(
+            arguments: args,
+          );
+
         case AppRoutes.jobApplicants:
           JobEntity args = settings.arguments as JobEntity;
           return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => GetJobApplicantsBloc()  ..add(ChangeToLoadingJobApplicantsEvent(jobId: args.id)),
-              ),
-            ],
-            child:  JobApplicantsScreen(
-              jobEntity: args,
-            )
-          );
+              providers: [
+                BlocProvider(
+                  create: (context) => GetJobApplicantsBloc()
+                    ..add(ChangeToLoadingJobApplicantsEvent(jobId: args.id)),
+                ),
+              ],
+              child: JobApplicantsScreen(
+                jobEntity: args,
+              ));
         default:
           return const Scaffold(
             body: Center(
