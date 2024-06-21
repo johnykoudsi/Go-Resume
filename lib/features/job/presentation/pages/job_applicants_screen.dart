@@ -103,7 +103,8 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
                       );
                     }
                     return JobApplicantsWidget(
-                       user: state.applicantsList[index],
+                      job: widget.jobEntity,
+                       applicant: state.applicantsList[index],
                     );
                   });
             }

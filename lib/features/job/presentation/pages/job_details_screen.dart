@@ -203,7 +203,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   width: 2,
                                 ),
                                 Text(
-                                  "Close",
+                                  "Open",
                                   style: AppFontStyles.boldH7
                                       .copyWith(color: Colors.green),
                                 ),

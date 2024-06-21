@@ -83,23 +83,6 @@ class JobWidget extends StatelessWidget {
                     style: AppFontStyles.regularH6
                         .copyWith(color: AppColors.kGreyColor),
                   ),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.fiber_manual_record,
-                        size: 10,
-                        color: AppColors.kGreenColor,
-                      ),
-                      const SizedBox(
-                        width: 2,
-                      ),
-                      Text(
-                        "Open",
-                        style: AppFontStyles.boldH5
-                            .copyWith(color: AppColors.kGreenColor),
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ],

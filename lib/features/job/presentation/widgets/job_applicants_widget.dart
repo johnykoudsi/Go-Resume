@@ -8,11 +8,13 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_p
 import '../../../../../generated/assets.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
+import '../../domain/entities/job_entity.dart';
 
 class JobApplicantsWidget extends StatelessWidget {
   final bool canReject;
-  User user;
-  JobApplicantsWidget({Key? key, this.canReject = true,required this.user})
+  User applicant;
+  JobEntity? job;
+  JobApplicantsWidget({Key? key, this.canReject = true,required this.applicant, this.job})
       : super(key: key);
 
   @override
@@ -35,12 +37,8 @@ class JobApplicantsWidget extends StatelessWidget {
         ),
         onPressed: () {
           Navigator.pushNamed(context, AppRoutes.applicantProfile, arguments:
-            user
+            applicant
           );
-          // Navigator.push(context ,  MaterialPageRoute(
-          //   builder: (context) =>  ApplicantProfileScreen(visitor: true, user: user,), // or false based on your logic
-          // ),
-          // );
         },
         child: Stack(
           children: [
@@ -59,19 +57,20 @@ class JobApplicantsWidget extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      CircularProfileImage(borderColor: AppColors.kMainColor100, image: Assets.jpgProfileImage,width: screenWidth*0.13,height: screenWidth*0.13,),
+                      CircularProfileImage(borderColor: AppColors.kMainColor100, image: applicant.profileImage,width: screenWidth*0.13,height: screenWidth*0.13,),
                       SizedBox(width: screenWidth*0.02,),
-                      const Text("John Due",style: AppFontStyles.boldH6,),
+                       Text(applicant.fullName,style: AppFontStyles.boldH6,),
                       const Spacer(),
 
                     ],
                   ),
                   SizedBox(height: screenWidth*0.01,),
-                  const Text(
-                    "Software Engineer",
+                   Text(
+                    job?.position??"",
                     style: AppFontStyles.boldH6,
                   ),
                   Text(
+                    //todo change to job.location
                     "Damascus - Syria",
                     style: AppFontStyles.regularH6
                         .copyWith(color: AppColors.kGreyColor),
@@ -80,7 +79,8 @@ class JobApplicantsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        DateFormat.yMd().format(DateTime.now()),
+                      DateFormat.yMd()
+                      .format(job?.startDate ?? DateTime(1970)),
                         style: AppFontStyles.regularH6
                             .copyWith(color: AppColors.kGreyColor),
                       ),

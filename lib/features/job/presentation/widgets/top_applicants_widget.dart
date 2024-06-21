@@ -53,8 +53,9 @@ class TopApplicantsWidget extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 if (applicants != []) {
                   return JobApplicantsWidget(
+                    job: jobEntity,
                     canReject: false,
-                    user: applicants[index],
+                    applicant: applicants[index],
                   );
                 }
               },

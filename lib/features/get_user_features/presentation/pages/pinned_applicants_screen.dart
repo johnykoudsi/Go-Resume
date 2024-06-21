@@ -88,7 +88,7 @@ class _PinnedApplicantsScreenState extends State<PinnedApplicantsScreen> {
                     if (state is GetPinnedApplicantsLoadedState) {
                       return JobApplicantsWidget(
                         canReject: true,
-                        user: state.applicantsList[index],
+                        applicant: state.applicantsList[index],
                       );
                     }
                     if (state is GetPinnedApplicantsLoadedState) {
