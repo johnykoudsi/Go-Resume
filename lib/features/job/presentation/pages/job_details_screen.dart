@@ -344,58 +344,56 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 ],
               ),
               DescriptionItemWidget(description: widget.jobEntity.description),
-              widget.jobEntity.applicants.isEmpty
-                  ? const SizedBox()
-                  : Column(
-                      children: [
-                        SizedBox(
-                          height: screenWidth * 0.1,
-                        ),
-                        Container(
-                          height:
-                              screenWidth * 0.005, // Adjust height as needed
-                          decoration: BoxDecoration(
-                            color: Colors.red, // Divider color
-                            borderRadius: BorderRadius.circular(
-                                screenWidth * 0.01), // Rounded corners
-                          ),
-                        ),
-                        isCompany?
-                        BlocBuilder<GetJobApplicantsBloc,
-                            GetJobApplicantsState>(
-                          builder: (context, state) {
-                            if(state is GetJobApplicantsLoadedState){
-                              if(state.applicantsList.isEmpty){
-                                return const SizedBox();
-                              }else{
-                                return TopApplicantsWidget(
-                                  applicants: state.applicantsList,
-                                  jobEntity: widget.jobEntity,
-                                );
-                              }
-                            }else{
-                             return Padding(
-                               padding: const EdgeInsets.all(18),
-                               child: Column(
-                                 children: [
-                                   Row(
-                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                     children: [
-                                       ShimmerLoader(width: 80,height: 20,),
-                                       ShimmerLoader(width: 80,height: 20,),
-                                     ],
-                                   ),
-                                   const SizedBox(height: 20,),
-                                   ShimmerLoader(width: screenWidth,height: 150,),
-                                 ],
-                               ),
-                             );
-                            }
 
-                          },
-                        ):const SizedBox()
-                      ],
-                    ),
+                   isCompany?
+                   BlocBuilder<GetJobApplicantsBloc,
+                       GetJobApplicantsState>(
+                     builder: (context, state) {
+                       if(state is GetJobApplicantsLoadedState){
+                         if(state.applicantsList.isEmpty){
+                           return const SizedBox();
+                         }else{
+                           return Column(
+                             children: [
+                               SizedBox(
+                                 height: screenWidth * 0.1,
+                               ),
+                               Container(
+                                 height:
+                                 screenWidth * 0.005, // Adjust height as needed
+                                 decoration: BoxDecoration(
+                                   color: Colors.red, // Divider color
+                                   borderRadius: BorderRadius.circular(
+                                       screenWidth * 0.01), // Rounded corners
+                                 ),
+                               ),
+                               TopApplicantsWidget(
+                                 applicants: state.applicantsList,
+                                 jobEntity: widget.jobEntity,
+                               ),
+                             ],
+                           );
+                         }
+                       }else{
+                        return Padding(
+                          padding: const EdgeInsets.all(18),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ShimmerLoader(width: 80,height: 20,),
+                                  ShimmerLoader(width: 80,height: 20,),
+                                ],
+                              ),
+                              const SizedBox(height: 20,),
+                              ShimmerLoader(width: screenWidth,height: 150,),
+                            ],
+                          ),
+                        );
+                       }
+                     },
+                   ):const SizedBox(),
               const SizedBox(
                 height: 100,
               ),

@@ -25,7 +25,6 @@ class JobEntity {
   int workFieldId;
   DateTime? createdAt;
   List<BenefitEntity> benefits;
-  List<User> applicants;
 
   JobEntity({
     this.id = -1,
@@ -46,7 +45,6 @@ class JobEntity {
     this.workFieldId = -1,
     this.createdAt,
     this.benefits = const [],
-    this.applicants = const [],
   });
 
   factory JobEntity.fromJson(Map<String, dynamic> json) => JobEntity(
@@ -80,7 +78,6 @@ class JobEntity {
             ? List<BenefitEntity>.from(
                 json["benefits"].map((x) => BenefitEntity.fromJson(x)))
             : [],
-        applicants:
-            List<User>.from(json["applicants"].map((x) => User.fromJson(x))),
+
       );
 }
