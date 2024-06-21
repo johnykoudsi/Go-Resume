@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String jpgCarousel = 'assets/images/jpg/carousel.jpg';
+  static const String jpgCompany = 'assets/images/jpg/company.jpg';
   static const String jpgCompanyProfile = 'assets/images/jpg/company_profile.jpg';
   static const String jpgCoverImage = 'assets/images/jpg/cover_image.jpg';
   static const String jpgProfileImage = 'assets/images/jpg/profile_image.jpg';

@@ -5,6 +5,8 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 
+import '../../../../../generated/assets.dart';
+
 class CompanyWidget extends StatelessWidget {
   const CompanyWidget({required this.user, super.key});
   final User user;
@@ -36,16 +38,24 @@ class CompanyWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
+            SizedBox(
               width: 70,
               height: 70,
-              decoration: const BoxDecoration(
-                  color: AppColors.kBackGroundColor,
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg/1200px-M%C3%BCnster%2C_LVM%2C_B%C3%BCrogeb%C3%A4ude_--_2013_--_5149-51.jpg"),
-                      fit: BoxFit.cover)),
+              child: ClipOval(
+                child: FadeInImage(
+                  fadeInDuration: const Duration(milliseconds: 100),
+                  fadeOutDuration: const Duration(milliseconds: 100),
+                  placeholder: const AssetImage(Assets.jpgCompany),
+                  image: NetworkImage(user.profileImage),
+                  fit: BoxFit.cover,
+                  imageErrorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      Assets.jpgCompany,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
+              ),
             ),
             Column(
               children: [

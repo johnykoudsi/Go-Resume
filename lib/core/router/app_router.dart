@@ -142,6 +142,9 @@ class AppRouter {
                 BlocProvider(
                   create: (context) => ToggleCompanyBloc(),
                 ),
+                BlocProvider(
+                  create: (context) => CompanyProfileBloc(),
+                ),
               ],
               child: CompanyProfileScreen(
                 user: user,

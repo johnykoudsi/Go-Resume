@@ -44,6 +44,7 @@ class CompanyProfileDataSource {
       url: EndPoints.isCompanyFavorite(id: event.id),
       useUserToken: true,
     );
+
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
         final isFavorite = json.decode(helperResponse.response)["data"]["is_favorite"];
