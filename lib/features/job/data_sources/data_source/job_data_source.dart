@@ -80,8 +80,6 @@ class JobDataSource {
       url: EndPoints.isJobClosed(id: event.id),
       useUserToken: true,
     );
-    print("jjjjj");
-    print(helperResponse.response);
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
         final isClosed = json.decode(helperResponse.response)["data"]["is_closed"];
@@ -202,6 +200,7 @@ class JobDataSource {
       url: urlWithParams,
       useUserToken: true,
     );
+
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {

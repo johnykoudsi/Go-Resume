@@ -6,14 +6,18 @@ import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
+import 'package:smart_recruitment_flutter_user/features/get_user_features/presentation/bloc/get_All_applicants/get_all_applicants_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/top_applicants_widget.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/toggle_button_widget.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../bloc/get_all_jobs/get_all_jobs_bloc.dart';
+import '../bloc/get_job_applicants/get_job_applicants_bloc.dart';
 import '../widgets/description_item_widget.dart';
 
 class JobDetailsScreen extends StatefulWidget {
@@ -26,8 +30,10 @@ class JobDetailsScreen extends StatefulWidget {
 
 class _JobDetailsScreenState extends State<JobDetailsScreen> {
   bool isCompany = false;
+  JobApplicantsSearchFilter applicantsFilter = JobApplicantsSearchFilter();
   @override
   void initState() {
+    applicantsFilter.page = 1;
     final userBloc = context.read<UserBloc>().state;
     if (userBloc is UserLoggedState) {
       isCompany = userBloc.user.data.company != null ? true : false;
@@ -36,6 +42,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
       context
           .read<ToggleJobBloc>()
           .add(GetJobClosedStatusEvent(id: widget.jobEntity.id));
+      context.read<GetJobApplicantsBloc>().add(GetJobApplicantsSearchEvent(
+          jobId: widget.jobEntity.id, searchFilter: applicantsFilter));
     } else {
       context
           .read<ToggleJobBloc>()
@@ -162,9 +170,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   BlocBuilder<ToggleJobBloc, ToggleJobState>(
                     builder: (context, state) {
                       if (isCompany) {
-                        if(state is ToggleJobLoadedState){
-                          if(state.isSaved==true){
-                          return  Row(
+                        if (state is ToggleJobLoadedState) {
+                          if (state.isSaved == true) {
+                            return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Icon(
@@ -175,13 +183,15 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                 const SizedBox(
                                   width: 2,
                                 ),
-                                Text("Close",
-                                  style: AppFontStyles.boldH7.copyWith(color:Colors.red),
+                                Text(
+                                  "Close",
+                                  style: AppFontStyles.boldH7
+                                      .copyWith(color: Colors.red),
                                 ),
                               ],
                             );
-                          }else{
-                          return  Row(
+                          } else {
+                            return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Icon(
@@ -192,13 +202,15 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                 const SizedBox(
                                   width: 2,
                                 ),
-                                Text("Close",
-                                  style: AppFontStyles.boldH7.copyWith(color:Colors.green),
+                                Text(
+                                  "Close",
+                                  style: AppFontStyles.boldH7
+                                      .copyWith(color: Colors.green),
                                 ),
                               ],
                             );
                           }
-                        }else{
+                        } else {
                           return const CircularProgressIndicator();
                         }
                       } else {
@@ -346,8 +358,38 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                 screenWidth * 0.01), // Rounded corners
                           ),
                         ),
-                        TopApplicantsWidget(
-                          jobEntity: widget.jobEntity,
+                        BlocBuilder<GetJobApplicantsBloc,
+                            GetJobApplicantsState>(
+                          builder: (context, state) {
+                            if(state is GetJobApplicantsLoadedState){
+                              if(state.applicantsList.isEmpty){
+                                return const SizedBox();
+                              }else{
+                                return TopApplicantsWidget(
+                                  applicants: state.applicantsList,
+                                  jobEntity: widget.jobEntity,
+                                );
+                              }
+                            }else{
+                             return Padding(
+                               padding: const EdgeInsets.all(18),
+                               child: Column(
+                                 children: [
+                                   Row(
+                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     children: [
+                                       ShimmerLoader(width: 80,height: 20,),
+                                       ShimmerLoader(width: 80,height: 20,),
+                                     ],
+                                   ),
+                                   const SizedBox(height: 20,),
+                                   ShimmerLoader(width: screenWidth,height: 150,),
+                                 ],
+                               ),
+                             );
+                            }
+
+                          },
                         )
                       ],
                     ),

@@ -6,6 +6,7 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_profile_image.dart';
 import '../../../../../generated/assets.dart';
+import '../../../../core/router/app_routes.dart';
 import '../../../profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
 
 class JobApplicantsWidget extends StatelessWidget {
@@ -33,12 +34,13 @@ class JobApplicantsWidget extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          print("kkkkkkkk");
-          print(user.toString());
-          Navigator.push(context ,  MaterialPageRoute(
-            builder: (context) =>  ApplicantProfileScreen(visitor: true, user: user,), // or false based on your logic
-          ),
+          Navigator.pushNamed(context, AppRoutes.applicantProfile, arguments:
+            user
           );
+          // Navigator.push(context ,  MaterialPageRoute(
+          //   builder: (context) =>  ApplicantProfileScreen(visitor: true, user: user,), // or false based on your logic
+          // ),
+          // );
         },
         child: Stack(
           children: [

@@ -12,6 +12,7 @@ import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/
 import 'package:smart_recruitment_flutter_user/features/auth/presentation/pages/verification_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_job_applicants/get_job_applicants_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_details_screen.dart';
@@ -111,6 +112,7 @@ class AppRouter {
               providers: [
                 BlocProvider(create: (context) => ApplyForJobBloc()),
                 BlocProvider(create: (context) => ToggleJobBloc()),
+                BlocProvider(create: (context) => GetJobApplicantsBloc()),
               ],
               child: JobDetailsScreen(
                 jobEntity: args,
@@ -227,10 +229,27 @@ class AppRouter {
           return const AllCompaniesScreen();
         case AppRoutes.savedJobs:
           return const SavedJobsScreen();
+        case AppRoutes.applicantProfile:
+          User args = settings.arguments as User;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => ToggleCompanyBloc(),
+              ),
+            ],
+            child:  ApplicantProfileScreen(user: args),
+          );
         case AppRoutes.jobApplicants:
           JobEntity args = settings.arguments as JobEntity;
-          return JobApplicantsScreen(
-            jobEntity: args,
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => GetJobApplicantsBloc()  ..add(ChangeToLoadingJobApplicantsEvent(jobId: args.id)),
+              ),
+            ],
+            child:  JobApplicantsScreen(
+              jobEntity: args,
+            )
           );
         default:
           return const Scaffold(
