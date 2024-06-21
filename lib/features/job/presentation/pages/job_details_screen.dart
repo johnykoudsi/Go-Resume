@@ -15,6 +15,7 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.da
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/toggle_button_widget.dart';
 
 import '../../../../generated/assets.dart';
+import '../../../../utility/app_strings.dart';
 import '../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../bloc/get_all_jobs/get_all_jobs_bloc.dart';
 import '../bloc/get_job_applicants/get_job_applicants_bloc.dart';
@@ -167,6 +168,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     style: AppFontStyles.mediumH5,
                   ),
                   const Spacer(),
+
                   BlocBuilder<ToggleJobBloc, ToggleJobState>(
                     builder: (context, state) {
                       if (isCompany) {
@@ -321,7 +323,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                   Text(
-                    "Description",
+                    AppStrings.description,
                     style: AppFontStyles.boldH5.copyWith(color: Colors.red),
                   ),
                 ],
@@ -358,6 +360,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                 screenWidth * 0.01), // Rounded corners
                           ),
                         ),
+                        isCompany?
                         BlocBuilder<GetJobApplicantsBloc,
                             GetJobApplicantsState>(
                           builder: (context, state) {
@@ -390,7 +393,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             }
 
                           },
-                        )
+                        ):const SizedBox()
                       ],
                     ),
               const SizedBox(

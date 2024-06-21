@@ -45,6 +45,7 @@
   "verify": "Verify",
   "didNotReceiveCode": "Did not receive any code?",
   "resendCode": "Resend Code",
-  "applicants": "Applicants"
+  "applicants": "Applicants",
+  "description": "Description"
 
 }
