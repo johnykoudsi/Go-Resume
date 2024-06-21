@@ -10,6 +10,7 @@ import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/top_applicants_widget.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/toggle_button_widget.dart';
 
 import '../../../../generated/assets.dart';
 import '../../../../utility/global_widgets/dialog_snack_bar.dart';
@@ -24,11 +25,23 @@ class JobDetailsScreen extends StatefulWidget {
 }
 
 class _JobDetailsScreenState extends State<JobDetailsScreen> {
+  bool isCompany = false;
   @override
   void initState() {
-    context
-        .read<ToggleJobBloc>()
-        .add(GetJobStatusEvent(id: widget.jobEntity.id));
+    final userBloc = context.read<UserBloc>().state;
+    if (userBloc is UserLoggedState) {
+      isCompany = userBloc.user.data.company != null ? true : false;
+    }
+    if (isCompany) {
+      context
+          .read<ToggleJobBloc>()
+          .add(GetJobClosedStatusEvent(id: widget.jobEntity.id));
+    } else {
+      context
+          .read<ToggleJobBloc>()
+          .add(GetJobStatusEvent(id: widget.jobEntity.id));
+    }
+
     super.initState();
   }
 
@@ -51,33 +64,58 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
         appBar: AppBar(
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
           actions: [
-            IconButton(onPressed: () {
-              context
-                  .read<ToggleJobBloc>()
-                  .add(ToggleJobApiEvent(id: widget.jobEntity.id));
-            }, icon: BlocBuilder<ToggleJobBloc, ToggleJobState>(
-              builder: (context, state) {
-                if (state is ToggleJobLoadedState) {
-                  if(state.isSaved ==false){
-                    return SvgPicture.asset(
-                      Assets.svgSave,
-                      color: AppColors.kMainColor100,
-                      width: screenWidth * 0.07,
-                      height: screenWidth * 0.07,
-                    );
-                  }if(state.isSaved ==true){
-                    return SvgPicture.asset(
-                      Assets.svgSaveFill,
-                      color: AppColors.kMainColor100,
-                      width: screenWidth * 0.07,
-                      height: screenWidth * 0.07,
-                    );
-                  }
-
-                }
-                return const CircularProgressIndicator();
-              },
-            ))
+            isCompany
+                ? GestureDetector(onTap: () {
+                    context
+                        .read<ToggleJobBloc>()
+                        .add(ToggleJobStatusApiEvent(id: widget.jobEntity.id));
+                  }, child: BlocBuilder<ToggleJobBloc, ToggleJobState>(
+                    builder: (context, state) {
+                      if (state is ToggleJobLoadedState) {
+                        if (state.isSaved == false) {
+                          return ToggleSliderWidget(
+                            isClosed: false,
+                          );
+                        }
+                        if (state.isSaved == true) {
+                          return ToggleSliderWidget(
+                            isClosed: true,
+                          );
+                        }
+                      }
+                      return const Padding(
+                        padding: EdgeInsets.only(right: 15.0, left: 15.0),
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  ))
+                : IconButton(onPressed: () {
+                    context
+                        .read<ToggleJobBloc>()
+                        .add(ToggleJobApiEvent(id: widget.jobEntity.id));
+                  }, icon: BlocBuilder<ToggleJobBloc, ToggleJobState>(
+                    builder: (context, state) {
+                      if (state is ToggleJobLoadedState) {
+                        if (state.isSaved == false) {
+                          return SvgPicture.asset(
+                            Assets.svgSave,
+                            color: AppColors.kMainColor100,
+                            width: screenWidth * 0.07,
+                            height: screenWidth * 0.07,
+                          );
+                        }
+                        if (state.isSaved == true) {
+                          return SvgPicture.asset(
+                            Assets.svgSaveFill,
+                            color: AppColors.kMainColor100,
+                            width: screenWidth * 0.07,
+                            height: screenWidth * 0.07,
+                          );
+                        }
+                      }
+                      return const CircularProgressIndicator();
+                    },
+                  ))
           ],
         ),
         body: Padding(
@@ -104,6 +142,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                   Text(
+                    //  widget.jobEntity.
                     "Damascus-Syria-Company",
                     style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
                   ),
@@ -120,23 +159,75 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     style: AppFontStyles.mediumH5,
                   ),
                   const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Icon(
-                        Icons.fiber_manual_record,
-                        size: 10,
-                        color: AppColors.kGreenColor,
-                      ),
-                      const SizedBox(
-                        width: 2,
-                      ),
-                      Text(
-                        "Open",
-                        style: AppFontStyles.boldH7
-                            .copyWith(color: AppColors.kGreenColor),
-                      ),
-                    ],
+                  BlocBuilder<ToggleJobBloc, ToggleJobState>(
+                    builder: (context, state) {
+                      if (isCompany) {
+                        if(state is ToggleJobLoadedState){
+                          if(state.isSaved==true){
+                          return  Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Icon(
+                                  Icons.fiber_manual_record,
+                                  size: 10,
+                                  color: Colors.red,
+                                ),
+                                const SizedBox(
+                                  width: 2,
+                                ),
+                                Text("Close",
+                                  style: AppFontStyles.boldH7.copyWith(color:Colors.red),
+                                ),
+                              ],
+                            );
+                          }else{
+                          return  Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Icon(
+                                  Icons.fiber_manual_record,
+                                  size: 10,
+                                  color: Colors.green,
+                                ),
+                                const SizedBox(
+                                  width: 2,
+                                ),
+                                Text("Close",
+                                  style: AppFontStyles.boldH7.copyWith(color:Colors.green),
+                                ),
+                              ],
+                            );
+                          }
+                        }else{
+                          return const CircularProgressIndicator();
+                        }
+                      } else {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.fiber_manual_record,
+                              size: 10,
+                              color: widget.jobEntity.status == 'open'
+                                  ? Colors.green
+                                  : Colors.red,
+                            ),
+                            const SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                              widget.jobEntity.status == 'open'
+                                  ? "Open"
+                                  : "Close",
+                              style: AppFontStyles.boldH7.copyWith(
+                                  color: widget.jobEntity.status == 'open'
+                                      ? Colors.green
+                                      : Colors.red),
+                            ),
+                          ],
+                        );
+                      }
+                    },
                   ),
                 ],
               ),
@@ -239,9 +330,27 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 ],
               ),
               DescriptionItemWidget(description: widget.jobEntity.description),
-              TopApplicantsWidget(
-                jobEntity: widget.jobEntity,
-              ),
+              widget.jobEntity.applicants.isEmpty
+                  ? const SizedBox()
+                  : Column(
+                      children: [
+                        SizedBox(
+                          height: screenWidth * 0.1,
+                        ),
+                        Container(
+                          height:
+                              screenWidth * 0.005, // Adjust height as needed
+                          decoration: BoxDecoration(
+                            color: Colors.red, // Divider color
+                            borderRadius: BorderRadius.circular(
+                                screenWidth * 0.01), // Rounded corners
+                          ),
+                        ),
+                        TopApplicantsWidget(
+                          jobEntity: widget.jobEntity,
+                        )
+                      ],
+                    ),
               const SizedBox(
                 height: 100,
               ),
@@ -260,24 +369,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             },
                           );
                         },
-                      );
-                    }
-                    if (state.user.data.company != null) {
-                      return Column(
-                        children: [
-                          Container(
-                            height:
-                                screenWidth * 0.011, // Adjust height as needed
-                            decoration: BoxDecoration(
-                              color: Colors.red, // Divider color
-                              borderRadius: BorderRadius.circular(
-                                  screenWidth * 0.01), // Rounded corners
-                            ),
-                          ),
-                          TopApplicantsWidget(
-                            jobEntity: widget.jobEntity,
-                          ),
-                        ],
                       );
                     }
                   }

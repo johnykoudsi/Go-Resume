@@ -58,4 +58,15 @@ class JobRepoImpl extends JobRepo {
     return jobDataSource.getJobApplicants(getJobApplicantsSearchEvent);
 
   }
+
+  @override
+  Future toggleJobStatus(ToggleJobStatusApiEvent toggleJobStatusApiEvent) {
+    return jobDataSource.toggleJobStatus(toggleJobStatusApiEvent);
+  }
+
+  @override
+  Future getJobClosedStatus(GetJobClosedStatusEvent getJobClosedStatusEvent) {
+    return jobDataSource.getJobClosedStatus(event: getJobClosedStatusEvent);
+
+  }
 }

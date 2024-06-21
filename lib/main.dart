@@ -67,7 +67,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final NotificationSetUp _noti = NotificationSetUp();
-
+  //final String? token = await FirebaseMessaging.instance.getToken();
   // This widget is the root of your application.
   @override
   void initState() {

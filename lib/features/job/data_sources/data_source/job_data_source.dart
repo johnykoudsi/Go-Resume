@@ -54,6 +54,45 @@ class JobDataSource {
     }
     return helperResponse;
   }
+  Future toggleJobStatus(ToggleJobStatusApiEvent toggleJobStatusApiEvent) async {
+
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      crud: "PUT",
+      useUserToken: true,
+      url: EndPoints.closeJobToggle(id: toggleJobStatusApiEvent.id),
+    );
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isClosed = json.decode(helperResponse.response)["data"]["is_closed"];
+        print(helperResponse.response.toString());
+        return isClosed;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
+    return helperResponse;
+  }
+  Future getJobClosedStatus({
+    required GetJobClosedStatusEvent event,
+  }) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: EndPoints.isJobClosed(id: event.id),
+      useUserToken: true,
+    );
+    print("jjjjj");
+    print(helperResponse.response);
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isClosed = json.decode(helperResponse.response)["data"]["is_closed"];
+        return isClosed;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
+    return helperResponse;
+  }
   Future getJobStatus({
     required GetJobStatusEvent event,
   }) async {

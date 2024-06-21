@@ -48,81 +48,37 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    return BlocProvider.value(
-      value: getJobApplicantsBloc,
-      child: Scaffold(
-        appBar: AppBar(
-          bottom: PreferredSize(
-            preferredSize: const Size(double.infinity, 75),
-            child: SearchTextField(
-              onClear: () {},
-              onSend: (value) {},
-              searchController: searchController,
-              showSearchDeleteIcon: false,
-            ),
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.myNotifications);
-                },
-                icon: SvgPicture.asset(
-                  Assets.svgNotification,
-                ))
-          ],
-          toolbarHeight: screenHeight * 0.15,
-          title:  Text(
-            AppStrings.applicantFor+widget.jobEntity.position
-            ,
-            style: AppFontStyles.boldH2,
-            maxLines: 2,
-          ),
-        ),
-        body: RefreshIndicator(
-          onRefresh: () async {
-            getJobApplicantsBloc.add(ChangeToLoadingJobApplicantsEvent(jobId:widget.jobEntity.id));
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: BlocBuilder<GetJobApplicantsBloc, GetJobApplicantsState>(
-              builder: (context, state) {
-                return ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    if (state is GetJobApplicantsLoadedState) {
-                      return JobApplicantsWidget(
-                        canReject: true,
-                        user: state.applicantsList[index],
-                      );
-                    }
-                    if (state is GetJobApplicantsLoadedState) {
-                      return AlignedGridView.count(
-                        crossAxisCount: 1,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        itemCount: 4,
-                        itemBuilder: (context, index) {
-                          return ShimmerLoader(
-                            height: 170,
-                          );
-                        },
-                      );
-                    } else {
-                      return SomethingWrongWidget(
-                        svgPath: Assets.svgNoInternet,
-                        elevatedButtonWidget: ElevatedButtonWidget(
-                          title: AppStrings.refresh,
-                          onPressed: () {
-                            getJobApplicantsBloc
-                                .add(ChangeToLoadingJobApplicantsEvent(jobId:widget.jobEntity.id));
-                          },
-                        ),
-                      );
-                    }
-                  },
-                );
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.myNotifications);
               },
-            ),
-          ),
+              icon: SvgPicture.asset(
+                Assets.svgNotification,
+              ))
+        ],
+        toolbarHeight: screenHeight * 0.15,
+        title:  Text(
+          AppStrings.applicantFor+widget.jobEntity.position,
+          style: AppFontStyles.boldH2,
+          maxLines: 2,
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: ListView.builder(
+          controller: scrollController,
+          itemCount: widget.jobEntity.applicants.length,
+          itemBuilder: (BuildContext context, int index) {
+            if (widget.jobEntity.applicants != []) {
+              return JobApplicantsWidget(
+                canReject: true,
+                user: widget.jobEntity.applicants[index],
+              );
+            }
+          },
         ),
       ),
     );

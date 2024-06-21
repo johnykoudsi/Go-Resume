@@ -15,6 +15,8 @@ abstract class JobRepo {
   Future getSavedJobs(GetSavedJobsSearchEvent getSavedJobsSearchEvent);
   Future applyForJob(ApplyForJobApiEvent applyForJobApiEvent);
   Future toggleJob(ToggleJobApiEvent toggleJobApiEvent);
+  Future toggleJobStatus(ToggleJobStatusApiEvent toggleJobStatusApiEvent);
   Future getJobStatus(GetJobStatusEvent getJobStatusEvent);
+  Future getJobClosedStatus(GetJobClosedStatusEvent getJobClosedStatusEvent);
   Future getJobApplicants(GetJobApplicantsSearchEvent getJobApplicantsSearchEvent);
 }

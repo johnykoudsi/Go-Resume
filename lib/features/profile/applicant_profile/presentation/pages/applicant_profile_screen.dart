@@ -43,6 +43,8 @@ class ApplicantProfileScreen extends StatefulWidget {
 }
 
 class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
+  ApplicantProfileBloc applicantProfileBloc = ApplicantProfileBloc();
+
   late User user;
   List<File>? _coverImage;
   Future<void> _pickCoverImage() async {
@@ -79,7 +81,9 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return BlocConsumer<ApplicantProfileBloc, ApplicantProfileState>(
+    return BlocProvider.value(
+  value: applicantProfileBloc,
+  child: BlocConsumer<ApplicantProfileBloc, ApplicantProfileState>(
       listener: (context, applicantProfileState){
         //context.read<UserBloc>().add(RefreshUserEvent());
           if (applicantProfileState is ApplicantProfileResponseState) {
@@ -343,6 +347,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
       ),
     );
   },
+),
 );
   }
 }

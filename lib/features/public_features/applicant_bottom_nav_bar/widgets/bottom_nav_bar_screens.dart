@@ -37,10 +37,6 @@ class GetSelectedScreenByIndex extends StatelessWidget {
                 providers: [
                   BlocProvider(
                     create: (context) => ToggleCompanyBloc(),
-
-                  ),
-                  BlocProvider(
-                    create: (context) => ApplicantProfileBloc(),
                   ),
                 ],
                 child:  ApplicantProfileScreen(

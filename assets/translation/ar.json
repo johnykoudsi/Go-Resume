@@ -43,7 +43,9 @@
   "enterFourDigits": "الرجاء ادخال الرمز المكون من 4 أرقام",
   "verify": "تأكيد",
   "didNotReceiveCode": "لم تحصل على رمز؟",
-  "resendCode": "اعادة ارسال الرمز"
+  "resendCode": "اعادة ارسال الرمز",
+  "applicants": "المتقدمون"
+
 
 
 

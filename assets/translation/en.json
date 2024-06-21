@@ -44,6 +44,7 @@
   "enterFourDigits": "Please enter the 4-digit code sent to",
   "verify": "Verify",
   "didNotReceiveCode": "Did not receive any code?",
-  "resendCode": "Resend Code"
+  "resendCode": "Resend Code",
+  "applicants": "Applicants"
 
 }
