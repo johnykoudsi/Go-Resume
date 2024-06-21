@@ -344,7 +344,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 ],
               ),
               DescriptionItemWidget(description: widget.jobEntity.description),
-
                    isCompany?
                    BlocBuilder<GetJobApplicantsBloc,
                        GetJobApplicantsState>(
