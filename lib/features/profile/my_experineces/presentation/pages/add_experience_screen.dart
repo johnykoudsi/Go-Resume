@@ -159,7 +159,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
             ],
           ),
         ),
-        bottomSheet: Padding(
+        bottomNavigationBar: Padding(
           padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
               screenWidth * 0.04, screenWidth * 0.1),
           child: BlocBuilder<ExperienceActionsBloc, ExperienceActionsState>(

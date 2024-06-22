@@ -6,6 +6,7 @@ import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_wi
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget_border.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/experience_generation/education_generation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_generation/experience_generation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
@@ -33,6 +34,9 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
     final event = widget.arguments.event;
     if (event is PostExperienceGenerationEvent) {
       appBar = "Generated Experience";
+    }
+    if (event is PostEducationGenerationEvent) {
+      appBar = "Generated Education";
     }
     super.initState();
   }
@@ -106,12 +110,14 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
                     onPressed: () {
                       Navigator.of(context).pop();
                       final event = widget.arguments.event;
-                      if (event is PostExperienceGenerationEvent) {
-                        Navigator.of(context).pushReplacementNamed(
-                          AppRoutes.addExperience,
-                          arguments: widget.arguments,
-                        );
+                      String route = AppRoutes.addExperience;
+                      if (event is PostEducationGenerationEvent) {
+                        route = AppRoutes.addEducation;
                       }
+                      Navigator.of(context).pushReplacementNamed(
+                        route,
+                        arguments: widget.arguments,
+                      );
                     },
                   ),
                 ),

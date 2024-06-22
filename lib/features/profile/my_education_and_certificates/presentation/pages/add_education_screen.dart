@@ -6,25 +6,45 @@ import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_wi
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/experience_generation/education_generation_bloc.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../bloc/education_actions_bloc.dart';
 
 class AddEducationScreen extends StatefulWidget {
-  const AddEducationScreen({Key? key}) : super(key: key);
-
+  const AddEducationScreen({this.arguments, Key? key}) : super(key: key);
+  final DisplayGenerationScreenArguments? arguments;
   @override
   State<AddEducationScreen> createState() => _AddEducationScreenState();
 }
 
 class _AddEducationScreenState extends State<AddEducationScreen> {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController universityController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-  TextEditingController gradeDateController = TextEditingController();
+  late TextEditingController nameController;
+  late TextEditingController universityController;
+  late TextEditingController descriptionController;
+  late TextEditingController gradeDateController = TextEditingController();
   TextEditingController linkController = TextEditingController();
   DateTime? selectedStartDate;
   DateTime? selectedEndDate;
+
+  @override
+  void initState() {
+    final arg = widget.arguments;
+    if (arg != null) {
+      final event = arg.event as PostEducationGenerationEvent;
+      nameController = TextEditingController(text: event.specialization);
+      universityController = TextEditingController(text: event.school);
+      descriptionController = TextEditingController(text: arg.generation);
+    } else {
+      nameController = TextEditingController();
+      universityController = TextEditingController();
+      descriptionController = TextEditingController();
+    }
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -141,7 +161,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
             ],
           ),
         ),
-        bottomSheet: Padding(
+        bottomNavigationBar: Padding(
           padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
               screenWidth * 0.04, screenWidth * 0.1),
           child: BlocBuilder<EducationActionsBloc, EducationActionsState>(
@@ -152,7 +172,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
                 onPressed: () {
                   if (_key.currentState!.validate() &&
                       selectedStartDate != null &&
-                      selectedEndDate!= null) {
+                      selectedEndDate != null) {
                     FocusScope.of(context).unfocus();
                     context.read<EducationActionsBloc>().add(AddEducationEvent(
                         description: descriptionController.text,

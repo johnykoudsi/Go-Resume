@@ -10,27 +10,27 @@ import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
-import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_generation/experience_generation_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/experience_generation/education_generation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 
-class ExperienceGenerationScreen extends StatefulWidget {
-  const ExperienceGenerationScreen({super.key});
+class EducationGenerationScreen extends StatefulWidget {
+  const EducationGenerationScreen({super.key});
 
   @override
-  State<ExperienceGenerationScreen> createState() =>
-      _ExperienceGenerationScreenState();
+  State<EducationGenerationScreen> createState() =>
+      _EducationGenerationScreenState();
 }
 
-class _ExperienceGenerationScreenState
-    extends State<ExperienceGenerationScreen> {
+class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController specializationTextController = TextEditingController();
-  TextEditingController companyTextController = TextEditingController();
-  TextEditingController numberOfYearsController = TextEditingController();
-  TextEditingController numberOfMonthsController = TextEditingController();
+  TextEditingController schoolTextController = TextEditingController();
   TextEditingController additionalKeyWordsController = TextEditingController();
-  late PostExperienceGenerationEvent postExperienceGeneration;
+  TextEditingController graduationYearsController = TextEditingController();
+  TextEditingController locationTextController = TextEditingController();
+  late PostEducationGenerationEvent postEducationGeneration;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -38,16 +38,16 @@ class _ExperienceGenerationScreenState
     final double heightBetweenFields = screenHeight * 0.015;
 
     return BlocProvider(
-      create: (context) => ExperienceGenerationBloc(),
-      child: BlocListener<ExperienceGenerationBloc, ExperienceGenerationState>(
+      create: (context) => EducationGenerationBloc(),
+      child: BlocListener<EducationGenerationBloc, EducationGenerationState>(
         listener: (context, state) {
-          if (state is ExperienceGenerationDoneState) {
+          if (state is EducationGenerationDoneState) {
             Navigator.of(context).pushNamed(AppRoutes.displayGenerationScreen,
                 arguments: DisplayGenerationScreenArguments(
-                    event: postExperienceGeneration,
+                    event: postEducationGeneration,
                     generation: state.generation));
           }
-          if (state is ExperienceGenerationErrorState) {
+          if (state is EducationGenerationErrorState) {
             DialogsWidgetsSnackBar.showSnackBarFromStatus(
               context: context,
               helperResponse: state.response,
@@ -58,14 +58,13 @@ class _ExperienceGenerationScreenState
         child: Scaffold(
           appBar: AppBar(
             title: const Text(
-              "Generate Experience",
+              "Generate Education",
               style: AppFontStyles.boldH3,
             ),
           ),
-          body:
-              BlocBuilder<ExperienceGenerationBloc, ExperienceGenerationState>(
+          body: BlocBuilder<EducationGenerationBloc, EducationGenerationState>(
             builder: (context, state) {
-              if (state is ExperienceGenerationLoadingState) {
+              if (state is EducationGenerationLoadingState) {
                 return Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +80,7 @@ class _ExperienceGenerationScreenState
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              "Generating experience description",
+                              "Generating Education description",
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
@@ -124,12 +123,12 @@ class _ExperienceGenerationScreenState
                     ),
                     CustomTextField(
                       action: TextInputAction.done,
-                      controller: companyTextController,
-                      label: "Company",
-                      hintText: "company name",
+                      controller: schoolTextController,
+                      label: "University",
+                      hintText: "Damascus university",
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Company is required";
+                          return "University is required";
                         }
                         return null;
                       },
@@ -146,38 +145,34 @@ class _ExperienceGenerationScreenState
                     SizedBox(
                       height: heightBetweenFields,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomTextField(
-                            action: TextInputAction.done,
-                            controller: numberOfYearsController,
-                            textInputType: TextInputType.number,
-                            label: "Experience years",
-                            hintText: "number of years",
-                            onlyNumber: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Experience years is required";
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Expanded(
-                          child: CustomTextField(
-                            action: TextInputAction.done,
-                            controller: numberOfMonthsController,
-                            textInputType: TextInputType.number,
-                            label: "Experience months",
-                            hintText: "number of months",
-                            onlyNumber: true,
-                          ),
-                        ),
-                      ],
+                    CustomTextField(
+                      action: TextInputAction.done,
+                      controller: locationTextController,
+                      label: "Location",
+                      hintText: "damascus - syria",
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "location is required";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: heightBetweenFields,
+                    ),
+                    CustomTextField(
+                      action: TextInputAction.done,
+                      controller: graduationYearsController,
+                      textInputType: TextInputType.number,
+                      label: "Graduation Year",
+                      hintText: "2025",
+                      onlyNumber: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Graduation year is required";
+                        }
+                        return null;
+                      },
                     ),
                   ],
                 ),
@@ -187,13 +182,13 @@ class _ExperienceGenerationScreenState
           bottomNavigationBar: Padding(
             padding: EdgeInsets.fromLTRB(screenWidth * 0.04, screenWidth * 0.06,
                 screenWidth * 0.04, screenWidth * 0.1),
-            child: BlocBuilder<ExperienceGenerationBloc,
-                ExperienceGenerationState>(
+            child:
+                BlocBuilder<EducationGenerationBloc, EducationGenerationState>(
               builder: (context, state) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (state is! ExperienceGenerationLoadingState)
+                    if (state is! EducationGenerationLoadingState)
                       ElevatedButtonWidget(
                         title: "Generate",
                         onPressed: () {
@@ -216,17 +211,19 @@ class _ExperienceGenerationScreenState
 
                           String cleanedSkills =
                               skills.replaceAll(punctuationRegExp, '');
-                          postExperienceGeneration =
-                              PostExperienceGenerationEvent(
-                            company: companyTextController.text,
-                            month: numberOfMonthsController.text,
+
+                          postEducationGeneration =
+                              PostEducationGenerationEvent(
                             specialization: specializationTextController.text,
-                            years: numberOfYearsController.text,
                             skills: cleanedSkills,
+                            school: schoolTextController.text,
+                            graduationYears: graduationYearsController.text,
+                            location: locationTextController.text,
                           );
+
                           context
-                              .read<ExperienceGenerationBloc>()
-                              .add(postExperienceGeneration);
+                              .read<EducationGenerationBloc>()
+                              .add(postEducationGeneration);
                         },
                       ),
                   ],

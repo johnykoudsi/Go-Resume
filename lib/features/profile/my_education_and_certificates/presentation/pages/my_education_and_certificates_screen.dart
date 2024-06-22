@@ -101,8 +101,11 @@ class _MyEducationAndCertificatesScreenState
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const CustomFloatingButtonWidget(
-            icon: Icon(Icons.auto_fix_high_rounded),
+          CustomFloatingButtonWidget(
+            icon: const Icon(Icons.auto_fix_high_rounded),
+            onPressed: (){
+              Navigator.pushNamed(context, AppRoutes.educationAIGeneration);
+            },
           ),
           SizedBox(
             height: screenHeight * 0.015,

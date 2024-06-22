@@ -33,6 +33,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_p
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/pages/edit_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/education_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/pages/add_education_screen.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/pages/education_generation_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/pages/my_education_and_certificates_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/pages/add_experience_screen.dart';
@@ -200,13 +201,17 @@ class AppRouter {
             ),
           );
         case AppRoutes.addEducation:
+          DisplayGenerationScreenArguments args =
+              settings.arguments as DisplayGenerationScreenArguments;
           return MultiBlocProvider(
             providers: [
               BlocProvider(
                 create: (context) => EducationActionsBloc(),
               ),
             ],
-            child: const AddEducationScreen(),
+            child: AddEducationScreen(
+              arguments: args,
+            ),
           );
         // case AppRoutes.benefitsScreen:
         //   List<BenefitEntity> args = settings.arguments as  List<BenefitEntity>;
@@ -250,6 +255,9 @@ class AppRouter {
 
         case AppRoutes.experienceAIGeneration:
           return const ExperienceGenerationScreen();
+
+        case AppRoutes.educationAIGeneration:
+          return const EducationGenerationScreen();
 
         case AppRoutes.displayGenerationScreen:
           DisplayGenerationScreenArguments args =
