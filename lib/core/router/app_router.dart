@@ -188,8 +188,8 @@ class AppRouter {
             child: const EditCompanyProfileScreen(),
           );
         case AppRoutes.addExperience:
-          DisplayGenerationScreenArguments args =
-              settings.arguments as DisplayGenerationScreenArguments;
+          DisplayGenerationScreenArguments? args =
+              settings.arguments as DisplayGenerationScreenArguments?;
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -201,8 +201,8 @@ class AppRouter {
             ),
           );
         case AppRoutes.addEducation:
-          DisplayGenerationScreenArguments args =
-              settings.arguments as DisplayGenerationScreenArguments;
+          DisplayGenerationScreenArguments? args =
+              settings.arguments as DisplayGenerationScreenArguments?;
           return MultiBlocProvider(
             providers: [
               BlocProvider(

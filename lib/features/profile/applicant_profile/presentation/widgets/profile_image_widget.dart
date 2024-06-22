@@ -61,7 +61,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
         ],
       ).then((croppedFile) async {
         if (croppedFile != null) {
-          if (widget.isCompany) {
+          if (!widget.isCompany) {
             context.read<ApplicantProfileBloc>().add(
                 UpdateApplicantProfileEvent(
                     profileImage: [File(croppedFile.path)]));

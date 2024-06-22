@@ -44,7 +44,6 @@ class ApplicantProfileScreen extends StatefulWidget {
 }
 
 class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
-
   late User user;
 
   Future galleryPicker() async {
@@ -110,9 +109,6 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
         }
       },
       builder: (context, applicantProfileState) {
-        if (applicantProfileState is ApplicantProfileLoading) {
-          return const Center(child: CircularProgressIndicator());
-        }
         return Scaffold(
           backgroundColor: AppColors.kBackGroundColor,
           body: RefreshIndicator(
@@ -263,8 +259,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                           children: List.generate(
                             user.applicant?.education?.length ?? 0,
                             (index) {
-                              Education? e =
-                                  user.applicant?.education?[index];
+                              Education? e = user.applicant?.education?[index];
                               return EducationAndCertificatesWidget(
                                 education: e!,
                               );
@@ -332,8 +327,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                       ContactInfoWidget(
                           onTap: () {
                             try {
-                              launchUrl(
-                                  Uri(scheme: "tel", path: user.mobile));
+                              launchUrl(Uri(scheme: "tel", path: user.mobile));
                               {
                                 throw 'Could not launch ${user.mobile}';
                               }
