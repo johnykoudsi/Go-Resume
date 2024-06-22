@@ -24,10 +24,6 @@ class ApplicantProfileBloc
       EditApplicantProfileUsecase(applicantProfileRepoImpl);
 
   ApplicantProfileBloc() : super(ApplicantProfileInit()) {
-    on<ApplicantProfileEvent>((event, emit) {
-      // TODO: implement event handler
-    });
-
     on<UpdateApplicantProfileEvent>((event, emit) async {
       emit(ApplicantProfileLoading());
       final response = await applicantProfileUsecase.call(event);

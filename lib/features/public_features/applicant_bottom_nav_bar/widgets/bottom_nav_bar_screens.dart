@@ -35,11 +35,10 @@ class GetSelectedScreenByIndex extends StatelessWidget {
             if (state is UserLoggedState) {
               return MultiBlocProvider(
                 providers: [
-                  BlocProvider(
-                    create: (context) => ToggleCompanyBloc(),
-                  ),
+                  BlocProvider(create: (context) => ToggleCompanyBloc()),
+                  BlocProvider(create: (context) => ApplicantProfileBloc()),
                 ],
-                child:  ApplicantProfileScreen(
+                child: ApplicantProfileScreen(
                   user: state.user.data,
                   visitor: false,
                 ),

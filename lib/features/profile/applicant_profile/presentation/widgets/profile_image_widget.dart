@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
@@ -37,29 +38,40 @@ class ProfileImageWidget extends StatefulWidget {
   State<ProfileImageWidget> createState() => _ProfileImageWidgetState();
 }
 
-class _ProfileImageWidgetState extends State<ProfileImageWidget>
-    with SingleTickerProviderStateMixin {
-  double _size = 0.07;
-  late AnimationController _controller;
-  List<File>? _profileImage;
-  Future<void> _pickProfileImage() async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: false,type: FileType.image);
-    setState(() {
-      if (result != null) {
-        _profileImage = result.paths.map((path) => File(path!)).toList();
-      } else {}
-    });
-    if(!widget.isCompany){
-      context
-          .read<ApplicantProfileBloc>()
-          .add(UpdateApplicantProfileEvent(profileImage: _profileImage));
-    }else{
-      context
-          .read<CompanyProfileBloc>()
-          .add(UpdateCompanyProfileEvent(profileImage: _profileImage));
-    }
+class _ProfileImageWidgetState extends State<ProfileImageWidget> {
+  final double _size = 0.07;
 
+  Future galleryPicker() async {
+    // cover photo picker compressor
+    final myFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (myFile != null) {
+      ImageCropper().cropImage(
+        sourcePath: myFile.path,
+        compressQuality: 50,
+        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: AppColors.kMainColor100,
+            cropStyle: CropStyle.circle,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: true,
+          ),
+        ],
+      ).then((croppedFile) async {
+        if (croppedFile != null) {
+          if (widget.isCompany) {
+            context.read<ApplicantProfileBloc>().add(
+                UpdateApplicantProfileEvent(
+                    profileImage: [File(croppedFile.path)]));
+          } else {
+            context.read<CompanyProfileBloc>().add(UpdateCompanyProfileEvent(
+                profileImage: [File(croppedFile.path)]));
+          }
+        }
+      });
+    }
   }
 
   @override
@@ -68,21 +80,6 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
     context
         .read<ToggleCompanyBloc>()
         .add(GetCompanyStatusEvent(id: widget.userId ?? 0));
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
-      vsync: this,
-    )..repeat(reverse: true);
-    _controller.addListener(() {
-      setState(() {
-        _size = 0.07 + 0.02 * _controller.value;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 
   @override
@@ -101,13 +98,6 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
                 decoration:
                     const BoxDecoration(gradient: AppColors.kLinearColor),
               ),
-              // bottom: screenHeight * 0.01,
-              // left: screenWidth * 0.02,
-              // right: screenWidth * 0.02,
-
-              //  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //      crossAxisAlignment: CrossAxisAlignment.center,
-
               Positioned(
                 left: 10,
                 top: 15,
@@ -124,48 +114,25 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
                 // bottom: 1,
                 child: GestureDetector(
                   onTap: () {
+                    if (widget.visitor) {
+                      return context
+                          .read<ToggleCompanyBloc>()
+                          .add(ToggleCompanyApiEvent(id: widget.userId ?? 0));
+                    }
                     if (widget.isCompany) {
-                      if (widget.visitor) {
-                        context
-                            .read<ToggleCompanyBloc>()
-                            .add(ToggleCompanyApiEvent(id: widget.userId ?? 0));
-                      } else {
-                        Navigator.pushNamed(
-                            context, AppRoutes.editCompanyProfile);
-                      }
-                    } else {
-                      if (widget.visitor) {
-                        //todo add pin toggle
-                      } else {}
+                      Navigator.pushNamed(
+                          context, AppRoutes.editCompanyProfile);
+                      return;
+                    }
+                    if (!widget.isCompany) {
                       Navigator.pushNamed(
                           context, AppRoutes.editApplicantProfile);
+                      return;
                     }
                   },
                   child: BlocBuilder<ToggleCompanyBloc, ToggleCompanyState>(
                     builder: (context, companyState) {
-                      if (widget.visitor) {
-                        if (companyState is ToggleCompanyLoadedState) {
-                          if (companyState.isFavorite) {
-                            return SvgPicture.asset(
-                                width: 30, height: 30, Assets.svgStarFill);
-                          } else {
-                            return AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
-                              width: screenWidth * _size,
-                              height: screenWidth * _size,
-                              child: SvgPicture.asset(
-                                  color: Colors.white,
-                                  width: 30,
-                                  height: 30,
-                                  Assets.svgStar),
-                            );
-                          }
-                        } else {
-                          return const CircularProgressIndicator(
-                            color: AppColors.kBackGroundColor,
-                          );
-                        }
-                      } else {
+                      if (!widget.visitor) {
                         return SvgPicture.asset(
                           Assets.svgEdit,
                           width: screenWidth * 0.08,
@@ -173,6 +140,26 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
                           color: Colors.white,
                         );
                       }
+                      if (companyState is ToggleCompanyLoadedState &&
+                          companyState.isFavorite) {
+                        return SvgPicture.asset(
+                            width: 30, height: 30, Assets.svgStarFill);
+                      }
+                      if (companyState is ToggleCompanyLoadedState) {
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          width: screenWidth * _size,
+                          height: screenWidth * _size,
+                          child: SvgPicture.asset(
+                              color: Colors.white,
+                              width: 30,
+                              height: 30,
+                              Assets.svgStar),
+                        );
+                      }
+                      return const CircularProgressIndicator(
+                        color: AppColors.kBackGroundColor,
+                      );
                     },
                   ),
                 ),
@@ -194,7 +181,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
                       bottom: 2,
                       right: 0,
                       child: GestureDetector(
-                        onTap: _pickProfileImage,
+                        onTap: galleryPicker,
                         child: Container(
                           width: screenWidth * 0.09,
                           height: screenWidth * 0.09,
