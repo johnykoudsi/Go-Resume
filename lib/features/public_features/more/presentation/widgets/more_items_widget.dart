@@ -21,7 +21,7 @@ class MoreItemsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding:  EdgeInsets.only(top: topPadding,left: screenWidth*0.05,right: screenWidth*0.05),
+      padding:  const EdgeInsets.all(18),
       child: InkWell(
         onTap: onTap,
         child: Row(

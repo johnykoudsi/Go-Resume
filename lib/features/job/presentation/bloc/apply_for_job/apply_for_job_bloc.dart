@@ -12,12 +12,12 @@ part 'apply_for_job_state.dart';
 class ApplyForJobBloc extends Bloc<ApplyForJobEvent, ApplyForJobState> {
   ApplyForJobBloc() : super(ApplyForJobInitial()) {
     final JobRepoImpl jobRepoImpl =
-    JobRepoImpl(JobDataSource(NetworkHelpers()));
+        JobRepoImpl(JobDataSource(NetworkHelpers()));
     ApplyForJobUseCase applyForJobUseCase = ApplyForJobUseCase(jobRepoImpl);
-      on<ApplyForJobApiEvent>((event, emit) async {
-        emit(ApplyForJobLoadingState());
-        final response = await applyForJobUseCase.call(event);
-        emit(ApplyForJobResponseState(helperResponse: response));
-      });
+    on<ApplyForJobApiEvent>((event, emit) async {
+      emit(ApplyForJobLoadingState());
+      final response = await applyForJobUseCase.call(event);
+      emit(ApplyForJobResponseState(helperResponse: response));
+    });
   }
 }

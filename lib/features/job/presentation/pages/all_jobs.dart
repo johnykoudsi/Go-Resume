@@ -64,6 +64,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
     return BlocProvider.value(
       value: getAllJobsBloc,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(AppStrings.jobs),
           centerTitle: false,
@@ -86,6 +87,9 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
                 search();
               },
               onSend: (value) {
+                if (value == null || value.isEmpty) {
+                  return;
+                }
                 setState(() {
                   searchDeleteIcon = true;
                 });
@@ -99,7 +103,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            context.read<GetAllJobsBloc>().add(ChangeToLoadingAllJobsEvent());
+            search();
           },
           child: BlocBuilder<GetAllJobsBloc, GetAllJobsState>(
             builder: (context, state) {
@@ -161,7 +165,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
           children: [
             // Filter FAB
             FloatingActionButton(
-              heroTag: "asdasdasd",
+              heroTag: null,
               onPressed: () {
                 showModalBottomSheet(
                     context: context,
@@ -243,12 +247,11 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
                         builder: (BuildContext context,
                             void Function(void Function()) setState) {
                           return SortsFilterWidget(
-                            value: jobFilter.sort??JobSorts.none,
+                            value: jobFilter.sort ?? JobSorts.none,
                             onChanged: (value) {
                               Navigator.of(context).pop();
                               setState(() {
-                                jobFilter =
-                                    jobFilter.copyWith(sort: value);
+                                jobFilter = jobFilter.copyWith(sort: value);
                               });
                               search();
                             },

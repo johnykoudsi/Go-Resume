@@ -8,12 +8,13 @@ class SearchTextField extends StatelessWidget {
     required this.onSend,
     required this.searchController,
     required this.showSearchDeleteIcon,
+    this.enabled = true,
     Key? key}) : super(key: key);
   Function()? onClear;
   Function(String?) onSend;
   TextEditingController searchController;
   bool showSearchDeleteIcon;
-
+  bool enabled;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,6 +29,7 @@ class SearchTextField extends StatelessWidget {
             TextFormField(
               controller: searchController,
               onFieldSubmitted: onSend,
+              enabled: enabled,
               style: const TextStyle(
                   color: AppColors.kTextFieldGrey
               ),

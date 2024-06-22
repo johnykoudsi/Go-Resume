@@ -11,6 +11,7 @@ class Assets {
   static const String jsonJobDone = 'assets/json/job_done.json';
   static const String jsonNoDataWidget = 'assets/json/no_data_widget.json';
   static const String jsonTextGeneration = 'assets/json/text_generation.json';
+  static const String pngEmployeeOnRoad = 'assets/images/png/employee_on_road.png';
   static const String pngGoResumeLogo = 'assets/images/png/go_resume_logo.png';
   static const String pngJobSearch = 'assets/images/png/job_search.png';
   static const String pngRandomUser = 'assets/images/png/random_user.png';
@@ -19,7 +20,6 @@ class Assets {
   static const String svgCase = 'assets/images/svg/case.svg';
   static const String svgEdit = 'assets/images/svg/edit.svg';
   static const String svgEmployee = 'assets/images/svg/employee.svg';
-  static const String svgEmployeeOnRoad = 'assets/images/svg/employee_on_road.svg';
   static const String svgFacebook = 'assets/images/svg/facebook.svg';
   static const String svgFilter = 'assets/images/svg/filter.svg';
   static const String svgGmail = 'assets/images/svg/gmail.svg';

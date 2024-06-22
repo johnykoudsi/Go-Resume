@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
@@ -32,20 +31,57 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    return  Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.kBackGroundColor,
       body: ListView(
         children: [
-          Stack(
+          const EmployeeOnRoad(),
+          Column(
             children: [
-              const EmployeeOnRoad(),
-               MoreItemsWidget(iconPath: Assets.svgMySubmissions, text:user.company == null ? AppStrings.mySubmissions:AppStrings.myJobs, topPadding: screenHeight*0.55,onTap:user.company == null ? (){Navigator.of(context).pushNamed(AppRoutes.mySubmissions);}:(){Navigator.of(context).pushNamed(AppRoutes.myJobs,arguments: user=user);},),
-              MoreItemsWidget(iconPath: Assets.svgSave,text:AppStrings.savedJobs, topPadding: screenHeight*0.65,onTap:(){Navigator.of(context).pushNamed(AppRoutes.savedJobs);}),
-              MoreItemsWidget(iconPath: Assets.svgNotification, text: AppStrings.notifications, topPadding: screenHeight*0.75,onTap: (){Navigator.of(context).pushNamed(AppRoutes.myNotifications);}),
-              MoreItemsWidget(iconPath: Assets.svgLanguage, text: AppStrings.language, topPadding: screenHeight*0.85,   onTap: () {
-                LanguageDialog.showLanguageBottomSheet(context);
-              },),
-              MoreItemsWidget(iconPath: Assets.svgUpdate, text: AppStrings.update, topPadding: screenHeight*0.95,),
+              MoreItemsWidget(
+                iconPath: Assets.svgMySubmissions,
+                text: user.company == null
+                    ? AppStrings.mySubmissions
+                    : AppStrings.myJobs,
+                topPadding: screenHeight * 0.55,
+                onTap: user.company == null
+                    ? () {
+                  Navigator.of(context)
+                      .pushNamed(AppRoutes.mySubmissions);
+                }
+                    : () {
+                  Navigator.of(context).pushNamed(AppRoutes.myJobs,
+                      arguments: user = user);
+                },
+              ),
+              MoreItemsWidget(
+                  iconPath: Assets.svgSave,
+                  text: AppStrings.savedJobs,
+                  topPadding: screenHeight * 0.65,
+                  onTap: () {
+                    Navigator.of(context).pushNamed(AppRoutes.savedJobs);
+                  }),
+              MoreItemsWidget(
+                  iconPath: Assets.svgNotification,
+                  text: AppStrings.notifications,
+                  topPadding: screenHeight * 0.75,
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(AppRoutes.myNotifications);
+                  }),
+              MoreItemsWidget(
+                iconPath: Assets.svgLanguage,
+                text: AppStrings.language,
+                topPadding: screenHeight * 0.85,
+                onTap: () {
+                  LanguageDialog.showLanguageBottomSheet(context);
+                },
+              ),
+              MoreItemsWidget(
+                iconPath: Assets.svgUpdate,
+                text: AppStrings.update,
+                topPadding: screenHeight * 0.95,
+              ),
               GestureDetector(
                 onTap: () {
                   DialogsWidgetsYesNo.showYesNoDialog(
@@ -65,7 +101,11 @@ class _MoreScreenState extends State<MoreScreen> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20),
-                  child: MoreItemsWidget(iconPath: Assets.svgSignOut, text: AppStrings.signOut, topPadding: screenHeight*1.05,),
+                  child: MoreItemsWidget(
+                    iconPath: Assets.svgSignOut,
+                    text: AppStrings.signOut,
+                    topPadding: screenHeight * 1.05,
+                  ),
                 ),
               ),
             ],
