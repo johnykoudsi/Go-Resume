@@ -6,6 +6,7 @@ import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_wi
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget_border.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/bio_generation/bio_generation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/experience_generation/education_generation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_generation/experience_generation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
@@ -37,6 +38,9 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
     }
     if (event is PostEducationGenerationEvent) {
       appBar = "Generated Education";
+    }
+    if(event is PostBioGenerationEvent){
+      appBar = "Generated Bio";
     }
     super.initState();
   }
@@ -113,6 +117,9 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
                       String route = AppRoutes.addExperience;
                       if (event is PostEducationGenerationEvent) {
                         route = AppRoutes.addEducation;
+                      }
+                      if(event is PostBioGenerationEvent){
+                        route = AppRoutes.editApplicantProfile;
                       }
                       Navigator.of(context).pushReplacementNamed(
                         route,

@@ -30,6 +30,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/company_profile/
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/edit_company_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/my_policies_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/pages/bio_generation_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/pages/edit_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/education_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/pages/add_education_screen.dart';
@@ -158,6 +159,8 @@ class AppRouter {
             user: user,
           );
         case AppRoutes.editApplicantProfile:
+          DisplayGenerationScreenArguments? args =
+          settings.arguments as DisplayGenerationScreenArguments?;
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -170,7 +173,7 @@ class AppRouter {
                 create: (context) => GetAllCitiesBloc(),
               ),
             ],
-            child: const EditApplicantProfileScreen(),
+            child: EditApplicantProfileScreen(arguments: args,),
           );
         case AppRoutes.editCompanyProfile:
           return MultiBlocProvider(
@@ -258,6 +261,9 @@ class AppRouter {
 
         case AppRoutes.educationAIGeneration:
           return const EducationGenerationScreen();
+
+        case AppRoutes.bioAIGeneration:
+          return const BioGenerationScreen();
 
         case AppRoutes.displayGenerationScreen:
           DisplayGenerationScreenArguments args =

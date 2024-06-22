@@ -10,10 +10,13 @@ import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
+import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/preferred_gender_widget.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../../utility/global_widgets/display_generation_screen.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
 import '../../../company_profile/domain/entities/City_entity.dart';
 import '../../../company_profile/domain/entities/country_entity.dart';
@@ -23,8 +26,9 @@ import '../../../company_profile/presentation/widget/country_city_drop_down.dart
 import '../bloc/applicant_profile_bloc.dart';
 
 class EditApplicantProfileScreen extends StatefulWidget {
-  const EditApplicantProfileScreen({Key? key}) : super(key: key);
-
+  const EditApplicantProfileScreen({this.arguments, Key? key})
+      : super(key: key);
+  final DisplayGenerationScreenArguments? arguments;
   @override
   State<EditApplicantProfileScreen> createState() =>
       _EditApplicantProfileScreenState();
@@ -45,12 +49,16 @@ class _EditApplicantProfileScreenState
 
   @override
   void initState() {
+    print(widget.arguments?.generation);
+
     context.read<GetAllCountriesBloc>().add(GetCountriesEvent());
 
     final userBloc = context.read<UserBloc>().state;
     if (userBloc is UserLoggedState) {
       nameController.text = userBloc.user.data.fullName;
-      bioController.text = userBloc.user.data.applicant?.bio ?? "";
+      bioController.text = widget.arguments?.generation ??
+          userBloc.user.data.applicant?.bio ??
+          "";
       selectedDate = userBloc.user.data.applicant?.dob;
       _selectedUserGender = userBloc.user.data.applicant?.gender == "m"
           ? GenderEnum.m
@@ -65,11 +73,14 @@ class _EditApplicantProfileScreenState
     }
     super.initState();
   }
+
   Country? _selectedCountry;
   City? _selectedCity;
 
   void _handleSelectedCountries(Country selectedCountry) {
-    context.read<GetAllCitiesBloc>().add(GetCitiesEvent(countryCode: selectedCountry.countryCode));
+    context
+        .read<GetAllCitiesBloc>()
+        .add(GetCitiesEvent(countryCode: selectedCountry.countryCode));
     setState(() {
       _selectedCountry = selectedCountry;
     });
@@ -80,6 +91,7 @@ class _EditApplicantProfileScreenState
       _selectedCity = selectedCities;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -94,7 +106,8 @@ class _EditApplicantProfileScreenState
             showServerError: true,
             popOnSuccess: true,
           );
-          if(state.helperResponse.servicesResponse == ServicesResponseStatues.success){
+          if (state.helperResponse.servicesResponse ==
+              ServicesResponseStatues.success) {
             context.read<UserBloc>().add(RefreshUserEvent());
           }
         }
@@ -132,22 +145,22 @@ class _EditApplicantProfileScreenState
               ),
               BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
                 builder: (countryContext, countryState) {
-                  if(countryState is GetAllCountriesInitial){
+                  if (countryState is GetAllCountriesInitial) {
                     return ShimmerLoader(
                       height: screenHeight * 0.05,
                       width: screenWidth,
                     );
                   }
-                  if(countryState is GetCountriesDoneState){
-                    return
-                      CountryCityDropDown(
-                        title: '',
-                        countries: countryState.countries,
-                        onCountrySelect: _handleSelectedCountries,
-                        onCitySelect: _handleSelectedCities,
-                      );
+                  if (countryState is GetCountriesDoneState) {
+                    return CountryCityDropDown(
+                      title: '',
+                      countries: countryState.countries,
+                      onCountrySelect: _handleSelectedCountries,
+                      onCitySelect: _handleSelectedCities,
+                    );
+                  } else {
+                    return const SizedBox.shrink();
                   }
-                  else{return const SizedBox.shrink();}
                 },
               ),
               SizedBox(
@@ -213,7 +226,6 @@ class _EditApplicantProfileScreenState
               SizedBox(
                 height: heightBetweenFields,
               ),
-
               DatePickerWidget(
                 label: 'Date Of Birth',
                 selectedDate: selectedDate,
@@ -246,7 +258,15 @@ class _EditApplicantProfileScreenState
               SizedBox(
                 height: screenHeight * 0.1,
               ),
-              BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
+            ],
+          ),
+        ),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
                 builder: (context, state) {
                   return ElevatedButtonWidget(
                     title: "Edit",
@@ -259,24 +279,27 @@ class _EditApplicantProfileScreenState
                           .read<ApplicantProfileBloc>()
                           .add(UpdateApplicantProfileEvent(
                             dob: selectedDate,
-                            gender:_selectedUserGender ?? GenderEnum.none,
+                            gender: _selectedUserGender ?? GenderEnum.none,
                             bio: bioController.text,
                             fullName: nameController.text,
-                        websiteLink: websiteController.text,
-                        instagram: instagramController.text,
-                        facebook: facebookController.text,
-                        linkedin: linkedinController.text,
-                        email: emailController.text,
+                            websiteLink: websiteController.text,
+                            instagram: instagramController.text,
+                            facebook: facebookController.text,
+                            linkedin: linkedinController.text,
+                            email: emailController.text,
                           ));
                     },
                   );
                 },
               ),
-              SizedBox(
-                height: screenHeight * 0.05,
-              ),
-            ],
-          ),
+            ),
+          ],
+        ),
+        floatingActionButton: CustomFloatingButtonWidget(
+          icon: const Icon(Icons.auto_fix_high_rounded),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, AppRoutes.bioAIGeneration);
+          },
         ),
       ),
     );
