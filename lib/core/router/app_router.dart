@@ -30,6 +30,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/company_profile/
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/edit_company_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/pages/my_policies_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/toggle_applicant/toggle_applicant_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/pages/bio_generation_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/pages/edit_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/education_actions_bloc.dart';
@@ -132,6 +133,7 @@ class AppRouter {
           return MultiBlocProvider(
               providers: [
                 BlocProvider(create: (context) => ApplicantProfileBloc()),
+                BlocProvider(create: (context) => ToggleApplicantBloc()),
                 BlocProvider(
                   create: (context) => ToggleCompanyBloc(),
                 ),

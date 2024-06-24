@@ -4,6 +4,7 @@ import 'package:smart_recruitment_core/utility/networking/endpoints.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/bio_generation/bio_generation_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/toggle_applicant/toggle_applicant_bloc.dart';
 
 class ApplicantProfileDataSource {
   ApplicantProfileDataSource(this.networkHelpers);
@@ -35,6 +36,45 @@ class ApplicantProfileDataSource {
       );
       return helperResponse;
     }
+  }
+  Future toggleApplicant(ToggleApplicantApiEvent toggleApplicantApiEvent) async {
+
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      useUserToken: true,
+      url: EndPoints.pinApplicantToggle(id: toggleApplicantApiEvent.id),
+    );
+    print("jjjjjjjjjjj");
+    print(toggleApplicantApiEvent.id);
+    print(helperResponse.response.toString());
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isPinned = json.decode(helperResponse.response)["data"]["is_pinned"];
+        return isPinned;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
+    return helperResponse;
+  }
+  Future getApplicantStatus({
+    required GetApplicantStatusEvent event,
+  }) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: EndPoints.isApplicantPinned(id: event.id),
+      useUserToken: true,
+    );
+
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isPinned = json.decode(helperResponse.response)["data"]["is_pinned"];
+        return isPinned;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
+    return helperResponse;
   }
 
   Future generateBio(PostBioGenerationEvent postBioGenerationEvent) async {

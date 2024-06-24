@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/toggle_applicant/toggle_applicant_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_profile_image.dart';
 
 import '../../../../../generated/assets.dart';
@@ -81,6 +82,12 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
       context
           .read<ToggleCompanyBloc>()
           .add(GetCompanyStatusEvent(id: widget.userId ?? 0));
+    } else {
+      print("kkkkk");
+      print(widget.userId);
+      context
+          .read<ToggleApplicantBloc>()
+          .add(GetApplicantStatusEvent(id: widget.userId ?? 0));
     }
   }
 
@@ -114,14 +121,11 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
                   top: 10,
                   // right:0,
                   // bottom: 1,
-                  child:
-                  !widget.visitor?
-                  _buildEditButton(context)
-                  :
-                  widget.isCompany
-                      ? _buildFavoriteButton(context)
-                      : _buildPinButton(context)
-              )
+                  child: !widget.visitor
+                      ? _buildEditButton(context)
+                      : widget.isCompany
+                          ? _buildFavoriteButton(context)
+                          : _buildPinButton(context))
             ],
           ),
         ),
@@ -168,94 +172,73 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
 
   GestureDetector _buildFavoriteButton(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    return GestureDetector(
-      onTap: () {
-          return context
-              .read<ToggleCompanyBloc>()
-              .add(ToggleCompanyApiEvent(id: widget.userId ?? 0));
-
+    return GestureDetector(onTap: () {
+      return context
+          .read<ToggleCompanyBloc>()
+          .add(ToggleCompanyApiEvent(id: widget.userId ?? 0));
+    }, child: BlocBuilder<ToggleCompanyBloc, ToggleCompanyState>(
+      builder: (context, companyState) {
+        if (companyState is ToggleCompanyLoadedState &&
+            companyState.isFavorite) {
+          return SvgPicture.asset(width: 30, height: 30, Assets.svgStarFill);
+        }
+        if (companyState is ToggleCompanyLoadedState) {
+          return AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            width: screenWidth * _size,
+            height: screenWidth * _size,
+            child: SvgPicture.asset(
+                color: Colors.white, width: 30, height: 30, Assets.svgStar),
+          );
+        }
+        return const CircularProgressIndicator(
+          color: AppColors.kBackGroundColor,
+        );
       },
-         child:  BlocBuilder<ToggleCompanyBloc, ToggleCompanyState>(
-              builder: (context, companyState) {
-                if (companyState is ToggleCompanyLoadedState &&
-                    companyState.isFavorite) {
-                  return SvgPicture.asset(
-                      width: 30, height: 30, Assets.svgStarFill);
-                }
-                if (companyState is ToggleCompanyLoadedState) {
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: screenWidth * _size,
-                    height: screenWidth * _size,
-                    child: SvgPicture.asset(
-                        color: Colors.white,
-                        width: 30,
-                        height: 30,
-                        Assets.svgStar),
-                  );
-                }
-                return const CircularProgressIndicator(
-                  color: AppColors.kBackGroundColor,
-                );
-              },
-            )
-    );
+    ));
   }
+
   GestureDetector _buildPinButton(BuildContext context) {
-    //todo add the pin applicant UI and logic
+    double screenWidth = MediaQuery.of(context).size.width;
+    return GestureDetector(onTap: () {
+      return context
+          .read<ToggleApplicantBloc>()
+          .add(ToggleApplicantApiEvent(id: widget.userId ?? 0));
+    }, child: BlocBuilder<ToggleApplicantBloc, ToggleApplicantState>(
+      builder: (context, applicantState) {
+        if (applicantState is ToggleApplicantLoadedState &&
+            applicantState.isPinned) {
+          return SvgPicture.asset(width: 35, height: 35, Assets.svgIsPin,color: AppColors.kBackGroundColor,);
+        }
+        if (applicantState is ToggleApplicantLoadedState) {
+          return SvgPicture.asset(
+              color: AppColors.kBackGroundColor, width: 35, height: 35, Assets.svgNotPin);
+        }
+        return const CircularProgressIndicator(
+          color: AppColors.kBackGroundColor,
+        );
+      },
+    ));
+  }
+
+  GestureDetector _buildEditButton(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return GestureDetector(
         onTap: () {
-          return context
-              .read<ToggleCompanyBloc>()
-              .add(ToggleCompanyApiEvent(id: widget.userId ?? 0));
-
+          if (widget.isCompany) {
+            Navigator.pushNamed(context, AppRoutes.editCompanyProfile);
+            return;
+          }
+          if (!widget.isCompany) {
+            Navigator.pushNamed(context, AppRoutes.editApplicantProfile);
+            return;
+          }
         },
-        child:  BlocBuilder<ToggleCompanyBloc, ToggleCompanyState>(
-          builder: (context, companyState) {
-            if (companyState is ToggleCompanyLoadedState &&
-                companyState.isFavorite) {
-              return SvgPicture.asset(
-                  width: 30, height: 30, Assets.svgStarFill);
-            }
-            if (companyState is ToggleCompanyLoadedState) {
-              return AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                width: screenWidth * _size,
-                height: screenWidth * _size,
-                child: SvgPicture.asset(
-                    color: Colors.white,
-                    width: 30,
-                    height: 30,
-                    Assets.svgStar),
-              );
-            }
-            return const CircularProgressIndicator(
-              color: AppColors.kBackGroundColor,
-            );
-          },
-        )
-    );
-  }
-  GestureDetector _buildEditButton(BuildContext context){
-    double screenWidth = MediaQuery.of(context).size.width;
-    return GestureDetector(
-      onTap: () {
-        if (widget.isCompany) {
-          Navigator.pushNamed(context, AppRoutes.editCompanyProfile);
-          return;
-        }
-        if (!widget.isCompany) {
-          Navigator.pushNamed(context, AppRoutes.editApplicantProfile);
-          return;
-        }
-      },
-      child: SvgPicture.asset(
-        Assets.svgEdit,
-        width: screenWidth * 0.08,
-        height: screenWidth * 0.08,
-        color: Colors.white,
-      )
-    );
+        child: SvgPicture.asset(
+          Assets.svgEdit,
+          width: screenWidth * 0.08,
+          height: screenWidth * 0.08,
+          color: Colors.white,
+        ));
   }
 }
