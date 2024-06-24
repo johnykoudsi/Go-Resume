@@ -317,33 +317,39 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: screenHeight * 0.02,
-              ),
-              Row(
+              widget.jobEntity.description != ""?
+              Column(
                 children: [
-                  Text(
-                    AppStrings.description,
-                    style: AppFontStyles.boldH5.copyWith(color: Colors.red),
+                  SizedBox(
+                    height: screenHeight * 0.02,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        AppStrings.description,
+                        style: AppFontStyles.boldH5.copyWith(color: Colors.red),
+                      ),
+                      SizedBox(
+                        height: screenHeight * 0.01,
+                      ),
+                      const Row(
+                        children: [
+                          Text(
+                            "⚡",
+                            style: AppFontStyles.mediumH5,
+                          ),
+                          Text(
+                            "Requirements:",
+                            style: AppFontStyles.mediumH5,
+                          ),
+                        ],
+                      ),
+                      DescriptionItemWidget(description: widget.jobEntity.description),
+                    ],
                   ),
                 ],
-              ),
-              SizedBox(
-                height: screenHeight * 0.01,
-              ),
-              const Row(
-                children: [
-                  Text(
-                    "⚡",
-                    style: AppFontStyles.mediumH5,
-                  ),
-                  Text(
-                    "Requirements:",
-                    style: AppFontStyles.mediumH5,
-                  ),
-                ],
-              ),
-              DescriptionItemWidget(description: widget.jobEntity.description),
+              ):SizedBox(),
+
                    isCompany?
                    BlocBuilder<GetJobApplicantsBloc,
                        GetJobApplicantsState>(

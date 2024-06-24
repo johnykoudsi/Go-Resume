@@ -132,6 +132,9 @@ class AppRouter {
           return MultiBlocProvider(
               providers: [
                 BlocProvider(create: (context) => ApplicantProfileBloc()),
+                BlocProvider(
+                  create: (context) => ToggleCompanyBloc(),
+                ),
               ],
               child: ApplicantProfileScreen(
                 user: user,
@@ -245,23 +248,10 @@ class AppRouter {
           return const AllCompaniesScreen();
         case AppRoutes.savedJobs:
           return const SavedJobsScreen();
-        case AppRoutes.applicantProfile:
-          User args = settings.arguments as User;
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => ToggleCompanyBloc(),
-              ),
-            ],
-            child: ApplicantProfileScreen(user: args),
-          );
-
         case AppRoutes.experienceAIGeneration:
           return const ExperienceGenerationScreen();
-
         case AppRoutes.educationAIGeneration:
           return const EducationGenerationScreen();
-
         case AppRoutes.bioAIGeneration:
           return const BioGenerationScreen();
 

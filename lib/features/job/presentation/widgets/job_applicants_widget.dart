@@ -19,7 +19,6 @@ class JobApplicantsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
@@ -36,7 +35,7 @@ class JobApplicantsWidget extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.applicantProfile, arguments:
+          Navigator.pushNamed(context, AppRoutes.viewApplicantProfile, arguments:
             applicant
           );
         },

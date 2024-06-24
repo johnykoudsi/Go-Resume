@@ -28,7 +28,7 @@ class TopApplicantsWidget extends StatelessWidget {
               children: [
                 Text(
                   AppStrings.applicants,
-                  style: AppFontStyles.mediumH4.copyWith(fontSize: 20),
+                  style: AppFontStyles.mediumH4
                 ),
                 TextButton(
                     onPressed: () {
@@ -41,13 +41,13 @@ class TopApplicantsWidget extends StatelessWidget {
                       },
                     child: Text(
                       "See All",
-                      style: AppFontStyles.mediumH4.copyWith(fontSize: 20)
+                      style: AppFontStyles.mediumH4
                           .copyWith(color: AppColors.kMainColor100),
                     ))
               ]),
 
           Container(
-            height: 200,
+            height: 400,
             child: ListView.builder(
               itemCount: applicants.length,
               itemBuilder: (BuildContext context, int index) {

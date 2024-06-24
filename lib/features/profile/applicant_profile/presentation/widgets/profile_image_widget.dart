@@ -77,9 +77,11 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
   @override
   void initState() {
     super.initState();
-    context
-        .read<ToggleCompanyBloc>()
-        .add(GetCompanyStatusEvent(id: widget.userId ?? 0));
+    if (widget.isCompany) {
+      context
+          .read<ToggleCompanyBloc>()
+          .add(GetCompanyStatusEvent(id: widget.userId ?? 0));
+    }
   }
 
   @override
@@ -108,61 +110,17 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
               ),
               //    SizedBox(width: screenWidth * 0.65),
               Positioned(
-                right: 10,
-                top: 10,
-                // right:0,
-                // bottom: 1,
-                child: GestureDetector(
-                  onTap: () {
-                    if (widget.visitor) {
-                      return context
-                          .read<ToggleCompanyBloc>()
-                          .add(ToggleCompanyApiEvent(id: widget.userId ?? 0));
-                    }
-                    if (widget.isCompany) {
-                      Navigator.pushNamed(
-                          context, AppRoutes.editCompanyProfile);
-                      return;
-                    }
-                    if (!widget.isCompany) {
-                      Navigator.pushNamed(
-                          context, AppRoutes.editApplicantProfile);
-                      return;
-                    }
-                  },
-                  child: BlocBuilder<ToggleCompanyBloc, ToggleCompanyState>(
-                    builder: (context, companyState) {
-                      if (!widget.visitor) {
-                        return SvgPicture.asset(
-                          Assets.svgEdit,
-                          width: screenWidth * 0.08,
-                          height: screenWidth * 0.08,
-                          color: Colors.white,
-                        );
-                      }
-                      if (companyState is ToggleCompanyLoadedState &&
-                          companyState.isFavorite) {
-                        return SvgPicture.asset(
-                            width: 30, height: 30, Assets.svgStarFill);
-                      }
-                      if (companyState is ToggleCompanyLoadedState) {
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          width: screenWidth * _size,
-                          height: screenWidth * _size,
-                          child: SvgPicture.asset(
-                              color: Colors.white,
-                              width: 30,
-                              height: 30,
-                              Assets.svgStar),
-                        );
-                      }
-                      return const CircularProgressIndicator(
-                        color: AppColors.kBackGroundColor,
-                      );
-                    },
-                  ),
-                ),
+                  right: 10,
+                  top: 10,
+                  // right:0,
+                  // bottom: 1,
+                  child:
+                  !widget.visitor?
+                  _buildEditButton(context)
+                  :
+                  widget.isCompany
+                      ? _buildFavoriteButton(context)
+                      : _buildPinButton(context)
               )
             ],
           ),
@@ -205,6 +163,99 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
           ),
         ),
       ],
+    );
+  }
+
+  GestureDetector _buildFavoriteButton(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    return GestureDetector(
+      onTap: () {
+          return context
+              .read<ToggleCompanyBloc>()
+              .add(ToggleCompanyApiEvent(id: widget.userId ?? 0));
+
+      },
+         child:  BlocBuilder<ToggleCompanyBloc, ToggleCompanyState>(
+              builder: (context, companyState) {
+                if (companyState is ToggleCompanyLoadedState &&
+                    companyState.isFavorite) {
+                  return SvgPicture.asset(
+                      width: 30, height: 30, Assets.svgStarFill);
+                }
+                if (companyState is ToggleCompanyLoadedState) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    width: screenWidth * _size,
+                    height: screenWidth * _size,
+                    child: SvgPicture.asset(
+                        color: Colors.white,
+                        width: 30,
+                        height: 30,
+                        Assets.svgStar),
+                  );
+                }
+                return const CircularProgressIndicator(
+                  color: AppColors.kBackGroundColor,
+                );
+              },
+            )
+    );
+  }
+  GestureDetector _buildPinButton(BuildContext context) {
+    //todo add the pin applicant UI and logic
+    double screenWidth = MediaQuery.of(context).size.width;
+    return GestureDetector(
+        onTap: () {
+          return context
+              .read<ToggleCompanyBloc>()
+              .add(ToggleCompanyApiEvent(id: widget.userId ?? 0));
+
+        },
+        child:  BlocBuilder<ToggleCompanyBloc, ToggleCompanyState>(
+          builder: (context, companyState) {
+            if (companyState is ToggleCompanyLoadedState &&
+                companyState.isFavorite) {
+              return SvgPicture.asset(
+                  width: 30, height: 30, Assets.svgStarFill);
+            }
+            if (companyState is ToggleCompanyLoadedState) {
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                width: screenWidth * _size,
+                height: screenWidth * _size,
+                child: SvgPicture.asset(
+                    color: Colors.white,
+                    width: 30,
+                    height: 30,
+                    Assets.svgStar),
+              );
+            }
+            return const CircularProgressIndicator(
+              color: AppColors.kBackGroundColor,
+            );
+          },
+        )
+    );
+  }
+  GestureDetector _buildEditButton(BuildContext context){
+    double screenWidth = MediaQuery.of(context).size.width;
+    return GestureDetector(
+      onTap: () {
+        if (widget.isCompany) {
+          Navigator.pushNamed(context, AppRoutes.editCompanyProfile);
+          return;
+        }
+        if (!widget.isCompany) {
+          Navigator.pushNamed(context, AppRoutes.editApplicantProfile);
+          return;
+        }
+      },
+      child: SvgPicture.asset(
+        Assets.svgEdit,
+        width: screenWidth * 0.08,
+        height: screenWidth * 0.08,
+        color: Colors.white,
+      )
     );
   }
 }
