@@ -4,7 +4,7 @@ abstract class MyNotificationsState extends Equatable {
   const MyNotificationsState();
 }
 
-class MyNotificationsInitial extends MyNotificationsState {
+class MyNotificationsLoadingState extends MyNotificationsState {
   @override
   List<Object> get props => [];
 }

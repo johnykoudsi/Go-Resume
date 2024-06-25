@@ -105,7 +105,7 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) => MyNotificationsBloc()
-                  ..add(ChangeToLoadingApiMyNotificationsEvent()),
+                  ..add(ChangeToLoadingMyNotificationsEvent()),
               ),
             ],
             child: const MyNotification(),

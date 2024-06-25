@@ -76,7 +76,8 @@ class GetAllJobsBloc extends Bloc<GetAllJobsEvent, GetAllJobsState> {
 
       add(GetAllJobsSearchEvent(
           searchFilter:
-              event.searchFilter?.copyWith(page: 1) ?? AllJobsSearchFilter()));
+              event.searchFilter?.copyWith(page: 1) ?? AllJobsSearchFilter())
+      );
     });
   }
 }

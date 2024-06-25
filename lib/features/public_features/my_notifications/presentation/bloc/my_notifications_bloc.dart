@@ -13,14 +13,17 @@ import '../../domain/use_cases/get_my_notifications_usecase.dart';
 part 'my_notifications_event.dart';
 part 'my_notifications_state.dart';
 
-class MyNotificationsBloc extends Bloc<MyNotificationsEvent, MyNotificationsState> {
-  static final MyNotificationsRepoImpl myNotificationsRepoImpl = MyNotificationsRepoImpl(MyNotificationsDataSource(NetworkHelpers()));
-
-  MyNotificationsBloc() : super(MyNotificationsInitial()) {
+class MyNotificationsBloc
+    extends Bloc<MyNotificationsEvent, MyNotificationsState> {
+  MyNotificationsBloc() : super(MyNotificationsLoadingState()) {
+    final MyNotificationsRepoImpl myNotificationsRepoImpl =
+        MyNotificationsRepoImpl(MyNotificationsDataSource(NetworkHelpers()));
+    GetMyNotificationsUseCase getMyNotificationsUseCase = GetMyNotificationsUseCase(myNotificationsRepoImpl);
 
     on<GetMyNotificationsEvent>((event, emit) async {
       final currentState = state;
-      if (currentState is MyNotificationsLoadedState && currentState.hasReachedMax) {
+      if (currentState is MyNotificationsLoadedState &&
+          currentState.hasReachedMax) {
         return;
       }
 
@@ -31,21 +34,21 @@ class MyNotificationsBloc extends Bloc<MyNotificationsEvent, MyNotificationsStat
         return 0;
       }
 
-      var getMyNotifications;
+      dynamic getMyNotifications;
 
       event.searchFilterProperties.page = getPage();
-      GetMyNotificationsUseCase myNotificationsUseCase = GetMyNotificationsUseCase(myNotificationsRepoImpl);
 
-      getMyNotifications = await myNotificationsUseCase.call(event);
+      getMyNotifications = await getMyNotificationsUseCase.call(event);
 
       if (getMyNotifications is List<NotificationEntity>) {
         if (getMyNotifications.isNotEmpty) {
           // copy previous state
           if (currentState is MyNotificationsLoadedState) {
             emit(currentState.copyWith(
-                notifications: List.of(currentState.notifications)..addAll(getMyNotifications),
+                notifications: List.of(currentState.notifications)
+                  ..addAll(getMyNotifications),
                 hasReachedMax:
-                getMyNotifications.length < kGetLimit ? true : false));
+                    getMyNotifications.length < kGetLimit ? true : false));
           }
 
           // add loaded state
@@ -53,7 +56,7 @@ class MyNotificationsBloc extends Bloc<MyNotificationsEvent, MyNotificationsStat
             emit(MyNotificationsLoadedState(
               notifications: getMyNotifications,
               hasReachedMax:
-              getMyNotifications.length < kGetLimit ? true : false,
+                  getMyNotifications.length < kGetLimit ? true : false,
             ));
           }
         } else {
@@ -69,21 +72,18 @@ class MyNotificationsBloc extends Bloc<MyNotificationsEvent, MyNotificationsStat
             ));
           }
         }
-      }if(getMyNotifications == 0){
-        emit(MyNotificationsLoadedState(hasReachedMax: true,notifications: []));
-      }
-      else {
-        print("Server ${(getMyNotifications as HelperResponse).response}");
-
+      }else {
         emit(MyNotificationsErrorState(helperResponse: getMyNotifications));
       }
     });
 
-    on<ChangeToLoadingApiMyNotificationsEvent>((event, emit) async {
-      emit(MyNotificationsInitial());
+    on<ChangeToLoadingMyNotificationsEvent>((event, emit) async {
+      emit(MyNotificationsLoadingState());
 
       add(GetMyNotificationsEvent(
-          searchFilterProperties: NotificationsSearchFilter(page: 1)));
+          searchFilterProperties:
+          event.searchFilterProperties?.copyWith(page: 1) ?? NotificationsSearchFilter())
+      );
     });
   }
 }

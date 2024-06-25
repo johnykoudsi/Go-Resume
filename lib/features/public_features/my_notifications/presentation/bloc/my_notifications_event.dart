@@ -12,8 +12,8 @@ class GetMyNotificationsEvent extends MyNotificationsEvent{
   List<Object?> get props => [searchFilterProperties];
 }
 
-class ChangeToLoadingApiMyNotificationsEvent extends MyNotificationsEvent {
-  ChangeToLoadingApiMyNotificationsEvent(
+class ChangeToLoadingMyNotificationsEvent extends MyNotificationsEvent {
+  ChangeToLoadingMyNotificationsEvent(
       { this.searchFilterProperties});
 
   NotificationsSearchFilter? searchFilterProperties;

@@ -59,6 +59,7 @@ class AppStrings{
   static String didNotReceiveCode = 'didNotReceiveCode'.tr();
   static String resendCode = 'resendCode'.tr();
 
-
+//notifications
+  static String myNotifications = 'myNotifications'.tr();
 
 }
