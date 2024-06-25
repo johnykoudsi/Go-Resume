@@ -17,7 +17,7 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Text(
               "Top Companies",
-              style: AppFontStyles.mediumH3.copyWith(fontSize: 22),
+              style: AppFontStyles.mediumH4,
             ),
             TextButton(
                 onPressed: () {
@@ -25,7 +25,7 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
                 },
                 child: Text(
                   "See More",
-                  style: AppFontStyles.mediumH5
+                  style: AppFontStyles.mediumH4
                       .copyWith(color: AppColors.kMainColor100),
                 ))
           ]),

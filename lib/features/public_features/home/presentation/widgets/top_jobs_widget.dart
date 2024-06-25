@@ -16,13 +16,13 @@ class TopJobsSectionWidget extends StatelessWidget {
               children: [
                  Text(
                   "Top Offers",
-                  style: AppFontStyles.mediumH3.copyWith(fontSize: 22),
+                  style: AppFontStyles.mediumH4,
                 ),
                 TextButton(
                     onPressed: () {},
                     child: Text(
                       "See More",
-                      style: AppFontStyles.mediumH5
+                      style: AppFontStyles.mediumH4
                           .copyWith(color: AppColors.kMainColor100),
                     ))
               ]),
