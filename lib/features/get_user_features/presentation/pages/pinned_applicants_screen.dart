@@ -10,6 +10,7 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.da
 import '../../../../core/router/app_routes.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utility/app_strings.dart';
+import '../../../../utility/global_widgets/no_data_widget.dart';
 import '../../../../utility/global_widgets/search_text_field.dart';
 import '../../../job/presentation/widgets/job_applicants_widget.dart';
 import '../bloc/get_pinned_applicants/get_pinned_applicants_bloc.dart';
@@ -83,39 +84,55 @@ class _PinnedApplicantsScreenState extends State<PinnedApplicantsScreen> {
             padding: const EdgeInsets.all(18.0),
             child: BlocBuilder<GetPinnedApplicantsBloc, GetPinnedApplicantsState>(
               builder: (context, state) {
-                return ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                    if (state is GetPinnedApplicantsLoadedState) {
-                      return JobApplicantsWidget(
-                        canReject: true,
-                        applicant: state.applicantsList[index],
-                      );
-                    }
-                    if (state is GetPinnedApplicantsLoadedState) {
-                      return AlignedGridView.count(
-                        crossAxisCount: 1,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        itemCount: 4,
-                        itemBuilder: (context, index) {
-                          return ShimmerLoader(
-                            height: 170,
+                if (state is GetPinnedApplicantsLoadedState && state.applicantsList.isNotEmpty) {
+                  return ListView.builder(
+                      padding: const EdgeInsets.all(18),
+                      controller: scrollController,
+                      itemCount: state.hasReachedMax
+                          ? state.applicantsList.length
+                          : state.applicantsList.length + 2,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index >= state.applicantsList.length) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: SizedBox(
+                              height: 130,
+                              child: ShimmerLoader(),
+                            ),
                           );
-                        },
-                      );
-                    } else {
-                      return SomethingWrongWidget(
-                        svgPath: Assets.svgNoInternet,
-                        elevatedButtonWidget: ElevatedButtonWidget(
-                          title: AppStrings.refresh,
-                          onPressed: () {
-                            getPinnedApplicantsBloc
-                                .add(ChangeToLoadingPinnedApplicantsEvent());
-                          },
-                        ),
-                      );
-                    }
-                  },
+                        }
+                        return JobApplicantsWidget(
+                          applicant: state.applicantsList[index],
+                        );
+                      });
+                }
+                if (state is GetPinnedApplicantsLoadedState) {
+                  return const NoDataWidget();
+                }
+                if (state is GetPinnedApplicantsLoadingState) {
+                  return ListView.builder(
+                      padding: const EdgeInsets.all(18),
+                      controller: scrollController,
+                      itemCount: 8,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: SizedBox(height: 130, child: ShimmerLoader()),
+                        );
+                      });
+                }
+                return SomethingWrongWidget(
+                  svgPath: Assets.svgNoInternet,
+                  elevatedButtonWidget: ElevatedButtonWidget(
+                    title: "Refresh",
+                    onPressed: () {
+                      context
+                          .read<GetPinnedApplicantsBloc>()
+                          .add(ChangeToLoadingPinnedApplicantsEvent());
+
+                      //search(userS);
+                    },
+                  ),
                 );
               },
             ),
