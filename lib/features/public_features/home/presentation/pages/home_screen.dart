@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/jobs_horizantal_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/widget/company_horizantal_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           preferredSize: const Size(double.infinity, 75),
           child: GestureDetector(
             onTap: () {
-              // todo navigate to job screen
+              Navigator.of(context).pushNamed(AppRoutes.allJobs);
             },
             child: SearchTextField(
               enabled: false,
@@ -76,6 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: 12,
           ),
           HomeCompaniesSectionWidget(),
+          CompaniesHorizontalWidget(),
         ],
       ),
     );
