@@ -31,4 +31,5 @@ class AppRoutes {
   static const String bioAIGeneration = "/bioAIGeneration";
   static const String displayGenerationScreen = "/displayGenerationScreen";
   static const String myJobs = "/my_jobs";
+  static const String allJobs = "/allJobs";
 }

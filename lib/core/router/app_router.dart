@@ -14,6 +14,7 @@ import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/apply_for_job/apply_for_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_job_applicants/get_job_applicants_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/all_jobs.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_details_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/my_jobs_screen.dart';
@@ -165,7 +166,7 @@ class AppRouter {
           );
         case AppRoutes.editApplicantProfile:
           DisplayGenerationScreenArguments? args =
-          settings.arguments as DisplayGenerationScreenArguments?;
+              settings.arguments as DisplayGenerationScreenArguments?;
           return MultiBlocProvider(
             providers: [
               BlocProvider(
@@ -178,7 +179,9 @@ class AppRouter {
                 create: (context) => GetAllCitiesBloc(),
               ),
             ],
-            child: EditApplicantProfileScreen(arguments: args,),
+            child: EditApplicantProfileScreen(
+              arguments: args,
+            ),
           );
         case AppRoutes.editCompanyProfile:
           return MultiBlocProvider(
@@ -256,6 +259,9 @@ class AppRouter {
           return const EducationGenerationScreen();
         case AppRoutes.bioAIGeneration:
           return const BioGenerationScreen();
+
+        case AppRoutes.allJobs:
+          return const AllJobsScreen();
 
         case AppRoutes.displayGenerationScreen:
           DisplayGenerationScreenArguments args =

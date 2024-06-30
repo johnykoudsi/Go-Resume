@@ -60,10 +60,18 @@ class _AllJobsScreenState extends State<JobsHorizontalWidget> {
             return const NoDataWidget();
           }
           if (state is GetAllJobsLoadingState) {
-            return Padding(
-              padding: const EdgeInsets.all(18),
-              child: SizedBox(height: 130, child: ShimmerLoader()),
-            );
+            return ListView.builder(
+                padding: const EdgeInsets.all(18),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 2,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: SizedBox(height: 130, child: ShimmerLoader()),
+                  );
+                });
+
           }
           return SomethingWrongWidget(
             svgPath: Assets.svgNoInternet,

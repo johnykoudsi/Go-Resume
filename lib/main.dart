@@ -30,7 +30,7 @@ import 'firebase_options.dart';
 //         ),
 //       ));
 // }
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -41,8 +41,7 @@ Future<void> main() async{
       // statusBarColor: AppColors.kSecondColor, // status bar color
       statusBarIconBrightness: Brightness.light, // status bar icons' color
       systemNavigationBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: AppColors.kBackGroundColor
-  ));
+      systemNavigationBarColor: AppColors.kBackGroundColor));
   runApp(EasyLocalization(
     supportedLocales: const [Locale('en'), Locale('ar')],
     path: 'assets/translation',
@@ -50,7 +49,6 @@ Future<void> main() async{
     fallbackLocale: const Locale('en'),
     child: MyApp(appRouter: AppRouter()),
   ));
-
 }
 
 class MyApp extends StatefulWidget {
@@ -77,7 +75,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider.value(
       value: NetworkHelpers.globalUserBloc..add(CheckUserFromLocalStorage()),
       child: MaterialApp(

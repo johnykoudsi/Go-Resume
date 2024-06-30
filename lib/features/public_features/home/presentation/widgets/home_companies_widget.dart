@@ -15,7 +15,7 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(
+            const Text(
               "Top Companies",
               style: AppFontStyles.mediumH4,
             ),
@@ -29,19 +29,6 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
                       .copyWith(color: AppColors.kMainColor100),
                 ))
           ]),
-        ),
-        AlignedGridView.count(
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-          crossAxisCount: 2,
-          mainAxisSpacing: 16,
-          crossAxisSpacing: 16,
-          itemCount: 2,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            return const SizedBox();
-            // return const CompanyWidget();
-          },
         ),
       ],
     );
