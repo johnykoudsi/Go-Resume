@@ -3,7 +3,12 @@ part of 'company_profile_bloc.dart';
 abstract class CompanyProfileEvent extends Equatable {
   const CompanyProfileEvent();
 }
+class AddFcmToken extends CompanyProfileEvent {
+  @override
+  List<Object?> get props => [];
+}
 class UpdateCompanyProfileEvent extends CompanyProfileEvent {
+
   UpdateCompanyProfileEvent({
     this.about,
     this.websiteLink,
@@ -16,7 +21,8 @@ class UpdateCompanyProfileEvent extends CompanyProfileEvent {
     this.mission,
     this.culture,
     this.profileImage,
-    this.coverImage
+    this.coverImage,
+    this.cityId
   });
   String? about;
   String? websiteLink;
@@ -28,6 +34,7 @@ class UpdateCompanyProfileEvent extends CompanyProfileEvent {
   String? culture;
   String? vision;
   String? mission;
+  String? cityId;
   List<File>? profileImage;
   List<File>? coverImage;
 
@@ -44,6 +51,7 @@ class UpdateCompanyProfileEvent extends CompanyProfileEvent {
       "culture":culture??"",
       "vision":vision??"",
       "mission":mission??"",
+      "city_id":cityId??"",
     };
     map.removeWhere(
             (key, value) => value == "" || value == null || value == "null");
@@ -62,6 +70,7 @@ class UpdateCompanyProfileEvent extends CompanyProfileEvent {
     vision,
     mission,
     profileImage,
-    coverImage
+    coverImage,
+    cityId
   ];
 }

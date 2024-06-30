@@ -264,6 +264,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
                       }
                       context.read<CompanyProfileBloc>().add(
                           UpdateCompanyProfileEvent(
+                            cityId:_selectedCity?.id.toString(),
                               fullName: nameController.text,
                               websiteLink: websiteController.text,
                               instagram: instagramController.text,
