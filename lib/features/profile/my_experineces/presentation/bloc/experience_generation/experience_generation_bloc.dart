@@ -20,7 +20,6 @@ class ExperienceGenerationBloc
     on<PostExperienceGenerationEvent>((event, emit) async {
       emit(ExperienceGenerationLoadingState());
 
-      await Future.delayed(const Duration(seconds: 5));
       final response = await experienceGenerationUsecase.call(event);
 
       if (response is String) {

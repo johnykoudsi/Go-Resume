@@ -17,7 +17,9 @@ final class AddNewJobEvent extends AddJobEvent {
     required this.jobTypes,
     required this.experienceYears,
     required this.workFieldId,
-    required this.benefits
+    required this.benefits,
+    this.minExpectedSalary = 0,
+    this.maxExpectedSalary = 0,
   });
   String position;
   String description;
@@ -31,12 +33,14 @@ final class AddNewJobEvent extends AddJobEvent {
   num experienceYears;
   int workFieldId;
   List<int> benefits;
+  num minExpectedSalary;
+  num maxExpectedSalary;
   Map<String, String> toMapBody() {
     Map<String, String> map = {
       "position": position,
       "description": description,
       "start_date": startDate,
-      "gender":genderEnum.name,
+      "gender": genderEnum.name,
       "min_salary": minSalary.toString(),
       "max_salary": maxSalary.toString(),
       "compensation": compensation.name,
@@ -44,6 +48,8 @@ final class AddNewJobEvent extends AddJobEvent {
       "work_hours": workHours.toString(),
       "experience_years": experienceYears.toString(),
       "work_field_id": workFieldId.toString(),
+      "expected_min_salary": minExpectedSalary.toString(),
+      "expected_max_salary": maxExpectedSalary.toString(),
     };
 
     if (benefits.isNotEmpty) {
@@ -53,9 +59,10 @@ final class AddNewJobEvent extends AddJobEvent {
     }
 
     // Remove entries with null or empty values
-    map.removeWhere((key, value) => value.isEmpty || value=="none");
+    map.removeWhere((key, value) => value.isEmpty || value == "none");
     return map;
   }
+
   @override
   List<Object> get props => [
         position,

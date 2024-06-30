@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
+import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
@@ -318,39 +319,66 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   ),
                 ],
               ),
-              widget.jobEntity.description != ""?
-              Column(
-                children: [
-                  SizedBox(
-                    height: screenHeight * 0.02,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        AppStrings.description,
-                        style: AppFontStyles.boldH5.copyWith(color: Colors.red),
-                      ),
-                      SizedBox(
-                        height: screenHeight * 0.01,
-                      ),
-                      const Row(
-                        children: [
-                          Text(
-                            "⚡",
-                            style: AppFontStyles.mediumH5,
-                          ),
-                          Text(
-                            "Requirements:",
-                            style: AppFontStyles.mediumH5,
-                          ),
-                        ],
-                      ),
-                      DescriptionItemWidget(description: widget.jobEntity.description),
-                    ],
-                  ),
-                ],
-              ):SizedBox(),
-
+              SizedBox(
+                height: screenHeight * 0.03,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.kGreyColor),
+                    borderRadius: AppBorders.k8BorderRadius),
+                padding: const EdgeInsets.all(15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Salary Expectation",
+                        style: AppFontStyles.boldH4),
+                    Text(
+                      "${NumberFormat.decimalPattern().format(widget.jobEntity.minExpected)} M SYP"
+                      " - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxExpected)} M SYP",
+                      style: AppFontStyles.mediumH5,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              if (widget.jobEntity.description != "")
+                Column(
+                  children: [
+                    SizedBox(
+                      height: screenHeight * 0.02,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          AppStrings.description,
+                          style:
+                              AppFontStyles.boldH5.copyWith(color: Colors.red),
+                        ),
+                        SizedBox(
+                          height: screenHeight * 0.01,
+                        ),
+                        const Row(
+                          children: [
+                            Text(
+                              "⚡",
+                              style: AppFontStyles.mediumH5,
+                            ),
+                            Text(
+                              "Requirements:",
+                              style: AppFontStyles.mediumH5,
+                            ),
+                          ],
+                        ),
+                        DescriptionItemWidget(
+                            description: widget.jobEntity.description),
+                      ],
+                    ),
+                  ],
+                )
+              else
+                const SizedBox(),
               isCompany
                   ? BlocBuilder<GetJobApplicantsBloc, GetJobApplicantsState>(
                       builder: (context, state) {
@@ -421,18 +449,26 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     if (state.user.data.applicant != null) {
                       return BlocBuilder<ApplyForJobBloc, ApplyForJobState>(
                         builder: (applyForJobContext, applyForJobState) {
-                          if(applyForJobState is IsAppliedToJobResponseState){
-                            if(applyForJobState.isAppliedTo){return const SizedBox.shrink();}else{
+                          if (applyForJobState is IsAppliedToJobResponseState) {
+                            if (applyForJobState.isAppliedTo) {
+                              return const SizedBox.shrink();
+                            } else {
                               return ElevatedButtonWidget(
-                                isLoading: applyForJobState is ApplyForJobLoadingState,
+                                isLoading:
+                                    applyForJobState is ApplyForJobLoadingState,
                                 title: "Apply",
                                 onPressed: () {
-                                  applyForJobContext.read<ApplyForJobBloc>().add(
-                                      ApplyForJobApiEvent(id: widget.jobEntity.id));
+                                  applyForJobContext
+                                      .read<ApplyForJobBloc>()
+                                      .add(ApplyForJobApiEvent(
+                                          id: widget.jobEntity.id));
                                 },
                               );
                             }
-                          }else{return const Center(child: CircularProgressIndicator());}
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
                         },
                       );
                     }

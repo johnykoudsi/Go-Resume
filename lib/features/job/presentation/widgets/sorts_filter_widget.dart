@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/filter_spacing_widget.dart';
 import 'handle_widget.dart';
@@ -29,9 +30,8 @@ class SortsFilterWidget extends StatelessWidget {
                       horizontal: 22),
                   child: Text(
                     "Sorts".tr(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4,
+                    style: AppFontStyles.regularH4,
+
                   ),
                 ),
                 Column(

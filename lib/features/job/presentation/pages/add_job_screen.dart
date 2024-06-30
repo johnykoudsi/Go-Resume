@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget_border.dart';
+import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
@@ -299,6 +301,26 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 ),
                 BlocBuilder<SalaryExpectationBloc, SalaryExpectationState>(
                   builder: (context, state) {
+                    if (state is GetSalaryDoneState) {
+                      return Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.kGreyColor),
+                            borderRadius: AppBorders.k8BorderRadius),
+                        padding: const EdgeInsets.all(15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text("Salary Expectation",
+                                style: AppFontStyles.boldH4),
+                            Text(
+                              "${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.minSalary)} M SYP"
+                              " - ${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.maxSalary)} M SYP",
+                              style: AppFontStyles.mediumH5,
+                            ),
+                          ],
+                        ),
+                      );
+                    }
                     return ElevatedButtonBorderWidget(
                       title: "Get Expected Salary",
                       isLoading: state is GetSalaryLoadingState,
@@ -354,8 +376,20 @@ class _AddJobScreenState extends State<AddJobScreen> {
                             _selectedWorkField == null) {
                           return;
                         }
+                        num minExpected = 0;
+                        num maxExpected = 0;
+                        final salaryExpectationState =
+                            context.read<SalaryExpectationBloc>().state;
+                        if (salaryExpectationState is GetSalaryDoneState) {
+                          minExpected = salaryExpectationState
+                              .salaryExpectationEntity.minSalary;
+                          maxExpected = salaryExpectationState
+                              .salaryExpectationEntity.maxSalary;
+                        }
                         context.read<AddJobBloc>().add(
                               AddNewJobEvent(
+                                minExpectedSalary: minExpected,
+                                maxExpectedSalary: maxExpected,
                                 position: positionController.text,
                                 description: descriptionController.text,
                                 startDate: selectedDate.toString(),

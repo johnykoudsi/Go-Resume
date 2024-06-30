@@ -86,7 +86,8 @@ class ApplicantProfileDataSource {
       Map responseDummy = {
         "about_me": "## About Me\n\nHighly motivated Software Engineer with a strong background in agile methodologies and software development best practices. I am proficient in problem-solving, collaboration, communication, and data management. I am passionate about clean architecture, database optimization, and fast-paced learning. I am eager to join a team where I can utilize my skills and contribute to the creation of exceptional software solutions."
       };
-      return responseDummy["about_me"];
+      return json.decode(helperResponse.response)["about_me"];
+
     } catch (e) {
       return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError);

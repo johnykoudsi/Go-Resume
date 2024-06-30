@@ -30,30 +30,22 @@ final class GetSalaryEvent extends SalaryExpectationEvent {
   num experienceYears;
   int workFieldId;
   List<int> benefits;
-  Map<String, String> toMapBody() {
-    Map<String, String> map = {
+  Map<String, dynamic> toMapBody() {
+    Map<String, dynamic> map = {
       "Company Size Category": benefits.length > 2 ? "Medium" : "Small",
-      "Qualifications": "",
-      "Sector": "",
-      "skills": "",
+      "Qualifications": "s",
+      "Sector": "s",
+      "skills": "s",
+      "Industry": "s",
       "Job Title": position,
       "Role": description,
       "Preference": genderEnum.name,
       "Work Type": jobTypes.name,
-      "AvgExperience": experienceYears.toString(),
-      "Industry": workFieldId.toString(),
-      "Posting Year": DateTime.now().year.toString(),
-      "Posting Month": DateTime.now().month.toString(),
+      "AvgExperience": experienceYears,
+      "Posting Year": DateTime.now().year,
+      "Posting Month": DateTime.now().month,
     };
-
-    if (benefits.isNotEmpty) {
-      for (int i = 0; i < benefits.length; i++) {
-        map["benefits[$i]"] = benefits[i].toString();
-      }
-    }
-
     // Remove entries with null or empty values
-    map.removeWhere((key, value) => value.isEmpty || value == "none");
     return map;
   }
 

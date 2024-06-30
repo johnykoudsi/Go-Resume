@@ -25,6 +25,8 @@ class JobEntity {
   int workFieldId;
   DateTime? createdAt;
   List<BenefitEntity> benefits;
+  num minExpected;
+  num maxExpected;
 
   JobEntity({
     this.id = -1,
@@ -45,6 +47,8 @@ class JobEntity {
     this.workFieldId = -1,
     this.createdAt,
     this.benefits = const [],
+    this.minExpected = 0,
+    this.maxExpected = 0,
   });
 
   factory JobEntity.fromJson(Map<String, dynamic> json) => JobEntity(
@@ -72,12 +76,13 @@ class JobEntity {
         compensation: json["compensation"] ?? "",
         description: json["description"] ?? '',
         workFieldId: json["work_field_id"] ?? 0,
+        minExpected: json["expected_min_salary"] ?? 0,
+        maxExpected: json["expected_max_salary"] ?? 0,
         createdAt:
             DateTime.tryParse(json["created_at"] ?? '') ?? DateTime(1970),
         benefits: json["benefits"] != null
             ? List<BenefitEntity>.from(
                 json["benefits"].map((x) => BenefitEntity.fromJson(x)))
             : [],
-
       );
 }

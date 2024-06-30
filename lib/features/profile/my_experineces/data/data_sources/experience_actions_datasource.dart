@@ -40,9 +40,10 @@ class ExperienceActionsDataSource {
     try {
       Map responseDummy = {
         "work-experience":
-        "Software Engineer | Mobile Developer (90soft)\n\n- Develop and maintain mobile applications using Agile methodologies.\n- Collaborate effectively with cross-functional teams, including Scrum teams, to solve complex mobile development challenges.\n- Demonstrate strong problem-solving skills and ability to think creatively.\n- Effectively communicate with both technical and non-technical stakeholders.\n- Manage and maintain a clean codebase using best practices.\n- Stay up-to-date on the latest software development technologies and trends."
+            "Software Engineer | Mobile Developer (90soft)\n\n- Develop and maintain mobile applications using Agile methodologies.\n- Collaborate effectively with cross-functional teams, including Scrum teams, to solve complex mobile development challenges.\n- Demonstrate strong problem-solving skills and ability to think creatively.\n- Effectively communicate with both technical and non-technical stakeholders.\n- Manage and maintain a clean codebase using best practices.\n- Stay up-to-date on the latest software development technologies and trends."
       };
-      return responseDummy["work-experience"];
+
+      return json.decode(helperResponse.response)["work-experience"];
     } catch (e) {
       return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError);

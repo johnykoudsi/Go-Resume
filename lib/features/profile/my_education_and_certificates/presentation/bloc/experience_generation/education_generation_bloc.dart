@@ -20,7 +20,6 @@ class EducationGenerationBloc
     on<PostEducationGenerationEvent>((event, emit) async {
       emit(EducationGenerationLoadingState());
 
-      await Future.delayed(const Duration(seconds: 5));
       final response = await educationGenerationUsecase.call(event);
 
       if (response is String) {

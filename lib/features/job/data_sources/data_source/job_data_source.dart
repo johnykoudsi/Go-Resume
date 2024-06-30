@@ -251,6 +251,7 @@ class JobDataSource {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       mainUrl: EndPoints.aiMainUrl,
       url: EndPoints.salaryPrediction,
+      body: json.encode(event.toMapBody()),
     );
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {

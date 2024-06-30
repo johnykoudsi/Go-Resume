@@ -20,7 +20,6 @@ class BioGenerationBloc extends Bloc<BioGenerationEvent, BioGenerationState> {
     on<PostBioGenerationEvent>((event, emit) async {
       emit(BioGenerationLoadingState());
 
-      await Future.delayed(const Duration(seconds: 5));
       final response = await bioGenerationUsecase.call(event);
 
       if (response is String) {
