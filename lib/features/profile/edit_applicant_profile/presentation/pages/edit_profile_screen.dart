@@ -287,6 +287,7 @@ class _EditApplicantProfileScreenState
                             facebook: facebookController.text,
                             linkedin: linkedinController.text,
                             email: emailController.text,
+                        cityId: _selectedCity?.id.toString(),
                           ));
                     },
                   );

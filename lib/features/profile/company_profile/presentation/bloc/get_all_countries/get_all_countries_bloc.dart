@@ -23,7 +23,7 @@ class GetAllCountriesBloc extends Bloc<GetAllCountriesEvent, GetAllCountriesStat
       final response = await usecase.call(event);
 
       if (response is WelcomeCountries) {
-        emit(GetCountriesDoneState(countries: response.data.data));
+        emit(GetCountriesDoneState(countries: response.data));
       } else {
         emit(GetCountriesErrorState(helperResponse: response));
       }

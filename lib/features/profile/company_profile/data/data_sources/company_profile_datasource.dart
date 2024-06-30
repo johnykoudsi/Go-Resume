@@ -159,7 +159,7 @@ class CompanyProfileDataSource {
     );
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        return welcomeCountriesFromJson(helperResponse.response);
+        return welcomeCountriesEntityFromJson(helperResponse.response);
       } catch (e) {
         return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError,

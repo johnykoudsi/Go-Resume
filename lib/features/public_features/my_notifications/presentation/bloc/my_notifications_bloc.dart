@@ -44,7 +44,6 @@ class MyNotificationsBloc
         if (getMyNotifications.isNotEmpty) {
           // copy previous state
           if (currentState is MyNotificationsLoadedState) {
-            print("kkkkkkk");
             print(currentState.notifications);
             emit(currentState.copyWith(
                 notifications: List.of(currentState.notifications)

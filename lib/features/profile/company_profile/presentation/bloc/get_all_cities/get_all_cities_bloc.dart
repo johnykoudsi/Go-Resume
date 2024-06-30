@@ -23,7 +23,7 @@ class GetAllCitiesBloc extends Bloc<GetAllCitiesEvent, GetAllCitiesState> {
       final response = await usecase.call(event);
 
       if (response is WelcomeCities) {
-        emit(GetCitiesDoneState(cities: response.data.data));
+        emit(GetCitiesDoneState(cities: response.data));
       } else {
         emit(GetCitiesErrorState(helperResponse: response));
       }

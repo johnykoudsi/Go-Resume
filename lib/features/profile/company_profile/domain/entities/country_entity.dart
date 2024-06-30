@@ -1,37 +1,34 @@
+// To parse this JSON data, do
+//
+//     final welcomeCountriesEntity = welcomeCountriesEntityFromJson(jsonString);
+
 import 'dart:convert';
 
-WelcomeCountries welcomeCountriesFromJson(String str) => WelcomeCountries.fromJson(json.decode(str));
+WelcomeCountries welcomeCountriesEntityFromJson(String str) => WelcomeCountries.fromJson(json.decode(str));
 
-String welcomeCountriesToJson(WelcomeCountries data) => json.encode(data.toJson());
+String welcomeCountriesEntityToJson(WelcomeCountries data) => json.encode(data.toJson());
 
 class WelcomeCountries {
-  Data data;
+  List<Country> data;
+  String message;
+  int status;
 
   WelcomeCountries({
     required this.data,
+    required this.message,
+    required this.status,
   });
 
   factory WelcomeCountries.fromJson(Map<String, dynamic> json) => WelcomeCountries(
-    data: Data.fromJson(json["data"]),
-
-  );
-
-  Map<String, dynamic> toJson() => {
-    "data": data.toJson(),
-  };
-}
-
-class Data {
-  List<Country> data;
-  Data({
-    required this.data,
-  });
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
     data: List<Country>.from(json["data"].map((x) => Country.fromJson(x))),
+    message: json["message"],
+    status: json["status"],
   );
 
   Map<String, dynamic> toJson() => {
     "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "message": message,
+    "status": status,
   };
 }
 

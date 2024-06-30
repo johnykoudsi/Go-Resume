@@ -26,11 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   PhoneNumber? phoneNumberValue;
-  Future<String?> getFcmToken()async{
-    final NotificationSetUp _noti = NotificationSetUp();
-    final String? token = await FirebaseMessaging.instance.getToken();
-    return token;
-  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -134,13 +129,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           // final _firebaseMessaging = FirebaseMessaging.instance;
                           // await _firebaseMessaging.requestPermission();
-                           String? fcmToken = await getFcmToken();
-                           print(fcmToken.toString());
+
                           if (!_key.currentState!.validate()) {
                             return;
                           }
                           context.read<UserBloc>().add(LoginUserEvent(
-                                fcm_token: fcmToken,
                                 password: passwordController.text,
                                 phoneNumber: phoneNumberValue!.phoneNumber!
                                     .replaceAll("+", ""),
