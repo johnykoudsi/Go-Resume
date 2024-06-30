@@ -10,8 +10,8 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_wi
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
 class JobsHorizontalWidget extends StatefulWidget {
-  const JobsHorizontalWidget({super.key});
-
+  const JobsHorizontalWidget({this.companyId, super.key});
+  final int? companyId;
   @override
   State<JobsHorizontalWidget> createState() => _AllJobsScreenState();
 }
@@ -22,6 +22,7 @@ class _AllJobsScreenState extends State<JobsHorizontalWidget> {
 
   @override
   void initState() {
+    jobFilter = jobFilter.copyWith(companyId: widget.companyId);
     getAllJobsBloc.add(ChangeToLoadingAllJobsEvent());
     super.initState();
   }
@@ -71,7 +72,6 @@ class _AllJobsScreenState extends State<JobsHorizontalWidget> {
                     child: SizedBox(height: 130, child: ShimmerLoader()),
                   );
                 });
-
           }
           return SomethingWrongWidget(
             svgPath: Assets.svgNoInternet,

@@ -8,9 +8,6 @@ import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
 import 'widgets/recruiter_bottom_nav_bar_screens.dart';
 
-
-
-
 class RecruiterBottomNavBar extends StatefulWidget {
   const RecruiterBottomNavBar({Key? key}) : super(key: key);
 
@@ -74,20 +71,20 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
                       widgetIndex: 2,
-                      svgPath: Assets.svgAdd,
-                      selectedIndex: selectedIndex,
-                    ),
-                    label: 'Add'.tr(),
-                    tooltip: 'Add'.tr(),
-                  ),
-                  BottomNavigationBarItem(
-                    icon: CustomNavigatorWidget(
-                      widgetIndex: 3,
                       svgPath: Assets.svgProfile,
                       selectedIndex: selectedIndex,
                     ),
                     label: 'Profile'.tr(),
                     tooltip: 'Profile'.tr(),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: CustomNavigatorWidget(
+                      widgetIndex: 3,
+                      svgPath: Assets.svgAdd,
+                      selectedIndex: selectedIndex,
+                    ),
+                    label: 'Add'.tr(),
+                    tooltip: 'Add'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -104,7 +101,7 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
             body: PageTransitionSwitcher(
               duration: const Duration(milliseconds: 600),
               reverse:
-              context.locale.languageCode == 'ar' ? !isReverse : isReverse,
+                  context.locale.languageCode == 'ar' ? !isReverse : isReverse,
               transitionBuilder: (Widget child, Animation<double> animation,
                   Animation<double> secondaryAnimation) {
                 return SharedAxisTransition(

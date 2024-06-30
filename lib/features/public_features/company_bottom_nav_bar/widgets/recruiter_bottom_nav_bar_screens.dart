@@ -16,7 +16,6 @@ import 'package:smart_recruitment_flutter_user/features/public_features/more/pre
 import '../../../get_user_features/presentation/pages/pinned_applicants_screen.dart';
 import '../../../job/presentation/pages/company_home_page_screen.dart';
 
-
 class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
   const GetSelectedRecruiterScreenByIndex({required this.screenIndex, Key? key})
       : super(key: key);
@@ -29,11 +28,38 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
         return const CompanyHomePageScreen();
       }
       if (screenIndex == 1) {
-        return  const PinnedApplicantsScreen();
+        return const PinnedApplicantsScreen();
       }
       if (screenIndex == 2) {
+        return BlocBuilder<UserBloc, UserState>(
+          builder: (context, state) {
+            if (state is UserLoggedState) {
+              if (state.isRefreshing) {
+                return const Center(child: CircularProgressIndicator());
+              }
+            }
+            if (state is UserLoggedState) {
+              return MultiBlocProvider(
+                providers: [
+                  BlocProvider(
+                    create: (context) => ToggleCompanyBloc(),
+                  ),
+                  BlocProvider(
+                    create: (context) => CompanyProfileBloc(),
+                  ),
+                ],
+                child: CompanyProfileScreen(
+                  user: state.user.data,
+                  visitor: false,
+                ),
+              );
+            }
+            return const SizedBox();
+          },
+        );
+      }
+      if (screenIndex == 3) {
         return MultiBlocProvider(
-
           providers: [
             BlocProvider(
               create: (context) => AddJobBloc(),
@@ -51,33 +77,7 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
           child: const AddJobScreen(),
         );
       }
-      if (screenIndex == 3) {
-        return BlocBuilder<UserBloc, UserState>(
-          builder: (context, state) {
-            if (state is UserLoggedState) {
-              if (state.isRefreshing) {
-                return const Center(child: CircularProgressIndicator());
-              }
-            }
-            if (state is UserLoggedState) {
-              return MultiBlocProvider(
-                providers: [
-                  BlocProvider(
-                    create: (context) => ToggleCompanyBloc(),
-                  ),     BlocProvider(
-                    create: (context) => CompanyProfileBloc(),
-                  ),
-                ],
-                child:  CompanyProfileScreen(
-                  user: state.user.data,
-                  visitor: false,
-                ),
-              );
-            }
-            return const SizedBox();
-          },
-        );
-      }
+
       if (screenIndex == 4) {
         return BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
