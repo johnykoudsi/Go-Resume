@@ -11,29 +11,22 @@ import '../../presentation/bloc/my_notifications_bloc.dart';
 class MyNotificationsDataSource {
   MyNotificationsDataSource(this.networkHelpers);
   NetworkHelpers networkHelpers;
+  Future getMyNotificationsDataSource({required GetMyNotificationsEvent event}) async {
+    String queryString =
+        Uri(queryParameters: event.searchFilterProperties.toJson()).query;
+    String urlWithParams = "${EndPoints.getMyNotifications}?$queryString";
 
-  Future getMyNotificationsDataSource({
-    required GetMyNotificationsEvent event,
-  }) async {
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
-      url: EndPoints.getMyNotifications(
-        page: event.searchFilterProperties.page,
-        limit: kGetLimit,
-      ),
+      url: urlWithParams,
       useUserToken: true,
     );
-    print(helperResponse.servicesResponse);
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        int total = json.decode(helperResponse.response)["total"];
-        if (total == 0) {
-          return 0;
-        }
-
-        final data = welcomeNotificationsFromJson(helperResponse.response);
-
-        return data.data;
+        final data = json.decode(helperResponse.response)["data"];
+        print("jjjjjjjj");
+        print(data.toString());
+        return  List<NotificationEntity>.from(data.map((x) => NotificationEntity.fromJson(x)));
       } catch (e) {
         return helperResponse.copyWith(
             servicesResponse: ServicesResponseStatues.modelError);
@@ -41,4 +34,6 @@ class MyNotificationsDataSource {
     }
     return helperResponse;
   }
+
+
 }

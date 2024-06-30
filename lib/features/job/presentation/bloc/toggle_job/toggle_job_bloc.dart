@@ -38,19 +38,15 @@ class ToggleJobBloc extends Bloc<ToggleJobEvent, ToggleJobState> {
       emit(ToggleJobLoadingState());
       dynamic isSavedResponse;
       isSavedResponse = await getJobStatusUseCase.call(event);
-      // if (isSavedResponse is int) {
       bool isSaved = isSavedResponse == 0 ? false : true;
       emit(ToggleJobLoadedState(isSaved: isSaved));
-      //  }
     });
     on<GetJobClosedStatusEvent>((event, emit) async {
       emit(ToggleJobLoadingState());
       dynamic isClosedResponse;
       isClosedResponse = await getJobClosedStatusUseCase.call(event);
-      // if (isSavedResponse is int) {
       bool isClosed = isClosedResponse == 0 ? false : true;
       emit(ToggleJobLoadedState(isSaved: isClosed));
-      //  }
     });
   }
 }

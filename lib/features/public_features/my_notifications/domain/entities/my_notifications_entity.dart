@@ -4,9 +4,10 @@
 
 import 'dart:convert';
 
+import '../../../../../utility/constant_logic_validation.dart';
+
 WelcomeNotifications welcomeNotificationsFromJson(String str) => WelcomeNotifications.fromJson(json.decode(str));
 
-String welcomeNotificationsToJson(WelcomeNotifications data) => json.encode(data.toJson());
 
 class WelcomeNotifications {
   int currentPage;
@@ -55,61 +56,39 @@ class WelcomeNotifications {
     total: json["total"],
   );
 
-  Map<String, dynamic> toJson() => {
-    "current_page": currentPage,
-    "data": List<dynamic>.from(data.map((x) => x.toJson())),
-    "first_page_url": firstPageUrl,
-    "from": from,
-    "last_page": lastPage,
-    "last_page_url": lastPageUrl,
-    "links": List<dynamic>.from(links.map((x) => x.toJson())),
-    "next_page_url": nextPageUrl,
-    "path": path,
-    "per_page": perPage,
-    "prev_page_url": prevPageUrl,
-    "to": to,
-    "total": total,
-  };
+
 }
 
 class NotificationEntity {
   int id;
   String title;
-  dynamic body;
-  dynamic image;
+  String body;
+  String userImage;
+  int isRead;
   DateTime createdAt;
-  DateTime updatedAt;
-  Pivot pivot;
+  dynamic image;
 
   NotificationEntity({
     required this.id,
     required this.title,
     required this.body,
-    required this.image,
+    required this.userImage,
+    required this.isRead,
     required this.createdAt,
-    required this.updatedAt,
-    required this.pivot,
+    required this.image,
   });
 
   factory NotificationEntity.fromJson(Map<String, dynamic> json) => NotificationEntity(
     id: json["id"],
     title: json["title"],
     body: json["body"],
-    image: json["image"],
+    userImage: json["user_image"],
+    isRead: json["is_read"],
     createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
-    pivot: Pivot.fromJson(json["pivot"]),
+    image: json["image"],
   );
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "title": title,
-    "body": body,
-    "image": image,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
-    "pivot": pivot.toJson(),
-  };
+
 }
 
 class Pivot {
@@ -165,4 +144,13 @@ class NotificationsSearchFilter {
       NotificationsSearchFilter(
         page: page ?? this.page,
       );
+
+  Map<String, String> toJson() {
+    Map<String, String> map = {
+      "page": page.toString(),
+      "items_per_page": kGetLimit.toString(),
+    }..removeWhere(
+            (key, value) =>  value == "null" || value == "");
+    return map;
+  }
 }

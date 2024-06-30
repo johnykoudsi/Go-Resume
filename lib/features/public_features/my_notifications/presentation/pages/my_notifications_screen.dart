@@ -29,7 +29,7 @@ class _MyNotificationState extends State<MyNotification> {
 
   @override
   void initState() {
-    myNotificationsBloc.add(ChangeToLoadingMyNotificationsEvent(searchFilterProperties: searchFilter));
+    myNotificationsBloc.add(ChangeToLoadingMyNotificationsEvent());
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
