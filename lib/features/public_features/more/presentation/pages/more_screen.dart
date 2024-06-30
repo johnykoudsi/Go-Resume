@@ -46,28 +46,28 @@ class _MoreScreenState extends State<MoreScreen> {
                 topPadding: screenHeight * 0.55,
                 onTap: user.company == null
                     ? () {
-                  Navigator.of(context)
-                      .pushNamed(AppRoutes.mySubmissions);
-                }
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.mySubmissions);
+                      }
                     : () {
-                  Navigator.of(context).pushNamed(AppRoutes.myJobs,
-                      arguments: user = user);
-                },
+                        Navigator.of(context).pushNamed(AppRoutes.myJobs,
+                            arguments: user = user);
+                      },
               ),
-              MoreItemsWidget(
-                  iconPath: Assets.svgSave,
-                  text: AppStrings.savedJobs,
-                  topPadding: screenHeight * 0.65,
-                  onTap: () {
-                    Navigator.of(context).pushNamed(AppRoutes.savedJobs);
-                  }),
+              if (user.company == null)
+                MoreItemsWidget(
+                    iconPath: Assets.svgSave,
+                    text: AppStrings.savedJobs,
+                    topPadding: screenHeight * 0.65,
+                    onTap: () {
+                      Navigator.of(context).pushNamed(AppRoutes.savedJobs);
+                    }),
               MoreItemsWidget(
                   iconPath: Assets.svgNotification,
                   text: AppStrings.notifications,
                   topPadding: screenHeight * 0.75,
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(AppRoutes.myNotifications);
+                    Navigator.of(context).pushNamed(AppRoutes.myNotifications);
                   }),
               MoreItemsWidget(
                 iconPath: Assets.svgLanguage,
@@ -91,8 +91,7 @@ class _MoreScreenState extends State<MoreScreen> {
                       onYesTap: () {
                         context.read<UserBloc>().add(LogoutEvent());
                         Navigator.of(context).pushNamedAndRemoveUntil(
-                            AppRoutes.login,
-                                (Route<dynamic> route) => false);
+                            AppRoutes.login, (Route<dynamic> route) => false);
                       },
                       onNoTap: () {
                         Navigator.of(context).pop();

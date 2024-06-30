@@ -376,8 +376,8 @@ class _AddJobScreenState extends State<AddJobScreen> {
                             _selectedWorkField == null) {
                           return;
                         }
-                        num minExpected = 0;
-                        num maxExpected = 0;
+                        num? minExpected;
+                        num? maxExpected;
                         final salaryExpectationState =
                             context.read<SalaryExpectationBloc>().state;
                         if (salaryExpectationState is GetSalaryDoneState) {

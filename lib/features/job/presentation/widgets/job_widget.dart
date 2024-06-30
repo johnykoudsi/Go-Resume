@@ -47,8 +47,8 @@ class JobWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Spacer(),
-                             IconButton(
-                                onPressed: () {}, icon: const Icon(Icons.edit))
+                        IconButton(
+                            onPressed: () {}, icon: const Icon(Icons.edit))
                       ],
                     )
                   : const SizedBox(),
@@ -56,12 +56,13 @@ class JobWidget extends StatelessWidget {
                 jobEntity.position,
                 style: AppFontStyles.boldH5,
               ),
-               Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${jobEntity.minSalary} - ${jobEntity.maxSalary} SYP",
-                    style: AppFontStyles.mediumH5,
+                    "${NumberFormat.decimalPattern().format(jobEntity.minSalary)} SYP"
+                    " - ${NumberFormat.decimalPattern().format(jobEntity.maxSalary)} SYP",
+                    style: AppFontStyles.mediumH6,
                   ),
                   Text(
                     jobTypesUi.reverse[jobEntity.type] ?? '',

@@ -18,8 +18,8 @@ final class AddNewJobEvent extends AddJobEvent {
     required this.experienceYears,
     required this.workFieldId,
     required this.benefits,
-    this.minExpectedSalary = 0,
-    this.maxExpectedSalary = 0,
+    this.minExpectedSalary ,
+    this.maxExpectedSalary,
   });
   String position;
   String description;
@@ -33,8 +33,8 @@ final class AddNewJobEvent extends AddJobEvent {
   num experienceYears;
   int workFieldId;
   List<int> benefits;
-  num minExpectedSalary;
-  num maxExpectedSalary;
+  num? minExpectedSalary;
+  num? maxExpectedSalary;
   Map<String, String> toMapBody() {
     Map<String, String> map = {
       "position": position,
@@ -50,7 +50,7 @@ final class AddNewJobEvent extends AddJobEvent {
       "work_field_id": workFieldId.toString(),
       "expected_min_salary": minExpectedSalary.toString(),
       "expected_max_salary": maxExpectedSalary.toString(),
-    };
+    }..removeWhere((key, value) => value == null || value == "null");
 
     if (benefits.isNotEmpty) {
       for (int i = 0; i < benefits.length; i++) {

@@ -154,8 +154,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                   Text(
-                    widget.jobEntity.city != ""?
-                    widget.jobEntity.city  +" - "+ widget.jobEntity.country:"",
+                    widget.jobEntity.city != ""
+                        ? "${widget.jobEntity.city} - ${widget.jobEntity.country}"
+                        : "",
                     style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
                   ),
                 ],
@@ -359,7 +360,6 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         SizedBox(
                           height: screenHeight * 0.01,
                         ),
-
                       ],
                     ),
                     const Row(
