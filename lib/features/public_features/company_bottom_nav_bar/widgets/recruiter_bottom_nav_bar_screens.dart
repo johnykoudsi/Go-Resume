@@ -4,6 +4,7 @@ import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/add_job/add_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/benefits/benefits_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/salary_expectation/salary_expectation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/work_fields/work_fields_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/add_job_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/my_jobs_screen.dart';
@@ -42,6 +43,9 @@ class GetSelectedRecruiterScreenByIndex extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => WorkFieldsBloc(),
+            ),
+            BlocProvider(
+              create: (context) => SalaryExpectationBloc(),
             ),
           ],
           child: const AddJobScreen(),
