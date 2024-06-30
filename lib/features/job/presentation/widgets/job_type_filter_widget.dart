@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
 
 
@@ -18,7 +19,7 @@ class JobTypeFilterWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 22),
           child: Text(
             "Job Type".tr(),
-            style: Theme.of(context).textTheme.headline4,
+            style: AppFontStyles.regularH4,
           ),
         ),
         Column(
