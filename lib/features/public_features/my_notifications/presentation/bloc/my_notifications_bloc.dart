@@ -72,7 +72,13 @@ class MyNotificationsBloc
             ));
           }
         }
-      }else {
+      }if(getMyNotifications ==0){
+        emit(MyNotificationsLoadedState(
+          hasReachedMax: true,
+        ));
+      }
+
+      else {
         emit(MyNotificationsErrorState(helperResponse: getMyNotifications));
       }
     });
