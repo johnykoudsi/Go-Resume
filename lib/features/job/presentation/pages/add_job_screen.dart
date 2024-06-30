@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
+import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget_border.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/work_field_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/add_job/add_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/benefits/benefits_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/salary_expectation/salary_expectation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/benefits_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/compensation_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/date_picker_widget.dart';
@@ -106,13 +108,12 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   onlyNumber: false,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return AppStrings.position+AppStrings.isRequired;
+                      return AppStrings.position + AppStrings.isRequired;
                     }
                     return null;
                   },
                   hintText: 'Example: Software Engineer',
                 ),
-
                 SizedBox(
                   height: heightBetweenFields,
                 ),
@@ -239,24 +240,23 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   height: heightBetweenFields * 2,
                 ),
                 BlocBuilder<WorkFieldsBloc, WorkFieldsState>(
-                  builder: (context, state) {
-                    if (state is WorkFieldsInitial) {
-                      return ShimmerLoader(
-                        height: screenHeight * 0.05,
-                        width: screenWidth * 0.4,
-                      );
-                    }
-                    else if(state is WorkFieldsDoneState){
-                      return SearchableDropDownWidget(
-                        items: state.workFields,
-                        selectedItem: _selectedWorkField,
-                        onSelect: _handleSelectedWorkField,
-                        title: 'Work Field',
-                      );
-                    }
-                    else{return const SizedBox();}
+                    builder: (context, state) {
+                  if (state is WorkFieldsInitial) {
+                    return ShimmerLoader(
+                      height: screenHeight * 0.05,
+                      width: screenWidth * 0.4,
+                    );
+                  } else if (state is WorkFieldsDoneState) {
+                    return SearchableDropDownWidget(
+                      items: state.workFields,
+                      selectedItem: _selectedWorkField,
+                      onSelect: _handleSelectedWorkField,
+                      title: 'Work Field',
+                    );
+                  } else {
+                    return const SizedBox();
                   }
-                ),
+                }),
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
@@ -283,7 +283,6 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
-
                 const Text(
                   'Preferred Gender',
                   style: AppFontStyles.mediumH5,
@@ -298,11 +297,46 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
-                ElevatedButtonWidget(
-                  gradientColor: AppColors.kDarkLinearColor,
-                  title: "Get Expected Salary",
-                  onPressed: () {
-                    print(minimumSalaryController.text.replaceAll(",", ""));
+                BlocBuilder<SalaryExpectationBloc, SalaryExpectationState>(
+                  builder: (context, state) {
+                    return ElevatedButtonBorderWidget(
+                      title: "Get Expected Salary",
+                      isLoading: state is GetSalaryLoadingState,
+                      onPressed: () {
+                        if (!_key.currentState!.validate() ||
+                            selectedDate == null ||
+                            selectedJobType == null ||
+                            _selectedWorkField == null) {
+                          return;
+                        }
+                        context.read<SalaryExpectationBloc>().add(
+                              GetSalaryEvent(
+                                position: positionController.text,
+                                description: descriptionController.text,
+                                startDate: selectedDate.toString(),
+                                compensation: selectedCompensation!,
+                                genderEnum: selectedGender,
+                                maxSalary: num.tryParse(maximumSalaryController
+                                        .text
+                                        .replaceAll(",", "")) ??
+                                    0,
+                                minSalary: num.tryParse(minimumSalaryController
+                                        .text
+                                        .replaceAll(",", "")) ??
+                                    0,
+                                workHours: int.parse(workHoursController.text),
+                                jobTypes: selectedJobType!,
+                                experienceYears:
+                                    int.parse(experienceYearsController.text),
+                                workFieldId: _selectedWorkField!.id,
+                                //  benefits: [1],
+                                benefits: _selectedBenefits
+                                    .map((benefit) => benefit.id)
+                                    .toList(),
+                              ),
+                            );
+                      },
+                    );
                   },
                 ),
                 SizedBox(
@@ -314,10 +348,10 @@ class _AddJobScreenState extends State<AddJobScreen> {
                       isLoading: state is AddJobLoadingState,
                       title: "Submit",
                       onPressed: () {
-                        if (!_key.currentState!.validate() &&
-                            selectedDate != null && selectedJobType != null
-                        && _selectedWorkField != null
-                        ) {
+                        if (!_key.currentState!.validate() ||
+                            selectedDate == null ||
+                            selectedJobType == null ||
+                            _selectedWorkField == null) {
                           return;
                         }
                         context.read<AddJobBloc>().add(
@@ -327,15 +361,18 @@ class _AddJobScreenState extends State<AddJobScreen> {
                                 startDate: selectedDate.toString(),
                                 compensation: selectedCompensation!,
                                 genderEnum: selectedGender,
-                                maxSalary: num.tryParse(
-                                        maximumSalaryController.text.replaceAll(",", "")) ??
+                                maxSalary: num.tryParse(maximumSalaryController
+                                        .text
+                                        .replaceAll(",", "")) ??
                                     0,
-                                minSalary: num.tryParse(
-                                    minimumSalaryController.text.replaceAll(",", "")) ??
+                                minSalary: num.tryParse(minimumSalaryController
+                                        .text
+                                        .replaceAll(",", "")) ??
                                     0,
                                 workHours: int.parse(workHoursController.text),
                                 jobTypes: selectedJobType!,
-                                experienceYears: int.parse(experienceYearsController.text),
+                                experienceYears:
+                                    int.parse(experienceYearsController.text),
                                 workFieldId: _selectedWorkField!.id,
                                 //  benefits: [1],
                                 benefits: _selectedBenefits
