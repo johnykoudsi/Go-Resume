@@ -12,7 +12,7 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
-	<key>CFBundleName</key>
+	<key>Go Resume</key>
 	<string>smart_recruitment_flutter_user</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>

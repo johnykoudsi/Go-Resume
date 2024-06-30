@@ -43,8 +43,6 @@ class ApplicantProfileDataSource {
       useUserToken: true,
       url: EndPoints.pinApplicantToggle(id: toggleApplicantApiEvent.id),
     );
-    print("jjjjjjjjjjj");
-    print(toggleApplicantApiEvent.id);
     print(helperResponse.response.toString());
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {

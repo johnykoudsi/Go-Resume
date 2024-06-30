@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
-        android:label="smart_recruitment_flutter_user"
+        android:label="Go Resume"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
