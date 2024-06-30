@@ -69,4 +69,9 @@ class JobRepoImpl extends JobRepo {
     return jobDataSource.getJobClosedStatus(event: getJobClosedStatusEvent);
 
   }
+
+  @override
+  Future isAppliedToJob(IsAppliedToJobEvent isAppliedToJobEvent) {
+    return jobDataSource.isAppliedToJob(event: isAppliedToJobEvent);
+  }
 }

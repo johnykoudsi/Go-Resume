@@ -19,4 +19,5 @@ abstract class JobRepo {
   Future getJobStatus(GetJobStatusEvent getJobStatusEvent);
   Future getJobClosedStatus(GetJobClosedStatusEvent getJobClosedStatusEvent);
   Future getJobApplicants(GetJobApplicantsSearchEvent getJobApplicantsSearchEvent);
+  Future isAppliedToJob(IsAppliedToJobEvent isAppliedToJobEvent);
 }

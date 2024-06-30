@@ -74,6 +74,24 @@ class JobDataSource {
     }
     return helperResponse;
   }
+  Future isAppliedToJob({
+    required IsAppliedToJobEvent event,
+  }) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: EndPoints.isAppliedToJob(id: event.id),
+      useUserToken: true,
+    );
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final isAppliedTo = json.decode(helperResponse.response)["data"]["is_applied_to"];
+        return helperResponse;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
+    return helperResponse;
+  }
   Future getJobClosedStatus({
     required GetJobClosedStatusEvent event,
   }) async {

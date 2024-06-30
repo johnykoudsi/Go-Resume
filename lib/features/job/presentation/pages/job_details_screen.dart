@@ -47,6 +47,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
       context
           .read<ToggleJobBloc>()
           .add(GetJobStatusEvent(id: widget.jobEntity.id));
+
+      context
+          .read<ApplyForJobBloc>()
+          .add(IsAppliedToJobEvent(id: widget.jobEntity.id));
     }
 
     super.initState();
@@ -416,15 +420,19 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   if (state is UserLoggedState) {
                     if (state.user.data.applicant != null) {
                       return BlocBuilder<ApplyForJobBloc, ApplyForJobState>(
-                        builder: (context2, state2) {
-                          return ElevatedButtonWidget(
-                            isLoading: state2 is ApplyForJobLoadingState,
-                            title: "Apply",
-                            onPressed: () {
-                              context2.read<ApplyForJobBloc>().add(
-                                  ApplyForJobApiEvent(id: widget.jobEntity.id));
-                            },
-                          );
+                        builder: (applyForJobContext, applyForJobState) {
+                          if(applyForJobState is IsAppliedToJobResponseState){
+                            if(applyForJobState.isAppliedTo){return const SizedBox.shrink();}else{
+                              return ElevatedButtonWidget(
+                                isLoading: applyForJobState is ApplyForJobLoadingState,
+                                title: "Apply",
+                                onPressed: () {
+                                  applyForJobContext.read<ApplyForJobBloc>().add(
+                                      ApplyForJobApiEvent(id: widget.jobEntity.id));
+                                },
+                              );
+                            }
+                          }else{return const Center(child: CircularProgressIndicator());}
                         },
                       );
                     }
