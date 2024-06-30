@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -10,6 +11,7 @@ import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_phone_number_widget.dart';
 
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../firebase/notification.dart';
 import '../../../../utility/app_strings.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,7 +26,11 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   PhoneNumber? phoneNumberValue;
-
+  Future<String?> getFcmToken()async{
+    final NotificationSetUp _noti = NotificationSetUp();
+    final String? token = await FirebaseMessaging.instance.getToken();
+    return token;
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -125,13 +131,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         title: AppStrings.login,
                         isLoading: state is UserLoading,
                         onPressed: () async {
+
                           // final _firebaseMessaging = FirebaseMessaging.instance;
                           // await _firebaseMessaging.requestPermission();
-                          // String? fcmToken = await _firebaseMessaging.getToken();
+                           String? fcmToken = await getFcmToken();
+                           print(fcmToken.toString());
                           if (!_key.currentState!.validate()) {
                             return;
                           }
                           context.read<UserBloc>().add(LoginUserEvent(
+                                fcm_token: fcmToken,
                                 password: passwordController.text,
                                 phoneNumber: phoneNumberValue!.phoneNumber!
                                     .replaceAll("+", ""),

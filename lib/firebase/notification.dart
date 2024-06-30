@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class NotificationSetUp {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+
   Future<void> initializeNotification() async {
     AwesomeNotifications().initialize('resource://drawable/res_launcher_icon', [
       NotificationChannel(

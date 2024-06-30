@@ -28,6 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     print("FCM Token");
     print(token.toString());
   }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -36,7 +37,6 @@ class _SplashScreenState extends State<SplashScreen> {
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         if (state is UserLoggedState) {
-          printFcmToken();
           Navigator.of(context).pushNamedAndRemoveUntil(
               state.user.data.company==null?
               AppRoutes.bottomNavBarScreen:AppRoutes.recruiterBottomNavBar,
