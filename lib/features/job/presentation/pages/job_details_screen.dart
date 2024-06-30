@@ -327,7 +327,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     border: Border.all(color: AppColors.kGreyColor),
                     borderRadius: AppBorders.k8BorderRadius),
                 padding: const EdgeInsets.all(15),
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text("Salary Expectation",
@@ -359,22 +359,23 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         SizedBox(
                           height: screenHeight * 0.01,
                         ),
-                        const Row(
-                          children: [
-                            Text(
-                              "⚡",
-                              style: AppFontStyles.mediumH5,
-                            ),
-                            Text(
-                              "Requirements:",
-                              style: AppFontStyles.mediumH5,
-                            ),
-                          ],
-                        ),
-                        DescriptionItemWidget(
-                            description: widget.jobEntity.description),
+
                       ],
                     ),
+                    const Row(
+                      children: [
+                        Text(
+                          "⚡",
+                          style: AppFontStyles.mediumH5,
+                        ),
+                        Text(
+                          "Requirements:",
+                          style: AppFontStyles.mediumH5,
+                        ),
+                      ],
+                    ),
+                    DescriptionItemWidget(
+                        description: widget.jobEntity.description),
                   ],
                 )
               else
