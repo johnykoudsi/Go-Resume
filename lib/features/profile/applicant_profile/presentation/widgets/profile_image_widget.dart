@@ -131,6 +131,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
           child: Stack(
             children: [
               CircularProfileImage(
+                isCompany: widget.isCompany,
                 borderColor: Colors.white,
                 image: widget.profileImage,
                 width: screenWidth * 0.35,

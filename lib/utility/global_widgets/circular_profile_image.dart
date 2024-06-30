@@ -7,7 +7,8 @@ class CircularProfileImage extends StatelessWidget {
   final double height;
   final Color borderColor;
   final String image;
-  const CircularProfileImage({Key? key,this.width=50,this.height=50,required this.borderColor, required this.image}) : super(key: key);
+  final bool isCompany;
+  const CircularProfileImage({Key? key,this.width=50,this.height=50,required this.borderColor, required this.image, required this.isCompany}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +23,17 @@ class CircularProfileImage extends StatelessWidget {
       child: ClipOval(
         child: FadeInImage(
           key: UniqueKey(),
-          placeholder: const AssetImage(Assets.pngRandomUser),
+          placeholder:  AssetImage(
+            isCompany?
+                Assets.jpgCompany:
+              Assets.pngRandomUser
+          ),
           image: NetworkImage(image),
           fit: BoxFit.cover,
           imageErrorBuilder: (context, error, stackTrace) {
             return Image.asset(
+              isCompany?
+              Assets.jpgCompany:
               Assets.pngRandomUser,
               fit: BoxFit.cover,
             );

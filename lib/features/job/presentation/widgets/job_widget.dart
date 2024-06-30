@@ -60,7 +60,7 @@ class JobWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${jobEntity.maxSalary}  SYP",
+                    "${jobEntity.minSalary} - ${jobEntity.maxSalary} SYP",
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(

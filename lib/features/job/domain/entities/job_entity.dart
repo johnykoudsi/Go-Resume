@@ -18,6 +18,8 @@ class JobEntity {
   int minSalary;
   String position;
   String status;
+  String country;
+  String city;
   int experienceYears;
   int workHours;
   String compensation;
@@ -49,6 +51,8 @@ class JobEntity {
     this.benefits = const [],
     this.minExpected = 0,
     this.maxExpected = 0,
+    this.country="",
+    this.city=""
   });
 
   factory JobEntity.fromJson(Map<String, dynamic> json) => JobEntity(
@@ -70,6 +74,8 @@ class JobEntity {
         maxSalary: json["max_salary"] ?? 0,
         minSalary: json["min_salary"] ?? 0,
         position: json["position"] ?? "",
+        country: json["country"] ?? "",
+        city: json["city"] ?? "",
         status: json["status"] ?? "",
         experienceYears: json["experience_years"] ?? 0,
         workHours: json["work_hours"] ?? 0,

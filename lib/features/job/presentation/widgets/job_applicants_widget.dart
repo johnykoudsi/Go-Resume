@@ -56,7 +56,9 @@ class JobApplicantsWidget extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      CircularProfileImage(borderColor: AppColors.kMainColor100, image: applicant.profileImage,width: screenWidth*0.13,height: screenWidth*0.13,),
+                      CircularProfileImage(
+                        isCompany: false,
+                        borderColor: AppColors.kMainColor100, image: applicant.profileImage,width: screenWidth*0.13,height: screenWidth*0.13,),
                       SizedBox(width: screenWidth*0.02,),
                        Text(applicant.fullName,style: AppFontStyles.boldH6,),
                       const Spacer(),
