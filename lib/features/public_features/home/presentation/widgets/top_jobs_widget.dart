@@ -12,25 +12,22 @@ class TopJobsSectionWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Column(
         children: [
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                 const Text(
-                  "Top Offers",
-                  style: AppFontStyles.mediumH4,
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.allJobs);
-                    },
-                    child: Text(
-                      "See More",
-                      style: AppFontStyles.mediumH4
-                          .copyWith(color: AppColors.kMainColor100),
-                    ))
-              ]),
-       //   const JobWidget(),
-
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            const Text(
+              "Top Offers",
+              style: AppFontStyles.mediumH4,
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.allJobs);
+                },
+                child: Text(
+                  "See More",
+                  style: AppFontStyles.mediumH4
+                      .copyWith(color: AppColors.kMainColor100),
+                ))
+          ]),
+          //   const JobWidget(),
         ],
       ),
     );
