@@ -40,7 +40,7 @@ class MyNotificationsBloc
 
       getMyNotifications = await getMyNotificationsUseCase.call(event);
 
-      if (getMyNotifications is List<NotificationEntity>) {
+      if (getMyNotifications is List<NotificationsModel>) {
         if (getMyNotifications.isNotEmpty) {
           // copy previous state
           if (currentState is MyNotificationsLoadedState) {

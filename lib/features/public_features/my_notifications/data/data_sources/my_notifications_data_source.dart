@@ -23,10 +23,8 @@ class MyNotificationsDataSource {
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        final data = json.decode(helperResponse.response)["data"];
-        print("jjjjjjjj");
-        print(data.toString());
-        return  List<NotificationEntity>.from(data.map((x) => NotificationEntity.fromJson(x)));
+        final data = notificationsEntityFromJson(helperResponse.response);
+        return  data.data;
       } catch (e) {
         return helperResponse.copyWith(
             servicesResponse: ServicesResponseStatues.modelError);

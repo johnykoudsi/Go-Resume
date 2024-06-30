@@ -59,7 +59,7 @@ class _MyNotificationState extends State<MyNotification> {
 
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppStrings.myNotifications),
+          title: Text(AppStrings.myNotifications,style: AppFontStyles.boldH2,),
           centerTitle: false,
         ),
         body: RefreshIndicator(
@@ -129,7 +129,7 @@ class NotificationItemWidget extends StatelessWidget {
   NotificationItemWidget(
       {required this.notification, Key? key, required this.index})
       : super(key: key);
-  NotificationEntity notification;
+  NotificationsModel notification;
   int index;
 
   @override
@@ -157,12 +157,22 @@ class NotificationItemWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                   ),
-                  child: const CircleAvatar(
+                  child:  CircleAvatar(
                     radius: 37,
                     backgroundColor: AppColors.kBackGroundColor,
-                    child: CircleAvatar(
-                      radius: 35,
-                      foregroundImage: AssetImage(Assets.pngJobSearch),
+                    child: ClipOval(
+                      child: FadeInImage(
+                        key: UniqueKey(),
+                        placeholder: const AssetImage(Assets.pngRandomUser),
+                        image: NetworkImage(notification.userImage??""),
+                        fit: BoxFit.cover,
+                        imageErrorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            Assets.pngRandomUser,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -179,7 +189,7 @@ class NotificationItemWidget extends StatelessWidget {
                       ),
                       Text(
                         notification.body??"",
-                        style: Theme.of(context).textTheme.headline5,
+                        style: AppFontStyles.mediumH5,
                       ),
                     ],
                   ),

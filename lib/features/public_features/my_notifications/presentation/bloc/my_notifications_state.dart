@@ -9,15 +9,15 @@ class MyNotificationsLoadingState extends MyNotificationsState {
   List<Object> get props => [];
 }
 class MyNotificationsLoadedState extends MyNotificationsState {
-  List<NotificationEntity> notifications;
+  List<NotificationsModel> notifications;
   bool hasReachedMax;
 
   MyNotificationsLoadedState(
-      {this.notifications = const <NotificationEntity>[],
+      {this.notifications = const <NotificationsModel>[],
         required this.hasReachedMax});
 
   MyNotificationsLoadedState copyWith({
-    List<NotificationEntity>? notifications,
+    List<NotificationsModel>? notifications,
     bool? hasReachedMax,
   }) {
     return MyNotificationsLoadedState(

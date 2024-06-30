@@ -83,8 +83,6 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
           .read<ToggleCompanyBloc>()
           .add(GetCompanyStatusEvent(id: widget.userId ?? 0));
     } else {
-      print("kkkkk");
-      print(widget.userId);
       context
           .read<ToggleApplicantBloc>()
           .add(GetApplicantStatusEvent(id: widget.userId ?? 0));
