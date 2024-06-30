@@ -39,7 +39,7 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
     if (event is PostEducationGenerationEvent) {
       appBar = "Generated Education";
     }
-    if(event is PostBioGenerationEvent){
+    if (event is PostBioGenerationEvent) {
       appBar = "Generated Bio";
     }
     super.initState();
@@ -118,7 +118,7 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
                       if (event is PostEducationGenerationEvent) {
                         route = AppRoutes.addEducation;
                       }
-                      if(event is PostBioGenerationEvent){
+                      if (event is PostBioGenerationEvent) {
                         route = AppRoutes.editApplicantProfile;
                       }
                       Navigator.of(context).pushReplacementNamed(
