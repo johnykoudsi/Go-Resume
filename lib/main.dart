@@ -73,6 +73,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     _noti.configurePushNotifications(context);
     _noti.eventListenerCallback(context);
+
     NetworkHelpers.globalUserBloc = UserBloc();
     super.initState();
   }

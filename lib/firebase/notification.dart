@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 
 class NotificationSetUp {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
-
   Future<void> initializeNotification() async {
     AwesomeNotifications().initialize('resource://drawable/res_launcher_icon', [
       NotificationChannel(
@@ -42,12 +41,12 @@ class NotificationSetUp {
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       print("================");
-      print("=========${message.notification!.title}=======");
+      print("=========${message.data}=======");
       print("================");
-      if (message.notification != null) {
+      if (message.data != null) {
         createOrderNotifications(
-          title: message.notification!.title,
-          body: message.notification!.body,
+          title: message.data["title"],
+          body: message.data["body"],
         );
       }
     });
