@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,8 +10,6 @@ import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_core/utility/theme/app_style.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'core/router/app_router.dart';
-import 'firebase/firebase_notifications.dart';
-import 'firebase/flutter_notifications.dart';
 import 'firebase/notification.dart';
 import 'firebase_options.dart';
 

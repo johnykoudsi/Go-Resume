@@ -9,7 +9,7 @@ class NotificationSetUp {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
 
   Future<void> initializeNotification() async {
-    AwesomeNotifications().initialize('resource://drawable/res_launcher_icon', [
+    AwesomeNotifications().initialize('resource://drawable/app_icon', [
       NotificationChannel(
         channelKey: 'high_importance_channel',
         channelName: 'Chat notifications',
@@ -53,11 +53,11 @@ class NotificationSetUp {
   Future<void> createOrderNotifications({String? title, String? body}) async {
     await AwesomeNotifications().createNotification(
         content: NotificationContent(
-          id: 0,
-          channelKey: 'high_importance_channel',
-          title: title,
-          body: body,
-        ));
+      id: 0,
+      channelKey: 'high_importance_channel',
+      title: title,
+      body: body,
+    ));
   }
 
   void eventListenerCallback(BuildContext context) {
@@ -84,9 +84,8 @@ Future<dynamic> myBackgroundMessageHandler(RemoteMessage message) async {
 class NotificationController {
   /// Use this method to detect when a new notification or a schedule is created
   @pragma("vm:entry-point")
-  static Future<void> onActionReceivedMethod(ReceivedNotification receivedNotification) async {
-
-
+  static Future<void> onActionReceivedMethod(
+      ReceivedNotification receivedNotification) async {
     // Your code goes here
   }
 }
