@@ -216,7 +216,22 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                           ],
                         )
                       : const SizedBox.shrink(),
-
+                  user.company!.mission != ''
+                      ? Column(
+                    children: [
+                      CustomCard(
+                          operation: "",
+                          title: "Mission",
+                          content: Text(
+                            user.company!.mission,
+                            style: AppFontStyles.mediumH5,
+                          )),
+                      SizedBox(
+                        height: screenHeight * 0.02,
+                      ),
+                    ],
+                  )
+                      : const SizedBox.shrink(),
                   CustomCard(
                     title: "Policies",
                     visitor: widget.visitor,
