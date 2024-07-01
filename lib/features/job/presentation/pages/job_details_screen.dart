@@ -155,7 +155,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 children: [
                   Text(
                     widget.jobEntity.city != ""
-                        ? "${widget.jobEntity.city} - ${widget.jobEntity.country}"
+                        ? "${widget.jobEntity.company} - ${widget.jobEntity.country}"
                         : "",
                     style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
                   ),
