@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
@@ -29,12 +31,19 @@ class ToggleApplicantBloc extends Bloc<ToggleApplicantEvent, ToggleApplicantStat
 
     });
     on<GetApplicantStatusEvent>((event, emit) async {
+      add(AddView(id: event.id));
       emit(ToggleApplicantLoadingState());
       dynamic isPinnedResponse;
       isPinnedResponse = await getApplicantStatusUseCase.call(event);
       bool isPinned = isPinnedResponse == 0 ? false : true;
       emit(ToggleApplicantLoadedState(isPinned: isPinned));
     });
+    on<AddView>((event, emit) {
 
+      NetworkHelpers.getDeleteDataHelper(
+        url: "/applicants/${event.id}",
+        useUserToken: true,
+      );
+    });
   }
 }

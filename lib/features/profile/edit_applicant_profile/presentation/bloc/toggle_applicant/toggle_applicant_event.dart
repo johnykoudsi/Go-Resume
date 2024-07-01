@@ -3,6 +3,14 @@ part of 'toggle_applicant_bloc.dart';
 abstract class ToggleApplicantEvent extends Equatable {
   const ToggleApplicantEvent();
 }
+class AddView extends ToggleApplicantEvent {
+  int id;
+  AddView({
+    required this.id,
+  });
+  @override
+  List<Object?> get props => [id];
+}
 class ToggleApplicantApiEvent extends ToggleApplicantEvent{
   int id;
   ToggleApplicantApiEvent({

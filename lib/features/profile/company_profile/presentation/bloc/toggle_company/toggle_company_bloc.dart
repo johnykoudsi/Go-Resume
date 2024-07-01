@@ -27,12 +27,19 @@ class ToggleCompanyBloc extends Bloc<ToggleCompanyEvent, ToggleCompanyState> {
 
     });
     on<GetCompanyStatusEvent>((event, emit) async {
+      add(AddView(id: event.id));
       emit(ToggleCompanyLoadingState());
       dynamic isFavoriteResponse;
       isFavoriteResponse = await getCompanyStatusUseCase.call(event);
       bool isFavorite = isFavoriteResponse == 0 ? false : true;
       emit(ToggleCompanyLoadedState(isFavorite: isFavorite));
     });
+    on<AddView>((event, emit) {
 
+      NetworkHelpers.getDeleteDataHelper(
+        url: "/applicants/${event.id}",
+        useUserToken: true,
+      );
+    });
   }
 }
