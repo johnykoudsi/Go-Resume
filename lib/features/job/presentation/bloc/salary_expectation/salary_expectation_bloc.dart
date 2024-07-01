@@ -20,7 +20,7 @@ class SalaryExpectationBloc
     on<GetSalaryEvent>((event, emit) async {
       emit(GetSalaryLoadingState());
       final response = await getSalaryExpectationUseCase.call(event);
-
+      Future.delayed(const Duration(seconds: 6));
       if (response is SalaryExpectationEntity) {
         emit(GetSalaryDoneState(salaryExpectationEntity: response));
       } else {
