@@ -61,7 +61,7 @@ class CompanyWidget extends StatelessWidget {
               children: [
                 Text(
                   user.fullName ?? '',
-                  style: AppFontStyles.mediumH5,
+                  style: AppFontStyles.mediumH6,
                 ),
                 Text(
                   "Damascus - Syria",

@@ -21,8 +21,11 @@ import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/back_button_circular.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../job/presentation/widgets/jobs_horizantal_widget.dart';
+import '../../../applicant_profile/presentation/widgets/contact_info_widget.dart';
 import '../../../applicant_profile/presentation/widgets/profile_image_widget.dart';
 
 class CompanyProfileScreen extends StatefulWidget {
@@ -71,7 +74,19 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
     user = widget.user;
     super.initState();
   }
+  void openWhatsapp(
+      {required BuildContext context, required String number}) async {
+    var whatsapp = number; //+92xx enter like this
+    var whatsappURlAndroid = "whatsapp://send?phone=$whatsapp";
+    var whatsappURLIos = "https://wa.me/$whatsapp}";
 
+    if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
+      await launchUrl(Uri.parse(whatsappURlAndroid));
+    } else {
+      DialogsWidgetsSnackBar.showScaffoldSnackBar(
+          title: "Whatsapp not installed", context: context);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -229,12 +244,91 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   SizedBox(
                     height: screenHeight * 0.02,
                   ),
-                  // CustomProfileCard(
-                  //     title: "Contact Info",
-                  //     operation: widget.visitor ? "" : "Manage",
-                  //     contactInfo: contacts
-                  // ),
-                  //const TopJobsSectionWidget(),
+                  JobsHorizontalWidget(
+                    companyId: user.company?.id,
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  CustomCard(
+                    operation: "",
+                    title: "Contact Info",
+                    visitor: widget.visitor,
+                    content: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ContactInfoWidget(
+                            onTap: () {
+                              try {
+                                launchUrl(
+                                    Uri(
+                                      scheme: "https",
+                                      path: user.facebook,
+                                    ),
+                                    mode: LaunchMode.externalApplication);
+                                {
+                                  throw 'Could not launch ${user.facebook}';
+                                }
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            imagePath: Assets.svgFacebook),
+                        ContactInfoWidget(
+                            onTap: () {
+                              try {
+                                launchUrl(
+                                    Uri(
+                                      scheme: "https",
+                                      path: user.linkedin,
+                                    ),
+                                    mode: LaunchMode.externalApplication);
+                                {
+                                  throw 'Could not launch ${user.linkedin}';
+                                }
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            imagePath: Assets.svgLinkedin),
+                        ContactInfoWidget(
+                            onTap: () {
+                              openWhatsapp(
+                                context: context,
+                                number: user.mobile,
+                              );
+                            },
+                            imagePath: Assets.svgWhatsapp),
+                        ContactInfoWidget(
+                            onTap: () {
+                              try {
+                                launchUrl(Uri(scheme: "tel", path: user.mobile));
+                                {
+                                  throw 'Could not launch ${user.mobile}';
+                                }
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            imagePath: Assets.svgPhone),
+                        ContactInfoWidget(
+                            onTap: () {
+                              try {
+                                launchUrl(Uri(scheme: "mailto", path: user.email));
+                                {
+                                  throw 'Could not launch ${user.email}';
+                                }
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            imagePath: Assets.svgGmail),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 18,
+                  ),
                 ],
               ),
             ),
