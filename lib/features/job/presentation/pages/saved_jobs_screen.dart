@@ -6,6 +6,7 @@ import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dar
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_widget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
+import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
@@ -72,6 +73,9 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
           child: BlocBuilder<GetSavedJobsBloc, GetSavedJobsState>(
             builder: (context, state) {
               if (state is GetSavedJobsLoadedState) {
+                if(state.jobList.isEmpty){
+                  return const NoDataWidget();
+                }
                 return ListView.builder(
                     padding: const EdgeInsets.all(18),
                     controller: scrollController,

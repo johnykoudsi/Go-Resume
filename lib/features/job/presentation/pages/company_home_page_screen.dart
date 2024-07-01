@@ -57,7 +57,12 @@ class _CompanyHomePageScreenState extends State<CompanyHomePageScreen> {
           preferredSize: const Size(double.infinity, 75),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed(AppRoutes.allJobs);
+              final userState = context.read<UserBloc>().state;
+              if (userState is! UserLoggedState) {
+                return;
+              }
+              Navigator.pushNamed(context, AppRoutes.myJobs,
+                  arguments: userState.user.data);
             },
             child: SearchTextField(
               onClear: () {},

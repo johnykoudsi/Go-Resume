@@ -144,7 +144,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                       isCompany: user.company != null ? true : false,
                       visitor: widget.visitor,
                       profileImage: user.profileImage,
-                      viewsNumber: "0",
+                      viewsNumber: user.views.toString()??"",
                       //userId: user.id,
                     ),
                   ),

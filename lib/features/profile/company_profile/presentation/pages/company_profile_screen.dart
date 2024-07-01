@@ -125,7 +125,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                           isCompany: user.company != null ? true : false,
                           visitor: widget.visitor,
                           profileImage: user.profileImage,
-                          viewsNumber: '55',
+                          viewsNumber: user.views.toString()??"",
                         ),
                       ),
                       !widget.visitor

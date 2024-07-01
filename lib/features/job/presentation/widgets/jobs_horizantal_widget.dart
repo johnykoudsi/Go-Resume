@@ -22,8 +22,9 @@ class _AllJobsScreenState extends State<JobsHorizontalWidget> {
 
   @override
   void initState() {
+
     jobFilter = jobFilter.copyWith(companyId: widget.companyId);
-    getAllJobsBloc.add(ChangeToLoadingAllJobsEvent());
+    getAllJobsBloc.add(ChangeToLoadingAllJobsEvent(searchFilter: jobFilter));
     super.initState();
   }
 
