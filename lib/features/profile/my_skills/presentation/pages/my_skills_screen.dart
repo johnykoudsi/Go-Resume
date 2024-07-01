@@ -63,7 +63,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
           ),
           body:
           currentSkills.isEmpty?
-               NoDataWidget()
+               const NoDataWidget()
               :
           ListView.builder(
             padding: const EdgeInsets.all(18),

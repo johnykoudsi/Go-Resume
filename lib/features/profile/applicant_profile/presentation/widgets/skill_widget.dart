@@ -24,8 +24,8 @@ class SkillWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            SvgPicture.asset(
-              Assets.svgCase,
+            SvgPicture.network(
+              skill.icon,
               width: screenWidth * 0.07,
               height: screenWidth * 0.07,
               color: Colors.black,

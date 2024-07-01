@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/skill.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
@@ -19,6 +20,8 @@ class SkillDropdownList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -31,9 +34,20 @@ class SkillDropdownList extends StatelessWidget {
             return allSkills.map((item) {
               return PopupMenuItem<Skill>(
                 value: item,
-                child: Text(
-                  item.name,
-                  style: AppFontStyles.mediumH5, // Increase font size for items
+                child: Row(
+                  children: [
+                    SvgPicture.network(
+                      item.icon,
+                      width: screenWidth * 0.07,
+                      height: screenWidth * 0.07,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: screenWidth * 0.05),
+                    Text(
+                      item.name,
+                      style: AppFontStyles.mediumH5, // Increase font size for items
+                    ),
+                  ],
                 ),
               );
             }).toList();

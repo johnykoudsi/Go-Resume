@@ -144,7 +144,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                       isCompany: user.company != null ? true : false,
                       visitor: widget.visitor,
                       profileImage: user.profileImage,
-                      viewsNumber: user.views.toString()??"",
+                      viewsNumber: user.views.toString() ?? "",
                       //userId: user.id,
                     ),
                   ),
@@ -237,8 +237,12 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                           user.applicant?.skills?.length ?? 0,
                           (index) {
                             Skill? s = user.applicant?.skills?[index];
-                            return SkillWidget(
-                              skill: s!,
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: SkillWidget(
+                                skill: s!,
+                              ),
                             );
                           },
                         ),
