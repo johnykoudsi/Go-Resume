@@ -30,30 +30,29 @@ class JobEntity {
   num minExpected;
   num maxExpected;
 
-  JobEntity({
-    this.id = -1,
-    this.companyId = -1,
-    this.company,
-    this.startDate,
-    this.type = JobTypes.full_time,
-    this.gender = GenderEnum.none,
-    this.expectedSalary = 0,
-    this.maxSalary = 0,
-    this.minSalary = 0,
-    this.position = "",
-    this.status = "",
-    this.experienceYears = 0,
-    this.workHours = 0,
-    this.compensation = "",
-    this.description = "",
-    this.workFieldId = -1,
-    this.createdAt,
-    this.benefits = const [],
-    this.minExpected = 0,
-    this.maxExpected = 0,
-    this.country="",
-    this.city=""
-  });
+  JobEntity(
+      {this.id = -1,
+      this.companyId = -1,
+      this.company,
+      this.startDate,
+      this.type = JobTypes.full_time,
+      this.gender = GenderEnum.none,
+      this.expectedSalary = 0,
+      this.maxSalary = 0,
+      this.minSalary = 0,
+      this.position = "",
+      this.status = "",
+      this.experienceYears = 0,
+      this.workHours = 0,
+      this.compensation = "",
+      this.description = "",
+      this.workFieldId = -1,
+      this.createdAt,
+      this.benefits = const [],
+      this.minExpected = 0,
+      this.maxExpected = 0,
+      this.country = "",
+      this.city = ""});
 
   factory JobEntity.fromJson(Map<String, dynamic> json) => JobEntity(
         id: json["id"] ?? -1,

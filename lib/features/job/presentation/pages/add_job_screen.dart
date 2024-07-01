@@ -176,7 +176,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   action: TextInputAction.done,
                   controller: minimumSalaryController,
                   label: "Minimum Salary*",
-                  onlyNumber: false,
+                  onlyNumber: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Minimum Salary is required";
@@ -194,7 +194,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   action: TextInputAction.done,
                   controller: maximumSalaryController,
                   label: "Maximum Salary*",
-                  onlyNumber: false,
+                  onlyNumber: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Maximum Salary is required";
@@ -223,7 +223,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   action: TextInputAction.done,
                   controller: workHoursController,
                   label: "Work Hours",
-                  onlyNumber: false,
+                  onlyNumber: true,
                   hintText: 'Example: 8 hours',
                   textInputType: TextInputType.number,
                 ),
@@ -234,7 +234,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   action: TextInputAction.done,
                   controller: experienceYearsController,
                   label: "Experience Years",
-                  onlyNumber: false,
+                  onlyNumber: true,
                   hintText: 'Example: 2 years',
                   textInputType: TextInputType.number,
                 ),
