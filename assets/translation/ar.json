@@ -48,8 +48,28 @@
   "description": "الوصف",
   "myNotifications": "اشعاراتي",
   "mSYP": "م ل.س",
-  "syp": "ل.س"
-
-
+  "syp": "ل.س",
+  "seconds": "ثانية",
+  "close": "إغلاق",
+  "open": "فتح",
+  "addYourJob": "أضف فرصة العمل",
+  "preferredGender": "الجنس المفضل",
+  "salaryExpectations": "توقعات الراتب",
+  "getExpectedSalary": "الحصول على الراتب المتوقع",
+  "submit": "التأكيد",
+  "benefits": "المنافع",
+  "dailyWorkHours": "ساعات العمل اليومية: ",
+  "startDate": "تاريخ البداية: ",
+  "experienceYears": "سنوات الخبرة: ",
+  "years": "سنة",
+  "type": "النوع: ",
+  "requirements": "المتطلبات: ",
+  "selectDate": "اختر موعد: ",
+  "jobType": "نوع العمل: ",
+  "male": "ذكر",
+  "female": "أنثى",
+  "sorts": "الترتيب",
+  "seeAll": "عرض الكل",
+  "manage": "ادارة"
 
 }
