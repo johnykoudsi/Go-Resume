@@ -18,26 +18,5 @@ class CustomFloatingButtonWidget extends StatelessWidget {
       backgroundColor: AppColors.kSecondColor,
       child: icon,
     );
-    //   FloatingActionButton(
-    //   heroTag: null,
-    //   onPressed: onPressed,
-    //   backgroundColor:
-    //       Colors.transparent, // Make the background color transparent
-    //   elevation: 0, // Remove elevation
-    //   child: Ink(
-    //     decoration: const BoxDecoration(
-    //       gradient: AppColors.kLinearColor,
-    //     ),
-    //     child: Container(
-    //       width: double.infinity,
-    //       height: double.infinity,
-    //       alignment: Alignment.center,
-    //       child: Text(
-    //         title,
-    //         style: AppFontStyles.mediumH4.copyWith(color: Colors.white),
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }

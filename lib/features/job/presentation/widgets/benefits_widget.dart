@@ -3,6 +3,8 @@ import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
+import '../../../../utility/app_strings.dart';
+
 class BenefitsWidget extends StatelessWidget {
   final VoidCallback? onPressed;
   final String description;
@@ -30,10 +32,10 @@ class BenefitsWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Row(
+             Row(
               children: [
                 Text(
-                  "Benefits",
+                  AppStrings.benefits,
                   style: AppFontStyles.mediumH5,
                 ),
               ],

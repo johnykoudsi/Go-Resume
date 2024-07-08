@@ -63,5 +63,13 @@
   "startDate": "Start date: ",
   "experienceYears": "Experience Years: ",
   "years": "years",
-  "type": "Type: "
+  "type": "Type: ",
+  "requirements": "Requirements: ",
+  "selectDate": "Select Date: ",
+  "jobType": "Job Type",
+  "male": "Male",
+  "female": "Female",
+  "sorts": "Sorts",
+  "seeAll": "See All",
+  "manage": "Manage"
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/filter_spacing_widget.dart';
+import '../../../../utility/app_strings.dart';
 import 'handle_widget.dart';
 
 class SortsFilterWidget extends StatelessWidget {
@@ -29,7 +30,7 @@ class SortsFilterWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 22),
                   child: Text(
-                    "Sorts".tr(),
+                    AppStrings.sorts,
                     style: AppFontStyles.regularH4,
 
                   ),

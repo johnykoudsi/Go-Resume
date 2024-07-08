@@ -29,6 +29,9 @@ class AppStrings{
   static String dailyWorkHours = 'dailyWorkHours'.tr();
   static String experienceYears = 'experienceYears'.tr();
   static String type = 'type'.tr();
+  static String requirements = 'requirements'.tr();
+  static String selectDate = 'selectDate'.tr();
+  static String jobType = 'jobType'.tr();
 
 
   //company
@@ -48,6 +51,10 @@ class AppStrings{
   static String submit = 'submit'.tr();
   static String startDate = 'startDate'.tr();
   static String years = 'years'.tr();
+  static String male = 'male'.tr();
+  static String female = 'female'.tr();
+  static String seeAll = 'seeAll'.tr();
+  static String manage = 'manage'.tr();
 
   //login
   static String login = 'login'.tr();
@@ -75,7 +82,10 @@ class AppStrings{
   static String didNotReceiveCode = 'didNotReceiveCode'.tr();
   static String resendCode = 'resendCode'.tr();
 
-//notifications
+ //notifications
   static String myNotifications = 'myNotifications'.tr();
+
+  //filters
+  static String sorts = 'sorts'.tr();
 
 }

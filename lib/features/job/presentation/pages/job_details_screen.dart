@@ -360,14 +360,14 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         ),
                       ],
                     ),
-                    const Row(
+                     Row(
                       children: [
-                        Text(
+                        const Text(
                           "⚡",
                           style: AppFontStyles.mediumH5,
                         ),
                         Text(
-                          "Requirements:",
+                          AppStrings.requirements,
                           style: AppFontStyles.mediumH5,
                         ),
                       ],

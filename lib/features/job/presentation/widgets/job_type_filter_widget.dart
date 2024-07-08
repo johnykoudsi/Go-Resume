@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
 
+import '../../../../utility/app_strings.dart';
+
 
 class JobTypeFilterWidget extends StatelessWidget {
   const JobTypeFilterWidget(
@@ -18,7 +20,7 @@ class JobTypeFilterWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 22),
           child: Text(
-            "Job Type".tr(),
+            AppStrings.jobType,
             style: AppFontStyles.regularH4,
           ),
         ),

@@ -7,6 +7,8 @@ import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 
+import '../../../../utility/app_strings.dart';
+
 class JobWidget extends StatelessWidget {
   final bool editable;
   final JobEntity jobEntity;
@@ -60,8 +62,7 @@ class JobWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${NumberFormat.decimalPattern().format(jobEntity.minSalary)} SYP"
-                    " - ${NumberFormat.decimalPattern().format(jobEntity.maxSalary)} SYP",
+                    "${NumberFormat.decimalPattern().format(jobEntity.minSalary)} ${AppStrings.syp} - ${NumberFormat.decimalPattern().format(jobEntity.maxSalary)} ${AppStrings.syp}",
                     style: AppFontStyles.mediumH6,
                   ),
                   Text(

@@ -39,8 +39,7 @@ class TopApplicantsWidget extends StatelessWidget {
                       // ),
                       // );
                       },
-                    child: Text(
-                      "See All",
+                    child: Text(AppStrings.seeAll,
                       style: AppFontStyles.mediumH4
                           .copyWith(color: AppColors.kMainColor100),
                     ))
