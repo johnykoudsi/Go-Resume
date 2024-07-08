@@ -23,6 +23,7 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_car
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/router/app_routes.dart';
+import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../job/presentation/widgets/jobs_horizantal_widget.dart';
 import '../../../applicant_profile/presentation/widgets/contact_info_widget.dart';
@@ -267,7 +268,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   ),
                   CustomCard(
                     operation: "",
-                    title: "Contact Info",
+                    title: AppStrings.contactInfo,
                     visitor: widget.visitor,
                     content: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

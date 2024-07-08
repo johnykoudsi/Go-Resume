@@ -11,6 +11,7 @@ import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
+import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../job/presentation/widgets/description_item_widget.dart';
@@ -41,8 +42,8 @@ class _MyPoliciesScreenState extends State<MyPoliciesScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "My Policies",
+          title:  Text(
+            AppStrings.myPolicies,
             style: AppFontStyles.boldH3,
           ),
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
@@ -66,9 +67,9 @@ class _MyPoliciesScreenState extends State<MyPoliciesScreen> {
                   return CustomCard(
                     onOperationPressed: () {
                       DialogsWidgetsYesNo.showYesNoDialog(
-                        title: "Are you sure you want to delete this item.",
-                        noTitle: "No",
-                        yesTitle: "Yes",
+                        title: AppStrings.areYouSureToDelete,
+                        noTitle: AppStrings.no,
+                        yesTitle: AppStrings.yes,
                         isLoading: state is PoliciesActionsLoadingState,
                         onYesTap: () {
                           Navigator.of(context).pop();
@@ -84,8 +85,8 @@ class _MyPoliciesScreenState extends State<MyPoliciesScreen> {
                         context: context,
                       );
                     },
-                    operation: "Delete",
-                    title: "Policy",
+                    operation: AppStrings.delete,
+                    title: AppStrings.policy,
                     content: DescriptionItemWidget(
                       description: widget.policies![index].description,
                     ),

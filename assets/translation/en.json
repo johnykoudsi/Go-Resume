@@ -71,5 +71,21 @@
   "female": "Female",
   "sorts": "Sorts",
   "seeAll": "See All",
-  "manage": "Manage"
+  "manage": "Manage",
+  "experiences": "Experiences",
+  "skills": "Skills",
+  "contactInfo": "Contact Info",
+  "myExperiences": "My Experiences",
+  "mySkills": "My Skills",
+  "selectNewSkill": "Select New Skill",
+  "skillAlreadyAdded": "Skill already added",
+  "saveSkills": "Save Skills",
+  "areYouSureToDelete": "Are you sure you want to delete this item.",
+  "no": "No",
+  "yes": "Yes",
+  "delete": "Delete",
+  "experience": "Experience",
+  "education": "Education",
+  "myPolicies": "My Policies",
+  "policy": "Policy"
 }

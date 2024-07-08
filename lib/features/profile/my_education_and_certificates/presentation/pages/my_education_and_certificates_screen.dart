@@ -12,6 +12,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/applicant_profil
 import 'package:smart_recruitment_flutter_user/features/profile/my_education_and_certificates/presentation/bloc/education_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 
+import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/custom_card.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
@@ -33,15 +34,15 @@ class _MyEducationAndCertificatesScreenState
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Education & Certificates",
+        title:  Text(
+          AppStrings.educationCertificates,
           style: AppFontStyles.boldH3,
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
       ),
       body:
       widget.educations.isEmpty?
-           NoDataWidget()
+           const NoDataWidget()
           :
       ListView.builder(
         itemCount: widget.educations.length,
@@ -71,9 +72,9 @@ class _MyEducationAndCertificatesScreenState
                 return CustomCard(
                   onOperationPressed: () {
                     DialogsWidgetsYesNo.showYesNoDialog(
-                      title: "Are you sure you want to delete this item.",
-                      noTitle: "No",
-                      yesTitle: "Yes",
+                      title: AppStrings.areYouSureToDelete,
+                      noTitle: AppStrings.no,
+                      yesTitle: AppStrings.yes,
                       onYesTap: () {
                         Navigator.of(context).pop();
                         context
@@ -88,8 +89,8 @@ class _MyEducationAndCertificatesScreenState
                       context: context,
                     );
                   },
-                  operation: "Delete",
-                  title: "Education",
+                  operation: AppStrings.delete,
+                  title: AppStrings.education,
                   content: EducationAndCertificatesWidget(
                       education: widget.educations[index]),
                 );

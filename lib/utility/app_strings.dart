@@ -55,6 +55,10 @@ class AppStrings{
   static String female = 'female'.tr();
   static String seeAll = 'seeAll'.tr();
   static String manage = 'manage'.tr();
+  static String areYouSureToDelete = 'areYouSureToDelete'.tr();
+  static String no = 'no'.tr();
+  static String yes = 'yes'.tr();
+  static String delete = 'delete'.tr();
 
   //login
   static String login = 'login'.tr();
@@ -87,5 +91,20 @@ class AppStrings{
 
   //filters
   static String sorts = 'sorts'.tr();
+
+  //profile
+  static String experiences = 'experiences'.tr();
+  static String skills = 'Skills'.tr();
+  static String educationCertificates = 'educationCertificates'.tr();
+  static String contactInfo = 'contactInfo'.tr();
+  static String myExperiences = 'myExperiences'.tr();
+  static String mySkills = 'mySkills'.tr();
+  static String selectNewSkill = 'selectNewSkill'.tr();
+  static String skillAlreadyAdded = 'skillAlreadyAdded'.tr();
+  static String saveSkills = 'saveSkills'.tr();
+  static String experience = 'experience'.tr();
+  static String education = 'education'.tr();
+  static String myPolicies = 'myPolicies'.tr();
+  static String policy = 'policy'.tr();
 
 }

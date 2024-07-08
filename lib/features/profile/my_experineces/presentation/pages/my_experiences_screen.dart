@@ -12,6 +12,7 @@ import 'package:smart_recruitment_flutter_user/features/profile/applicant_profil
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/bloc/experience_actions_bloc/experience_actions_bloc.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_card.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
+import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 
@@ -43,8 +44,8 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "My Experiences",
+          title:  Text(
+            AppStrings.myExperiences,
             style: AppFontStyles.boldH3,
           ),
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
@@ -69,9 +70,9 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
                           onOperationPressed: () {
                             DialogsWidgetsYesNo.showYesNoDialog(
                               title:
-                                  "Are you sure you want to delete this item.",
-                              noTitle: "No",
-                              yesTitle: "Yes",
+                                  AppStrings.areYouSureToDelete,
+                              noTitle: AppStrings.no,
+                              yesTitle: AppStrings.yes,
                               isLoading: state is ExperienceActionsLoadingState,
                               onYesTap: () {
                                 Navigator.of(context).pop();
@@ -87,8 +88,8 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
                               context: context,
                             );
                           },
-                          operation: "Delete",
-                          title: "Experience",
+                          operation: AppStrings.delete,
+                          title: AppStrings.experience,
                           content: ExperienceWidget(
                             experience: widget.experiences[index],
                           ),

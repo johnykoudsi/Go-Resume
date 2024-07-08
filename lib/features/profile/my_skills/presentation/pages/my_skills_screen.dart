@@ -14,6 +14,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presen
 import 'package:smart_recruitment_flutter_user/features/profile/my_skills/presentation/widget/all_skills_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 
+import '../../../../../utility/app_strings.dart';
+
 class MySkillsScreen extends StatefulWidget {
   const MySkillsScreen({required this.skills, Key? key}) : super(key: key);
   final List<Skill> skills;
@@ -54,8 +56,8 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text(
-              "My Skills",
+            title:  Text(
+              AppStrings.mySkills,
               style: AppFontStyles.boldH2,
             ),
             iconTheme:
@@ -93,7 +95,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
                   builder: (context, state) {
                     if (state is GetSkillsLoadedState) {
                       return SkillDropdownList(
-                        title: 'Select New Skill',
+                        title: AppStrings.selectNewSkill,
                         selectedItem: currentSkills.isNotEmpty
                             ? currentSkills.last
                             : null,
@@ -106,7 +108,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
                               currentSkills.add(value);
                             } else {
                               DialogsWidgetsSnackBar.showScaffoldSnackBar(
-                                  title: "Skill already added",
+                                  title: AppStrings.skillAlreadyAdded,
                                   context: context);
                             }
                           });
@@ -125,7 +127,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
                 BlocBuilder<SkillActionsBloc, SkillActionsState>(
                   builder: (context, state) {
                     return ElevatedButtonWidget(
-                      title: "Save Skills",
+                      title: AppStrings.saveSkills,
                       isLoading: state is SkillActionsLoadingState,
                       onPressed: () {
                         context

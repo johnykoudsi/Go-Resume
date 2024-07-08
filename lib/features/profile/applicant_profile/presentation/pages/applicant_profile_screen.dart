@@ -28,6 +28,7 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_car
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 
 class ApplicantProfileScreen extends StatefulWidget {
@@ -189,9 +190,12 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  user.applicant?.bio ?? "",
-                  style: AppFontStyles.boldH5.copyWith(color: Colors.black),
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Text(
+                    user.applicant?.bio ?? "",
+                    style: AppFontStyles.boldH5.copyWith(color: Colors.black),
+                  ),
                 ),
               ),
               user.applicant?.bio != null
@@ -200,7 +204,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                     )
                   : const SizedBox.shrink(),
               CustomCard(
-                title: "Experiences",
+                title: AppStrings.experiences,
                 visitor: widget.visitor,
                 content: user.applicant!.experiences!.isEmpty
                     ? const NoDataWidget(
@@ -226,7 +230,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 height: 18,
               ),
               CustomCard(
-                title: "Skills",
+                title: AppStrings.skills,
                 visitor: widget.visitor,
                 content: user.applicant!.skills!.isEmpty
                     ? const NoDataWidget(
@@ -256,7 +260,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 height: 18,
               ),
               CustomCard(
-                title: "Education & Certificates",
+                title: AppStrings.educationCertificates,
                 visitor: widget.visitor,
                 content: user.applicant!.education!.isEmpty
                     ? const NoDataWidget(

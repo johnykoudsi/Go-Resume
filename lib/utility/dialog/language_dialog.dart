@@ -49,8 +49,11 @@ class LanguageDialog {
                       ElevatedButtonWidget(
                         title: 'Save'.tr(),
                         onPressed: () {
-                          context.setLocale(Locale(radioValue ?? 'en'));
-                          Navigator.of(context).pop();
+                          setState(() {
+                            context.setLocale(Locale(radioValue ?? 'en'));
+                            Navigator.of(context).pop();
+                          });
+
                         },
                       ),
                     ],

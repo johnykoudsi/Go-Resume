@@ -5,7 +5,7 @@
   "Favourite": "المفضلة",
   "More": "المزيد",
   "Search": "البحث",
-  "mySubmission": "طلباتي",
+  "mySubmissions": "طلباتي",
   "myJobs": "فرص العمل",
   "savedJobs": "الأعمال المحفوظة",
   "notifications": "الاشعارات",
@@ -71,5 +71,4 @@
   "sorts": "الترتيب",
   "seeAll": "عرض الكل",
   "manage": "ادارة"
-
 }
