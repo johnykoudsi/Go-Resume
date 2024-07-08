@@ -8,6 +8,7 @@ import 'package:smart_recruitment_flutter_user/features/my_submissions/data/repo
 import 'package:smart_recruitment_flutter_user/features/my_submissions/domain/entities/my_submissions_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/my_submissions/domain/use_cases/get_my_submissions_usecase.dart';
 import '../../../../../utility/constant_logic_validation.dart';
+import '../../domain/use_cases/remove_my_submission_usecase.dart';
 
 part 'my_submissions_event.dart';
 part 'my_submissions_state.dart';
@@ -16,6 +17,16 @@ class MySubmissionsBloc extends Bloc<MySubmissionsEvent, MySubmissionsState> {
   static final MySubmissionsRepoImpl mySubmissionsRepoImpl = MySubmissionsRepoImpl(MySubmissionsDataSource(NetworkHelpers()));
 
   MySubmissionsBloc() : super(MySubmissionsInitial()) {
+    on<RemoveSubmissionEvent>((event, emit) async {
+      emit(MySubmissionsInitial());
+
+      RemoveMySubmissionUseCase useCase = RemoveMySubmissionUseCase(mySubmissionsRepoImpl);
+
+      final response = await useCase.call(event);
+
+      emit(MySubmissionsLoadedState(hasReachedMax: false));
+
+    });
 
     on<GetMySubmissionsEvent>((event, emit) async {
       final currentState = state;

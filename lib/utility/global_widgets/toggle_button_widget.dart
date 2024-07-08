@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../app_strings.dart';
+
 class ToggleSliderWidget extends StatefulWidget {
    ToggleSliderWidget({super.key,required this.isClosed});
    bool isClosed;
@@ -45,7 +47,7 @@ class _ToggleSliderWidgetState extends State<ToggleSliderWidget> {
               ),
               Center(
                 child: Text(
-                  widget.isClosed ? 'Close' : 'Open',
+                  widget.isClosed ? AppStrings.close : AppStrings.open,
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,

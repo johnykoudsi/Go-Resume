@@ -22,3 +22,11 @@ class ChangeToLoadingApiMySubmissionsEvent extends MySubmissionsEvent {
   @override
   List<Object?> get props => [searchFilterProperties];
 }
+class RemoveSubmissionEvent extends MySubmissionsEvent{
+  int id;
+  RemoveSubmissionEvent({
+    required this.id,
+  });
+  @override
+  List<Object?> get props => [id];
+}

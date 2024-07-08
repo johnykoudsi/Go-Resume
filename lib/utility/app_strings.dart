@@ -20,6 +20,15 @@ class AppStrings{
   static String applicants = 'applicants'.tr();
   static String position = 'position'.tr();
   static String description = 'description'.tr();
+  static String addYourJob = 'addYourJob'.tr();
+  static String salaryExpectations = 'salaryExpectations'.tr();
+  static String mSYP = 'mSYP'.tr();
+  static String syp = 'syp'.tr();
+  static String getExpectedSalary = 'getExpectedSalary'.tr();
+  static String benefits = 'benefits'.tr();
+  static String dailyWorkHours = 'dailyWorkHours'.tr();
+  static String experienceYears = 'experienceYears'.tr();
+  static String type = 'type'.tr();
 
 
   //company
@@ -32,6 +41,13 @@ class AppStrings{
   static String editProfile = 'editProfile'.tr();
   static String noData = 'noData'.tr();
   static String isRequired = 'isRequired'.tr();
+  static String seconds = 'seconds'.tr();
+  static String close = 'close'.tr();
+  static String open = 'open'.tr();
+  static String preferredGender = 'preferredGender'.tr();
+  static String submit = 'submit'.tr();
+  static String startDate = 'startDate'.tr();
+  static String years = 'years'.tr();
 
   //login
   static String login = 'login'.tr();

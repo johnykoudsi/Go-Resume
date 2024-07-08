@@ -47,6 +47,21 @@
   "resendCode": "Resend Code",
   "applicants": "Applicants",
   "description": "Description",
-  "myNotifications": "My Notifications"
-
+  "myNotifications": "My Notifications",
+  "seconds": "seconds",
+  "close": "Close",
+  "open": "Open",
+  "addYourJob": "Add Your Job Vacancy",
+  "preferredGender": "Preferred Gender",
+  "salaryExpectations": "Salary Expectation",
+  "mSYP": "M SYP",
+  "getExpectedSalary": "Get Expected Salary",
+  "submit": "Submit",
+  "benefits": "Benefits",
+  "syp": "SYP",
+  "dailyWorkHours": "Daily Work Hours: ",
+  "startDate": "Start date: ",
+  "experienceYears": "Experience Years: ",
+  "years": "years",
+  "type": "Type: "
 }

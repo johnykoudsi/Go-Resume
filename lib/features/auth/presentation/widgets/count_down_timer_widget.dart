@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
+import '../../../../utility/app_strings.dart';
+
 class CountdownTimer extends StatefulWidget {
   const CountdownTimer({super.key});
 
@@ -42,7 +44,7 @@ class _CountdownTimerState extends State<CountdownTimer> {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '$_secondsRemaining seconds',
+      '$_secondsRemaining ${AppStrings.seconds}',
       style: AppFontStyles.mediumH3.copyWith(color: AppColors.kGreyColor),
     );
   }

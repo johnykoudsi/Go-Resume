@@ -4,6 +4,8 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/benefits_entity.dart';
 
+import '../../../../utility/app_strings.dart';
+
 class BenefitsScreen extends StatefulWidget {
   final void Function(List<BenefitEntity>)? onSelectionChanged;
   final List<BenefitEntity> benefits;
@@ -46,7 +48,7 @@ class _BenefitsScreenState extends State<BenefitsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  const Text('Benefits',style: AppFontStyles.boldH3,),
+        title:   Text(AppStrings.benefits,style: AppFontStyles.boldH3,),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

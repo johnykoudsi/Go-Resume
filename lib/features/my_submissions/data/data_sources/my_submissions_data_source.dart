@@ -36,4 +36,14 @@ class MySubmissionsDataSource {
     return helperResponse;
   }
 
+  Future removeSubmissionsDataSource(
+      RemoveSubmissionEvent removeSubmissionEvent) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      crud: "DELETE",
+      useUserToken: true,
+      url: EndPoints.removeSubmission(id: removeSubmissionEvent.id),
+    );
+    return helperResponse;
+  }
+
 }

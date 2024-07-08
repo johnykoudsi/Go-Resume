@@ -92,8 +92,8 @@ class _AddJobScreenState extends State<AddJobScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: const Text(
-            "Add Your Job Vacancy",
+          title:  Text(
+            AppStrings.addYourJob,
             style: AppFontStyles.boldH3,
           ),
         ),
@@ -285,8 +285,8 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
-                const Text(
-                  'Preferred Gender',
+                 Text(
+                  AppStrings.preferredGender,
                   style: AppFontStyles.mediumH5,
                 ),
                 PreferredGenderWidget(
@@ -310,11 +310,11 @@ class _AddJobScreenState extends State<AddJobScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Salary Expectation",
+                             Text(
+                                AppStrings.salaryExpectations,
                                 style: AppFontStyles.boldH4),
                             Text(
-                              "${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.minSalary)} M SYP"
-                              " - ${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.maxSalary)} M SYP",
+                              "${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.minSalary)} ${AppStrings.mSYP} - ${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.maxSalary)} ${AppStrings.mSYP}",
                               style: AppFontStyles.mediumH5,
                             ),
                           ],
@@ -322,7 +322,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                       );
                     }
                     return ElevatedButtonBorderWidget(
-                      title: "Get Expected Salary",
+                      title: AppStrings.getExpectedSalary,
                       isLoading: state is GetSalaryLoadingState,
                       onPressed: () {
                         if (!_key.currentState!.validate() ||
@@ -368,7 +368,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   builder: (context, state) {
                     return ElevatedButtonWidget(
                       isLoading: state is AddJobLoadingState,
-                      title: "Submit",
+                      title: AppStrings.submit,
                       onPressed: () {
                         if (!_key.currentState!.validate() ||
                             selectedDate == null ||

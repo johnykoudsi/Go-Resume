@@ -167,8 +167,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                   Text(
-                    "${NumberFormat.decimalPattern().format(widget.jobEntity.minSalary)} SYP"
-                    " - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxSalary)} SYP",
+                    "${NumberFormat.decimalPattern().format(widget.jobEntity.minSalary)} ${AppStrings.syp} - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxSalary)} ${AppStrings.syp}",
                     style: AppFontStyles.mediumH5,
                   ),
                   const Spacer(),
@@ -189,7 +188,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   width: 2,
                                 ),
                                 Text(
-                                  "Close",
+                                  AppStrings.close,
                                   style: AppFontStyles.boldH7
                                       .copyWith(color: Colors.red),
                                 ),
@@ -208,7 +207,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   width: 2,
                                 ),
                                 Text(
-                                  "Open",
+                                  AppStrings.open,
                                   style: AppFontStyles.boldH7
                                       .copyWith(color: Colors.green),
                                 ),
@@ -234,8 +233,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             ),
                             Text(
                               widget.jobEntity.status == 'open'
-                                  ? "Open"
-                                  : "Close",
+                                  ? AppStrings.open
+                                  : AppStrings.close,
                               style: AppFontStyles.boldH7.copyWith(
                                   color: widget.jobEntity.status == 'open'
                                       ? Colors.green
@@ -264,8 +263,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                  const Text(
-                    "Work Hours Daily: ",
+                   Text(
+                     AppStrings.dailyWorkHours,
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -279,8 +278,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                  const Text(
-                    "Start date: ",
+                   Text(
+                    AppStrings.startDate,
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -295,12 +294,12 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                  const Text(
-                    "Experience Years: ",
+                   Text(
+                     AppStrings.experienceYears,
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
-                    "${widget.jobEntity.experienceYears} years",
+                    "${widget.jobEntity.experienceYears} ${AppStrings.years}",
                     style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
                   ),
                 ],
@@ -310,8 +309,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                  const Text(
-                    "Type: ",
+                   Text(
+                     AppStrings.type,
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -331,11 +330,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text("Salary Expectation",
+                     Text(AppStrings.salaryExpectations,
                         style: AppFontStyles.boldH4),
                     Text(
-                      "${NumberFormat.decimalPattern().format(widget.jobEntity.minExpected)} M SYP"
-                      " - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxExpected)} M SYP",
+                      "${NumberFormat.decimalPattern().format(widget.jobEntity.minExpected)} ${AppStrings.mSYP} - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxExpected)} ${AppStrings.mSYP}",
                       style: AppFontStyles.mediumH5,
                     ),
                   ],
