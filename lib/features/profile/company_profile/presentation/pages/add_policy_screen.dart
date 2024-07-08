@@ -7,8 +7,8 @@ import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
+import '../../../../../utility/app_strings.dart';
 import '../bloc/policies_actions_bloc/policies_actions_bloc.dart';
-
 
 class AddPolicyScreen extends StatefulWidget {
   const AddPolicyScreen({Key? key}) : super(key: key);
@@ -21,7 +21,6 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +44,8 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Add Policy",
+          title: Text(
+            AppStrings.addPolicy,
             style: AppFontStyles.boldH3,
           ),
         ),
@@ -59,14 +58,14 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: titleController,
-                label: "title*",
+                label: AppStrings.title + AppStrings.star,
                 onlyNumber: false,
-                hintText: 'Example: No smoking',
+                hintText: AppStrings.noSmokingExample,
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "title is required";
+                    return AppStrings.title + AppStrings.isRequired;
                   }
                   return null;
                 },
@@ -77,14 +76,14 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: descriptionController,
-                label: "Description*",
+                label: AppStrings.description + AppStrings.star,
                 onlyNumber: false,
-                hintText: 'Example: Smoking is not allowed',
+                hintText: AppStrings.smokingNotAllowed,
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "description is required";
+                    return AppStrings.description + AppStrings.isRequired;
                   }
                   return null;
                 },
@@ -98,18 +97,15 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
           child: BlocBuilder<PoliciesActionsBloc, PoliciesActionsState>(
             builder: (context, state) {
               return ElevatedButtonWidget(
-                title: "Add",
+                title: AppStrings.add,
                 isLoading: state is PoliciesActionsLoadingState,
                 onPressed: () {
-                    if (_key.currentState!.validate()) {
-                      FocusScope.of(context).unfocus();
-                      context.read<PoliciesActionsBloc>().add(
-                          AddPolicyEvent(
-                              title: titleController.text,
-                              description: descriptionController.text
-                          ));
-                    }
-
+                  if (_key.currentState!.validate()) {
+                    FocusScope.of(context).unfocus();
+                    context.read<PoliciesActionsBloc>().add(AddPolicyEvent(
+                        title: titleController.text,
+                        description: descriptionController.text));
+                  }
                 },
               );
             },

@@ -14,6 +14,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_p
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 
+import '../../../../../utility/app_strings.dart';
+
 class BioGenerationScreen extends StatefulWidget {
   const BioGenerationScreen({super.key});
 
@@ -52,8 +54,8 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text(
-              "Generate Bio",
+            title:  Text(
+              AppStrings.generateBio,
               style: AppFontStyles.boldH3,
             ),
           ),
@@ -71,15 +73,15 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                         child: AnimatedTextKit(
                           animatedTexts: [
                             RotateAnimatedText(
-                              "Gathering your information!",
+                              AppStrings.gatheringYourInfo,
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              "Generating Bio description",
+                              AppStrings.generatingDescription,
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              "Connecting to the AI",
+                              AppStrings.connectingToAI,
                               textStyle: AppFontStyles.boldH3,
                             ),
                           ],
@@ -104,11 +106,11 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: specializationTextController,
-                      label: "Specialization",
-                      hintText: 'Example: Software Engineering',
+                      label: AppStrings.specialization,
+                      hintText: AppStrings.softwareEngineering,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Specialization is required";
+                          return AppStrings.specialization+AppStrings.isRequired;
                         }
                         return null;
                       },
@@ -119,11 +121,11 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: educationTextController,
-                      label: "education",
-                      hintText: "education name",
+                      label: AppStrings.education,
+                      hintText: AppStrings.educationName,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "education is required";
+                          return AppStrings.education+AppStrings.isRequired;
                         }
                         return null;
                       },
@@ -134,7 +136,7 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: additionalKeyWordsController,
-                      label: "Additional key words",
+                      label: AppStrings.additionalKeyWords,
                       hintText: "agile scrum github",
                     ),
                   ],
@@ -152,7 +154,7 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                   children: [
                     if (state is! BioGenerationLoadingState)
                       ElevatedButtonWidget(
-                        title: "Generate",
+                        title: AppStrings.generate,
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           if (!_key.currentState!.validate()) {

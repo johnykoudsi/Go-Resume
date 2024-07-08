@@ -288,7 +288,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
               ),
               CustomCard(
                 operation: "",
-                title: "Contact Info",
+                title: AppStrings.contactInfo,
                 visitor: widget.visitor,
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

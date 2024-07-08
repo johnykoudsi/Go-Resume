@@ -279,7 +279,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                    Text(
-                    AppStrings.startDate,
+                    "${AppStrings.startDate}: ",
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(

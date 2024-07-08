@@ -41,6 +41,7 @@ class AppStrings{
   static String describeYourCompany = 'describeYourCompany'.tr();
   static String companyGoals = 'companyGoals'.tr();
   static String companyMethods = 'companyMethods'.tr();
+  static String addPolicy = 'addPolicy'.tr();
 
   //other
   static String refresh = 'refresh'.tr();
@@ -53,6 +54,7 @@ class AppStrings{
   static String preferredGender = 'preferredGender'.tr();
   static String submit = 'submit'.tr();
   static String startDate = 'startDate'.tr();
+  static String endDate = 'endDate'.tr();
   static String years = 'years'.tr();
   static String male = 'male'.tr();
   static String female = 'female'.tr();
@@ -67,6 +69,14 @@ class AppStrings{
   static String website = 'website'.tr();
   static String about = 'about'.tr();
   static String edit = 'edit'.tr();
+  static String title = 'title'.tr();
+  static String noSmokingExample = 'noSmokingExample'.tr();
+  static String smokingNotAllowed = 'smokingNotAllowed'.tr();
+  static String add = 'add'.tr();
+  static String johnDue = 'johnDue'.tr();
+  static String dob = 'dob'.tr();
+  static String bio = 'bio'.tr();
+  static String describeYourself = 'describeYourself'.tr();
 
   //login
   static String login = 'login'.tr();
@@ -119,5 +129,23 @@ class AppStrings{
   static String mission = 'mission'.tr();
   static String policies = 'policies'.tr();
   static String name = 'name'.tr();
+  static String addEducation = 'addEducation'.tr();
+  static String describeEducation = 'describeEducation'.tr();
+  static String gradePercent = 'gradePercent'.tr();
+  static String university = 'university'.tr();
+  static String damascusUniversity = 'damascusUniversity'.tr();
+  static String certificateLink = 'certificateLink'.tr();
+
+
+  //AI
+  static String generateBio = 'generateBio'.tr();
+  static String gatheringYourInfo = 'gatheringYourInfo'.tr();
+  static String generatingDescription = 'generatingDescription'.tr();
+  static String connectingToAI = 'connectingToAI'.tr();
+  static String specialization = 'specialization'.tr();
+  static String softwareEngineering = 'softwareEngineering'.tr();
+  static String educationName = 'educationName'.tr();
+  static String additionalKeyWords = 'additionalKeyWords'.tr();
+  static String generate = 'generate'.tr();
 
 }

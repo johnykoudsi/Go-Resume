@@ -15,6 +15,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/preferred_gender_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/custom_floating_button_widget.dart';
+import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../../utility/global_widgets/display_generation_screen.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
@@ -114,8 +115,8 @@ class _EditApplicantProfileScreenState
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Edit Profile",
+          title:  Text(
+            AppStrings.editProfile,
             style: AppFontStyles.boldH2,
           ),
         ),
@@ -128,14 +129,14 @@ class _EditApplicantProfileScreenState
               CustomTextField(
                 action: TextInputAction.done,
                 controller: nameController,
-                label: "Full Name*",
+                label: AppStrings.fullName+AppStrings.star,
                 onlyNumber: false,
-                hintText: 'Example: John Due',
+                hintText: AppStrings.johnDue,
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Full Name is required";
+                    return AppStrings.fullName+AppStrings.isRequired;
                   }
                   return null;
                 },
@@ -169,7 +170,7 @@ class _EditApplicantProfileScreenState
               CustomTextField(
                 action: TextInputAction.done,
                 controller: emailController,
-                label: "Email",
+                label: AppStrings.email,
                 onlyNumber: false,
                 hintText: 'example@gmail.com',
                 textInputType: TextInputType.visiblePassword,
@@ -193,7 +194,7 @@ class _EditApplicantProfileScreenState
               CustomTextField(
                 action: TextInputAction.done,
                 controller: websiteController,
-                label: "Website",
+                label: AppStrings.website,
                 onlyNumber: false,
                 hintText: 'https://www.example.com',
                 textInputType: TextInputType.visiblePassword,
@@ -227,7 +228,7 @@ class _EditApplicantProfileScreenState
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                label: 'Date Of Birth',
+                label: AppStrings.dob,
                 selectedDate: selectedDate,
                 onDateChange: (date) {
                   setState(() {
@@ -241,9 +242,9 @@ class _EditApplicantProfileScreenState
               DescriptionField(
                 action: TextInputAction.done,
                 controller: bioController,
-                label: "Bio",
+                label: AppStrings.bio,
                 onlyNumber: false,
-                hintText: 'Describe your self with a few words',
+                hintText: AppStrings.describeYourself,
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -269,7 +270,7 @@ class _EditApplicantProfileScreenState
               child: BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
                 builder: (context, state) {
                   return ElevatedButtonWidget(
-                    title: "Edit",
+                    title: AppStrings.edit,
                     isLoading: state is ApplicantProfileLoading,
                     onPressed: () {
                       if (!_key.currentState!.validate()) {
