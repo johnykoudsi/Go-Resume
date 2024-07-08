@@ -106,14 +106,14 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: nameController,
-                label: "Name*",
+                label: AppStrings.name+AppStrings.star,
                 onlyNumber: false,
                 hintText: 'ESoft',
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Name is required";
+                    return AppStrings.name+AppStrings.isRequired;
                   }
                   return null;
                 },
@@ -147,7 +147,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: emailController,
-                label: "Email",
+                label: AppStrings.email,
                 onlyNumber: false,
                 hintText: 'company@gmail.com',
                 textInputType: TextInputType.visiblePassword,
@@ -171,7 +171,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: websiteController,
-                label: "Website",
+                label: AppStrings.website,
                 onlyNumber: false,
                 hintText: 'https://www.companywebsite.com',
                 textInputType: TextInputType.visiblePassword,
@@ -207,9 +207,9 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: aboutController,
-                label: "About",
+                label: AppStrings.about,
                 onlyNumber: false,
-                hintText: 'Describe your company with a few words',
+                hintText: AppStrings.describeYourCompany,
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -217,9 +217,9 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: visionController,
-                label: "Vision",
+                label: AppStrings.vision,
                 onlyNumber: false,
-                hintText: 'Describe your company goals',
+                hintText: AppStrings.companyGoals,
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -227,36 +227,17 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: missionController,
-                label: "Mission",
+                label: AppStrings.mission,
                 onlyNumber: false,
-                hintText: 'Describe your company methods',
+                hintText: AppStrings.companyMethods,
               ),
-              // BlocBuilder<GetAllCountriesBloc, GetAllCountriesState>(
-              //     builder: (context, state) {
-              //       if (state is Coun) {
-              //         return ShimmerLoader(
-              //           height: screenHeight * 0.05,
-              //           width: screenWidth * 0.4,
-              //         );
-              //       }
-              //       else if(state is WorkFieldsDoneState){
-              //         return SearchableDropDownWidget(
-              //           items: state.workFields,
-              //           selectedItem: _selectedWorkField,
-              //           onSelect: _handleSelectedWorkField,
-              //           title: 'Work Field',
-              //         );
-              //       }
-              //       else{return const SizedBox();}
-              //     }
-              // ),
               SizedBox(
                 height: screenHeight * 0.1,
               ),
               BlocBuilder<CompanyProfileBloc, CompanyProfileState>(
                 builder: (context, state) {
                   return ElevatedButtonWidget(
-                    title: "Edit",
+                    title: AppStrings.edit,
                     isLoading: state is CompanyProfileLoading,
                     onPressed: () {
                       if (!_key.currentState!.validate()) {

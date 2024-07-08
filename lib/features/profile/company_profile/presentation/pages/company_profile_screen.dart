@@ -188,7 +188,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                           children: [
                             CustomCard(
                               operation: "",
-                              title: "About Us",
+                              title: AppStrings.aboutUs,
                               visitor: widget.visitor,
                               content: Text(
                                 user.company!.about,
@@ -206,7 +206,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                           children: [
                             CustomCard(
                                 operation: "",
-                                title: "Vision",
+                                title: AppStrings.vision,
                                 content: Text(
                                   user.company!.vision,
                                   style: AppFontStyles.mediumH5,
@@ -222,7 +222,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                     children: [
                       CustomCard(
                           operation: "",
-                          title: "Mission",
+                          title: AppStrings.mission,
                           content: Text(
                             user.company!.mission,
                             style: AppFontStyles.mediumH5,
@@ -234,7 +234,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   )
                       : const SizedBox.shrink(),
                   CustomCard(
-                    title: "Policies",
+                    title: AppStrings.policies,
                     visitor: widget.visitor,
                     content: user.company!.policies!.isEmpty
                         ? const NoDataWidget(

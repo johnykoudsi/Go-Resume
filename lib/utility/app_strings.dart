@@ -38,6 +38,9 @@ class AppStrings{
   static String company = 'company'.tr();
   static String favoriteCompanies = 'favoriteCompanies'.tr();
   static String pinnedApplicants = 'pinnedApplicants'.tr();
+  static String describeYourCompany = 'describeYourCompany'.tr();
+  static String companyGoals = 'companyGoals'.tr();
+  static String companyMethods = 'companyMethods'.tr();
 
   //other
   static String refresh = 'refresh'.tr();
@@ -59,6 +62,11 @@ class AppStrings{
   static String no = 'no'.tr();
   static String yes = 'yes'.tr();
   static String delete = 'delete'.tr();
+  static String star = 'star'.tr();
+  static String email = 'email'.tr();
+  static String website = 'website'.tr();
+  static String about = 'about'.tr();
+  static String edit = 'edit'.tr();
 
   //login
   static String login = 'login'.tr();
@@ -106,5 +114,10 @@ class AppStrings{
   static String education = 'education'.tr();
   static String myPolicies = 'myPolicies'.tr();
   static String policy = 'policy'.tr();
+  static String aboutUs = 'aboutUs'.tr();
+  static String vision = 'vision'.tr();
+  static String mission = 'mission'.tr();
+  static String policies = 'policies'.tr();
+  static String name = 'name'.tr();
 
 }
