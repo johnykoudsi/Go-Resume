@@ -65,7 +65,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title:  Text(
+          title: Text(
             AppStrings.addEducation,
             style: AppFontStyles.boldH3,
           ),
@@ -79,14 +79,14 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: nameController,
-                label: AppStrings.specialization+AppStrings.star,
+                label: AppStrings.specialization + AppStrings.star,
                 onlyNumber: false,
                 hintText: AppStrings.softwareEngineering,
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppStrings.specialization+AppStrings.isRequired;
+                    return AppStrings.specialization + AppStrings.isRequired;
                   }
                   return null;
                 },
@@ -136,7 +136,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                label: AppStrings.startDate+AppStrings.star,
+                label: AppStrings.startDate + AppStrings.star,
                 selectedDate: selectedStartDate,
                 onDateChange: (date) {
                   setState(() {
@@ -148,7 +148,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                label: AppStrings.endDate+AppStrings.star,
+                label: AppStrings.endDate + AppStrings.star,
                 selectedDate: selectedEndDate,
                 onDateChange: (date) {
                   setState(() {

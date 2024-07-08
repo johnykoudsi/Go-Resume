@@ -14,6 +14,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/p
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 
+import '../../../../../utility/app_strings.dart';
+
 class ExperienceGenerationScreen extends StatefulWidget {
   const ExperienceGenerationScreen({super.key});
 
@@ -57,8 +59,8 @@ class _ExperienceGenerationScreenState
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text(
-              "Generate Experience",
+            title:  Text(
+              AppStrings.generateExperience,
               style: AppFontStyles.boldH3,
             ),
           ),
@@ -77,15 +79,15 @@ class _ExperienceGenerationScreenState
                         child: AnimatedTextKit(
                           animatedTexts: [
                             RotateAnimatedText(
-                              "Gathering your information!",
+                              AppStrings.gatheringYourInfo,
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              "Generating experience description",
+                              AppStrings.generatingExperience,
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              "Connecting to the AI",
+                              AppStrings.connectingToAI,
                               textStyle: AppFontStyles.boldH3,
                             ),
                           ],
@@ -110,11 +112,11 @@ class _ExperienceGenerationScreenState
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: specializationTextController,
-                      label: "Specialization",
-                      hintText: 'Example: Software Engineering',
+                      label: AppStrings.specialization,
+                      hintText: AppStrings.softwareEngineering,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Specialization is required";
+                          return AppStrings.specialization+AppStrings.isRequired;
                         }
                         return null;
                       },
@@ -125,11 +127,11 @@ class _ExperienceGenerationScreenState
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: companyTextController,
-                      label: "Company",
-                      hintText: "company name",
+                      label: AppStrings.company,
+                      hintText: "eWorld",
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Company is required";
+                          return AppStrings.company+AppStrings.isRequired;
                         }
                         return null;
                       },
@@ -140,7 +142,7 @@ class _ExperienceGenerationScreenState
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: additionalKeyWordsController,
-                      label: "Additional key words",
+                      label: AppStrings.additionalKeyWords,
                       hintText: "agile scrum github",
                     ),
                     SizedBox(
@@ -153,12 +155,12 @@ class _ExperienceGenerationScreenState
                             action: TextInputAction.done,
                             controller: numberOfYearsController,
                             textInputType: TextInputType.number,
-                            label: "Experience years",
-                            hintText: "number of years",
+                            label: AppStrings.experienceYears,
+                            hintText: "6",
                             onlyNumber: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Experience years is required";
+                                return AppStrings.experienceYears+AppStrings.isRequired;
                               }
                               return null;
                             },
@@ -172,8 +174,8 @@ class _ExperienceGenerationScreenState
                             action: TextInputAction.done,
                             controller: numberOfMonthsController,
                             textInputType: TextInputType.number,
-                            label: "Experience months",
-                            hintText: "number of months",
+                            label: AppStrings.experienceMonths,
+                            hintText: "10",
                             onlyNumber: true,
                           ),
                         ),
@@ -195,7 +197,7 @@ class _ExperienceGenerationScreenState
                   children: [
                     if (state is! ExperienceGenerationLoadingState)
                       ElevatedButtonWidget(
-                        title: "Generate",
+                        title: AppStrings.generate,
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           if (!_key.currentState!.validate()) {

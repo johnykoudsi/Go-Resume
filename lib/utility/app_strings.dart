@@ -135,6 +135,11 @@ class AppStrings{
   static String university = 'university'.tr();
   static String damascusUniversity = 'damascusUniversity'.tr();
   static String certificateLink = 'certificateLink'.tr();
+  static String addExperience = 'addExperience'.tr();
+  static String assistantManager = 'assistantManager'.tr();
+  static String describeYourWork = 'describeYourWork'.tr();
+  static String currentlyIn = 'currentlyIn'.tr();
+  static String experienceMonths = 'experienceMonths'.tr();
 
 
   //AI
@@ -147,5 +152,12 @@ class AppStrings{
   static String educationName = 'educationName'.tr();
   static String additionalKeyWords = 'additionalKeyWords'.tr();
   static String generate = 'generate'.tr();
+  static String generateEducation = 'generateEducation'.tr();
+  static String generatingEducation = 'generatingEducation'.tr();
+  static String location = 'location'.tr();
+  static String damascusSyria = 'damascusSyria'.tr();
+  static String graduationYear = 'graduationYear'.tr();
+  static String generateExperience = 'generateExperience'.tr();
+  static String generatingExperience = 'generatingExperience'.tr();
 
 }

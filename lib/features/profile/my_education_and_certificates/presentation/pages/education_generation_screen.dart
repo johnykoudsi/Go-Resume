@@ -14,6 +14,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_education_and
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 
+import '../../../../../utility/app_strings.dart';
+
 class EducationGenerationScreen extends StatefulWidget {
   const EducationGenerationScreen({super.key});
 
@@ -57,8 +59,8 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text(
-              "Generate Education",
+            title:  Text(
+              AppStrings.generateEducation,
               style: AppFontStyles.boldH3,
             ),
           ),
@@ -76,15 +78,15 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                         child: AnimatedTextKit(
                           animatedTexts: [
                             RotateAnimatedText(
-                              "Gathering your information!",
+                              AppStrings.gatheringYourInfo,
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              "Generating Education description",
+                              AppStrings.generatingEducation,
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              "Connecting to the AI",
+                              AppStrings.connectingToAI,
                               textStyle: AppFontStyles.boldH3,
                             ),
                           ],
@@ -109,11 +111,11 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: specializationTextController,
-                      label: "Specialization",
-                      hintText: 'Example: Software Engineering',
+                      label: AppStrings.specialization,
+                      hintText: AppStrings.softwareEngineering,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Specialization is required";
+                          return AppStrings.specialization+AppStrings.isRequired;
                         }
                         return null;
                       },
@@ -124,11 +126,11 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: schoolTextController,
-                      label: "University",
-                      hintText: "Damascus university",
+                      label: AppStrings.university,
+                      hintText: AppStrings.damascusUniversity,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "University is required";
+                          return AppStrings.university+AppStrings.isRequired;
                         }
                         return null;
                       },
@@ -139,7 +141,7 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: additionalKeyWordsController,
-                      label: "Additional key words",
+                      label: AppStrings.additionalKeyWords,
                       hintText: "agile scrum github",
                     ),
                     SizedBox(
@@ -148,11 +150,11 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: locationTextController,
-                      label: "Location",
-                      hintText: "damascus - syria",
+                      label: AppStrings.location,
+                      hintText: AppStrings.damascusSyria,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "location is required";
+                          return AppStrings.location+AppStrings.isRequired;
                         }
                         return null;
                       },
@@ -164,12 +166,12 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                       action: TextInputAction.done,
                       controller: graduationYearsController,
                       textInputType: TextInputType.number,
-                      label: "Graduation Year",
+                      label: AppStrings.graduationYear,
                       hintText: "2025",
                       onlyNumber: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Graduation year is required";
+                          return AppStrings.graduationYear+AppStrings.isRequired;
                         }
                         return null;
                       },
@@ -190,7 +192,7 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                   children: [
                     if (state is! EducationGenerationLoadingState)
                       ElevatedButtonWidget(
-                        title: "Generate",
+                        title: AppStrings.generate,
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           if (!_key.currentState!.validate()) {

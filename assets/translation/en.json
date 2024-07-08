@@ -125,6 +125,18 @@
   "university": "University",
   "damascusUniversity": "Damascus University",
   "certificateLink": "Certificate Link",
-  "endDate": "End Date"
+  "endDate": "End Date",
+  "generateEducation": "Generate Education",
+  "generatingEducation": "Generating Education description",
+  "location": "Location",
+  "damascusSyria": "Damascus - Syria",
+  "graduationYear": "Graduation Year",
+  "addExperience": "Add Experience",
+  "assistantManager": "Assistant Manager",
+  "describeYourWork": "Describe your work with a few words",
+  "currentlyIn": "Currently in",
+  "generateExperience": "Generate Experience",
+  "generatingExperience": "Generating experience description",
+  "experienceMonths": "Experience months"
 
 }

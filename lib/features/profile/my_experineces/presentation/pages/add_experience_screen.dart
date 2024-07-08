@@ -13,6 +13,8 @@ import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/p
 import 'package:smart_recruitment_flutter_user/features/profile/my_experineces/presentation/widgets/custom_check_box.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 
+import '../../../../../utility/app_strings.dart';
+
 class AddExperienceScreen extends StatefulWidget {
   const AddExperienceScreen({this.arguments, Key? key}) : super(key: key);
   final DisplayGenerationScreenArguments? arguments;
@@ -70,8 +72,8 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Add Experience",
+          title:  Text(
+            AppStrings.addExperience,
             style: AppFontStyles.boldH3,
           ),
         ),
@@ -84,14 +86,14 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: positionController,
-                label: "Position*",
+                label: AppStrings.position+AppStrings.star,
                 onlyNumber: false,
-                hintText: 'Example: Assistant Manager',
+                hintText: AppStrings.assistantManager,
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Position is required";
+                    return AppStrings.position+AppStrings.isRequired;
                   }
                   return null;
                 },
@@ -102,9 +104,9 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: companyController,
-                label: "Company",
+                label: AppStrings.company,
                 onlyNumber: false,
-                hintText: 'Example: eWorld Company',
+                hintText: 'eWorld',
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
               ),
@@ -114,16 +116,16 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: descriptionController,
-                label: "Description",
+                label: AppStrings.description,
                 onlyNumber: false,
-                hintText: 'Describe your work with a few words',
+                hintText: AppStrings.describeYourWork,
 
               ),
               SizedBox(
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                label: 'Start Date*',
+                label: AppStrings.startDate+AppStrings.star,
                 selectedDate: selectedStartDate,
                 onDateChange: (date) {
                   setState(() {
@@ -136,7 +138,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               ),
               if (!_currentlyIn)
                 DatePickerWidget(
-                  label: 'End Date*',
+                  label: AppStrings.endDate+AppStrings.star,
                   selectedDate: selectedEndDate,
                   onDateChange: (date) {
                     setState(() {
@@ -148,7 +150,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                 height: heightBetweenFields,
               ),
               CustomCheckBox(
-                text: 'Currently in',
+                text: AppStrings.currentlyIn,
                 isChecked: _currentlyIn,
                 onChanged: (value) {
                   setState(() {
@@ -165,7 +167,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
           child: BlocBuilder<ExperienceActionsBloc, ExperienceActionsState>(
             builder: (context, state) {
               return ElevatedButtonWidget(
-                title: "Add",
+                title: AppStrings.add,
                 isLoading: state is ExperienceActionsLoadingState,
                 onPressed: () {
                   if (_currentlyIn || selectedEndDate != null) {
