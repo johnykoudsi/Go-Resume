@@ -5,6 +5,7 @@ import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
+import '../../../utility/app_strings.dart';
 import 'widgets/CustomNavigatorWidget.dart';
 import 'widgets/bottom_nav_bar_screens.dart';
 
@@ -58,8 +59,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgHome,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Home'.tr(),
-                    tooltip: 'Home'.tr(),
+                    label: AppStrings.home,
+                    tooltip: AppStrings.home,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -67,8 +68,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgCase,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Jobs'.tr(),
-                    tooltip: 'Jobs'.tr(),
+                    label: AppStrings.jobs,
+                    tooltip:AppStrings.jobs,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -76,8 +77,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgProfile,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Profile'.tr(),
-                    tooltip: 'Profile'.tr(),
+                    label: AppStrings.profile,
+                    tooltip: AppStrings.profile,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -85,8 +86,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgStar,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Favourite'.tr(),
-                    tooltip: 'Favourite'.tr(),
+                    label: AppStrings.favorite,
+                    tooltip: AppStrings.favorite,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -94,8 +95,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgMore,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'More'.tr(),
-                    tooltip: 'More'.tr(),
+                    label: AppStrings.more,
+                    tooltip: AppStrings.more,
                   ),
                 ],
               ),

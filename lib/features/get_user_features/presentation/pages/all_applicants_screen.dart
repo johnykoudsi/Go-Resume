@@ -86,7 +86,6 @@ class _AllApplicantsScreenState extends State<AllApplicantsScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     if (state is GetAllApplicantsLoadedState) {
                       return JobApplicantsWidget(
-
                         canReject: true,
                         applicant: state.applicantsList[index],
                       );

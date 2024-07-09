@@ -455,7 +455,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                               return ElevatedButtonWidget(
                                 isLoading:
                                     applyForJobState is ApplyForJobLoadingState,
-                                title: "Apply",
+                                title: AppStrings.apply,
                                 onPressed: () {
                                   applyForJobContext
                                       .read<ApplyForJobBloc>()

@@ -9,6 +9,8 @@ import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
+import '../../../../utility/app_strings.dart';
+
 class JobsHorizontalWidget extends StatefulWidget {
   const JobsHorizontalWidget({this.companyId, super.key});
   final int? companyId;
@@ -77,7 +79,7 @@ class _AllJobsScreenState extends State<JobsHorizontalWidget> {
           return SomethingWrongWidget(
             svgPath: Assets.svgNoInternet,
             elevatedButtonWidget: ElevatedButtonWidget(
-              title: "Refresh",
+              title: AppStrings.refresh,
               onPressed: () {
                 context
                     .read<GetAllJobsBloc>()

@@ -114,14 +114,14 @@ class _AddJobScreenState extends State<AddJobScreen> {
                     }
                     return null;
                   },
-                  hintText: 'Example: Software Engineer',
+                  hintText: AppStrings.softwareEngineer,
                 ),
                 SizedBox(
                   height: heightBetweenFields,
                 ),
                 DatePickerWidget(
                   maxDate: DateTime.now().add(const Duration(days: 360)),
-                  label: 'Select Date*',
+                  label: AppStrings.selectDate+AppStrings.star,
                   selectedDate: selectedDate,
                   onDateChange: (date) {
                     setState(() {
@@ -158,7 +158,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                           );
                         },
                         description: _selectedBenefits.isEmpty
-                            ? "Add some benefits that your company will provide for the position you're offering."
+                            ? AppStrings.addSomeBenefits
                             : _selectedBenefits
                                 .map((benefit) => benefit.name)
                                 .join(', '),
@@ -175,15 +175,15 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   isMoney: true,
                   action: TextInputAction.done,
                   controller: minimumSalaryController,
-                  label: "Minimum Salary*",
+                  label: AppStrings.minimumSalary+AppStrings.star,
                   onlyNumber: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Minimum Salary is required";
+                      return AppStrings.minimumSalary+AppStrings.isRequired;
                     }
                     return null;
                   },
-                  hintText: 'Example: 1000,000 sp',
+                  hintText: '1000,000 ${AppStrings.syp}',
                   textInputType: TextInputType.number,
                 ),
                 SizedBox(
@@ -193,22 +193,22 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   isMoney: true,
                   action: TextInputAction.done,
                   controller: maximumSalaryController,
-                  label: "Maximum Salary*",
+                  label: AppStrings.maximumSalary+AppStrings.star,
                   onlyNumber: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "Maximum Salary is required";
+                      return AppStrings.maximumSalary+AppStrings.isRequired;
                     }
                     return null;
                   },
-                  hintText: 'Example: 2000,000 sp',
+                  hintText: '2000,000 ${AppStrings.syp}',
                   textInputType: TextInputType.number,
                 ),
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
                 CompensationDropdownList(
-                  title: 'Compensation',
+                  title: AppStrings.compensation,
                   onChanged: (value) {
                     setState(() {
                       selectedCompensation = value;
@@ -222,9 +222,9 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 CustomTextField(
                   action: TextInputAction.done,
                   controller: workHoursController,
-                  label: "Work Hours",
+                  label: AppStrings.dailyWorkHours,
                   onlyNumber: true,
-                  hintText: 'Example: 8 hours',
+                  hintText: '8 ${AppStrings.hours}',
                   textInputType: TextInputType.number,
                 ),
                 SizedBox(
@@ -233,9 +233,9 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 CustomTextField(
                   action: TextInputAction.done,
                   controller: experienceYearsController,
-                  label: "Experience Years",
+                  label: AppStrings.experienceYears,
                   onlyNumber: true,
-                  hintText: 'Example: 2 years',
+                  hintText: '2 ${AppStrings.years}',
                   textInputType: TextInputType.number,
                 ),
                 SizedBox(
@@ -253,7 +253,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                       items: state.workFields,
                       selectedItem: _selectedWorkField,
                       onSelect: _handleSelectedWorkField,
-                      title: 'Work Field',
+                      title: AppStrings.workField,
                     );
                   } else {
                     return const SizedBox();
@@ -263,7 +263,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   height: heightBetweenFields * 2,
                 ),
                 JobTypeDropdownList(
-                  title: 'Job Type',
+                  title: AppStrings.jobType,
                   onChanged: (value) {
                     setState(() {
                       selectedJobType = value;
@@ -278,9 +278,9 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   maxLines: 10,
                   action: TextInputAction.done,
                   controller: descriptionController,
-                  label: "Description",
+                  label: AppStrings.description,
                   onlyNumber: false,
-                  hintText: 'Describe your vacancy with a few words',
+                  hintText: AppStrings.describeVacancy,
                 ),
                 SizedBox(
                   height: heightBetweenFields * 2,

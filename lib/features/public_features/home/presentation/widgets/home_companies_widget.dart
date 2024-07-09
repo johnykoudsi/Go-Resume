@@ -4,6 +4,8 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 
+import '../../../../../utility/app_strings.dart';
+
 class HomeCompaniesSectionWidget extends StatelessWidget {
   const HomeCompaniesSectionWidget({super.key});
 
@@ -15,8 +17,8 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            const Text(
-              "Top Companies",
+             Text(
+              AppStrings.topCompanies,
               style: AppFontStyles.mediumH4,
             ),
             TextButton(
@@ -24,7 +26,7 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
                   Navigator.of(context).pushNamed(AppRoutes.allCompanyScreen);
                 },
                 child: Text(
-                  "See More",
+                  AppStrings.seeAll,
                   style: AppFontStyles.mediumH4
                       .copyWith(color: AppColors.kMainColor100),
                 ))

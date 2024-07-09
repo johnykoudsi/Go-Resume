@@ -100,7 +100,7 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
 
           }return SomethingWrongWidget(
             elevatedButtonWidget: ElevatedButtonWidget(
-              title: "Refresh",
+              title:AppStrings.refresh,
               onPressed: () {
                 context.read<MySubmissionsBloc>().add(ChangeToLoadingApiMySubmissionsEvent());
                 //search(userS);

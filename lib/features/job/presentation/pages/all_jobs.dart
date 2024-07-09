@@ -147,7 +147,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
               return SomethingWrongWidget(
                 svgPath: Assets.svgNoInternet,
                 elevatedButtonWidget: ElevatedButtonWidget(
-                  title: "Refresh",
+                  title: AppStrings.refresh,
                   onPressed: () {
                     context
                         .read<GetAllJobsBloc>()

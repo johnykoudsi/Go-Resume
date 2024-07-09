@@ -124,7 +124,7 @@ class _PinnedApplicantsScreenState extends State<PinnedApplicantsScreen> {
                 return SomethingWrongWidget(
                   svgPath: Assets.svgNoInternet,
                   elevatedButtonWidget: ElevatedButtonWidget(
-                    title: "Refresh",
+                    title: AppStrings.refresh,
                     onPressed: () {
                       context
                           .read<GetPinnedApplicantsBloc>()

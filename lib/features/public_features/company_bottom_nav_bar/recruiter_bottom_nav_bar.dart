@@ -6,6 +6,7 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/applicant_bottom_nav_bar/widgets/CustomNavigatorWidget.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
+import '../../../utility/app_strings.dart';
 import 'widgets/recruiter_bottom_nav_bar_screens.dart';
 
 class RecruiterBottomNavBar extends StatefulWidget {
@@ -56,8 +57,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgCase,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'My Jobs'.tr(),
-                    tooltip: 'My Jobs'.tr(),
+                    label: AppStrings.myJobs,
+                    tooltip: AppStrings.myJobs,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -65,8 +66,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgPin,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Pinned'.tr(),
-                    tooltip: 'Pinned'.tr(),
+                    label: AppStrings.pinned,
+                    tooltip: AppStrings.pinned,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -74,8 +75,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgProfile,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Profile'.tr(),
-                    tooltip: 'Profile'.tr(),
+                    label: AppStrings.profile,
+                    tooltip: AppStrings.profile,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -83,8 +84,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgAdd,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Add'.tr(),
-                    tooltip: 'Add'.tr(),
+                    label: AppStrings.add,
+                    tooltip: AppStrings.add,
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -92,8 +93,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgMore,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'More'.tr(),
-                    tooltip: 'More'.tr(),
+                    label: AppStrings.more,
+                    tooltip: AppStrings.more,
                   ),
                 ],
               ),

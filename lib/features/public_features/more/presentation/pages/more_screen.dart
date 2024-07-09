@@ -75,7 +75,10 @@ class _MoreScreenState extends State<MoreScreen> {
                 topPadding: screenHeight * 0.85,
                 onTap: () {
                   setState(() {
+                    int x=0;
                     LanguageDialog.showLanguageBottomSheet(context);
+                    x++;
+                    print(x);
 
                   });
                 },

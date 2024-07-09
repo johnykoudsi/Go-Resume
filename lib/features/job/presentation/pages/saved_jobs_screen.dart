@@ -112,7 +112,7 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
               return SomethingWrongWidget(
                 svgPath: Assets.svgNoInternet,
                 elevatedButtonWidget: ElevatedButtonWidget(
-                  title: "Refresh",
+                  title: AppStrings.refresh,
                   onPressed: () {
                     context
                         .read<GetSavedJobsBloc>()

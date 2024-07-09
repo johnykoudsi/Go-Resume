@@ -5,6 +5,8 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/router/app_routes.dart';
 
+import '../../../../../utility/app_strings.dart';
+
 class MyJobsSectionWidget extends StatelessWidget {
   const MyJobsSectionWidget({super.key});
 
@@ -15,8 +17,8 @@ class MyJobsSectionWidget extends StatelessWidget {
       child: Column(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            const Text(
-              "My Jobs",
+             Text(
+              AppStrings.myJobs,
               style: AppFontStyles.mediumH4,
             ),
             TextButton(
@@ -29,7 +31,7 @@ class MyJobsSectionWidget extends StatelessWidget {
                       arguments: userState.user.data);
                 },
                 child: Text(
-                  "See More",
+                  AppStrings.seeAll,
                   style: AppFontStyles.mediumH4
                       .copyWith(color: AppColors.kMainColor100),
                 ))

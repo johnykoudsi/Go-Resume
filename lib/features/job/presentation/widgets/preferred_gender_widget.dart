@@ -32,12 +32,6 @@ class PreferredGenderWidget extends StatelessWidget {
           onChanged: onUserTypeSelected,
         ),
          Text(AppStrings.female,style: AppFontStyles.mediumH5,),
-        // Radio<GenderEnum>(
-        //   value:  GenderEnum.none,
-        //   groupValue: selectedPreferredGender,
-        //   onChanged: onUserTypeSelected,
-        // ),
-        // const Text('None',style: AppFontStyles.mediumH5,),
       ],
     );
   }

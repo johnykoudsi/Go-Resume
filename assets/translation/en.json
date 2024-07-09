@@ -137,6 +137,22 @@
   "currentlyIn": "Currently in",
   "generateExperience": "Generate Experience",
   "generatingExperience": "Generating experience description",
-  "experienceMonths": "Experience months"
+  "experienceMonths": "Experience months",
+  "softwareEngineer": "Software Engineer",
+  "addSomeBenefits": "Add some benefits that your company will provide for the position you're offering.",
+  "minimumSalary": "Minimum Salary",
+  "maximumSalary": "Maximum Salary",
+  "compensation": "Compensation",
+  "hours": "hours",
+  "workField": "Work Field",
+  "describeVacancy": "Describe your vacancy with a few words",
+  "apply": "Apply",
+  "home": "Home",
+  "profile": "Profile",
+  "favorite": "Favorite",
+  "more": "More",
+  "pinned": "Pinned",
+  "topCompanies": "Top Companies",
+  "topOffers": "Top Offers"
 
 }

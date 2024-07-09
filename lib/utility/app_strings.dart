@@ -32,6 +32,15 @@ class AppStrings{
   static String requirements = 'requirements'.tr();
   static String selectDate = 'selectDate'.tr();
   static String jobType = 'jobType'.tr();
+  static String softwareEngineer = 'softwareEngineer'.tr();
+  static String addSomeBenefits = 'addSomeBenefits'.tr();
+  static String minimumSalary = 'minimumSalary'.tr();
+  static String maximumSalary = 'maximumSalary'.tr();
+  static String compensation = 'compensation'.tr();
+  static String hours = 'hours'.tr();
+  static String workField = 'workField'.tr();
+  static String describeVacancy = 'describeVacancy'.tr();
+  static String apply = 'apply'.tr();
 
 
   //company
@@ -159,5 +168,17 @@ class AppStrings{
   static String graduationYear = 'graduationYear'.tr();
   static String generateExperience = 'generateExperience'.tr();
   static String generatingExperience = 'generatingExperience'.tr();
+
+   //nav
+  static String home = 'home'.tr();
+  static String profile = 'profile'.tr();
+  static String favorite = 'favorite'.tr();
+  static String more = 'more'.tr();
+  static String pinned = 'pinned'.tr();
+
+   //home
+  static String topCompanies = 'topCompanies'.tr();
+  static String topOffers = 'topOffers'.tr();
+
 
 }
