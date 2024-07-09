@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -79,7 +80,7 @@ class _AllJobsScreenState extends State<JobsHorizontalWidget> {
           return SomethingWrongWidget(
             svgPath: Assets.svgNoInternet,
             elevatedButtonWidget: ElevatedButtonWidget(
-              title: AppStrings.refresh,
+              title: "refresh".tr(),
               onPressed: () {
                 context
                     .read<GetAllJobsBloc>()

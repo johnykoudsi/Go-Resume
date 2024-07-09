@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -190,12 +191,9 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Text(
-                    user.applicant?.bio ?? "",
-                    style: AppFontStyles.boldH5.copyWith(color: Colors.black),
-                  ),
+                child: Text(
+                  user.applicant?.bio ?? "",
+                  style: AppFontStyles.boldH5.copyWith(color: Colors.black),
                 ),
               ),
               user.applicant?.bio != null
@@ -204,7 +202,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                     )
                   : const SizedBox.shrink(),
               CustomCard(
-                title: AppStrings.experiences,
+                title: "experiences".tr(),
                 visitor: widget.visitor,
                 content: user.applicant!.experiences!.isEmpty
                     ? const NoDataWidget(
@@ -230,7 +228,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 height: 18,
               ),
               CustomCard(
-                title: AppStrings.skills,
+                title: "skills".tr(),
                 visitor: widget.visitor,
                 content: user.applicant!.skills!.isEmpty
                     ? const NoDataWidget(
@@ -260,7 +258,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 height: 18,
               ),
               CustomCard(
-                title: AppStrings.educationCertificates,
+                title: "educationCertificates".tr(),
                 visitor: widget.visitor,
                 content: user.applicant!.education!.isEmpty
                     ? const NoDataWidget(
@@ -288,7 +286,7 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
               ),
               CustomCard(
                 operation: "",
-                title: AppStrings.contactInfo,
+                title: "contactInfo".tr(),
                 visitor: widget.visitor,
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -27,7 +28,7 @@ class TopApplicantsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  AppStrings.applicants,
+                  "applicants".tr(),
                   style: AppFontStyles.mediumH4
                 ),
                 TextButton(
@@ -39,7 +40,7 @@ class TopApplicantsWidget extends StatelessWidget {
                       // ),
                       // );
                       },
-                    child: Text(AppStrings.seeAll,
+                    child: Text("seeAll".tr(),
                       style: AppFontStyles.mediumH4
                           .copyWith(color: AppColors.kMainColor100),
                     ))

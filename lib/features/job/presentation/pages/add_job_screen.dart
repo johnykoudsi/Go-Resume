@@ -93,7 +93,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title:  Text(
-            AppStrings.addYourJob,
+            "addYourJob".tr(),
             style: AppFontStyles.boldH3,
           ),
         ),
@@ -106,22 +106,22 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 CustomTextField(
                   action: TextInputAction.done,
                   controller: positionController,
-                  label: "${AppStrings.position}*",
+                  label: "${"position".tr()}*",
                   onlyNumber: false,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return AppStrings.position + AppStrings.isRequired;
+                      return "position".tr() + "isRequired".tr();
                     }
                     return null;
                   },
-                  hintText: AppStrings.softwareEngineer,
+                  hintText: "softwareEngineer".tr(),
                 ),
                 SizedBox(
                   height: heightBetweenFields,
                 ),
                 DatePickerWidget(
                   maxDate: DateTime.now().add(const Duration(days: 360)),
-                  label: AppStrings.selectDate+AppStrings.star,
+                  label: "selectDate".tr()+"star".tr(),
                   selectedDate: selectedDate,
                   onDateChange: (date) {
                     setState(() {
@@ -158,7 +158,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                           );
                         },
                         description: _selectedBenefits.isEmpty
-                            ? AppStrings.addSomeBenefits
+                            ? "addSomeBenefits".tr()
                             : _selectedBenefits
                                 .map((benefit) => benefit.name)
                                 .join(', '),
@@ -175,15 +175,15 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   isMoney: true,
                   action: TextInputAction.done,
                   controller: minimumSalaryController,
-                  label: AppStrings.minimumSalary+AppStrings.star,
+                  label: "minimumSalary".tr()+"star".tr(),
                   onlyNumber: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return AppStrings.minimumSalary+AppStrings.isRequired;
+                      return "minimumSalary".tr()+"isRequired".tr();
                     }
                     return null;
                   },
-                  hintText: '1000,000 ${AppStrings.syp}',
+                  hintText: '1000,000 ${"syp".tr()}',
                   textInputType: TextInputType.number,
                 ),
                 SizedBox(
@@ -193,22 +193,22 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   isMoney: true,
                   action: TextInputAction.done,
                   controller: maximumSalaryController,
-                  label: AppStrings.maximumSalary+AppStrings.star,
+                  label: "maximumSalary".tr()+"star".tr(),
                   onlyNumber: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return AppStrings.maximumSalary+AppStrings.isRequired;
+                      return "maximumSalary".tr()+"isRequired".tr();
                     }
                     return null;
                   },
-                  hintText: '2000,000 ${AppStrings.syp}',
+                  hintText: '2000,000 ${"syp".tr()}',
                   textInputType: TextInputType.number,
                 ),
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
                 CompensationDropdownList(
-                  title: AppStrings.compensation,
+                  title: "compensation".tr(),
                   onChanged: (value) {
                     setState(() {
                       selectedCompensation = value;
@@ -222,9 +222,9 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 CustomTextField(
                   action: TextInputAction.done,
                   controller: workHoursController,
-                  label: AppStrings.dailyWorkHours,
+                  label: "dailyWorkHours".tr(),
                   onlyNumber: true,
-                  hintText: '8 ${AppStrings.hours}',
+                  hintText: '8 ${"hours".tr()}',
                   textInputType: TextInputType.number,
                 ),
                 SizedBox(
@@ -233,9 +233,9 @@ class _AddJobScreenState extends State<AddJobScreen> {
                 CustomTextField(
                   action: TextInputAction.done,
                   controller: experienceYearsController,
-                  label: AppStrings.experienceYears,
+                  label: "experienceYears".tr(),
                   onlyNumber: true,
-                  hintText: '2 ${AppStrings.years}',
+                  hintText: '2 ${"years".tr()}',
                   textInputType: TextInputType.number,
                 ),
                 SizedBox(
@@ -253,7 +253,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                       items: state.workFields,
                       selectedItem: _selectedWorkField,
                       onSelect: _handleSelectedWorkField,
-                      title: AppStrings.workField,
+                      title: "workField".tr(),
                     );
                   } else {
                     return const SizedBox();
@@ -263,7 +263,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   height: heightBetweenFields * 2,
                 ),
                 JobTypeDropdownList(
-                  title: AppStrings.jobType,
+                  title: "jobType".tr(),
                   onChanged: (value) {
                     setState(() {
                       selectedJobType = value;
@@ -278,15 +278,15 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   maxLines: 10,
                   action: TextInputAction.done,
                   controller: descriptionController,
-                  label: AppStrings.description,
+                  label: "description".tr(),
                   onlyNumber: false,
-                  hintText: AppStrings.describeVacancy,
+                  hintText: "describeVacancy".tr(),
                 ),
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
                  Text(
-                  AppStrings.preferredGender,
+                  "preferredGender".tr(),
                   style: AppFontStyles.mediumH5,
                 ),
                 PreferredGenderWidget(
@@ -311,10 +311,10 @@ class _AddJobScreenState extends State<AddJobScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                              Text(
-                                AppStrings.salaryExpectations,
+                                "salaryExpectations".tr(),
                                 style: AppFontStyles.boldH4),
                             Text(
-                              "${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.minSalary)} ${AppStrings.mSYP} - ${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.maxSalary)} ${AppStrings.mSYP}",
+                              "${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.minSalary)} ${"mSYP".tr()} - ${NumberFormat.decimalPattern().format(state.salaryExpectationEntity.maxSalary)} ${"mSYP".tr()}",
                               style: AppFontStyles.mediumH5,
                             ),
                           ],
@@ -322,7 +322,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                       );
                     }
                     return ElevatedButtonBorderWidget(
-                      title: AppStrings.getExpectedSalary,
+                      title: "getExpectedSalary".tr(),
                       isLoading: state is GetSalaryLoadingState,
                       onPressed: () {
                         if (!_key.currentState!.validate() ||
@@ -368,7 +368,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                   builder: (context, state) {
                     return ElevatedButtonWidget(
                       isLoading: state is AddJobLoadingState,
-                      title: AppStrings.submit,
+                      title: "submit".tr(),
                       onPressed: () {
                         if (!_key.currentState!.validate() ||
                             selectedDate == null ||

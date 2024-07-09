@@ -18,7 +18,6 @@ class AppStrings{
   static String applicantFor = 'applicantFor'.tr();
   static String allApplicants = 'allApplicants'.tr();
   static String applicants = 'applicants'.tr();
-  static String position = 'position'.tr();
   static String description = 'description'.tr();
   static String addYourJob = 'addYourJob'.tr();
   static String salaryExpectations = 'salaryExpectations'.tr();
@@ -28,7 +27,6 @@ class AppStrings{
   static String benefits = 'benefits'.tr();
   static String dailyWorkHours = 'dailyWorkHours'.tr();
   static String experienceYears = 'experienceYears'.tr();
-  static String type = 'type'.tr();
   static String requirements = 'requirements'.tr();
   static String selectDate = 'selectDate'.tr();
   static String jobType = 'jobType'.tr();
@@ -58,8 +56,6 @@ class AppStrings{
   static String noData = 'noData'.tr();
   static String isRequired = 'isRequired'.tr();
   static String seconds = 'seconds'.tr();
-  static String close = 'close'.tr();
-  static String open = 'open'.tr();
   static String preferredGender = 'preferredGender'.tr();
   static String submit = 'submit'.tr();
   static String startDate = 'startDate'.tr();
@@ -72,17 +68,13 @@ class AppStrings{
   static String areYouSureToDelete = 'areYouSureToDelete'.tr();
   static String no = 'no'.tr();
   static String yes = 'yes'.tr();
-  static String delete = 'delete'.tr();
   static String star = 'star'.tr();
   static String email = 'email'.tr();
   static String website = 'website'.tr();
   static String about = 'about'.tr();
   static String edit = 'edit'.tr();
-  static String title = 'title'.tr();
   static String noSmokingExample = 'noSmokingExample'.tr();
   static String smokingNotAllowed = 'smokingNotAllowed'.tr();
-  static String add = 'add'.tr();
-  static String johnDue = 'johnDue'.tr();
   static String dob = 'dob'.tr();
   static String bio = 'bio'.tr();
   static String describeYourself = 'describeYourself'.tr();
@@ -137,7 +129,6 @@ class AppStrings{
   static String vision = 'vision'.tr();
   static String mission = 'mission'.tr();
   static String policies = 'policies'.tr();
-  static String name = 'name'.tr();
   static String addEducation = 'addEducation'.tr();
   static String describeEducation = 'describeEducation'.tr();
   static String gradePercent = 'gradePercent'.tr();
@@ -163,18 +154,14 @@ class AppStrings{
   static String generate = 'generate'.tr();
   static String generateEducation = 'generateEducation'.tr();
   static String generatingEducation = 'generatingEducation'.tr();
-  static String location = 'location'.tr();
-  static String damascusSyria = 'damascusSyria'.tr();
   static String graduationYear = 'graduationYear'.tr();
   static String generateExperience = 'generateExperience'.tr();
   static String generatingExperience = 'generatingExperience'.tr();
 
    //nav
-  static String home = 'home'.tr();
   static String profile = 'profile'.tr();
   static String favorite = 'favorite'.tr();
   static String more = 'more'.tr();
-  static String pinned = 'pinned'.tr();
 
    //home
   static String topCompanies = 'topCompanies'.tr();

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -116,7 +117,7 @@ class _EditApplicantProfileScreenState
       child: Scaffold(
         appBar: AppBar(
           title:  Text(
-            AppStrings.editProfile,
+            "editProfile".tr(),
             style: AppFontStyles.boldH2,
           ),
         ),
@@ -129,14 +130,14 @@ class _EditApplicantProfileScreenState
               CustomTextField(
                 action: TextInputAction.done,
                 controller: nameController,
-                label: AppStrings.fullName+AppStrings.star,
+                label: "fullName".tr()+"star".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.johnDue,
+                hintText: "johnDue".tr(),
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppStrings.fullName+AppStrings.isRequired;
+                    return "fullName".tr()+"isRequired".tr();
                   }
                   return null;
                 },
@@ -170,7 +171,7 @@ class _EditApplicantProfileScreenState
               CustomTextField(
                 action: TextInputAction.done,
                 controller: emailController,
-                label: AppStrings.email,
+                label:"email".tr(),
                 onlyNumber: false,
                 hintText: 'example@gmail.com',
                 textInputType: TextInputType.visiblePassword,
@@ -194,7 +195,7 @@ class _EditApplicantProfileScreenState
               CustomTextField(
                 action: TextInputAction.done,
                 controller: websiteController,
-                label: AppStrings.website,
+                label: "website".tr(),
                 onlyNumber: false,
                 hintText: 'https://www.example.com',
                 textInputType: TextInputType.visiblePassword,
@@ -228,7 +229,7 @@ class _EditApplicantProfileScreenState
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                label: AppStrings.dob,
+                label: "dob".tr(),
                 selectedDate: selectedDate,
                 onDateChange: (date) {
                   setState(() {
@@ -242,9 +243,9 @@ class _EditApplicantProfileScreenState
               DescriptionField(
                 action: TextInputAction.done,
                 controller: bioController,
-                label: AppStrings.bio,
+                label: "bio".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.describeYourself,
+                hintText: "describeYourself".tr(),
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -270,7 +271,7 @@ class _EditApplicantProfileScreenState
               child: BlocBuilder<ApplicantProfileBloc, ApplicantProfileState>(
                 builder: (context, state) {
                   return ElevatedButtonWidget(
-                    title: AppStrings.edit,
+                    title: "edit".tr(),
                     isLoading: state is ApplicantProfileLoading,
                     onPressed: () {
                       if (!_key.currentState!.validate()) {

@@ -20,7 +20,7 @@ class JobTypeFilterWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 22),
           child: Text(
-            AppStrings.jobType,
+            "jobType".tr(),
             style: AppFontStyles.regularH4,
           ),
         ),

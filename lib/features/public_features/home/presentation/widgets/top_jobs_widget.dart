@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
@@ -16,7 +17,7 @@ class TopJobsSectionWidget extends StatelessWidget {
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
              Text(
-              AppStrings.topOffers,
+              "topOffers".tr(),
               style: AppFontStyles.mediumH4,
             ),
             TextButton(
@@ -24,7 +25,7 @@ class TopJobsSectionWidget extends StatelessWidget {
                   Navigator.pushNamed(context, AppRoutes.allJobs);
                 },
                 child: Text(
-                  AppStrings.seeAll,
+                  "seeAll".tr(),
                   style: AppFontStyles.mediumH4
                       .copyWith(color: AppColors.kMainColor100),
                 ))

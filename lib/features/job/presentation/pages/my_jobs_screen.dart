@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -65,7 +66,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
       value: getAllJobsBloc,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppStrings.myJobs),
+          title: Text("myJobs".tr()),
           centerTitle: false,
           actions: [
             IconButton(
@@ -143,7 +144,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
               return SomethingWrongWidget(
                 svgPath: Assets.svgNoInternet,
                 elevatedButtonWidget: ElevatedButtonWidget(
-                  title: AppStrings.refresh,
+                  title: "refresh".tr(),
                   onPressed: () {
                     context
                         .read<GetAllJobsBloc>()

@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,7 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
         child: Scaffold(
           appBar: AppBar(
             title:  Text(
-              AppStrings.generateBio,
+              "generateBio".tr(),
               style: AppFontStyles.boldH3,
             ),
           ),
@@ -73,15 +74,15 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                         child: AnimatedTextKit(
                           animatedTexts: [
                             RotateAnimatedText(
-                              AppStrings.gatheringYourInfo,
+                              "gatheringYourInfo".tr(),
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              AppStrings.generatingDescription,
+                              "generatingDescription".tr(),
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              AppStrings.connectingToAI,
+                             "connectingToAI".tr(),
                               textStyle: AppFontStyles.boldH3,
                             ),
                           ],
@@ -106,11 +107,11 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: specializationTextController,
-                      label: AppStrings.specialization,
-                      hintText: AppStrings.softwareEngineering,
+                      label: "specialization".tr(),
+                      hintText: "softwareEngineering".tr(),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.specialization+AppStrings.isRequired;
+                          return "specialization".tr()+"isRequired".tr();
                         }
                         return null;
                       },
@@ -121,11 +122,11 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: educationTextController,
-                      label: AppStrings.education,
-                      hintText: AppStrings.educationName,
+                      label:"education".tr(),
+                      hintText: "educationName".tr(),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.education+AppStrings.isRequired;
+                          return "education".tr()+"isRequired".tr();
                         }
                         return null;
                       },
@@ -136,7 +137,7 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: additionalKeyWordsController,
-                      label: AppStrings.additionalKeyWords,
+                      label: "additionalKeyWords".tr(),
                       hintText: "agile scrum github",
                     ),
                   ],
@@ -154,7 +155,7 @@ class _BioGenerationScreenState extends State<BioGenerationScreen> {
                   children: [
                     if (state is! BioGenerationLoadingState)
                       ElevatedButtonWidget(
-                        title: AppStrings.generate,
+                        title: "generate".tr(),
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           if (!_key.currentState!.validate()) {

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
@@ -66,7 +67,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            AppStrings.addEducation,
+            "addEducation".tr(),
             style: AppFontStyles.boldH3,
           ),
         ),
@@ -79,14 +80,14 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: nameController,
-                label: AppStrings.specialization + AppStrings.star,
+                label: "specialization".tr() + "star".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.softwareEngineering,
+                hintText: "softwareEngineering".tr(),
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppStrings.specialization + AppStrings.isRequired;
+                    return "specialization".tr() + "isRequired".tr();
                   }
                   return null;
                 },
@@ -97,9 +98,9 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: descriptionController,
-                label: AppStrings.description,
+                label: "description".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.describeEducation,
+                hintText: "describeEducation".tr(),
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -107,7 +108,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: gradeDateController,
-                label: AppStrings.gradePercent,
+                label: "gradePercent".tr(),
                 onlyNumber: true,
                 textInputType: TextInputType.number,
                 hintText: '81.2',
@@ -118,9 +119,9 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: universityController,
-                label: AppStrings.university,
+                label: "university".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.damascusUniversity,
+                hintText: "damascusUniversity".tr(),
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -128,7 +129,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: linkController,
-                label: AppStrings.certificateLink,
+                label: "certificateLink".tr(),
                 onlyNumber: false,
                 hintText: 'https://certificatelink.com',
               ),
@@ -136,7 +137,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                label: AppStrings.startDate + AppStrings.star,
+                label: "startDate".tr() + "star".tr(),
                 selectedDate: selectedStartDate,
                 onDateChange: (date) {
                   setState(() {
@@ -148,7 +149,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                label: AppStrings.endDate + AppStrings.star,
+                label: "endDate".tr() + "star".tr(),
                 selectedDate: selectedEndDate,
                 onDateChange: (date) {
                   setState(() {
@@ -168,7 +169,7 @@ class _AddEducationScreenState extends State<AddEducationScreen> {
           child: BlocBuilder<EducationActionsBloc, EducationActionsState>(
             builder: (context, state) {
               return ElevatedButtonWidget(
-                title: AppStrings.add,
+                title: "add".tr(),
                 isLoading: state is EducationActionsLoadingState,
                 onPressed: () {
                   if (_key.currentState!.validate() &&

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,12 +68,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       return AppColors.kLinearColor.createShader(bounds);
                     },
                     child:  Text(
-                      AppStrings.welcome,
+                      "welcome".tr(),
                       style: AppFontStyles.boldH1,
                     ),
                   ),
                    Text(
-                    AppStrings.enterPhoneNumber,
+                    "enterPhoneNumber".tr(),
                     style: AppFontStyles.mediumH6,
                   ),
                   Column(
@@ -84,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       PhoneTextField(
                         phoneNumberController: phoneController,
-                        label: "${AppStrings.phoneNumber}*",
+                        label: "${"phoneNumber".tr()}*",
                         onPhoneNumberChanged: (PhoneNumber value) {
                           phoneNumberValue = value;
                         },
@@ -95,15 +96,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       CustomTextField(
                         action: TextInputAction.done,
                         controller: passwordController,
-                        label: "${AppStrings.password}*",
+                        label: "${"password".tr()}*",
                         onlyNumber: false,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppStrings.password+AppStrings.isRequired;
+                            return "password".tr()+"isRequired".tr();
                           }
                           RegExp regex = RegExp(r'^(?=.*?[a-z]).{8,}$');
                           if (!regex.hasMatch(value)) {
-                            return AppStrings.enterValidPassword;
+                            return "enterValidPassword".tr();
                           }
                           return null;
                         },
@@ -123,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   BlocBuilder<UserBloc, UserState>(
                     builder: (context, state) {
                       return ElevatedButtonWidget(
-                        title: AppStrings.login,
+                        title: "login".tr(),
                         isLoading: state is UserLoading,
                         onPressed: () async {
 
@@ -150,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                        Text(
-                        AppStrings.dontHaveAccount,
+                        "dontHaveAccount".tr(),
                         style: AppFontStyles.mediumH5,
                       ),
                       GestureDetector(
@@ -159,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context, AppRoutes.signup);
                           },
                           child: Text(
-                            " ${AppStrings.signup}",
+                            " ${"signup".tr()}",
                             style: AppFontStyles.mediumH5
                                 .copyWith(color: AppColors.kMainColor100),
                           ))

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
@@ -48,7 +49,7 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
     return Scaffold(
       appBar: AppBar(
         title:  Text(
-          AppStrings.mySubmissions,
+          "mySubmissions".tr(),
           style: AppFontStyles.boldH2,
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
@@ -100,7 +101,7 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
 
           }return SomethingWrongWidget(
             elevatedButtonWidget: ElevatedButtonWidget(
-              title:AppStrings.refresh,
+              title:"refresh".tr(),
               onPressed: () {
                 context.read<MySubmissionsBloc>().add(ChangeToLoadingApiMySubmissionsEvent());
                 //search(userS);

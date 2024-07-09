@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
@@ -35,7 +36,7 @@ class BenefitsWidget extends StatelessWidget {
              Row(
               children: [
                 Text(
-                  AppStrings.benefits,
+                  "benefits".tr(),
                   style: AppFontStyles.mediumH5,
                 ),
               ],

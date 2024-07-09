@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -50,12 +51,12 @@ class _SignupScreenState extends State<SignupScreen> {
                     return AppColors.kLinearColor.createShader(bounds);
                   },
                   child:  Text(
-                    AppStrings.welcome,
+                    "welcome".tr(),
                     style: AppFontStyles.boldH1,
                   ),
                 ),
                  Text(
-                  AppStrings.enterInformation,
+                  "enterInformation".tr(),
                   style: AppFontStyles.mediumH6,
                 ),
                 Column(
@@ -67,7 +68,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     PhoneTextField(
                       phoneNumberController: phoneController,
-                      label: "${AppStrings.phoneNumber}*",
+                      label: "${"phoneNumber".tr()}*",
                       onPhoneNumberChanged: (PhoneNumber value) {
                         phoneNumberValue = value;
                       },
@@ -78,15 +79,15 @@ class _SignupScreenState extends State<SignupScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: nameController,
-                      label: "${AppStrings.fullName}*",
+                      label: "${"fullName".tr()}*",
                       onlyNumber: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.fullName+AppStrings.isRequired;
+                          return "fullName".tr()+"isRequired".tr();
                         }
                         return null;
                       },
-                      hintText: 'John Due',
+                      hintText: "johnDue".tr(),
                       textInputType: TextInputType.visiblePassword,
                       passwordBool: false,
                     ),
@@ -96,15 +97,15 @@ class _SignupScreenState extends State<SignupScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: passwordController,
-                      label: "${AppStrings.password}*",
+                      label: "${"password".tr()}*",
                       onlyNumber: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.password+AppStrings.isRequired;
+                          return "password".tr()+"isRequired".tr();
                         }
                         RegExp regex = RegExp(r'^(?=.*?[a-z]).{8,}$');
                         if (!regex.hasMatch(value)) {
-                          return AppStrings.enterValidPassword;
+                          return "enterValidPassword".tr();
                         }
                         return null;
                       },
@@ -119,19 +120,19 @@ class _SignupScreenState extends State<SignupScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: repeatPasswordController,
-                      label: "${AppStrings.repeatPassword}*",
+                      label: "${"repeatPassword".tr()}*",
                       onlyNumber: false,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.repeatPassword+AppStrings.isRequired;
+                          return "repeatPassword".tr()+"isRequired".tr();
                         }
                         RegExp regex = RegExp(r'^(?=.*?[a-z]).{8,}$');
                         if (!regex.hasMatch(value)) {
-                          return AppStrings.enterValidPassword;
+                          return "enterValidPassword".tr();
                         }
                         if (passwordController.value !=
                             repeatPasswordController.value) {
-                          return AppStrings.doesNotMatch;
+                          return "doesNotMatch".tr();
                         }
                         return null;
                       },
@@ -155,7 +156,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: screenHeight * 0.05,
                 ),
                 ElevatedButtonWidget(
-                    title: AppStrings.signup,
+                    title: "signup".tr(),
                     onPressed: () {
                       if (!_key.currentState!.validate()) {
                         return;
@@ -185,7 +186,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                      Text(
-                      AppStrings.haveAccount,
+                     "haveAccount".tr(),
                       style: AppFontStyles.mediumH5,
                     ),
                     GestureDetector(
@@ -193,7 +194,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           Navigator.popAndPushNamed(context, AppRoutes.login);
                         },
                         child: Text(
-                          " ${AppStrings.login}",
+                          " ${"login".tr()}",
                           style: AppFontStyles.mediumH5
                               .copyWith(color: AppColors.kMainColor100),
                         ))

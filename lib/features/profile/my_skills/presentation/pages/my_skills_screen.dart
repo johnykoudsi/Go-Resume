@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/skill.dart';
@@ -57,7 +58,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
         child: Scaffold(
           appBar: AppBar(
             title:  Text(
-              AppStrings.mySkills,
+              "mySkills".tr(),
               style: AppFontStyles.boldH2,
             ),
             iconTheme:
@@ -95,7 +96,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
                   builder: (context, state) {
                     if (state is GetSkillsLoadedState) {
                       return SkillDropdownList(
-                        title: AppStrings.selectNewSkill,
+                        title: "selectNewSkill".tr(),
                         selectedItem: currentSkills.isNotEmpty
                             ? currentSkills.last
                             : null,
@@ -108,7 +109,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
                               currentSkills.add(value);
                             } else {
                               DialogsWidgetsSnackBar.showScaffoldSnackBar(
-                                  title: AppStrings.skillAlreadyAdded,
+                                  title: "skillAlreadyAdded".tr(),
                                   context: context);
                             }
                           });
@@ -127,7 +128,7 @@ class _MySkillsScreenState extends State<MySkillsScreen> {
                 BlocBuilder<SkillActionsBloc, SkillActionsState>(
                   builder: (context, state) {
                     return ElevatedButtonWidget(
-                      title: AppStrings.saveSkills,
+                      title: "saveSkills".tr(),
                       isLoading: state is SkillActionsLoadingState,
                       onPressed: () {
                         context

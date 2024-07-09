@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
@@ -48,7 +49,7 @@ class CustomCard extends StatelessWidget {
                   if(!visitor)
                   TextButton(
                     onPressed: onOperationPressed,
-                    child: Text(operation??AppStrings.manage,
+                    child: Text(operation??"manage".tr(),
                       style: AppFontStyles.boldH6.copyWith(color: Colors.red),
                     ),
                   )

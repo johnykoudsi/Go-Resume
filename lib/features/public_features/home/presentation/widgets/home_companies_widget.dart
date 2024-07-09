@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
@@ -18,7 +19,7 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
              Text(
-              AppStrings.topCompanies,
+              "topCompanies".tr(),
               style: AppFontStyles.mediumH4,
             ),
             TextButton(
@@ -26,7 +27,7 @@ class HomeCompaniesSectionWidget extends StatelessWidget {
                   Navigator.of(context).pushNamed(AppRoutes.allCompanyScreen);
                 },
                 child: Text(
-                  AppStrings.seeAll,
+                  "seeAll".tr(),
                   style: AppFontStyles.mediumH4
                       .copyWith(color: AppColors.kMainColor100),
                 ))

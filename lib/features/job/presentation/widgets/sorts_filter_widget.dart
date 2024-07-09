@@ -30,7 +30,7 @@ class SortsFilterWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 22),
                   child: Text(
-                    AppStrings.sorts,
+                    "sorts".tr(),
                     style: AppFontStyles.regularH4,
 
                   ),

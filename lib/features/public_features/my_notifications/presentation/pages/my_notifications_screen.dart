@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
@@ -59,7 +60,7 @@ class _MyNotificationState extends State<MyNotification> {
 
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppStrings.myNotifications,style: AppFontStyles.boldH2,),
+          title: Text("myNotifications".tr(),style: AppFontStyles.boldH2,),
           centerTitle: false,
         ),
         body: RefreshIndicator(
@@ -108,7 +109,7 @@ class _MyNotificationState extends State<MyNotification> {
               return SomethingWrongWidget(
                 svgPath: Assets.svgNoInternet,
                 elevatedButtonWidget: ElevatedButtonWidget(
-                  title: AppStrings.refresh,
+                  title: "refresh".tr(),
                   onPressed: () {
                     context
                         .read<MyNotificationsBloc>()

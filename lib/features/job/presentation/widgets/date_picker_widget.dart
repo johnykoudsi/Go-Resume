@@ -78,7 +78,7 @@ class DatePickerWidget extends StatelessWidget {
                     child: Text(
                       selectedDate != null
                           ? DateFormat.yMd().format(selectedDate!)
-                          : AppStrings.selectDate,
+                          : "selectDate".tr(),
                       style: TextStyle(
                         color: selectedDate != null
                             ? Colors.black

@@ -167,7 +167,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                   Text(
-                    "${NumberFormat.decimalPattern().format(widget.jobEntity.minSalary)} ${AppStrings.syp} - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxSalary)} ${AppStrings.syp}",
+                    "${NumberFormat.decimalPattern().format(widget.jobEntity.minSalary)} ${"syp".tr()} - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxSalary)} ${"syp".tr()}",
                     style: AppFontStyles.mediumH5,
                   ),
                   const Spacer(),
@@ -188,7 +188,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   width: 2,
                                 ),
                                 Text(
-                                  AppStrings.close,
+                                  "close".tr(),
                                   style: AppFontStyles.boldH7
                                       .copyWith(color: Colors.red),
                                 ),
@@ -207,7 +207,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   width: 2,
                                 ),
                                 Text(
-                                  AppStrings.open,
+                                  "open".tr(),
                                   style: AppFontStyles.boldH7
                                       .copyWith(color: Colors.green),
                                 ),
@@ -233,8 +233,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             ),
                             Text(
                               widget.jobEntity.status == 'open'
-                                  ? AppStrings.open
-                                  : AppStrings.close,
+                                  ? "open".tr()
+                                  : "close".tr(),
                               style: AppFontStyles.boldH7.copyWith(
                                   color: widget.jobEntity.status == 'open'
                                       ? Colors.green
@@ -264,7 +264,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                    Text(
-                     AppStrings.dailyWorkHours,
+                     "dailyWorkHours".tr(),
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -279,7 +279,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                    Text(
-                    "${AppStrings.startDate}: ",
+                    "${"startDate".tr()}: ",
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -295,11 +295,11 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                    Text(
-                     AppStrings.experienceYears,
+                     "experienceYears".tr(),
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
-                    "${widget.jobEntity.experienceYears} ${AppStrings.years}",
+                    "${widget.jobEntity.experienceYears} ${"years".tr()}",
                     style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
                   ),
                 ],
@@ -310,7 +310,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               Row(
                 children: [
                    Text(
-                     AppStrings.type,
+                     "type".tr(),
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -330,10 +330,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     Text(AppStrings.salaryExpectations,
+                     Text("salaryExpectations".tr(),
                         style: AppFontStyles.boldH4),
                     Text(
-                      "${NumberFormat.decimalPattern().format(widget.jobEntity.minExpected)} ${AppStrings.mSYP} - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxExpected)} ${AppStrings.mSYP}",
+                      "${NumberFormat.decimalPattern().format(widget.jobEntity.minExpected)} ${"mSYP".tr()} - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxExpected)} ${"mSYP".tr()}",
                       style: AppFontStyles.mediumH5,
                     ),
                   ],
@@ -351,7 +351,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     Row(
                       children: [
                         Text(
-                          AppStrings.description,
+                          "description".tr(),
                           style:
                               AppFontStyles.boldH5.copyWith(color: Colors.red),
                         ),
@@ -367,7 +367,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           style: AppFontStyles.mediumH5,
                         ),
                         Text(
-                          AppStrings.requirements,
+                          "requirements".tr(),
                           style: AppFontStyles.mediumH5,
                         ),
                       ],
@@ -455,7 +455,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                               return ElevatedButtonWidget(
                                 isLoading:
                                     applyForJobState is ApplyForJobLoadingState,
-                                title: AppStrings.apply,
+                                title: "apply".tr(),
                                 onPressed: () {
                                   applyForJobContext
                                       .read<ApplyForJobBloc>()

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -70,7 +71,7 @@ class _PinnedApplicantsScreenState extends State<PinnedApplicantsScreen> {
           ],
           toolbarHeight: screenHeight * 0.15,
           title:  Text(
-            AppStrings.pinnedApplicants
+            "pinnedApplicants".tr()
             ,
             style: AppFontStyles.boldH2,
             maxLines: 2,
@@ -124,7 +125,7 @@ class _PinnedApplicantsScreenState extends State<PinnedApplicantsScreen> {
                 return SomethingWrongWidget(
                   svgPath: Assets.svgNoInternet,
                   elevatedButtonWidget: ElevatedButtonWidget(
-                    title: AppStrings.refresh,
+                    title: "refresh".tr(),
                     onPressed: () {
                       context
                           .read<GetPinnedApplicantsBloc>()

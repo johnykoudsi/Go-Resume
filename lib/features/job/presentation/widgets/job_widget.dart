@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
@@ -62,7 +63,7 @@ class JobWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "${NumberFormat.decimalPattern().format(jobEntity.minSalary)} ${AppStrings.syp} - ${NumberFormat.decimalPattern().format(jobEntity.maxSalary)} ${AppStrings.syp}",
+                    "${NumberFormat.decimalPattern().format(jobEntity.minSalary)} ${"syp".tr()} - ${NumberFormat.decimalPattern().format(jobEntity.maxSalary)} ${"syp".tr()}",
                     style: AppFontStyles.mediumH6,
                   ),
                   Text(

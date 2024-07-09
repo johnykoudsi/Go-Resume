@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -69,7 +70,7 @@ class _AllApplicantsScreenState extends State<AllApplicantsScreen> {
           ],
           toolbarHeight: screenHeight * 0.15,
           title: Text(
-            AppStrings.allApplicants,
+            "allApplicants".tr(),
             style: AppFontStyles.boldH2,
             maxLines: 2,
           ),
@@ -106,7 +107,7 @@ class _AllApplicantsScreenState extends State<AllApplicantsScreen> {
                       return SomethingWrongWidget(
                         svgPath: Assets.svgNoInternet,
                         elevatedButtonWidget: ElevatedButtonWidget(
-                          title: AppStrings.refresh,
+                          title: "refresh".tr(),
                           onPressed: () {
                             getAllApplicantsBloc
                                 .add(ChangeToLoadingAllApplicantsEvent());

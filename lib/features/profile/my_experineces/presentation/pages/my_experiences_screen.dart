@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/experience.dart';
@@ -45,7 +46,7 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
       child: Scaffold(
         appBar: AppBar(
           title:  Text(
-            AppStrings.myExperiences,
+            "myExperiences".tr(),
             style: AppFontStyles.boldH3,
           ),
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
@@ -70,9 +71,9 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
                           onOperationPressed: () {
                             DialogsWidgetsYesNo.showYesNoDialog(
                               title:
-                                  AppStrings.areYouSureToDelete,
-                              noTitle: AppStrings.no,
-                              yesTitle: AppStrings.yes,
+                                  "areYouSureToDelete".tr(),
+                              noTitle: "no".tr(),
+                              yesTitle: "yes".tr(),
                               isLoading: state is ExperienceActionsLoadingState,
                               onYesTap: () {
                                 Navigator.of(context).pop();
@@ -88,8 +89,8 @@ class _MyExperiencesScreenState extends State<MyExperiencesScreen> {
                               context: context,
                             );
                           },
-                          operation: AppStrings.delete,
-                          title: AppStrings.experience,
+                          operation: "delete".tr(),
+                          title: "experience".tr(),
                           content: ExperienceWidget(
                             experience: widget.experiences[index],
                           ),

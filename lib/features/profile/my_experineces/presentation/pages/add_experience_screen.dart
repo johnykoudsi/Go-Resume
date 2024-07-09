@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
@@ -73,7 +74,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
       child: Scaffold(
         appBar: AppBar(
           title:  Text(
-            AppStrings.addExperience,
+            "addExperience".tr(),
             style: AppFontStyles.boldH3,
           ),
         ),
@@ -86,14 +87,14 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: positionController,
-                label: AppStrings.position+AppStrings.star,
+                label: "position".tr()+"star".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.assistantManager,
+                hintText: "assistantManager".tr(),
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppStrings.position+AppStrings.isRequired;
+                    return "position".tr()+"isRequired".tr();
                   }
                   return null;
                 },
@@ -104,7 +105,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: companyController,
-                label: AppStrings.company,
+                label: "company".tr(),
                 onlyNumber: false,
                 hintText: 'eWorld',
                 textInputType: TextInputType.visiblePassword,
@@ -116,16 +117,16 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: descriptionController,
-                label: AppStrings.description,
+                label: "description".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.describeYourWork,
+                hintText: "describeYourWork".tr(),
 
               ),
               SizedBox(
                 height: heightBetweenFields,
               ),
               DatePickerWidget(
-                label: AppStrings.startDate+AppStrings.star,
+                label: "startDate".tr()+"star".tr(),
                 selectedDate: selectedStartDate,
                 onDateChange: (date) {
                   setState(() {
@@ -138,7 +139,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
               ),
               if (!_currentlyIn)
                 DatePickerWidget(
-                  label: AppStrings.endDate+AppStrings.star,
+                  label: "endDate".tr()+"star".tr(),
                   selectedDate: selectedEndDate,
                   onDateChange: (date) {
                     setState(() {
@@ -150,7 +151,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                 height: heightBetweenFields,
               ),
               CustomCheckBox(
-                text: AppStrings.currentlyIn,
+                text: "currentlyIn".tr(),
                 isChecked: _currentlyIn,
                 onChanged: (value) {
                   setState(() {
@@ -167,7 +168,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
           child: BlocBuilder<ExperienceActionsBloc, ExperienceActionsState>(
             builder: (context, state) {
               return ElevatedButtonWidget(
-                title: AppStrings.add,
+                title: "add".tr(),
                 isLoading: state is ExperienceActionsLoadingState,
                 onPressed: () {
                   if (_currentlyIn || selectedEndDate != null) {

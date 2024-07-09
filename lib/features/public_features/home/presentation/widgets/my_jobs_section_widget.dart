@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
@@ -18,7 +19,7 @@ class MyJobsSectionWidget extends StatelessWidget {
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
              Text(
-              AppStrings.myJobs,
+              "myJobs".tr(),
               style: AppFontStyles.mediumH4,
             ),
             TextButton(
@@ -31,7 +32,7 @@ class MyJobsSectionWidget extends StatelessWidget {
                       arguments: userState.user.data);
                 },
                 child: Text(
-                  AppStrings.seeAll,
+                 "seeAll".tr(),
                   style: AppFontStyles.mediumH4
                       .copyWith(color: AppColors.kMainColor100),
                 ))

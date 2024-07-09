@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +61,7 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
         child: Scaffold(
           appBar: AppBar(
             title:  Text(
-              AppStrings.generateEducation,
+              "generateEducation".tr(),
               style: AppFontStyles.boldH3,
             ),
           ),
@@ -78,15 +79,15 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                         child: AnimatedTextKit(
                           animatedTexts: [
                             RotateAnimatedText(
-                              AppStrings.gatheringYourInfo,
+                              "gatheringYourInfo".tr(),
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              AppStrings.generatingEducation,
+                              "generatingEducation".tr(),
                               textStyle: AppFontStyles.boldH3,
                             ),
                             RotateAnimatedText(
-                              AppStrings.connectingToAI,
+                              "connectingToAI".tr(),
                               textStyle: AppFontStyles.boldH3,
                             ),
                           ],
@@ -111,11 +112,11 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: specializationTextController,
-                      label: AppStrings.specialization,
-                      hintText: AppStrings.softwareEngineering,
+                      label: "specialization".tr(),
+                      hintText: "softwareEngineering".tr(),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.specialization+AppStrings.isRequired;
+                          return "specialization".tr()+"isRequired".tr();
                         }
                         return null;
                       },
@@ -126,11 +127,11 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: schoolTextController,
-                      label: AppStrings.university,
-                      hintText: AppStrings.damascusUniversity,
+                      label: "university".tr(),
+                      hintText: "damascusUniversity".tr(),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.university+AppStrings.isRequired;
+                          return "university".tr()+"isRequired".tr();
                         }
                         return null;
                       },
@@ -141,7 +142,7 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: additionalKeyWordsController,
-                      label: AppStrings.additionalKeyWords,
+                      label: "additionalKeyWords".tr(),
                       hintText: "agile scrum github",
                     ),
                     SizedBox(
@@ -150,11 +151,11 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                     CustomTextField(
                       action: TextInputAction.done,
                       controller: locationTextController,
-                      label: AppStrings.location,
-                      hintText: AppStrings.damascusSyria,
+                      label: "location".tr(),
+                      hintText: "damascusSyria".tr(),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.location+AppStrings.isRequired;
+                          return "location".tr()+"isRequired".tr();
                         }
                         return null;
                       },
@@ -166,12 +167,12 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                       action: TextInputAction.done,
                       controller: graduationYearsController,
                       textInputType: TextInputType.number,
-                      label: AppStrings.graduationYear,
+                      label: "graduationYear".tr(),
                       hintText: "2025",
                       onlyNumber: true,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return AppStrings.graduationYear+AppStrings.isRequired;
+                          return "graduationYear".tr()+"isRequired".tr();
                         }
                         return null;
                       },
@@ -192,7 +193,7 @@ class _EducationGenerationScreenState extends State<EducationGenerationScreen> {
                   children: [
                     if (state is! EducationGenerationLoadingState)
                       ElevatedButtonWidget(
-                        title: AppStrings.generate,
+                        title: "generate".tr(),
                         onPressed: () {
                           FocusScope.of(context).unfocus();
                           if (!_key.currentState!.validate()) {

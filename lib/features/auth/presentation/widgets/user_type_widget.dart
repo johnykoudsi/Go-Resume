@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
@@ -22,13 +23,13 @@ class UserTypeWidget extends StatelessWidget {
           groupValue: selectedUserType,
           onChanged: onUserTypeSelected,
         ),
-         Text(AppStrings.applicant,style: AppFontStyles.mediumH5,),
+         Text("applicant".tr(),style: AppFontStyles.mediumH5,),
         Radio<String>(
           value: 'Company Recruiter',
           groupValue: selectedUserType,
           onChanged: onUserTypeSelected,
         ),
-         Text(AppStrings.companyRecruiter,style: AppFontStyles.mediumH5,),
+         Text("companyRecruiter".tr(),style: AppFontStyles.mediumH5,),
       ],
     );
   }

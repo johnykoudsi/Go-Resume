@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -188,7 +189,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                           children: [
                             CustomCard(
                               operation: "",
-                              title: AppStrings.aboutUs,
+                              title: "aboutUs".tr(),
                               visitor: widget.visitor,
                               content: Text(
                                 user.company!.about,
@@ -206,7 +207,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                           children: [
                             CustomCard(
                                 operation: "",
-                                title: AppStrings.vision,
+                                title: "vision".tr(),
                                 content: Text(
                                   user.company!.vision,
                                   style: AppFontStyles.mediumH5,
@@ -222,7 +223,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                     children: [
                       CustomCard(
                           operation: "",
-                          title: AppStrings.mission,
+                          title: "mission".tr(),
                           content: Text(
                             user.company!.mission,
                             style: AppFontStyles.mediumH5,
@@ -234,7 +235,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   )
                       : const SizedBox.shrink(),
                   CustomCard(
-                    title: AppStrings.policies,
+                    title: "policies".tr(),
                     visitor: widget.visitor,
                     content: user.company!.policies!.isEmpty
                         ? const NoDataWidget(
@@ -268,7 +269,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   ),
                   CustomCard(
                     operation: "",
-                    title: AppStrings.contactInfo,
+                    title: "contactInfo".tr(),
                     visitor: widget.visitor,
                     content: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

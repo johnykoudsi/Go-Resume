@@ -57,8 +57,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgCase,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.myJobs,
-                    tooltip: AppStrings.myJobs,
+                    label: "myJobs".tr(),
+                    tooltip: "myJobs".tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -66,8 +66,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgPin,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.pinned,
-                    tooltip: AppStrings.pinned,
+                    label: "pinned".tr(),
+                    tooltip: "pinned".tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -75,8 +75,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgProfile,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.profile,
-                    tooltip: AppStrings.profile,
+                    label: "profile".tr(),
+                    tooltip: "profile".tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -84,8 +84,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgAdd,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.add,
-                    tooltip: AppStrings.add,
+                    label: "add".tr(),
+                    tooltip: "add".tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -93,8 +93,8 @@ class _RecruiterBottomNavBarState extends State<RecruiterBottomNavBar> {
                       svgPath: Assets.svgMore,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.more,
-                    tooltip: AppStrings.more,
+                    label: "more".tr(),
+                    tooltip: "more".tr(),
                   ),
                 ],
               ),

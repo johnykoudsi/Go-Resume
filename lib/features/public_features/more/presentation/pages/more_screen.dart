@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
@@ -41,8 +42,8 @@ class _MoreScreenState extends State<MoreScreen> {
               MoreItemsWidget(
                 iconPath: Assets.svgMySubmissions,
                 text: user.company == null
-                    ? AppStrings.mySubmissions
-                    : AppStrings.myJobs,
+                    ? "mySubmissions".tr()
+                    : "myJobs".tr(),
                 topPadding: screenHeight * 0.55,
                 onTap: user.company == null
                     ? () {
@@ -57,43 +58,41 @@ class _MoreScreenState extends State<MoreScreen> {
               if (user.company == null)
                 MoreItemsWidget(
                     iconPath: Assets.svgSave,
-                    text: AppStrings.savedJobs,
+                    text: "savedJobs".tr(),
                     topPadding: screenHeight * 0.65,
                     onTap: () {
                       Navigator.of(context).pushNamed(AppRoutes.savedJobs);
                     }),
               MoreItemsWidget(
                   iconPath: Assets.svgNotification,
-                  text: AppStrings.notifications,
+                  text: "notifications".tr(),
                   topPadding: screenHeight * 0.75,
                   onTap: () {
                     Navigator.of(context).pushNamed(AppRoutes.myNotifications);
                   }),
               MoreItemsWidget(
                 iconPath: Assets.svgLanguage,
-                text: AppStrings.language,
+                text: "language".tr(),
                 topPadding: screenHeight * 0.85,
                 onTap: () {
                   setState(() {
-                    int x=0;
+
                     LanguageDialog.showLanguageBottomSheet(context);
-                    x++;
-                    print(x);
 
                   });
                 },
               ),
               MoreItemsWidget(
                 iconPath: Assets.svgUpdate,
-                text: AppStrings.update,
+                text: "update".tr(),
                 topPadding: screenHeight * 0.95,
               ),
               GestureDetector(
                 onTap: () {
                   DialogsWidgetsYesNo.showYesNoDialog(
-                      title: AppStrings.signOutQuestion,
-                      noTitle: AppStrings.cancel,
-                      yesTitle: AppStrings.signOut,
+                      title: "signOutQuestion".tr(),
+                      noTitle: "cancel".tr(),
+                      yesTitle: "signOut".tr(),
                       onYesTap: () {
                         context.read<UserBloc>().add(LogoutEvent());
                         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -108,7 +107,7 @@ class _MoreScreenState extends State<MoreScreen> {
                   padding: const EdgeInsets.only(bottom: 20),
                   child: MoreItemsWidget(
                     iconPath: Assets.svgSignOut,
-                    text: AppStrings.signOut,
+                    text: "signOut".tr(),
                     topPadding: screenHeight * 1.05,
                   ),
                 ),

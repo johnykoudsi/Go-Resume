@@ -59,8 +59,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgHome,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.home,
-                    tooltip: AppStrings.home,
+                    label: "home".tr(),
+                    tooltip: "home".tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -68,8 +68,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgCase,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.jobs,
-                    tooltip:AppStrings.jobs,
+                    label: "jobs".tr(),
+                    tooltip:"jobs".tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -77,8 +77,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgProfile,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.profile,
-                    tooltip: AppStrings.profile,
+                    label: "profile".tr(),
+                    tooltip: "profile".tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -86,8 +86,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgStar,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.favorite,
-                    tooltip: AppStrings.favorite,
+                    label: "favorite".tr(),
+                    tooltip: "favorite".tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -95,8 +95,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: Assets.svgMore,
                       selectedIndex: selectedIndex,
                     ),
-                    label: AppStrings.more,
-                    tooltip: AppStrings.more,
+                    label: "more".tr(),
+                    tooltip: "more".tr(),
                   ),
                 ],
               ),

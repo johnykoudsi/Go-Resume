@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
@@ -93,7 +94,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
       child: Scaffold(
         appBar: AppBar(
           title:  Text(
-            AppStrings.editProfile,
+            "editProfile".tr(),
             style: AppFontStyles.boldH2,
           ),
         ),
@@ -106,14 +107,14 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: nameController,
-                label: AppStrings.name+AppStrings.star,
+                label:"name".tr()+"star".tr(),
                 onlyNumber: false,
                 hintText: 'ESoft',
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppStrings.name+AppStrings.isRequired;
+                    return "name".tr()+"isRequired".tr();
                   }
                   return null;
                 },
@@ -147,7 +148,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: emailController,
-                label: AppStrings.email,
+                label: "email".tr(),
                 onlyNumber: false,
                 hintText: 'company@gmail.com',
                 textInputType: TextInputType.visiblePassword,
@@ -171,7 +172,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: websiteController,
-                label: AppStrings.website,
+                label: "website".tr(),
                 onlyNumber: false,
                 hintText: 'https://www.companywebsite.com',
                 textInputType: TextInputType.visiblePassword,
@@ -207,9 +208,9 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: aboutController,
-                label: AppStrings.about,
+                label: "about".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.describeYourCompany,
+                hintText: "describeYourCompany".tr(),
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -217,9 +218,9 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: visionController,
-                label: AppStrings.vision,
+                label: "vision".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.companyGoals,
+                hintText: "companyGoals".tr(),
               ),
               SizedBox(
                 height: heightBetweenFields,
@@ -227,9 +228,9 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               DescriptionField(
                 action: TextInputAction.done,
                 controller: missionController,
-                label: AppStrings.mission,
+                label: "mission".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.companyMethods,
+                hintText: "companyMethods".tr(),
               ),
               SizedBox(
                 height: screenHeight * 0.1,
@@ -237,7 +238,7 @@ class _EditCompanyProfileScreenState extends State<EditCompanyProfileScreen> {
               BlocBuilder<CompanyProfileBloc, CompanyProfileState>(
                 builder: (context, state) {
                   return ElevatedButtonWidget(
-                    title: AppStrings.edit,
+                    title: "edit".tr(),
                     isLoading: state is CompanyProfileLoading,
                     onPressed: () {
                       if (!_key.currentState!.validate()) {

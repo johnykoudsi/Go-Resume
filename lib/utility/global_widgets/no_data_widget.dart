@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
@@ -34,7 +35,7 @@ class _NoDataWidgetState extends State<NoDataWidget> {
                 repeat: false,
                 height:widget.small==true?screenHeight*0.2: screenHeight*0.3
             ),
-            Text(AppStrings.noData,style: AppFontStyles.mediumH3,)
+            Text("noData".tr(),style: AppFontStyles.mediumH3,)
           ],
         ),
       ),

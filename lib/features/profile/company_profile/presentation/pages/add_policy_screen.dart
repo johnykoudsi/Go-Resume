@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
@@ -45,7 +46,7 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            AppStrings.addPolicy,
+            "addPolicy".tr(),
             style: AppFontStyles.boldH3,
           ),
         ),
@@ -58,14 +59,14 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: titleController,
-                label: AppStrings.title + AppStrings.star,
+                label: "title".tr() + "star".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.noSmokingExample,
+                hintText: "noSmokingExample".tr(),
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppStrings.title + AppStrings.isRequired;
+                    return "title".tr() + "isRequired".tr();
                   }
                   return null;
                 },
@@ -76,14 +77,14 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
               CustomTextField(
                 action: TextInputAction.done,
                 controller: descriptionController,
-                label: AppStrings.description + AppStrings.star,
+                label: "description".tr() + "star".tr(),
                 onlyNumber: false,
-                hintText: AppStrings.smokingNotAllowed,
+                hintText: "smokingNotAllowed".tr(),
                 textInputType: TextInputType.visiblePassword,
                 passwordBool: false,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return AppStrings.description + AppStrings.isRequired;
+                    return "description".tr() + "isRequired".tr();
                   }
                   return null;
                 },
@@ -97,7 +98,7 @@ class _AddPolicyScreenState extends State<AddPolicyScreen> {
           child: BlocBuilder<PoliciesActionsBloc, PoliciesActionsState>(
             builder: (context, state) {
               return ElevatedButtonWidget(
-                title: AppStrings.add,
+                title: "add".tr(),
                 isLoading: state is PoliciesActionsLoadingState,
                 onPressed: () {
                   if (_key.currentState!.validate()) {

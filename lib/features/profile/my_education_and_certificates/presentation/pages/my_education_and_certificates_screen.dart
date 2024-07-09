@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/education.dart';
@@ -34,7 +35,7 @@ class _MyEducationAndCertificatesScreenState
     return Scaffold(
       appBar: AppBar(
         title:  Text(
-          AppStrings.educationCertificates,
+          "educationCertificates".tr(),
           style: AppFontStyles.boldH3,
         ),
         iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
@@ -71,9 +72,9 @@ class _MyEducationAndCertificatesScreenState
                 return CustomCard(
                   onOperationPressed: () {
                     DialogsWidgetsYesNo.showYesNoDialog(
-                      title: AppStrings.areYouSureToDelete,
-                      noTitle: AppStrings.no,
-                      yesTitle: AppStrings.yes,
+                      title: "areYouSureToDelete".tr(),
+                      noTitle: "no".tr(),
+                      yesTitle:"yes".tr(),
                       onYesTap: () {
                         Navigator.of(context).pop();
                         context
@@ -88,8 +89,8 @@ class _MyEducationAndCertificatesScreenState
                       context: context,
                     );
                   },
-                  operation: AppStrings.delete,
-                  title: AppStrings.education,
+                  operation: "delete".tr(),
+                  title: "education".tr(),
                   content: EducationAndCertificatesWidget(
                       education: widget.educations[index]),
                 );

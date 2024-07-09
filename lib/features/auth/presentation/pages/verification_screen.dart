@@ -76,7 +76,7 @@ class _CodeVerificationScreenPagePageState
                     return AppColors.kLinearColor.createShader(bounds);
                   },
                   child:  Text(
-                    AppStrings.verifyNumber,
+                   "verifyNumber".tr(),
                     style: AppFontStyles.boldH1,
                   ),
                 ),
@@ -85,7 +85,7 @@ class _CodeVerificationScreenPagePageState
               Column(
                 children: [
                    Text(
-                    AppStrings.enterFourDigits,
+                    "enterFourDigits".tr(),
                     textAlign: TextAlign.center,
                     style: AppFontStyles.mediumH3,
                   ),
@@ -133,7 +133,7 @@ class _CodeVerificationScreenPagePageState
               BlocBuilder<UserBloc, UserState>(
                 builder: (context, state) {
                   return ElevatedButtonWidget(
-                    title: AppStrings.verify,
+                    title: "verify".tr(),
                     isLoading: state is UserLoading,
                     onPressed: controller.text.isEmpty
                         ? null
@@ -157,11 +157,11 @@ class _CodeVerificationScreenPagePageState
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                        Text(
-                        "${AppStrings.didNotReceiveCode} ",
+                        "${"didNotReceiveCode".tr()} ",
                         style: AppFontStyles.mediumH4,
                       ),
                       Text(
-                        AppStrings.resendCode,
+                        "resendCode".tr(),
                         style: AppFontStyles.mediumH4
                             .copyWith(color: AppColors.kMainColor100),
                       ),

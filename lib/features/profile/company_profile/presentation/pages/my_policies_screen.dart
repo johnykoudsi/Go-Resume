@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/policy.dart';
@@ -43,7 +44,7 @@ class _MyPoliciesScreenState extends State<MyPoliciesScreen> {
       child: Scaffold(
         appBar: AppBar(
           title:  Text(
-            AppStrings.myPolicies,
+            "myPolicies".tr(),
             style: AppFontStyles.boldH3,
           ),
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
@@ -67,9 +68,9 @@ class _MyPoliciesScreenState extends State<MyPoliciesScreen> {
                   return CustomCard(
                     onOperationPressed: () {
                       DialogsWidgetsYesNo.showYesNoDialog(
-                        title: AppStrings.areYouSureToDelete,
-                        noTitle: AppStrings.no,
-                        yesTitle: AppStrings.yes,
+                        title:"areYouSureToDelete".tr(),
+                        noTitle: "no".tr(),
+                        yesTitle: "yes".tr(),
                         isLoading: state is PoliciesActionsLoadingState,
                         onYesTap: () {
                           Navigator.of(context).pop();
@@ -85,8 +86,8 @@ class _MyPoliciesScreenState extends State<MyPoliciesScreen> {
                         context: context,
                       );
                     },
-                    operation: AppStrings.delete,
-                    title: AppStrings.policy,
+                    operation: "delete".tr(),
+                    title: "policy".tr(),
                     content: DescriptionItemWidget(
                       description: widget.policies![index].description,
                     ),

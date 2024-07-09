@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../app_strings.dart';
@@ -47,7 +48,7 @@ class _ToggleSliderWidgetState extends State<ToggleSliderWidget> {
               ),
               Center(
                 child: Text(
-                  widget.isClosed ? AppStrings.close : AppStrings.open,
+                  widget.isClosed ? "close".tr() : "open".tr(),
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
