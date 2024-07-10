@@ -14,6 +14,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/to
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/top_applicants_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/toggle_button_widget.dart';
+import '../../../../core/router/app_routes.dart';
 import '../../../../generated/assets.dart';
 import '../../../../utility/app_strings.dart';
 import '../../../../utility/global_widgets/dialog_snack_bar.dart';
@@ -77,30 +78,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
           actions: [
             isCompany
-                ? GestureDetector(onTap: () {
-                    context
-                        .read<ToggleJobBloc>()
-                        .add(ToggleJobStatusApiEvent(id: widget.jobEntity.id));
-                  }, child: BlocBuilder<ToggleJobBloc, ToggleJobState>(
-                    builder: (context, state) {
-                      if (state is ToggleJobLoadedState) {
-                        if (state.isSaved == false) {
-                          return ToggleSliderWidget(
-                            isClosed: false,
-                          );
-                        }
-                        if (state.isSaved == true) {
-                          return ToggleSliderWidget(
-                            isClosed: true,
-                          );
-                        }
-                      }
-                      return const Padding(
-                        padding: EdgeInsets.only(right: 15.0, left: 15.0),
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                  ))
+                ? IconButton(onPressed: (){Navigator.pushNamed(context, AppRoutes.editJob,arguments: widget.jobEntity);}, icon: const Icon(Icons.edit))
                 : IconButton(onPressed: () {
                     context
                         .read<ToggleJobBloc>()

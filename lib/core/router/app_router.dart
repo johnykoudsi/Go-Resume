@@ -15,6 +15,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/ap
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/get_job_applicants/get_job_applicants_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/all_jobs.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/edit_job_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_applicants_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/job_details_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/my_jobs_screen.dart';
@@ -49,6 +50,9 @@ import 'package:smart_recruitment_flutter_user/features/public_features/my_notif
 import 'package:smart_recruitment_flutter_user/features/public_features/my_notifications/presentation/pages/my_notifications_screen.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/display_generation_screen.dart';
 import '../../features/get_user_features/presentation/pages/all_applicants_screen.dart';
+import '../../features/job/presentation/bloc/benefits/benefits_bloc.dart';
+import '../../features/job/presentation/bloc/edit_job/edit_job_bloc.dart';
+import '../../features/job/presentation/bloc/work_fields/work_fields_bloc.dart';
 import '../../features/profile/company_profile/presentation/bloc/policies_actions_bloc/policies_actions_bloc.dart';
 import '../../features/profile/company_profile/presentation/pages/add_policy_screen.dart';
 import 'app_routes.dart';
@@ -270,7 +274,25 @@ class AppRouter {
           return DisplayGenerationScreen(
             arguments: args,
           );
-
+        case AppRoutes.editJob:
+          JobEntity args =
+          settings.arguments as JobEntity;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => EditJobBloc(),
+              ),
+              BlocProvider(
+                create: (context) => BenefitsBloc(),
+              ),
+              BlocProvider(
+                create: (context) => WorkFieldsBloc(),
+              ),
+            ],
+            child: EditJobScreen(
+              arguments: args,
+            ),
+          );
         case AppRoutes.jobApplicants:
           JobEntity args = settings.arguments as JobEntity;
           return MultiBlocProvider(

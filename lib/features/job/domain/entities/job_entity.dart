@@ -22,7 +22,7 @@ class JobEntity {
   String city;
   int experienceYears;
   int workHours;
-  String compensation;
+  Compensation compensation;
   String description;
   int workFieldId;
   DateTime? createdAt;
@@ -44,7 +44,7 @@ class JobEntity {
       this.status = "",
       this.experienceYears = 0,
       this.workHours = 0,
-      this.compensation = "",
+      this.compensation = Compensation.salary,
       this.description = "",
       this.workFieldId = -1,
       this.createdAt,
@@ -78,7 +78,10 @@ class JobEntity {
         status: json["status"] ?? "",
         experienceYears: json["experience_years"] ?? 0,
         workHours: json["work_hours"] ?? 0,
-        compensation: json["compensation"] ?? "",
+        compensation: Compensation.values.firstWhere(
+            (element) => element.name == json["compensation"], orElse: () {
+          return Compensation.salary;
+        }),
         description: json["description"] ?? '',
         workFieldId: json["work_field_id"] ?? 0,
         minExpected: json["expected_min_salary"] ?? 0,

@@ -32,4 +32,5 @@ class AppRoutes {
   static const String displayGenerationScreen = "/displayGenerationScreen";
   static const String myJobs = "/my_jobs";
   static const String allJobs = "/allJobs";
+  static const String editJob = "/editJob";
 }
