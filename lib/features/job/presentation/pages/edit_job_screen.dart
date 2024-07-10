@@ -349,7 +349,7 @@ class _EditJobScreenState extends State<EditJobScreen> {
                             jobTypes: selectedJobType!,
                             experienceYears:
                             int.parse(experienceYearsController.text),
-                            workFieldId: _selectedWorkField!.id,
+                            workFieldId: _selectedWorkField!.id.toString(),
                             //  benefits: [1],
                             benefits: _selectedBenefits
                                 .map((benefit) => benefit.id)

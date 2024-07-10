@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -34,13 +35,13 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
   void initState() {
     final event = widget.arguments.event;
     if (event is PostExperienceGenerationEvent) {
-      appBar = "Generated Experience";
+      appBar = "Generated Experience".tr();
     }
     if (event is PostEducationGenerationEvent) {
-      appBar = "Generated Education";
+      appBar = "Generated Education".tr();
     }
     if (event is PostBioGenerationEvent) {
-      appBar = "Generated Bio";
+      appBar = "Generated Bio".tr();
     }
     super.initState();
   }
@@ -100,7 +101,7 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
               children: [
                 Expanded(
                   child: ElevatedButtonBorderWidget(
-                    title: "Back",
+                    title: "Back".tr(),
                     mainColor: Colors.white,
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -110,7 +111,7 @@ class _DisplayGenerationScreenState extends State<DisplayGenerationScreen> {
                 const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButtonWidget(
-                    title: "Proceed",
+                    title: "Proceed".tr(),
                     onPressed: () {
                       Navigator.of(context).pop();
                       final event = widget.arguments.event;

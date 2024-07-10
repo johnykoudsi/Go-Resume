@@ -153,5 +153,22 @@
   "more": "المزيد",
   "pinned": "المعلقة",
   "topCompanies": "أفضل الشركات",
-  "topOffers": "أفضل العروض"
+  "topOffers": "أفضل العروض",
+  "Search for an item...": "ابحث عن ما تريد ...",
+  "Generated Experience": "الخبرة المولدة",
+  "Generated Education": "التعليم المولد",
+  "Generated Bio": "الوصف المولد",
+  "Back": "عودة",
+  "Proceed": "متابعة",
+  "Search by country name or dial code": "البحث عن طريق اسم الدولة أو رقمها",
+  "None": "لا شيء",
+  "Salary": "راتب شهري",
+  "New To Old": "الجديد للأقدم",
+  "Contract": "عقد",
+  "Full time": "دوام كامل",
+  "Part time": "دوام جزئي",
+  "Task based": "معتمد على المهام",
+  "Outsourcing": "استعانة خارجية",
+  "Hourly Pay": "راتب ساعي"
+
 }

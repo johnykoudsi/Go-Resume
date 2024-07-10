@@ -1,5 +1,6 @@
 
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:smart_recruitment_core/utility/enums.dart';
 
 enum GenderEnum{
@@ -25,19 +26,19 @@ enum JobSorts{
   created_at
 }
 final EnumValues jobSortsUi = EnumValues({
-  "None": JobSorts.none,
-  "Salary": JobSorts.min_salary,
-  "New To Old": JobSorts.created_at,
+  "None".tr(): JobSorts.none,
+  "Salary".tr(): JobSorts.min_salary,
+  "New To Old".tr(): JobSorts.created_at,
 });
 final EnumValues jobTypesUi = EnumValues({
-  "None": JobTypes.none,
-  "Contract": JobTypes.contract,
-  "Full time": JobTypes.full_time,
-  "Part time": JobTypes.part_time,
-  "Task based": JobTypes.task_based,
-  "Outsourcing": JobTypes.out_sourcing,
+  "None".tr(): JobTypes.none,
+  "Contract".tr(): JobTypes.contract,
+  "Full time".tr(): JobTypes.full_time,
+  "Part time".tr(): JobTypes.part_time,
+  "Task based".tr(): JobTypes.task_based,
+  "Outsourcing".tr(): JobTypes.out_sourcing,
 });
 final EnumValues compensationTypesUi = EnumValues({
-  "Hourly Pay": Compensation.hourly_pay,
-  "Salary": Compensation.salary,
+  "Hourly Pay".tr(): Compensation.hourly_pay,
+  "Salary".tr(): Compensation.salary,
 });

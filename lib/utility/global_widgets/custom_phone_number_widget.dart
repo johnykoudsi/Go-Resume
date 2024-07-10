@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
@@ -34,10 +35,10 @@ class PhoneTextField extends StatelessWidget {
             onInputChanged: (phoneNumber) {
               onPhoneNumberChanged(phoneNumber);
             },
-            searchBoxDecoration: const InputDecoration(
+            searchBoxDecoration:  InputDecoration(
               contentPadding: EdgeInsets.only(top: 30),
               // hintText: "Search by country name or dial code",
-              labelText: "Search by country name or dial code",
+              labelText: "Search by country name or dial code".tr(),
             ),
             // textStyle: AppFontStyles.regularH5,
             // .copyWith(color: AppColors.kTextField2Grey),

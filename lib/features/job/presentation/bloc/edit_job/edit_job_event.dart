@@ -32,7 +32,7 @@ final class EditMyJobEvent extends EditJobEvent {
   JobTypes jobTypes;
   num workHours;
   num experienceYears;
-  int workFieldId;
+  String workFieldId;
   List<int> benefits;
   num? minExpectedSalary;
   num? maxExpectedSalary;
@@ -79,19 +79,5 @@ final class EditMyJobEvent extends EditJobEvent {
     workFieldId,
     benefits
   ];
-  // Map<String, dynamic> toJson() => {
-  //   "position": position,
-  //   "description": description,
-  //   "start_date": startDate,
-  //   "gender": genderEnum.name,
-  //   "min_salary": minSalary.toString(),
-  //   "max_salary": maxSalary.toString(),
-  //   "compensation": compensation.name,
-  //   "type": jobTypes.name,
-  //   "work_hours": workHours.toString(),
-  //   "experience_years": experienceYears.toString(),
-  //   "work_field_id": workFieldId.toString(),
-  //   "expected_min_salary": minExpectedSalary.toString(),
-  //   "expected_max_salary": maxExpectedSalary.toString(),
-  // };
+
 }

@@ -38,10 +38,6 @@ class JobDataSource {
       url: EndPoints.editJob(id: editMyJobEvent.jobId),
       body:json.encode(editMyJobEvent.toMapBody()),
     );
-    print("kkkkkk");
-    print(editMyJobEvent.toMapBody());
-    print("kkkkkk");
-    print(helperResponse.response);
     return helperResponse;
   }
   Future applyForJob(ApplyForJobApiEvent applyForJobApiEvent) async {

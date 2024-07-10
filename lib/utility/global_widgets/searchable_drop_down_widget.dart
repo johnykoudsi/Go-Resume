@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
@@ -116,7 +117,7 @@ class _SearchableDropDownWidgetState extends State<SearchableDropDownWidget> {
                     horizontal: 10,
                     vertical: 8,
                   ),
-                  hintText: 'Search for an item...',
+                  hintText: 'Search for an item...'.tr(),
                   hintStyle: const TextStyle(fontSize: 12),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
