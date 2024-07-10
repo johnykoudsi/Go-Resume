@@ -30,12 +30,14 @@ class _BenefitsScreenState extends State<BenefitsScreen> {
   void initState() {
     super.initState();
     _selectedItems = List.from(widget.initiallySelectedItems); // Initialize with initially selected items
+
   }
 
   void _toggleSelection(BenefitEntity item) {
     setState(() {
-      if (_selectedItems.contains(item)) {
-        _selectedItems.remove(item);
+      if (searchBenefitsList(item, _selectedItems)) {
+        removeBenefit(item,_selectedItems);
+
       } else {
         _selectedItems.add(item);
       }
@@ -72,7 +74,8 @@ class _BenefitsScreenState extends State<BenefitsScreen> {
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: _selectedItems.contains(item)
+                      color:
+                      searchBenefitsList(item,_selectedItems)
                           ? AppColors.kGreyColor
                           : AppColors.kWhiteColor,
                       borderRadius: AppBorders.k24BorderRadius,
@@ -93,4 +96,22 @@ class _BenefitsScreenState extends State<BenefitsScreen> {
       ),
     );
   }
+
+   searchBenefitsList(BenefitEntity item, List<BenefitEntity> selectedItems) {
+    for(int i=0;i<selectedItems.length;i++){
+      if(item.id==selectedItems[i].id){
+        return true;
+      }
+    }return false;
+  }
+
+  void removeBenefit(BenefitEntity item, List<BenefitEntity> selectedItems) {
+    for(int i=0;i<selectedItems.length;i++){
+      if(item.id==selectedItems[i].id){
+       _selectedItems.remove(_selectedItems[i]);
+      }
+    }
+  }
+
+
 }

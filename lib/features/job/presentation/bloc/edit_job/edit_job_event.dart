@@ -55,7 +55,7 @@ final class EditMyJobEvent extends EditJobEvent {
 
     if (benefits.isNotEmpty) {
       for (int i = 0; i < benefits.length; i++) {
-        map["benefits[$i]"] = benefits[i].toString();
+        map["benefits[$i]"] =benefits[i].toString();
       }
     }
 

@@ -54,4 +54,8 @@ class BenefitEntity {
     "name": name,
     "description": description,
   };
+
+  contains(BenefitEntity item,List<BenefitEntity>selectedItems) {
+
+  }
 }

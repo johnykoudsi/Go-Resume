@@ -24,12 +24,17 @@ import 'package:smart_recruitment_flutter_user/utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../../utility/global_widgets/searchable_drop_down_widget.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
+import '../../../../utility/global_widgets/toggle_button_widget.dart';
 import '../../domain/entities/benefits_entity.dart';
+import '../bloc/toggle_job/toggle_job_bloc.dart';
 import '../bloc/work_fields/work_fields_bloc.dart';
 import 'benefits_screen.dart';
 
 class EditJobScreen extends StatefulWidget {
-  const EditJobScreen({Key? key, required this.arguments,}) : super(key: key);
+  const EditJobScreen({
+    Key? key,
+    required this.arguments,
+  }) : super(key: key);
   final JobEntity arguments;
 
   @override
@@ -51,7 +56,7 @@ class _EditJobScreenState extends State<EditJobScreen> {
   DateTime? selectedDate;
   JobTypes? selectedJobType;
   WorkFieldEntity? _selectedWorkField;
-  int workFieldId=0;
+  int workFieldId = 0;
 
   void _handleSelectionBenefits(List<BenefitEntity> selectedItems) {
     setState(() {
@@ -67,21 +72,24 @@ class _EditJobScreenState extends State<EditJobScreen> {
 
   @override
   void initState() {
+    context
+        .read<ToggleJobBloc>()
+        .add(GetJobClosedStatusEvent(id: widget.arguments.id));
     search();
-     positionController.text = widget.arguments.position;
-     descriptionController.text = widget.arguments.description;
-     minimumSalaryController.text = widget.arguments.minSalary.toString();
-     maximumSalaryController.text = widget.arguments.maxSalary.toString();
-     workHoursController.text = widget.arguments.workHours.toString();
-     experienceYearsController.text = widget.arguments.experienceYears.toString();
+    positionController.text = widget.arguments.position;
+    descriptionController.text = widget.arguments.description;
+    minimumSalaryController.text = widget.arguments.minSalary.toString();
+    maximumSalaryController.text = widget.arguments.maxSalary.toString();
+    workHoursController.text = widget.arguments.workHours.toString();
+    experienceYearsController.text =
+        widget.arguments.experienceYears.toString();
 
-     selectedGender = widget.arguments.gender;
-     selectedCompensation=widget.arguments.compensation;
-     _selectedBenefits = widget.arguments.benefits;
-     selectedDate=widget.arguments.startDate;
-     selectedJobType=widget.arguments.type;
-
-     workFieldId=widget.arguments.workFieldId;
+    selectedGender = widget.arguments.gender;
+    selectedCompensation = widget.arguments.compensation;
+    _selectedBenefits.addAll(widget.arguments.benefits);
+    selectedDate = widget.arguments.startDate;
+    selectedJobType = widget.arguments.type;
+    workFieldId = widget.arguments.workFieldId;
     super.initState();
   }
 
@@ -110,10 +118,32 @@ class _EditJobScreenState extends State<EditJobScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title:  Text(
-            "editMyJob".tr(),
-            style: AppFontStyles.boldH3,
-          ),
+          actions: [
+            GestureDetector(onTap: () {
+              context
+                  .read<ToggleJobBloc>()
+                  .add(ToggleJobStatusApiEvent(id: widget.arguments.id));
+            }, child: BlocBuilder<ToggleJobBloc, ToggleJobState>(
+              builder: (context, state) {
+                if (state is ToggleJobLoadedState) {
+                  if (state.isSaved == false) {
+                    return ToggleSliderWidget(
+                      isClosed: false,
+                    );
+                  }
+                  if (state.isSaved == true) {
+                    return ToggleSliderWidget(
+                      isClosed: true,
+                    );
+                  }
+                }
+                return const Padding(
+                  padding: EdgeInsets.only(right: 15.0, left: 15.0),
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ))
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -139,7 +169,7 @@ class _EditJobScreenState extends State<EditJobScreen> {
                 ),
                 DatePickerWidget(
                   maxDate: DateTime.now().add(const Duration(days: 360)),
-                  label: "startDate".tr()+"star".tr(),
+                  label: "startDate".tr() + "star".tr(),
                   selectedDate: selectedDate,
                   onDateChange: (date) {
                     setState(() {
@@ -178,8 +208,8 @@ class _EditJobScreenState extends State<EditJobScreen> {
                         description: _selectedBenefits.isEmpty
                             ? "addSomeBenefits".tr()
                             : _selectedBenefits
-                            .map((benefit) => benefit.name)
-                            .join(', '),
+                                .map((benefit) => benefit.name)
+                                .join(', '),
                       );
                     } else {
                       return const SizedBox.shrink();
@@ -193,11 +223,11 @@ class _EditJobScreenState extends State<EditJobScreen> {
                   isMoney: true,
                   action: TextInputAction.done,
                   controller: minimumSalaryController,
-                  label: "minimumSalary".tr()+"star".tr(),
+                  label: "minimumSalary".tr() + "star".tr(),
                   onlyNumber: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "minimumSalary".tr()+"isRequired".tr();
+                      return "minimumSalary".tr() + "isRequired".tr();
                     }
                     return null;
                   },
@@ -211,11 +241,11 @@ class _EditJobScreenState extends State<EditJobScreen> {
                   isMoney: true,
                   action: TextInputAction.done,
                   controller: maximumSalaryController,
-                  label: "maximumSalary".tr()+"star".tr(),
+                  label: "maximumSalary".tr() + "star".tr(),
                   onlyNumber: true,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "maximumSalary".tr()+"isRequired".tr();
+                      return "maximumSalary".tr() + "isRequired".tr();
                     }
                     return null;
                   },
@@ -261,22 +291,22 @@ class _EditJobScreenState extends State<EditJobScreen> {
                 ),
                 BlocBuilder<WorkFieldsBloc, WorkFieldsState>(
                     builder: (context, state) {
-                      if (state is WorkFieldsInitial) {
-                        return ShimmerLoader(
-                          height: screenHeight * 0.05,
-                          width: screenWidth * 0.4,
-                        );
-                      } else if (state is WorkFieldsDoneState) {
-                        return SearchableDropDownWidget(
-                          items: state.workFields,
-                          selectedItem: state.workFields[workFieldId],
-                          onSelect: _handleSelectedWorkField,
-                          title: "workField".tr(),
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    }),
+                  if (state is WorkFieldsInitial) {
+                    return ShimmerLoader(
+                      height: screenHeight * 0.05,
+                      width: screenWidth * 0.4,
+                    );
+                  } else if (state is WorkFieldsDoneState) {
+                    return SearchableDropDownWidget(
+                      items: state.workFields,
+                      selectedItem: state.workFields[workFieldId],
+                      onSelect: _handleSelectedWorkField,
+                      title: "workField".tr(),
+                    );
+                  } else {
+                    return const SizedBox();
+                  }
+                }),
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),
@@ -330,32 +360,32 @@ class _EditJobScreenState extends State<EditJobScreen> {
                           return;
                         }
                         context.read<EditJobBloc>().add(
-                          EditMyJobEvent(
-                            jobId: widget.arguments.id,
-                            position: positionController.text,
-                            description: descriptionController.text,
-                            startDate: selectedDate.toString(),
-                            compensation: selectedCompensation!,
-                            genderEnum: selectedGender,
-                            maxSalary: num.tryParse(maximumSalaryController
-                                .text
-                                .replaceAll(",", "")) ??
-                                0,
-                            minSalary: num.tryParse(minimumSalaryController
-                                .text
-                                .replaceAll(",", "")) ??
-                                0,
-                            workHours: int.parse(workHoursController.text),
-                            jobTypes: selectedJobType!,
-                            experienceYears:
-                            int.parse(experienceYearsController.text),
-                            workFieldId: _selectedWorkField!.id.toString(),
-                            //  benefits: [1],
-                            benefits: _selectedBenefits
-                                .map((benefit) => benefit.id)
-                                .toList(),
-                          ),
-                        );
+                              EditMyJobEvent(
+                                jobId: widget.arguments.id,
+                                position: positionController.text,
+                                description: descriptionController.text,
+                                startDate: selectedDate.toString(),
+                                compensation: selectedCompensation!,
+                                genderEnum: selectedGender,
+                                maxSalary: num.tryParse(maximumSalaryController
+                                        .text
+                                        .replaceAll(",", "")) ??
+                                    0,
+                                minSalary: num.tryParse(minimumSalaryController
+                                        .text
+                                        .replaceAll(",", "")) ??
+                                    0,
+                                workHours: int.parse(workHoursController.text),
+                                jobTypes: selectedJobType!,
+                                experienceYears:
+                                    int.parse(experienceYearsController.text),
+                                workFieldId: _selectedWorkField!.id.toString(),
+                                //  benefits: [1],
+                                benefits: _selectedBenefits
+                                    .map((benefit) => benefit.id)
+                                    .toList(),
+                              ),
+                            );
                       },
                     );
                   },

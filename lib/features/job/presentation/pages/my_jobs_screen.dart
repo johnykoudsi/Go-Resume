@@ -100,7 +100,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
-            context.read<GetAllJobsBloc>().add(ChangeToLoadingAllJobsEvent());
+            search();
           },
           child: BlocBuilder<GetAllJobsBloc, GetAllJobsState>(
             builder: (context, state) {

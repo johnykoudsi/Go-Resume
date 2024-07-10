@@ -29,6 +29,9 @@ class JobDataSource {
       url: EndPoints.addNewJob,
       body: addNewJobEvent.toMapBody(),
     );
+    print(addNewJobEvent.toMapBody());
+    print("jjjjjjj");
+    print(helperResponse.response);
     return helperResponse;
   }
   Future editJob(EditMyJobEvent editMyJobEvent) async {
@@ -38,6 +41,9 @@ class JobDataSource {
       url: EndPoints.editJob(id: editMyJobEvent.jobId),
       body:json.encode(editMyJobEvent.toMapBody()),
     );
+    print(editMyJobEvent.toMapBody());
+    print("jjjjjjj");
+    print(helperResponse.response);
     return helperResponse;
   }
   Future applyForJob(ApplyForJobApiEvent applyForJobApiEvent) async {

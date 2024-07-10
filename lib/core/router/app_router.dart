@@ -288,6 +288,7 @@ class AppRouter {
               BlocProvider(
                 create: (context) => WorkFieldsBloc(),
               ),
+              BlocProvider(create: (context) => ToggleJobBloc()),
             ],
             child: EditJobScreen(
               arguments: args,
