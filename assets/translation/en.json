@@ -171,5 +171,8 @@
   "Task based": "Task based",
   "Outsourcing": "Outsourcing",
   "Hourly Pay": "Hourly Pay",
-  "cancelApplication": "Cancel Application"
+  "cancelApplication": "Cancel Application",
+  "educationCertificates": "Education & Certificates"
+  "isOpen": "open",
+  "isClosed": "closed"
 }

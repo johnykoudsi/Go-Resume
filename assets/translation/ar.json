@@ -170,6 +170,9 @@
   "Task based": "معتمد على المهام",
   "Outsourcing": "استعانة خارجية",
   "Hourly Pay": "راتب ساعي",
-  "cancelApplication": "الغاء الطلب"
+  "cancelApplication": "الغاء الطلب",
+  "educationCertificates": "التعليم والشهادات",
+  "isOpen": "مفتوح",
+  "isClosed": "مغلق"
 
 }

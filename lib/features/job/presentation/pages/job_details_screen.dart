@@ -166,7 +166,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   width: 2,
                                 ),
                                 Text(
-                                  "close".tr(),
+                                  "isClosed".tr(),
                                   style: AppFontStyles.boldH7
                                       .copyWith(color: Colors.red),
                                 ),
@@ -185,7 +185,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                                   width: 2,
                                 ),
                                 Text(
-                                  "open".tr(),
+                                  "isOpen".tr(),
                                   style: AppFontStyles.boldH7
                                       .copyWith(color: Colors.green),
                                 ),
@@ -211,8 +211,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             ),
                             Text(
                               widget.jobEntity.status == 'open'
-                                  ? "open".tr()
-                                  : "close".tr(),
+                                  ? "isOpen".tr()
+                                  : "isClosed".tr(),
                               style: AppFontStyles.boldH7.copyWith(
                                   color: widget.jobEntity.status == 'open'
                                       ? Colors.green
