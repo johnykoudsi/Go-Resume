@@ -85,4 +85,10 @@ class JobRepoImpl extends JobRepo {
   Future editJob(EditMyJobEvent editMyJobEvent) {
     return jobDataSource.editJob(editMyJobEvent);
   }
+
+  @override
+  Future deleteJob(DeleteJobEvent deleteJobEvent) {
+    return jobDataSource.deleteJob(deleteJobEvent);
+
+  }
 }

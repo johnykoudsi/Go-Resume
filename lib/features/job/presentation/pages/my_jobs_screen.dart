@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
+import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
@@ -24,8 +25,7 @@ import '../widgets/sorts_filter_widget.dart';
 
 
 class MyJobsScreen extends StatefulWidget {
-  const MyJobsScreen({super.key, required this.user});
-  final User user;
+  const MyJobsScreen({super.key});
   @override
   State<MyJobsScreen> createState() => _MyJobsScreenState();
 }
@@ -37,10 +37,14 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
   GetAllJobsBloc getAllJobsBloc = GetAllJobsBloc();
   bool searchDeleteIcon = false;
   AllJobsSearchFilter jobFilter = AllJobsSearchFilter();
-
+  int? companyId;
   @override
   void initState() {
-    jobFilter=jobFilter.copyWith(companyId: widget.user.company?.id);
+    final userState = context.read<UserBloc>().state;
+    if (userState is UserLoggedState) {
+      companyId = userState.user.data.company?.id;
+    }
+    jobFilter=jobFilter.copyWith(companyId: companyId);
     getAllJobsBloc.add(ChangeToLoadingAllJobsEvent(searchFilter: jobFilter));
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==

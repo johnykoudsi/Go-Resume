@@ -7,6 +7,7 @@ import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import '../../../../../core/enums.dart';
 import '../../../data_sources/data_source/job_data_source.dart';
 import '../../../data_sources/reposetries/job_repo_impl.dart';
+import '../../../domain/use_cases/delete_job_usecase.dart';
 import '../../../domain/use_cases/edit_job_usecase.dart';
 
 part 'edit_job_event.dart';
@@ -22,5 +23,16 @@ class EditJobBloc extends Bloc<EditJobEvent, EditJobState> {
 
       emit(EditJobResponseState(helperResponse: response));
     });
+    on<DeleteJobEvent>((event, emit) async {
+      emit(EditJobLoadingState());
+
+      DeleteJobUseCase useCase = DeleteJobUseCase(jobRepoImpl);
+
+      final response = await useCase.call(event);
+
+      emit(EditJobResponseState(helperResponse: response));
+
+    });
   }
+
 }

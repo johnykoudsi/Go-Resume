@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes_no.dart';
+import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget_border.dart';
@@ -24,6 +26,7 @@ import 'package:smart_recruitment_flutter_user/utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../../utility/global_widgets/searchable_drop_down_widget.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
+import '../../../../core/router/app_routes.dart';
 import '../../../../utility/global_widgets/toggle_button_widget.dart';
 import '../../domain/entities/benefits_entity.dart';
 import '../bloc/toggle_job/toggle_job_bloc.dart';
@@ -113,6 +116,9 @@ class _EditJobScreenState extends State<EditJobScreen> {
             helperResponse: state.helperResponse,
             popOnSuccess: false,
           );
+          if(state.helperResponse.servicesResponse == ServicesResponseStatues.success){
+            Navigator.pushReplacementNamed(context, AppRoutes.myJobs);
+          }
         }
       },
       child: Scaffold(
@@ -344,6 +350,37 @@ class _EditJobScreenState extends State<EditJobScreen> {
                         selectedGender = value ?? GenderEnum.none;
                       });
                     }),
+                SizedBox(
+                  height: heightBetweenFields * 2,
+                ),
+                BlocBuilder<EditJobBloc, EditJobState>(
+                  builder: (context, state) {
+                    return ElevatedButtonWidget(
+                      isLoading: state is EditJobLoadingState,
+                      title: "delete".tr(),
+                      onPressed: () {
+                        DialogsWidgetsYesNo.showYesNoDialog(
+                          title:"areYouSureToDelete".tr(),
+                          noTitle: "no".tr(),
+                          yesTitle: "yes".tr(),
+                          isLoading: state is EditJobLoadingState,
+                          onYesTap: () {
+                            Navigator.of(context).pop();
+                            context.read<EditJobBloc>().add(
+                              DeleteJobEvent(
+                                id: widget.arguments.id,
+                              ),
+                            );
+                          },
+                          onNoTap: () {
+                            Navigator.of(context).pop();
+                          },
+                          context: context,
+                        );
+                      },
+                    );
+                  },
+                ),
                 SizedBox(
                   height: heightBetweenFields * 2,
                 ),

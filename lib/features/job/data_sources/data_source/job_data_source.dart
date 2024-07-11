@@ -29,9 +29,6 @@ class JobDataSource {
       url: EndPoints.addNewJob,
       body: addNewJobEvent.toMapBody(),
     );
-    print(addNewJobEvent.toMapBody());
-    print("jjjjjjj");
-    print(helperResponse.response);
     return helperResponse;
   }
   Future editJob(EditMyJobEvent editMyJobEvent) async {
@@ -41,9 +38,14 @@ class JobDataSource {
       url: EndPoints.editJob(id: editMyJobEvent.jobId),
       body:json.encode(editMyJobEvent.toMapBody()),
     );
-    print(editMyJobEvent.toMapBody());
-    print("jjjjjjj");
-    print(helperResponse.response);
+    return helperResponse;
+  }
+  Future deleteJob(DeleteJobEvent deleteJobEvent) async {
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      crud: "DELETE",
+      useUserToken: true,
+      url: EndPoints.deleteJob(id: deleteJobEvent.id),
+    );
     return helperResponse;
   }
   Future applyForJob(ApplyForJobApiEvent applyForJobApiEvent) async {

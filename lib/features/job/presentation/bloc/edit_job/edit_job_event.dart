@@ -3,6 +3,14 @@ part of 'edit_job_bloc.dart';
 sealed class EditJobEvent extends Equatable {
   const EditJobEvent();
 }
+class DeleteJobEvent extends EditJobEvent{
+  int id;
+  DeleteJobEvent({
+    required this.id,
+  });
+  @override
+  List<Object?> get props => [id];
+}
 final class EditMyJobEvent extends EditJobEvent {
   EditMyJobEvent({
     required this.jobId,

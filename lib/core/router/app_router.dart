@@ -164,9 +164,7 @@ class AppRouter {
                 visitor: true,
               ));
         case AppRoutes.myJobs:
-          User user = settings.arguments as User;
-          return MyJobsScreen(
-            user: user,
+          return const MyJobsScreen(
           );
         case AppRoutes.editApplicantProfile:
           DisplayGenerationScreenArguments? args =

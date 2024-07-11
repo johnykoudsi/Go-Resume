@@ -23,6 +23,7 @@ abstract class JobRepo {
   Future getJobApplicants(GetJobApplicantsSearchEvent getJobApplicantsSearchEvent);
   Future isAppliedToJob(IsAppliedToJobEvent isAppliedToJobEvent);
   Future editJob(EditMyJobEvent editMyJobEvent);
+  Future deleteJob(DeleteJobEvent deleteJobEvent);
 
   Future getSalaryExpectation(GetSalaryEvent getSalaryEvent);
 
