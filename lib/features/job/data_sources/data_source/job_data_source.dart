@@ -48,6 +48,17 @@ class JobDataSource {
     );
     return helperResponse;
   }
+  Future rejectApplicant(RejectApplicantEvent rejectApplicantEvent) async {
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      useUserToken: true,
+      url: EndPoints.rejectApplicant(jobId: rejectApplicantEvent.jobId, applicantId: rejectApplicantEvent.applicantId),
+    );
+    // print("kkkkkkk");
+    // print("jobId"+rejectApplicantEvent.jobId.toString());
+    // print("applicantId"+rejectApplicantEvent.applicantId.toString());
+    // print(helperResponse.response);
+    return helperResponse;
+  }
   Future applyForJob(ApplyForJobApiEvent applyForJobApiEvent) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       useUserToken: true,

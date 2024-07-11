@@ -11,6 +11,14 @@ class DeleteJobEvent extends EditJobEvent{
   @override
   List<Object?> get props => [id];
 }
+class RejectApplicantEvent extends EditJobEvent {
+  RejectApplicantEvent({required this.jobId,required this.applicantId});
+  int jobId;
+  int applicantId;
+
+  @override
+  List<Object?> get props => [];
+}
 final class EditMyJobEvent extends EditJobEvent {
   EditMyJobEvent({
     required this.jobId,

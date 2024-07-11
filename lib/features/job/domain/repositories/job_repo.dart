@@ -25,6 +25,7 @@ abstract class JobRepo {
   Future editJob(EditMyJobEvent editMyJobEvent);
   Future deleteJob(DeleteJobEvent deleteJobEvent);
   Future cancelApplication(CancelApplicationEvent cancelApplicationEvent);
+  Future rejectApplicant(RejectApplicantEvent rejectApplicantEvent);
 
   Future getSalaryExpectation(GetSalaryEvent getSalaryEvent);
 

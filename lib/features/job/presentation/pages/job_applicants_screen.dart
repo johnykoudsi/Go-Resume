@@ -52,11 +52,8 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
     super.initState();
   }
   void search() {
-    getJobApplicantsBloc.add(
-      ChangeToLoadingJobApplicantsEvent(
-        searchFilter: jobFilter, jobId: widget.jobEntity.id,
-      ),
-    );
+     context.read<GetJobApplicantsBloc>().add(ChangeToLoadingJobApplicantsEvent(jobId: widget.jobEntity.id,searchFilter: jobFilter));
+
   }
 
   @override
@@ -82,7 +79,8 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          context.read<GetJobApplicantsBloc>().add(ChangeToLoadingJobApplicantsEvent(jobId: widget.jobEntity.id));
+          search();
+         // context.read<GetJobApplicantsBloc>().add(ChangeToLoadingJobApplicantsEvent(jobId: widget.jobEntity.id,searchFilter: jobFilter));
         },
         child: BlocBuilder<GetJobApplicantsBloc, GetJobApplicantsState>(
           builder: (context, state) {
@@ -104,6 +102,7 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
                       );
                     }
                     return JobApplicantsWidget(
+                      refresh: (){search();},
                       job: widget.jobEntity,
                        applicant: state.applicantsList[index],
                     );

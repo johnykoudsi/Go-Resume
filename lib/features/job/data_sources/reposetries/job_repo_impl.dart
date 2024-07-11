@@ -97,4 +97,10 @@ class JobRepoImpl extends JobRepo {
     return jobDataSource.cancelApplication(cancelApplicationEvent);
 
   }
+
+  @override
+  Future rejectApplicant(RejectApplicantEvent rejectApplicantEvent) {
+    return jobDataSource.rejectApplicant(rejectApplicantEvent);
+
+  }
 }

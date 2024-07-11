@@ -9,6 +9,7 @@ import '../../../data_sources/data_source/job_data_source.dart';
 import '../../../data_sources/reposetries/job_repo_impl.dart';
 import '../../../domain/use_cases/delete_job_usecase.dart';
 import '../../../domain/use_cases/edit_job_usecase.dart';
+import '../../../domain/use_cases/reject_applicant_usecase.dart';
 
 part 'edit_job_event.dart';
 part 'edit_job_state.dart';
@@ -27,6 +28,16 @@ class EditJobBloc extends Bloc<EditJobEvent, EditJobState> {
       emit(EditJobLoadingState());
 
       DeleteJobUseCase useCase = DeleteJobUseCase(jobRepoImpl);
+
+      final response = await useCase.call(event);
+
+      emit(EditJobResponseState(helperResponse: response));
+
+    });
+    on<RejectApplicantEvent>((event, emit) async {
+      emit(EditJobLoadingState());
+
+      RejectApplicantUseCase useCase = RejectApplicantUseCase(jobRepoImpl);
 
       final response = await useCase.call(event);
 

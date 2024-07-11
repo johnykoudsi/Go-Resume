@@ -172,7 +172,8 @@
   "Outsourcing": "Outsourcing",
   "Hourly Pay": "Hourly Pay",
   "cancelApplication": "Cancel Application",
-  "educationCertificates": "Education & Certificates"
+  "educationCertificates": "Education & Certificates",
   "isOpen": "open",
-  "isClosed": "closed"
+  "isClosed": "closed",
+  "areYouSureToReject": "Are you sure you want to reject this applicant?"
 }

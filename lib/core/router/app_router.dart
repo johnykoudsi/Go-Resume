@@ -300,6 +300,9 @@ class AppRouter {
                   create: (context) => GetJobApplicantsBloc()
                     ..add(ChangeToLoadingJobApplicantsEvent(jobId: args.id)),
                 ),
+                BlocProvider(
+                  create: (context) => EditJobBloc(),
+                ),
               ],
               child: JobApplicantsScreen(
                 jobEntity: args,

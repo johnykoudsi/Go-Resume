@@ -173,6 +173,8 @@
   "cancelApplication": "الغاء الطلب",
   "educationCertificates": "التعليم والشهادات",
   "isOpen": "مفتوح",
-  "isClosed": "مغلق"
+  "isClosed": "مغلق",
+  "areYouSureToReject": "هل أنت متأكد أنك تريد رفض هذا المرشح؟"
+
 
 }
