@@ -23,7 +23,6 @@ import '../widgets/job_type_filter_widget.dart';
 import '../widgets/job_widget.dart';
 import '../widgets/sorts_filter_widget.dart';
 
-
 class MyJobsScreen extends StatefulWidget {
   const MyJobsScreen({super.key});
   @override
@@ -31,7 +30,6 @@ class MyJobsScreen extends StatefulWidget {
 }
 
 class _MyJobsScreenState extends State<MyJobsScreen> {
-
   TextEditingController searchController = TextEditingController();
   ScrollController scrollController = ScrollController();
   GetAllJobsBloc getAllJobsBloc = GetAllJobsBloc();
@@ -44,7 +42,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
     if (userState is UserLoggedState) {
       companyId = userState.user.data.company?.id;
     }
-    jobFilter=jobFilter.copyWith(companyId: companyId);
+    jobFilter = jobFilter.copyWith(companyId: companyId);
     getAllJobsBloc.add(ChangeToLoadingAllJobsEvent(searchFilter: jobFilter));
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
@@ -55,8 +53,10 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
           ),
         );
       }
-    });    super.initState();
+    });
+    super.initState();
   }
+
   void search() {
     getAllJobsBloc.add(
       ChangeToLoadingAllJobsEvent(
@@ -64,11 +64,13 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: getAllJobsBloc,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text("myJobs".tr()),
           centerTitle: false,
@@ -103,13 +105,16 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
           ),
         ),
         body: RefreshIndicator(
+          triggerMode: RefreshIndicatorTriggerMode.anywhere,
           onRefresh: () async {
             search();
           },
           child: BlocBuilder<GetAllJobsBloc, GetAllJobsState>(
             builder: (context, state) {
-              if (state is GetAllJobsLoadedState && state.jobList.isNotEmpty) {
+              if (state is GetAllJobsLoadedState &&
+                  state.jobList.isNotEmpty) {
                 return ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(18),
                     controller: scrollController,
                     itemCount: state.hasReachedMax
@@ -183,22 +188,23 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                               children: [
                                 const HandleWidget(),
                                 Padding(
-                                  padding:
-                                  const EdgeInsets.symmetric(vertical: 18),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 18),
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       JobTypeFilterWidget(
                                         onChanged: (value) {
                                           Navigator.of(context).pop();
                                           setState(() {
-                                            jobFilter =
-                                                jobFilter.copyWith(type: value);
+                                            jobFilter = jobFilter.copyWith(
+                                                type: value);
                                           });
                                           search();
                                         },
-                                        value: jobFilter.type ?? JobTypes.none,
+                                        value:
+                                            jobFilter.type ?? JobTypes.none,
                                       ),
                                       const FilterSpacing(),
                                       // PropertyServiceFilterExploreWidget(
@@ -248,12 +254,11 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                         builder: (BuildContext context,
                             void Function(void Function()) setState) {
                           return SortsFilterWidget(
-                            value: jobFilter.sort??JobSorts.none,
+                            value: jobFilter.sort ?? JobSorts.none,
                             onChanged: (value) {
                               Navigator.of(context).pop();
                               setState(() {
-                                jobFilter =
-                                    jobFilter.copyWith(sort: value);
+                                jobFilter = jobFilter.copyWith(sort: value);
                               });
                               search();
                             },

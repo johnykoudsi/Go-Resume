@@ -71,6 +71,7 @@ class _MyNotificationState extends State<MyNotification> {
             builder: (context, state) {
               if (state is MyNotificationsLoadedState && state.notifications.isNotEmpty) {
                 return ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(18),
                     controller: scrollController,
                     itemCount: state.hasReachedMax

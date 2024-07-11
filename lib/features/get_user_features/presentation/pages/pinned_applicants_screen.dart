@@ -87,6 +87,7 @@ class _PinnedApplicantsScreenState extends State<PinnedApplicantsScreen> {
               builder: (context, state) {
                 if (state is GetPinnedApplicantsLoadedState && state.applicantsList.isNotEmpty) {
                   return ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       padding: const EdgeInsets.all(18),
                       controller: scrollController,
                       itemCount: state.hasReachedMax

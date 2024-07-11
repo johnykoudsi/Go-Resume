@@ -78,6 +78,7 @@ class _SavedJobsScreenState extends State<SavedJobsScreen> {
                   return const NoDataWidget();
                 }
                 return ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(18),
                     controller: scrollController,
                     itemCount: state.hasReachedMax

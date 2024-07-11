@@ -84,6 +84,7 @@ class _AllApplicantsScreenState extends State<AllApplicantsScreen> {
             child: BlocBuilder<GetAllApplicantsBloc, GetAllApplicantsState>(
               builder: (context, state) {
                 return ListView.builder(
+                  physics: const AlwaysScrollableScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
                     if (state is GetAllApplicantsLoadedState) {
                       return JobApplicantsWidget(

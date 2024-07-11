@@ -33,7 +33,7 @@ class TopApplicantsWidget extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.jobApplicants,arguments: jobEntity);
+                      Navigator.popAndPushNamed(context, AppRoutes.jobApplicants,arguments: jobEntity);
 
                       // Navigator.push(context ,  MaterialPageRoute(
                       //   builder: (context) =>  JobApplicantsScreen(jobEntity: jobEntity,), // or false based on your logic

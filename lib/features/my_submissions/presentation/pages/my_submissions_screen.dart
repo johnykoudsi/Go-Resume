@@ -62,7 +62,8 @@ class _MySubmissionsScreenState extends State<MySubmissionsScreen> {
                   const NoDataWidget()
                   :
               ListView.builder(
-              padding: const EdgeInsets.all(18),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(18),
                 controller: scrollController,
               itemCount: state.hasReachedMax
                   ? state.submissions.length

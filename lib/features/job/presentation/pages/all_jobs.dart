@@ -110,6 +110,7 @@ class _AllJobsScreenState extends State<AllJobsScreen> {
             builder: (context, state) {
               if (state is GetAllJobsLoadedState && state.jobList.isNotEmpty) {
                 return ListView.builder(
+                    physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.all(18),
                     controller: scrollController,
                     itemCount: state.hasReachedMax
