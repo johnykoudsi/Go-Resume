@@ -11,6 +11,14 @@ class ApplyForJobApiEvent extends ApplyForJobEvent{
   @override
   List<Object?> get props => [id];
 }
+class CancelApplicationEvent extends ApplyForJobEvent{
+  int id;
+  CancelApplicationEvent({
+    required this.id,
+  });
+  @override
+  List<Object?> get props => [id];
+}
 class IsAppliedToJobEvent extends ApplyForJobEvent{
   int id;
   IsAppliedToJobEvent({

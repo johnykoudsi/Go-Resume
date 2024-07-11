@@ -9,6 +9,7 @@ import 'package:smart_recruitment_flutter_user/features/job/domain/use_cases/is_
 
 import '../../../data_sources/data_source/job_data_source.dart';
 import '../../../data_sources/reposetries/job_repo_impl.dart';
+import '../../../domain/use_cases/cancel_application_usecase.dart';
 
 part 'apply_for_job_event.dart';
 part 'apply_for_job_state.dart';
@@ -18,6 +19,7 @@ class ApplyForJobBloc extends Bloc<ApplyForJobEvent, ApplyForJobState> {
     final JobRepoImpl jobRepoImpl =
         JobRepoImpl(JobDataSource(NetworkHelpers()));
     ApplyForJobUseCase applyForJobUseCase = ApplyForJobUseCase(jobRepoImpl);
+    CancelApplicationUseCase cancelApplicationUseCase = CancelApplicationUseCase(jobRepoImpl);
     IsAppliedToJobUseCase isAppliedToJobUseCase = IsAppliedToJobUseCase(jobRepoImpl);
 
     on<ApplyForJobApiEvent>((event, emit) async {
@@ -27,6 +29,17 @@ class ApplyForJobBloc extends Bloc<ApplyForJobEvent, ApplyForJobState> {
       if(response is HelperResponse){
         if(response.servicesResponse == ServicesResponseStatues.success){
           emit(IsAppliedToJobResponseState(isAppliedTo: true));
+        }
+      }
+
+    });
+    on<CancelApplicationEvent>((event, emit) async {
+      emit(ApplyForJobLoadingState());
+      final response = await cancelApplicationUseCase.call(event);
+      emit(ApplyForJobResponseState(helperResponse: response));
+      if(response is HelperResponse){
+        if(response.servicesResponse == ServicesResponseStatues.success){
+          emit(IsAppliedToJobResponseState(isAppliedTo: false));
         }
       }
 

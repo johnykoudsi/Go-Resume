@@ -91,4 +91,10 @@ class JobRepoImpl extends JobRepo {
     return jobDataSource.deleteJob(deleteJobEvent);
 
   }
+
+  @override
+  Future cancelApplication(CancelApplicationEvent cancelApplicationEvent) {
+    return jobDataSource.cancelApplication(cancelApplicationEvent);
+
+  }
 }

@@ -55,7 +55,13 @@ class JobDataSource {
     );
     return helperResponse;
   }
-
+  Future cancelApplication(CancelApplicationEvent cancelApplicationEvent) async {
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      useUserToken: true,
+      url: EndPoints.cancelMyApplication(id: cancelApplicationEvent.id),
+    );
+    return helperResponse;
+  }
   Future toggleJob(ToggleJobApiEvent toggleJobApiEvent) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       useUserToken: true,

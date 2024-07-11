@@ -428,7 +428,17 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         builder: (applyForJobContext, applyForJobState) {
                           if (applyForJobState is IsAppliedToJobResponseState) {
                             if (applyForJobState.isAppliedTo) {
-                              return const SizedBox.shrink();
+                              return ElevatedButtonWidget(
+                                isLoading:
+                                applyForJobState is ApplyForJobLoadingState,
+                                title: "cancelApplication".tr(),
+                                onPressed: () {
+                                  applyForJobContext
+                                      .read<ApplyForJobBloc>()
+                                      .add(CancelApplicationEvent(
+                                      id: widget.jobEntity.id));
+                                },
+                              );
                             } else {
                               return ElevatedButtonWidget(
                                 isLoading:
