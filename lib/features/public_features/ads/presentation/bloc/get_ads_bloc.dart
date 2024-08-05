@@ -14,6 +14,8 @@ class GetAdsBloc extends Bloc<GetAdsEvent, GetAdsState> {
     final AdsRepoImpl adsRepoImpl = AdsRepoImpl(AdsDataSource(NetworkHelpers()));
 
     on<GetAllAdsEvent>((event, emit) async{
+      print("jjjjjjj");
+
       emit(GetAdsInitial());
 
       GetAllAdsUseCase usecase = GetAllAdsUseCase(adsRepoImpl);

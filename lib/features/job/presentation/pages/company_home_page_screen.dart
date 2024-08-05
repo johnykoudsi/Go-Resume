@@ -10,6 +10,7 @@ import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../utility/app_strings.dart';
+import '../../../public_features/ads/presentation/bloc/get_ads_bloc.dart';
 
 class CompanyHomePageScreen extends StatefulWidget {
   const CompanyHomePageScreen({super.key});
@@ -24,6 +25,7 @@ class _CompanyHomePageScreenState extends State<CompanyHomePageScreen> {
   int? companyId;
   @override
   void initState() {
+    context.read<GetAdsBloc>().add(GetAllAdsEvent());
     final userState = context.read<UserBloc>().state;
     if (userState is UserLoggedState) {
       companyId = userState.user.data.company?.id;
@@ -79,7 +81,18 @@ class _CompanyHomePageScreenState extends State<CompanyHomePageScreen> {
       ),
       body: ListView(
         children: [
-          const CarouselSliderWidget(),
+          BlocBuilder<GetAdsBloc, GetAdsState>(
+            builder: (context, state) {
+              if(state is GetAllAdsDoneState){
+                return  CarouselSliderWidget(ads: state.ads,);
+              }else{
+                return const Center(child: Padding(
+                  padding: EdgeInsets.only(top:8.0),
+                  child: CircularProgressIndicator(),
+                ));
+              }
+            },
+          ),
           const SizedBox(
             height: 30,
           ),

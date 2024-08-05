@@ -8,6 +8,7 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/pages/a
 import 'package:smart_recruitment_flutter_user/features/profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/applicant_profile_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/edit_applicant_profile/presentation/bloc/toggle_applicant/toggle_applicant_bloc.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/ads/presentation/bloc/get_ads_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/public_features/more/presentation/pages/more_screen.dart';
 import '../../home/presentation/pages/home_screen.dart';
 
@@ -20,7 +21,11 @@ class GetSelectedScreenByIndex extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       if (screenIndex == 0) {
-        return const HomeScreen();
+        return MultiBlocProvider(providers: [
+          BlocProvider(create: (context) => GetAdsBloc()),
+
+        ], child: const HomeScreen()
+        );
       }
       if (screenIndex == 1) {
         return const AllJobsScreen();

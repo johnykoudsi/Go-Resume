@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/jobs_horizantal_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/profile/company_profile/presentation/widget/company_horizantal_widget.dart';
+import 'package:smart_recruitment_flutter_user/features/public_features/ads/presentation/bloc/get_ads_bloc.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 
@@ -18,8 +20,16 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+
+    context.read<GetAdsBloc>().add(GetAllAdsEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,21 +73,29 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: ListView(
-        children: const [
-          SizedBox(
+        children:  [
+          const SizedBox(
             height: 30,
           ),
-          CarouselSliderWidget(),
-          SizedBox(
+          BlocBuilder<GetAdsBloc, GetAdsState>(
+            builder: (context, state) {
+              if(state is GetAllAdsDoneState){
+                return  CarouselSliderWidget(ads: state.ads,);
+              }else{
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+          const SizedBox(
             height: 30,
           ),
-          TopJobsSectionWidget(),
-          JobsHorizontalWidget(),
-          SizedBox(
+          const TopJobsSectionWidget(),
+          const JobsHorizontalWidget(),
+          const SizedBox(
             height: 12,
           ),
-          HomeCompaniesSectionWidget(),
-          CompaniesHorizontalWidget(),
+          const HomeCompaniesSectionWidget(),
+          const CompaniesHorizontalWidget(),
         ],
       ),
     );

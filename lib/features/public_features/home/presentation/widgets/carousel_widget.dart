@@ -4,15 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
+import '../../../ads/domain/entities/ad_entity.dart';
+
 class CarouselSliderWidget extends StatelessWidget {
-  const CarouselSliderWidget({super.key});
+  final List<Ad> ads;
+  const CarouselSliderWidget({super.key,  required this.ads});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200,
       child: CarouselSlider.builder(
-        itemCount: 3,
+        itemCount: ads.length,
         itemBuilder:
             (BuildContext context, int index, int realIndex) {
           return Padding(
@@ -30,7 +33,7 @@ class CarouselSliderWidget extends StatelessWidget {
                   borderRadius: AppBorders.k9BorderRadius,
                   image: DecorationImage(
                     alignment: Alignment.center,
-                    image: Image.asset(Assets.jpgCarousel)
+                    image: Image.network(ads[index].image)
                         .image,
                     fit: BoxFit.cover,
                   ),

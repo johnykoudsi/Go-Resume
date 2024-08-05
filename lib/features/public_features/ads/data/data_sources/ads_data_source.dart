@@ -22,6 +22,7 @@ class AdsDataSource {
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
         final data = adEntityFromJson(helperResponse.response);
+        print(data.data);
         return  data.data;
       } catch (e) {
         return helperResponse.copyWith(
