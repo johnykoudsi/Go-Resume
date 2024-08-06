@@ -76,19 +76,7 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
     user = widget.user;
     super.initState();
   }
-  void openWhatsapp(
-      {required BuildContext context, required String number}) async {
-    var whatsapp = number; //+92xx enter like this
-    var whatsappURlAndroid = "whatsapp://send?phone=$whatsapp";
-    var whatsappURLIos = "https://wa.me/$whatsapp}";
 
-    if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
-      await launchUrl(Uri.parse(whatsappURlAndroid));
-    } else {
-      DialogsWidgetsSnackBar.showScaffoldSnackBar(
-          title: "Whatsapp not installed", context: context);
-    }
-  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -264,8 +252,23 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                   SizedBox(
                     height: screenHeight * 0.02,
                   ),
-                  JobsHorizontalWidget(
-                    companyId: user.company?.id,
+                  Column(
+                    children: [
+                      const Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 18.0),
+                            child: Text("Jobs",
+                              style: AppFontStyles.mediumH4,
+                            ),
+                          ),
+                        ],
+                      ),
+                      JobsHorizontalWidget(
+                        companyId: user.company?.id,
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 18,
@@ -313,10 +316,8 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                             imagePath: Assets.svgLinkedin),
                         ContactInfoWidget(
                             onTap: () {
-                              openWhatsapp(
-                                context: context,
-                                number: user.mobile,
-                              );
+                              Uri whatsapp=Uri.parse('https://wa.me/${user.mobile}');
+                              launchUrl(whatsapp);
                             },
                             imagePath: Assets.svgWhatsapp),
                         ContactInfoWidget(

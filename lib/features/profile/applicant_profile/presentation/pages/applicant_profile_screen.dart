@@ -81,19 +81,6 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
     super.initState();
   }
 
-  void openWhatsapp(
-      {required BuildContext context, required String number}) async {
-    var whatsapp = number; //+92xx enter like this
-    var whatsappURlAndroid = "whatsapp://send?phone=$whatsapp";
-    var whatsappURLIos = "https://wa.me/$whatsapp}";
-
-    if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
-      await launchUrl(Uri.parse(whatsappURlAndroid));
-    } else {
-      DialogsWidgetsSnackBar.showScaffoldSnackBar(
-          title: "Whatsapp not installed", context: context);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -327,10 +314,8 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                         imagePath: Assets.svgLinkedin),
                     ContactInfoWidget(
                         onTap: () {
-                          openWhatsapp(
-                            context: context,
-                            number: user.mobile,
-                          );
+                          Uri whatsapp=Uri.parse('https://wa.me/${user.mobile}');
+                          launchUrl(whatsapp);
                         },
                         imagePath: Assets.svgWhatsapp),
                     ContactInfoWidget(
