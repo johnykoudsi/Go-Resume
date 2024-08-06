@@ -17,7 +17,7 @@ class DescriptionItemWidget extends StatelessWidget {
         const Icon(Icons.square_rounded,color: AppColors.fontColor,size: 10,),
         SizedBox(width: screenWidth*0.03,),
         Container(
-          constraints: BoxConstraints(maxWidth: screenWidth * 0.8),
+          constraints: BoxConstraints(maxWidth: screenWidth * 0.7),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

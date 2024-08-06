@@ -246,8 +246,11 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                               user.company?.policies?.length ?? 0,
                               (index) {
                                 Policy? p = user.company?.policies?[index];
-                                return DescriptionItemWidget(
-                                  description: p!.description,
+                                return Padding(
+                                  padding: EdgeInsets.symmetric(vertical: screenHeight * 0.01),
+                                  child: DescriptionItemWidget(
+                                    description: p!.description,
+                                  ),
                                 );
                               },
                             ),
