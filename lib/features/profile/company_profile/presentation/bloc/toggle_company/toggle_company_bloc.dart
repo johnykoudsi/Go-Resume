@@ -34,10 +34,10 @@ class ToggleCompanyBloc extends Bloc<ToggleCompanyEvent, ToggleCompanyState> {
       bool isFavorite = isFavoriteResponse == 0 ? false : true;
       emit(ToggleCompanyLoadedState(isFavorite: isFavorite));
     });
-    on<AddView>((event, emit) {
-
+    on<AddView>((event, emit) async{
+      HelperResponse helperResponse = await
       NetworkHelpers.getDeleteDataHelper(
-        url: "/applicants/${event.id}",
+        url: "/companies/${event.id}",
         useUserToken: true,
       );
     });

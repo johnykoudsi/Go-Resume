@@ -134,7 +134,6 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                       visitor: widget.visitor,
                       profileImage: user.profileImage,
                       viewsNumber: user.views.toString() ?? "",
-                      //userId: user.id,
                     ),
                   ),
                   !widget.visitor

@@ -38,12 +38,13 @@ class ToggleApplicantBloc extends Bloc<ToggleApplicantEvent, ToggleApplicantStat
       bool isPinned = isPinnedResponse == 0 ? false : true;
       emit(ToggleApplicantLoadedState(isPinned: isPinned));
     });
-    on<AddView>((event, emit) {
-
+    on<AddView>((event, emit) async{
+      HelperResponse helperResponse = await
       NetworkHelpers.getDeleteDataHelper(
         url: "/applicants/${event.id}",
         useUserToken: true,
       );
+      print(helperResponse.response);
     });
   }
 }
