@@ -64,7 +64,8 @@ class CompanyWidget extends StatelessWidget {
                   style: AppFontStyles.mediumH6,
                 ),
                 Text(
-                  "Damascus - Syria",
+                  user.country != ""?
+                  "${user.city} - ${user.country}":"",
                   style: AppFontStyles.regularH6
                       .copyWith(color: AppColors.kGreyColor),
                 ),
