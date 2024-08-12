@@ -50,7 +50,8 @@ class JobApplicantsWidget extends StatelessWidget {
           children: [
             canReject
                 ? Positioned(
-                    right: 0,
+                    right: context.locale.languageCode=="en"?0:null,
+                    left: context.locale.languageCode=="ar"?0:null,
                     child: BlocConsumer<EditJobBloc,
                         EditJobState>(
                       listener: (context, state) {
