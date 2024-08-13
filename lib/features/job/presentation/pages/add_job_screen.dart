@@ -141,8 +141,6 @@ class _AddJobScreenState extends State<AddJobScreen> {
                       );
                     }
                     if (state is BenefitsDoneState) {
-                      print("jjjjjjj");
-                      print(state.benefits[0].description.toString());
                       return BenefitsWidget(
                         onPressed: () {
                           Navigator.push(

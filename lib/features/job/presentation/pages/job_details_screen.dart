@@ -85,7 +85,15 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 ? IconButton(
                     onPressed: () {
                       Navigator.pushNamed(context, AppRoutes.editJob,
-                          arguments: widget.jobEntity);
+                          arguments: widget.jobEntity).then((_) {
+                        if (isCompany) {
+                          context
+                              .read<ToggleJobBloc>()
+                              .add(GetJobClosedStatusEvent(id: widget.jobEntity.id));
+                          context.read<GetJobApplicantsBloc>().add(GetJobApplicantsSearchEvent(
+                              jobId: widget.jobEntity.id, searchFilter: applicantsFilter));
+                        }
+                      });;
                     },
                     icon: const Icon(Icons.edit))
                 : IconButton(onPressed: () {

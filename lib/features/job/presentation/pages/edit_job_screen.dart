@@ -5,24 +5,18 @@ import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes
 import 'package:smart_recruitment_core/utility/enums.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/custom_text_field.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
-import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget_border.dart';
-import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
-import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/core/enums.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/work_field_entity.dart';
-import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/add_job/add_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/benefits/benefits_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/edit_job/edit_job_bloc.dart';
-import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/salary_expectation/salary_expectation_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/benefits_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/compensation_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/date_picker_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/description_field.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_drop_down.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/preferred_gender_widget.dart';
-import 'package:smart_recruitment_flutter_user/utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../../utility/global_widgets/searchable_drop_down_widget.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
@@ -69,7 +63,7 @@ class _EditJobScreenState extends State<EditJobScreen> {
 
   void _handleSelectedWorkField(WorkFieldEntity workFieldEntity) {
     setState(() {
-      _selectedWorkField = workFieldEntity;
+      workFieldId =workFieldEntity.id;
     });
   }
 
@@ -117,7 +111,10 @@ class _EditJobScreenState extends State<EditJobScreen> {
             popOnSuccess: false,
           );
           if(state.helperResponse.servicesResponse == ServicesResponseStatues.success){
-            Navigator.pushReplacementNamed(context, AppRoutes.myJobs);
+            Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pushNamed(context, AppRoutes.myJobs);
           }
         }
       },
@@ -305,7 +302,7 @@ class _EditJobScreenState extends State<EditJobScreen> {
                   } else if (state is WorkFieldsDoneState) {
                     return SearchableDropDownWidget(
                       items: state.workFields,
-                      selectedItem: state.workFields[workFieldId],
+                      selectedItem: state.workFields[workFieldId-1],
                       onSelect: _handleSelectedWorkField,
                       title: "workField".tr(),
                     );
@@ -390,39 +387,37 @@ class _EditJobScreenState extends State<EditJobScreen> {
                       isLoading: state is EditJobLoadingState,
                       title: "edit".tr(),
                       onPressed: () {
-                        if (!_key.currentState!.validate() ||
-                            selectedDate == null ||
-                            selectedJobType == null ||
-                            _selectedWorkField == null) {
+                        if (!_key.currentState!.validate()) {
                           return;
+                        }else{
+                          context.read<EditJobBloc>().add(
+                            EditMyJobEvent(
+                              jobId: widget.arguments.id,
+                              position: positionController.text,
+                              description: descriptionController.text,
+                              startDate: selectedDate.toString(),
+                              compensation: selectedCompensation!,
+                              genderEnum: selectedGender,
+                              maxSalary: num.tryParse(maximumSalaryController
+                                  .text
+                                  .replaceAll(",", "")) ??
+                                  0,
+                              minSalary: num.tryParse(minimumSalaryController
+                                  .text
+                                  .replaceAll(",", "")) ??
+                                  0,
+                              workHours: int.parse(workHoursController.text),
+                              jobTypes: selectedJobType!,
+                              experienceYears:
+                              int.parse(experienceYearsController.text),
+                              workFieldId:workFieldId.toString(),
+                              benefits: _selectedBenefits
+                                  .map((benefit) => benefit.id)
+                                  .toList(),
+                            ),
+                          );
                         }
-                        context.read<EditJobBloc>().add(
-                              EditMyJobEvent(
-                                jobId: widget.arguments.id,
-                                position: positionController.text,
-                                description: descriptionController.text,
-                                startDate: selectedDate.toString(),
-                                compensation: selectedCompensation!,
-                                genderEnum: selectedGender,
-                                maxSalary: num.tryParse(maximumSalaryController
-                                        .text
-                                        .replaceAll(",", "")) ??
-                                    0,
-                                minSalary: num.tryParse(minimumSalaryController
-                                        .text
-                                        .replaceAll(",", "")) ??
-                                    0,
-                                workHours: int.parse(workHoursController.text),
-                                jobTypes: selectedJobType!,
-                                experienceYears:
-                                    int.parse(experienceYearsController.text),
-                                workFieldId: _selectedWorkField!.id.toString(),
-                                //  benefits: [1],
-                                benefits: _selectedBenefits
-                                    .map((benefit) => benefit.id)
-                                    .toList(),
-                              ),
-                            );
+
                       },
                     );
                   },

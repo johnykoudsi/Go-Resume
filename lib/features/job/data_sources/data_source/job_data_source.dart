@@ -32,11 +32,11 @@ class JobDataSource {
     return helperResponse;
   }
   Future editJob(EditMyJobEvent editMyJobEvent) async {
-    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+    HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
       crud: "PUT",
       useUserToken: true,
       url: EndPoints.editJob(id: editMyJobEvent.jobId),
-      body:json.encode(editMyJobEvent.toMapBody()),
+      body:editMyJobEvent.toMapBody(),
     );
     return helperResponse;
   }
