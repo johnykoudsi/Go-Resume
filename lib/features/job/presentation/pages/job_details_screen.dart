@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,11 +14,10 @@ import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/ap
 import 'package:smart_recruitment_flutter_user/features/job/presentation/bloc/toggle_job/toggle_job_bloc.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/top_applicants_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
-import 'package:smart_recruitment_flutter_user/utility/global_widgets/toggle_button_widget.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../generated/assets.dart';
-import '../../../../utility/app_strings.dart';
 import '../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../profile/company_profile/presentation/widget/company_widget.dart';
 import '../bloc/get_job_applicants/get_job_applicants_bloc.dart';
 import '../widgets/description_item_widget.dart';
 
@@ -31,6 +31,7 @@ class JobDetailsScreen extends StatefulWidget {
 
 class _JobDetailsScreenState extends State<JobDetailsScreen> {
   bool isCompany = false;
+  String benefits = 'none';
   JobApplicantsSearchFilter applicantsFilter = JobApplicantsSearchFilter();
   @override
   void initState() {
@@ -54,7 +55,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           .read<ApplyForJobBloc>()
           .add(IsAppliedToJobEvent(id: widget.jobEntity.id));
     }
-
+    for (int i = 0; i < widget.jobEntity.benefits.length; i++) {
+      benefits =
+          widget.jobEntity.benefits.map((benefit) => benefit.name).join(', ');
+    }
     super.initState();
   }
 
@@ -78,7 +82,12 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
           iconTheme: const IconThemeData(size: 25, color: AppColors.fontColor),
           actions: [
             isCompany
-                ? IconButton(onPressed: (){Navigator.pushNamed(context, AppRoutes.editJob,arguments: widget.jobEntity);}, icon: const Icon(Icons.edit))
+                ? IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.editJob,
+                          arguments: widget.jobEntity);
+                    },
+                    icon: const Icon(Icons.edit))
                 : IconButton(onPressed: () {
                     context
                         .read<ToggleJobBloc>()
@@ -133,7 +142,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 children: [
                   Text(
                     widget.jobEntity.city != ""
-                        ? "${widget.jobEntity.company} - ${widget.jobEntity.country}"
+                        ? "${widget.jobEntity.city} - ${widget.jobEntity.country}"
                         : "",
                     style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
                   ),
@@ -241,8 +250,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                   Text(
-                     "dailyWorkHours".tr(),
+                  Text(
+                    "dailyWorkHours".tr(),
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -256,7 +265,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                   Text(
+                  Text(
                     "${"startDate".tr()}: ",
                     style: AppFontStyles.mediumH5,
                   ),
@@ -272,8 +281,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                   Text(
-                     "experienceYears".tr(),
+                  Text(
+                    "experienceYears".tr(),
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -287,8 +296,8 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
               ),
               Row(
                 children: [
-                   Text(
-                     "type".tr(),
+                  Text(
+                    "type".tr(),
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
@@ -296,6 +305,39 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              Row(
+                children: [
+                  Text(
+                    "compensation:".tr(),
+                    style: AppFontStyles.mediumH5,
+                  ),
+                  Text(
+                    compensationTypesUi.reverse[widget.jobEntity.compensation] ?? '',
+                    style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: screenHeight * 0.01,
+              ),
+              Visibility(
+                visible: benefits != 'none',
+                child: Row(
+                  children: [
+                    Text(
+                      "benefits:".tr(),
+                      style: AppFontStyles.mediumH5,
+                    ),
+                    Text(
+                      benefits,
+                      style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -308,7 +350,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                     Text("salaryExpectations".tr(),
+                    Text("salaryExpectations".tr(),
                         style: AppFontStyles.boldH4),
                     Text(
                       "${NumberFormat.decimalPattern().format(widget.jobEntity.minExpected)} ${"mSYP".tr()} - ${NumberFormat.decimalPattern().format(widget.jobEntity.maxExpected)} ${"mSYP".tr()}",
@@ -338,7 +380,7 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                         ),
                       ],
                     ),
-                     Row(
+                    Row(
                       children: [
                         const Text(
                           "⚡",
@@ -415,8 +457,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           );
                         }
                       },
-                    )
-                  : const SizedBox(),
+                    ):SizedBox(),
+                  // : CompanyWidget(
+                  //     user: widget.jobEntity.company!,
+                  //   ),
               const SizedBox(
                 height: 100,
               ),
@@ -430,13 +474,13 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                             if (applyForJobState.isAppliedTo) {
                               return ElevatedButtonWidget(
                                 isLoading:
-                                applyForJobState is ApplyForJobLoadingState,
+                                    applyForJobState is ApplyForJobLoadingState,
                                 title: "cancelApplication".tr(),
                                 onPressed: () {
                                   applyForJobContext
                                       .read<ApplyForJobBloc>()
                                       .add(CancelApplicationEvent(
-                                      id: widget.jobEntity.id));
+                                          id: widget.jobEntity.id));
                                 },
                               );
                             } else {
@@ -462,7 +506,10 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                   }
                   return const SizedBox();
                 },
-              )
+              ),
+              const SizedBox(
+                height: 50,
+              ),
             ],
           ),
         ),

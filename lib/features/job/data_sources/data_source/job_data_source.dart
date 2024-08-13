@@ -216,7 +216,6 @@ class JobDataSource {
       url: urlWithParams,
       useUserToken: true,
     );
-
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
         final data = json.decode(helperResponse.response)["data"];
