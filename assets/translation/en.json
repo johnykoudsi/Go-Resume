@@ -177,5 +177,7 @@
   "educationCertificates": "Education & Certificates",
   "isOpen": "open",
   "isClosed": "closed",
+  "checkUpdates": "Checking for updates",
+  "noUpdates": "No updates at the moment",
   "areYouSureToReject": "Are you sure you want to reject this applicant?"
 }

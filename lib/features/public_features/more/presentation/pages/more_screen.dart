@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/features/auth/presentation/bloc/user/user_bloc.dart';
 import 'package:smart_recruitment_core/utility/dialogs_and_snackbars/dialogs_yes_no.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
-import 'package:smart_recruitment_flutter_user/utility/app_strings.dart';
+import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../generated/assets.dart';
@@ -82,10 +83,15 @@ class _MoreScreenState extends State<MoreScreen> {
                   });
                 },
               ),
-              MoreItemsWidget(
-                iconPath: Assets.svgUpdate,
-                text: "update".tr(),
-                topPadding: screenHeight * 0.95,
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context).restorablePush(_modalBuilder);
+                },
+                child: MoreItemsWidget(
+                  iconPath: Assets.svgUpdate,
+                  text: "update".tr(),
+                  topPadding: screenHeight * 0.95,
+                ),
               ),
               GestureDetector(
                 onTap: () {
@@ -116,6 +122,24 @@ class _MoreScreenState extends State<MoreScreen> {
           ),
         ],
       ),
+    );
+  }
+  @pragma('vm:entry-point')
+  static Route<void> _modalBuilder(BuildContext context, Object? arguments) {
+    return CupertinoModalPopupRoute<void>(
+      builder: (BuildContext context) {
+        return CupertinoActionSheet(
+          title: const Text('checkUpdates'),
+          actions: <CupertinoActionSheetAction>[
+            CupertinoActionSheetAction(
+              child: const Text('noUpdates',style: AppFontStyles.mediumH3,),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

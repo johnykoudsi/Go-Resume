@@ -32,7 +32,13 @@ class _BenefitsScreenState extends State<BenefitsScreen> {
     _selectedItems = List.from(widget.initiallySelectedItems); // Initialize with initially selected items
 
   }
-
+bool isOn(BenefitEntity item){
+    if(searchBenefitsList(item, _selectedItems)){
+      return true;
+    }else{
+      return false;
+    }
+}
   void _toggleSelection(BenefitEntity item) {
     setState(() {
       if (searchBenefitsList(item, _selectedItems)) {
@@ -69,27 +75,74 @@ class _BenefitsScreenState extends State<BenefitsScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Material(
-                  elevation: 5,
+                  elevation: 8, // Enhanced elevation for a more prominent shadow
+                  shadowColor: Colors.black45, // Subtle shadow color
                   borderRadius: AppBorders.k24BorderRadius,
                   child: Container(
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color:
-                      searchBenefitsList(item,_selectedItems)
-                          ? AppColors.kGreyColor
-                          : AppColors.kWhiteColor,
+                      gradient: LinearGradient( // Subtle gradient for the background
+                        colors: [
+                          AppColors.kWhiteColor,
+                          searchBenefitsList(item, _selectedItems)
+                              ? Colors.grey
+                              : AppColors.kWhiteColor,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
                       borderRadius: AppBorders.k24BorderRadius,
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        item.name,
-                        style: AppFontStyles.mediumH4,
+                      padding: const EdgeInsets.all(16.0), // Consistent padding around the content
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start, // Aligns text to the start
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  item.name, // Display the benefit name
+                                  style: AppFontStyles.boldH3.copyWith(
+                                    color: AppColors.fontColor, // Custom color for the name
+                                    fontWeight: FontWeight.w600, // Slightly heavier font weight
+                                  ),
+                                  overflow: TextOverflow.visible, // Handle overflow gracefully
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 3),
+                                child: Icon(
+                                  Icons.check_circle, // Add an icon (optional)
+                                  color: isOn(item) ? AppColors.fontColor : AppColors.kGreyColor,
+                                  size: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8.0), // Spacing between name and description
+                          Flexible(
+                            child: Text(
+                              item.description, // Display the benefit description
+                              style: AppFontStyles.mediumH4.copyWith(
+                                color: isOn(item) ? AppColors.kTextField2Grey : AppColors.kGreyColor, // Custom color for the description
+                                fontStyle: FontStyle.italic, // Italic for description
+                              ),
+                              overflow: TextOverflow.clip, // Handles text overflow for long descriptions
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ),
+              )
+
+
+
             );
           },
         ),
