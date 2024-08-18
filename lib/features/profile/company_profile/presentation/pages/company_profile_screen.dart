@@ -26,6 +26,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../../utility/global_widgets/report_button.dart';
 import '../../../../job/presentation/widgets/jobs_horizantal_widget.dart';
 import '../../../applicant_profile/presentation/widgets/contact_info_widget.dart';
 import '../../../applicant_profile/presentation/widgets/profile_image_widget.dart';
@@ -353,7 +354,13 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 ],
               ),
             ),
-            const BackButtonCircular(),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BackButtonCircular(),
+                ReportButton(),
+              ],
+            ),
           ],
         ),
       ),

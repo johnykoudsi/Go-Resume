@@ -63,16 +63,14 @@ class JobWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
+                    overflow: TextOverflow.ellipsis,
                     "${NumberFormat.decimalPattern().format(jobEntity.minSalary)} ${"syp".tr()} - ${NumberFormat.decimalPattern().format(jobEntity.maxSalary)} ${"syp".tr()}",
                     style: AppFontStyles.mediumH6,
-                  ),
-                  Text(
-                    jobTypesUi.reverse[jobEntity.type] ?? '',
-                    style: AppFontStyles.mediumH5,
                   ),
                 ],
               ),
               Text(
+
                 jobTypesUi.reverse[jobEntity.type] ?? '',
                 style: AppFontStyles.regularH6
                     .copyWith(color: AppColors.kGreyColor),

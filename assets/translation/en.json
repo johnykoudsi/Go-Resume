@@ -179,5 +179,14 @@
   "isClosed": "closed",
   "checkUpdates": "Checking for updates",
   "noUpdates": "No updates at the moment",
-  "areYouSureToReject": "Are you sure you want to reject this applicant?"
+  "areYouSureToReject": "Are you sure you want to reject this applicant?",
+  "reportDescription": "Describe Your Report",
+  "category": "Category",
+  "Bad Behavior": "Bad Behavior",
+  "Fraud": "Fraud",
+  "Bad Language": "Bad Language",
+  "Stolen Identity": "Stolen Identity",
+  "report": "Report",
+  "Are you sure you want to exit !": "Are you sure you want to exit !",
+  "exit": "Exit"
 }

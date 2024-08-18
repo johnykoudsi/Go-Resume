@@ -16,6 +16,7 @@ import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/custom_card.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../../utility/global_widgets/dialogs_yes_no.dart';
 
 class MyEducationAndCertificatesScreen extends StatefulWidget {
   const MyEducationAndCertificatesScreen({Key? key, required this.educations})

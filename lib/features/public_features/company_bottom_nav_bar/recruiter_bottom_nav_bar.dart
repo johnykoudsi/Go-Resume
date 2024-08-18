@@ -7,6 +7,7 @@ import 'package:smart_recruitment_flutter_user/features/public_features/applican
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
 import '../../../utility/app_strings.dart';
+import '../../../utility/global_widgets/dialogs_yes_no.dart';
 import 'widgets/recruiter_bottom_nav_bar_screens.dart';
 
 class RecruiterBottomNavBar extends StatefulWidget {

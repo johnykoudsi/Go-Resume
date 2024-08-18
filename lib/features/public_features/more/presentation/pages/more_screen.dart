@@ -11,6 +11,7 @@ import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../generated/assets.dart';
 import '../../../../../utility/dialog/language_dialog.dart';
+import '../../../../../utility/global_widgets/dialogs_yes_no.dart';
 import '../widgets/employee_on_road_widget.dart';
 import '../widgets/more_items_widget.dart';
 

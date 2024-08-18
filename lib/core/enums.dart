@@ -12,6 +12,12 @@ enum Compensation{
   hourly_pay,
   salary,
 }
+enum ReportCategory{
+  stolen_identity,
+  bad_language,
+  fraud,
+  bad_behavior
+}
 enum JobTypes{
   none,
   contract,
@@ -41,4 +47,10 @@ final EnumValues jobTypesUi = EnumValues({
 final EnumValues compensationTypesUi = EnumValues({
   "Hourly Pay".tr(): Compensation.hourly_pay,
   "Salary".tr(): Compensation.salary,
+});
+final EnumValues reportTypesUi = EnumValues({
+  "Stolen Identity".tr(): ReportCategory.stolen_identity,
+  "Bad Language".tr(): ReportCategory.bad_language,
+  "Fraud".tr(): ReportCategory.fraud,
+  "Bad Behavior".tr(): ReportCategory.bad_behavior,
 });

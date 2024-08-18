@@ -21,6 +21,7 @@ import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
 import '../../../../../utility/global_widgets/searchable_drop_down_widget.dart';
 import '../../../../../utility/global_widgets/shimmer.dart';
 import '../../../../core/router/app_routes.dart';
+import '../../../../utility/global_widgets/dialogs_yes_no.dart';
 import '../../../../utility/global_widgets/toggle_button_widget.dart';
 import '../../domain/entities/benefits_entity.dart';
 import '../bloc/toggle_job/toggle_job_bloc.dart';

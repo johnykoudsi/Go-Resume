@@ -6,6 +6,7 @@ import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 
 import '../../../utility/app_strings.dart';
+import '../../../utility/global_widgets/dialogs_yes_no.dart';
 import 'widgets/CustomNavigatorWidget.dart';
 import 'widgets/bottom_nav_bar_screens.dart';
 

@@ -15,6 +15,7 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/no_data_wi
 import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/custom_floating_button_widget.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../../utility/global_widgets/dialogs_yes_no.dart';
 import '../../../../job/presentation/widgets/description_item_widget.dart';
 
 class MyPoliciesScreen extends StatefulWidget {

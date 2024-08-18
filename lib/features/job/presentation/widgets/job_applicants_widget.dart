@@ -13,6 +13,7 @@ import 'package:smart_recruitment_flutter_user/utility/global_widgets/circular_p
 import '../../../../../generated/assets.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../utility/global_widgets/dialogs_yes_no.dart';
 import '../../../profile/applicant_profile/presentation/pages/applicant_profile_screen.dart';
 import '../../domain/entities/job_entity.dart';
 

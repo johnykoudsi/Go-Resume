@@ -178,7 +178,15 @@
   "isClosed": "مغلق",
   "checkUpdates": "تفقد التحديثات",
   "noUpdates": "لا يوجد تحديثات حاليا",
-  "areYouSureToReject": "هل أنت متأكد أنك تريد رفض هذا المرشح؟"
-
+  "areYouSureToReject": "هل أنت متأكد أنك تريد رفض هذا المرشح؟",
+  "reportDescription": "قم بوصف التبيلغ",
+  "category": "الصنف",
+  "Bad Behavior": "تصرف سيء",
+  "Fraud": "احتيال",
+  "Bad Language": "لغة مسيئة",
+  "Stolen Identity": "انتحال شخصية",
+  "report": "تبليغ",
+  "Are you sure you want to exit !": "هل أنت متأكد أنك تريد الخروج",
+  "exit": "خروج"
 
 }
