@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
+import 'package:smart_recruitment_flutter_user/core/enums.dart';
 
 import '../../data/data_sources/report_user_data_source.dart';
 import '../../data/repositories/report_user_repo_impl.dart';
@@ -18,7 +19,7 @@ ReportUserUseCase reportUserUseCase = ReportUserUseCase(reportUserRepoImpl);
 
       final response = await reportUserUseCase.call(event);
 
-      emit(ReportUserDoneState());
+      emit(ReportUserDoneState(helperResponse: response));
 
     });
   }

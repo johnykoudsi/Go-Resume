@@ -16,14 +16,15 @@ class ReportUserApiEvent extends ReportUserEvent {
     this.description,
     this.id,
   });
-  String? category;
+  ReportCategory? category;
   String? description;
   int? id;
 
   Map<String, String> toMapBody() {
 
     Map<String, String> map = {
-      "category": category??"",
+      "reported_id":id.toString()??"",
+      "category": category?.name ??"",
       "description": description??"",
     };
     map.removeWhere(

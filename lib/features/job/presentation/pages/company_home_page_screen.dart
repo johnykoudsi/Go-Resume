@@ -9,7 +9,6 @@ import 'package:smart_recruitment_flutter_user/features/public_features/home/pre
 import 'package:smart_recruitment_flutter_user/generated/assets.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/search_text_field.dart';
 import '../../../../../core/router/app_routes.dart';
-import '../../../../utility/app_strings.dart';
 import '../../../public_features/ads/presentation/bloc/get_ads_bloc.dart';
 
 class CompanyHomePageScreen extends StatefulWidget {
@@ -83,11 +82,18 @@ class _CompanyHomePageScreenState extends State<CompanyHomePageScreen> {
         children: [
           BlocBuilder<GetAdsBloc, GetAdsState>(
             builder: (context, state) {
-              if(state is GetAllAdsDoneState){
-                return  CarouselSliderWidget(ads: state.ads,);
-              }else{
-                return const Center(child: Padding(
-                  padding: EdgeInsets.only(top:8.0),
+              if (state is GetAllAdsDoneState) {
+                if (state.ads.isNotEmpty) {
+                  return CarouselSliderWidget(
+                    ads: state.ads,
+                  );
+                } else {
+                  return const SizedBox();
+                }
+              } else {
+                return const Center(
+                    child: Padding(
+                  padding: EdgeInsets.only(top: 8.0),
                   child: CircularProgressIndicator(),
                 ));
               }

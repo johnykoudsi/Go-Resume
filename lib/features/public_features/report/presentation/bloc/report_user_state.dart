@@ -13,8 +13,10 @@ final class ReportUserLoadingState extends ReportUserState {
   List<Object> get props => [];
 }
 class ReportUserDoneState extends ReportUserState {
+  ReportUserDoneState({required this.helperResponse});
+  HelperResponse helperResponse;
   @override
-  List<Object> get props => [];
+  List<Object> get props => [helperResponse.servicesResponse, helperResponse.response];
 }
 
 class ReportUserErrorState extends ReportUserState {
