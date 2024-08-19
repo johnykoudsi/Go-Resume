@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
+import 'package:smart_recruitment_core/utility/networking/endpoints.dart';
+import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 
 class LanguageDialog {
@@ -44,13 +48,22 @@ class LanguageDialog {
                           onChanged: (value) {
                             setState(() {
                               radioValue = value;
+
                             });
                           }),
                       ElevatedButtonWidget(
                         title: 'Save'.tr(),
-                        onPressed: () {
-                          setState(() {
+                        onPressed: () async{
+                          setState(() async {
                             context.setLocale(Locale(radioValue ?? 'en'));
+                            HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+                              crud: "PUT",
+                              url: EndPoints.changeLocale,
+                              body: json.encode({
+                                "locale": radioValue.toString(),
+                              }),
+                              useUserToken: true,
+                            );
                             Navigator.of(context).pop();
                           });
 

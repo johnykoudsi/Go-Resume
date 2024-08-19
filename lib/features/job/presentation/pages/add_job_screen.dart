@@ -140,7 +140,7 @@ class _AddJobScreenState extends State<AddJobScreen> {
                         width: screenWidth * 0.4,
                       );
                     }
-                    if (state is BenefitsDoneState) {
+                    if (state is BenefitsDoneState && state.benefits.isNotEmpty) {
                       return BenefitsWidget(
                         onPressed: () {
                           Navigator.push(

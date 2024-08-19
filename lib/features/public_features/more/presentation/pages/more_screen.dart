@@ -130,10 +130,10 @@ class _MoreScreenState extends State<MoreScreen> {
     return CupertinoModalPopupRoute<void>(
       builder: (BuildContext context) {
         return CupertinoActionSheet(
-          title: const Text('checkUpdates'),
+          title:  Text('checkUpdates'.tr()),
           actions: <CupertinoActionSheetAction>[
             CupertinoActionSheetAction(
-              child: const Text('noUpdates',style: AppFontStyles.mediumH3,),
+              child:  Text('noUpdates'.tr(),style: AppFontStyles.mediumH3,),
               onPressed: () {
                 Navigator.pop(context);
               },
