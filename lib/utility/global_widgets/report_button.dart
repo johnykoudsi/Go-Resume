@@ -94,7 +94,7 @@ class _ReportButtonState extends State<ReportButton> {
                       ],
                     ),
                   ),
-                  SizedBox(height: screenWidth * 0.1),
+                  SizedBox(height: screenWidth * 0.05),
                   Builder(builder: (context) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
