@@ -85,15 +85,18 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 ? IconButton(
                     onPressed: () {
                       Navigator.pushNamed(context, AppRoutes.editJob,
-                          arguments: widget.jobEntity).then((_) {
+                              arguments: widget.jobEntity)
+                          .then((_) {
                         if (isCompany) {
-                          context
-                              .read<ToggleJobBloc>()
-                              .add(GetJobClosedStatusEvent(id: widget.jobEntity.id));
-                          context.read<GetJobApplicantsBloc>().add(GetJobApplicantsSearchEvent(
-                              jobId: widget.jobEntity.id, searchFilter: applicantsFilter));
+                          context.read<ToggleJobBloc>().add(
+                              GetJobClosedStatusEvent(id: widget.jobEntity.id));
+                          context.read<GetJobApplicantsBloc>().add(
+                              GetJobApplicantsSearchEvent(
+                                  jobId: widget.jobEntity.id,
+                                  searchFilter: applicantsFilter));
                         }
-                      });;
+                      });
+                      ;
                     },
                     icon: const Icon(Icons.edit))
                 : IconButton(onPressed: () {
@@ -324,7 +327,9 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                     style: AppFontStyles.mediumH5,
                   ),
                   Text(
-                    compensationTypesUi.reverse[widget.jobEntity.compensation] ?? '',
+                    compensationTypesUi
+                            .reverse[widget.jobEntity.compensation] ??
+                        '',
                     style: AppFontStyles.mediumH5.copyWith(color: Colors.red),
                   ),
                 ],
@@ -406,6 +411,21 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                 )
               else
                 const SizedBox(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: screenHeight * 0.01,
+                  ),
+                  Text("Publisher".tr(),style: AppFontStyles.boldH4,),
+                  SizedBox(
+                    height: screenHeight * 0.01,
+                  ),
+                  CompanyWidget(
+                    user: widget.jobEntity.company,
+                  )
+                ],
+              ),
               isCompany
                   ? BlocBuilder<GetJobApplicantsBloc, GetJobApplicantsState>(
                       builder: (context, state) {
@@ -465,10 +485,11 @@ class _JobDetailsScreenState extends State<JobDetailsScreen> {
                           );
                         }
                       },
-                    ):SizedBox(),
-                  // : CompanyWidget(
-                  //     user: widget.jobEntity.company!,
-                  //   ),
+                    )
+                  : const SizedBox(),
+              // : CompanyWidget(
+              //     user: widget.jobEntity.company!,
+              //   ),
               const SizedBox(
                 height: 100,
               ),

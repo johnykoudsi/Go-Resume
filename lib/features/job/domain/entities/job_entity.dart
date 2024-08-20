@@ -9,7 +9,7 @@ List<JobEntity> jobEntityFromJson(String str) =>
 class JobEntity {
   int id;
   int companyId;
-  User? company;
+  User company;
   DateTime? startDate;
   JobTypes type;
   GenderEnum gender;
@@ -33,7 +33,7 @@ class JobEntity {
   JobEntity(
       {this.id = -1,
       this.companyId = -1,
-      this.company,
+      required this.company,
       this.startDate,
       this.type = JobTypes.full_time,
       this.gender = GenderEnum.none,
@@ -58,7 +58,7 @@ class JobEntity {
         id: json["id"] ?? -1,
         companyId: json["company_id"] ?? -1,
         company:
-            json["company"] != null ? User.fromJson(json["company"]) : null,
+             User.fromJson(json["company"]) ,
         startDate:
             DateTime.tryParse(json["start_date"] ?? '') ?? DateTime(1970),
         type: JobTypes.values
