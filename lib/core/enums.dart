@@ -31,6 +31,19 @@ enum JobSorts{
   min_salary,
   created_at
 }
+enum ApplicantTypes{
+  none,
+  contract,
+  full_time,
+  part_time,
+  task_based,
+  out_sourcing
+}
+enum ApplicantSorts{
+  none,
+  min_salary,
+  created_at
+}
 final EnumValues jobSortsUi = EnumValues({
   "None".tr(): JobSorts.none,
   "Salary".tr(): JobSorts.min_salary,

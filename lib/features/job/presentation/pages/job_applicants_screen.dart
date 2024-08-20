@@ -10,6 +10,7 @@ import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
 import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
+import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/applicant_filter_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_applicants_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
 
@@ -37,7 +38,7 @@ class JobApplicantsScreen extends StatefulWidget {
 class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
   ScrollController scrollController = ScrollController();
   bool searchDeleteIcon = false;
-  JobApplicantsSearchFilter jobFilter = JobApplicantsSearchFilter();
+  JobApplicantsSearchFilter jobApplicantsFilter = JobApplicantsSearchFilter();
   TextEditingController searchController = TextEditingController();
   GetJobApplicantsBloc getJobApplicantsBloc = GetJobApplicantsBloc();
 
@@ -61,7 +62,7 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
 
   void search() {
     context.read<GetJobApplicantsBloc>().add(ChangeToLoadingJobApplicantsEvent(
-        jobId: widget.jobEntity.id, searchFilter: jobFilter));
+        jobId: widget.jobEntity.id, searchFilter: jobApplicantsFilter));
   }
 
   @override
@@ -92,14 +93,14 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
                 searchDeleteIcon = false;
                 searchController.clear();
               });
-              jobFilter = jobFilter.copyWith(search: '');
+              jobApplicantsFilter = jobApplicantsFilter.copyWith(search: '');
               search();
             },
             onSend: (value) {
               setState(() {
                 searchDeleteIcon = true;
               });
-              jobFilter = jobFilter.copyWith(search: value);
+              jobApplicantsFilter = jobApplicantsFilter.copyWith(search: value);
               search();
             },
             searchController: searchController,
@@ -202,32 +203,8 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
                                   crossAxisAlignment:
                                   CrossAxisAlignment.start,
                                   children: [
-                                    JobTypeFilterWidget(
-                                      onChanged: (value) {
-                                        Navigator.of(context).pop();
-                                        setState(() {
-                                          jobFilter = jobFilter.copyWith(
-                                              type: value);
-                                        });
-                                        search();
-                                      },
-                                      value:
-                                      jobFilter.type ?? JobTypes.none,
-                                    ),
+                                    ApplicantFilterWidget(onChanged: (){}, value: value),
                                     const FilterSpacing(),
-                                    // PropertyServiceFilterExploreWidget(
-                                    //   onChanged: (value) {
-                                    //     Navigator.of(context).pop();
-                                    //     setState(() {
-                                    //       propertiesSearchFilter =
-                                    //           propertiesSearchFilter.copyWith(
-                                    //               propertyService: value);
-                                    //     });
-                                    //     search();
-                                    //   },
-                                    //   value: propertiesSearchFilter
-                                    //       .propertyService,
-                                    // ),
                                   ],
                                 ),
                               ),
@@ -262,11 +239,11 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
                       builder: (BuildContext context,
                           void Function(void Function()) setState) {
                         return SortsFilterWidget(
-                          value: jobFilter.sort ?? JobSorts.none,
+                          value: jobApplicantsFilter.sort ?? JobSorts.none,
                           onChanged: (value) {
                             Navigator.of(context).pop();
                             setState(() {
-                              jobFilter = jobFilter.copyWith(sort: value);
+                              jobApplicantsFilter = jobApplicantsFilter.copyWith(sort: value);
                             });
                             search();
                           },
