@@ -5,6 +5,7 @@ import 'package:smart_recruitment_core/utility/networking/network_helper.dart';
 import 'package:smart_recruitment_flutter_user/features/job/data_sources/data_source/job_data_source.dart';
 import 'package:smart_recruitment_flutter_user/features/job/data_sources/reposetries/job_repo_impl.dart';
 
+import '../../../../../core/enums.dart';
 import '../../../../../utility/constant_logic_validation.dart';
 import '../../../domain/use_cases/get_job_applicants_usecase.dart';
 
