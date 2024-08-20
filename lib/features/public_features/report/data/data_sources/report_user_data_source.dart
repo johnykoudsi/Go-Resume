@@ -12,12 +12,13 @@ import '../../presentation/bloc/report_user_bloc.dart';
 
 
 class ReportUserDataSource {
+
   ReportUserDataSource(this.networkHelpers);
   NetworkHelpers networkHelpers;
   Future reportUser(ReportUserApiEvent reportUserEvent) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       useUserToken: true,
-      url: EndPoints.updateCompanyProfile,
+      url: EndPoints.reportUser,
       body: json.encode(reportUserEvent.toMapBody()),
     );
     return helperResponse;

@@ -47,7 +47,6 @@ class CompanyProfileBloc extends Bloc<CompanyProfileEvent, CompanyProfileState> 
           }),
           useUserToken: true,
         );
-
       });
     });
 

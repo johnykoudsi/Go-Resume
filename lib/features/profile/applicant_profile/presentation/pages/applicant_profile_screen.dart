@@ -32,6 +32,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../../utility/app_strings.dart';
 import '../../../../../utility/global_widgets/back_button_circular.dart';
 import '../../../../../utility/global_widgets/dialog_snack_bar.dart';
+import '../../../../../utility/global_widgets/report_button.dart';
 
 class ApplicantProfileScreen extends StatefulWidget {
   const ApplicantProfileScreen({
@@ -353,7 +354,13 @@ class _ApplicantProfileScreenState extends State<ApplicantProfileScreen> {
                 ],
               ),
             ),
-            const BackButtonCircular(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const BackButtonCircular(),
+                ReportButton(id: widget.user.id,),
+              ],
+            ),
           ],
         ),
       ),

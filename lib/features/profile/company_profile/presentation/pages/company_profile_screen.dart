@@ -354,11 +354,11 @@ class _CompanyProfileScreenState extends State<CompanyProfileScreen> {
                 ],
               ),
             ),
-            const Row(
+             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BackButtonCircular(),
-                ReportButton(),
+                const BackButtonCircular(),
+                ReportButton(id: widget.user.id,),
               ],
             ),
           ],

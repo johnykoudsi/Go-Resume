@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +110,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget> {
                 left: 10,
                 top: 15,
                 child: Text(
-                  "${widget.viewsNumber} Views",
+                  "${widget.viewsNumber} ${"Views".tr()}",
                   style: AppFontStyles.mediumH6.copyWith(color: Colors.white),
                 ),
               ),

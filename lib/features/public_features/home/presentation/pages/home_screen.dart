@@ -20,13 +20,11 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
-
     context.read<GetAdsBloc>().add(GetAllAdsEvent());
     super.initState();
   }
@@ -73,15 +71,19 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       body: ListView(
-        children:  [
+        children: [
           const SizedBox(
             height: 30,
           ),
           BlocBuilder<GetAdsBloc, GetAdsState>(
             builder: (context, state) {
-              if(state is GetAllAdsDoneState){
-                return  CarouselSliderWidget(ads: state.ads,);
-              }else{
+              if (state is GetAllAdsDoneState) {
+                if (state.ads.isNotEmpty) {
+                  return CarouselSliderWidget(
+                    ads: state.ads,
+                  );
+                }else{return const SizedBox();}
+              } else {
                 return const Center(child: CircularProgressIndicator());
               }
             },
