@@ -18,8 +18,61 @@ class GetJobApplicantsBloc extends Bloc<GetJobApplicantsEvent, GetJobApplicantsS
     JobRepoImpl(JobDataSource(NetworkHelpers()));
 
     GetJobApplicantsUseCase getJobApplicantsUseCase = GetJobApplicantsUseCase(jobRepoImpl);
+    GetJobTopApplicantsUseCase getJobTopApplicantsUseCase = GetJobTopApplicantsUseCase(jobRepoImpl);
 
     on<GetJobApplicantsSearchEvent>((event, emit) async {
+      final currentState = state;
+      if (currentState is GetJobApplicantsLoadedState && currentState.hasReachedMax) {
+        return;
+      }
+
+      int getPage() {
+        if (currentState is GetJobApplicantsLoadedState) {
+          return currentState.applicantsList.length ~/ kGetLimit + 1;
+        }
+        return 0;
+      }
+
+      dynamic getApplicants;
+
+      event.searchFilter.page = getPage();
+
+      getApplicants = await getJobApplicantsUseCase.call(event);
+
+      if (getApplicants is List<User>) {
+        if (getApplicants.isNotEmpty) {
+          // copy previous state
+          if (currentState is GetJobApplicantsLoadedState) {
+            emit(currentState.copyWith(
+                applicantsList: List.of(currentState.applicantsList)..addAll(getApplicants),
+                hasReachedMax: getApplicants.length < kGetLimit ? true : false));
+          }
+
+          // add loaded state
+          else {
+            emit(GetJobApplicantsLoadedState(
+              applicantsList: getApplicants,
+              hasReachedMax: getApplicants.length < kGetLimit ? true : false,
+            ));
+          }
+        } else {
+          // done loading
+          if (currentState is GetJobApplicantsLoadedState) {
+            emit(currentState.copyWith(hasReachedMax: true));
+          }
+          // done but nothing is there
+          else {
+            emit(GetJobApplicantsLoadedState(
+              applicantsList: getApplicants,
+              hasReachedMax: true,
+            ));
+          }
+        }
+      } else {
+        emit(GetJobApplicantsErrorState(helperResponse: getApplicants));
+      }
+    });
+    on<GetJobTopApplicantsSearchEvent>((event, emit) async {
       final currentState = state;
       if (currentState is GetJobApplicantsLoadedState && currentState.hasReachedMax) {
         return;

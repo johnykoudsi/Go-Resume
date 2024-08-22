@@ -26,16 +26,16 @@ import '../widgets/handle_widget.dart';
 import '../widgets/job_type_filter_widget.dart';
 import '../widgets/sorts_filter_widget.dart';
 
-class JobApplicantsScreen extends StatefulWidget {
+class TopApplicantsScreen extends StatefulWidget {
   JobEntity jobEntity;
 
-  JobApplicantsScreen({Key? key, required this.jobEntity}) : super(key: key);
+  TopApplicantsScreen({Key? key, required this.jobEntity}) : super(key: key);
 
   @override
-  State<JobApplicantsScreen> createState() => _JobApplicantsScreenState();
+  State<TopApplicantsScreen> createState() => _TopApplicantsScreenState();
 }
 
-class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
+class _TopApplicantsScreenState extends State<TopApplicantsScreen> {
   ScrollController scrollController = ScrollController();
   bool searchDeleteIcon = false;
   JobApplicantsSearchFilter jobApplicantsFilter = JobApplicantsSearchFilter();
@@ -74,7 +74,7 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
         centerTitle: false,
         toolbarHeight: screenHeight * 0.15,
         title: Text(
-          "applicantFor".tr() + widget.jobEntity.position,
+          "bestCandidatesFor".tr() + widget.jobEntity.position,
           style: AppFontStyles.boldH2,
           maxLines: 2,
         ),
@@ -165,7 +165,7 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
                 title: "refresh".tr(),
                 onPressed: () {
                   context.read<GetJobApplicantsBloc>().add(
-                      ChangeToLoadingJobApplicantsEvent(
+                      ChangeToLoadingTopJobApplicantsEvent(
                           jobId: widget.jobEntity.id));
 
                   //search(userS);
@@ -175,21 +175,6 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.topApplicants);
-        },
-        backgroundColor: AppColors.kMainColor100,
-        child: SizedBox(
-          child: SvgPicture.asset(
-            width: screenHeight*0.05,
-            height: screenHeight*0.05,
-            "assets/images/svg/top.svg",
-            color: AppColors.kBackGroundColor,
-          ),
-        ),
-      ),
-
     );
   }
 }

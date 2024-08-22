@@ -307,6 +307,21 @@ class AppRouter {
               child: JobApplicantsScreen(
                 jobEntity: args,
               ));
+        case AppRoutes.topApplicants:
+          JobEntity args = settings.arguments as JobEntity;
+          return MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create: (context) => GetJobApplicantsBloc()
+                    ..add(ChangeToLoadingJobApplicantsEvent(jobId: args.id)),
+                ),
+                BlocProvider(
+                  create: (context) => EditJobBloc(),
+                ),
+              ],
+              child: JobApplicantsScreen(
+                jobEntity: args,
+              ));
         default:
           return const Scaffold(
             body: Center(

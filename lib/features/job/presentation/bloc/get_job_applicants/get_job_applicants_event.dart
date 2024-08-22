@@ -11,9 +11,24 @@ class GetJobApplicantsSearchEvent extends GetJobApplicantsEvent {
   @override
   List<Object?> get props => [searchFilter];
 }
+class GetJobTopApplicantsSearchEvent extends GetJobApplicantsEvent {
+  GetJobTopApplicantsSearchEvent({required this.searchFilter,required this.jobId});
+  int jobId;
+  JobApplicantsSearchFilter searchFilter;
 
+  @override
+  List<Object?> get props => [searchFilter];
+}
 class ChangeToLoadingJobApplicantsEvent extends GetJobApplicantsEvent {
   ChangeToLoadingJobApplicantsEvent({this.searchFilter,required this.jobId});
+  int jobId;
+  JobApplicantsSearchFilter? searchFilter;
+
+  @override
+  List<Object?> get props => [searchFilter,jobId];
+}
+class ChangeToLoadingTopJobApplicantsEvent extends GetJobApplicantsEvent {
+  ChangeToLoadingTopJobApplicantsEvent({this.searchFilter,required this.jobId});
   int jobId;
   JobApplicantsSearchFilter? searchFilter;
 

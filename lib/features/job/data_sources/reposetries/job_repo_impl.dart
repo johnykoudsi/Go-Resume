@@ -103,4 +103,10 @@ class JobRepoImpl extends JobRepo {
     return jobDataSource.rejectApplicant(rejectApplicantEvent);
 
   }
+
+  @override
+  Future getJobTopApplicants(GetJobTopApplicantsSearchEvent getJobTopApplicantsSearchEvent) async{
+    return jobDataSource.getJobTopApplicants(getJobTopApplicantsSearchEvent);
+
+  }
 }
