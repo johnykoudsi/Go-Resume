@@ -8,6 +8,7 @@ import 'package:smart_recruitment_flutter_user/features/job/data_sources/reposet
 import '../../../../../core/enums.dart';
 import '../../../../../utility/constant_logic_validation.dart';
 import '../../../domain/use_cases/get_job_applicants_usecase.dart';
+import '../../../domain/use_cases/get_job_top_applicants_usecase.dart';
 
 part 'get_job_applicants_event.dart';
 part 'get_job_applicants_state.dart';
@@ -72,7 +73,7 @@ class GetJobApplicantsBloc extends Bloc<GetJobApplicantsEvent, GetJobApplicantsS
         emit(GetJobApplicantsErrorState(helperResponse: getApplicants));
       }
     });
-    on<GetJobTopApplicantsSearchEvent>((event, emit) async {
+    on<GetJobApplicantsTopSearchEvent>((event, emit) async {
       final currentState = state;
       if (currentState is GetJobApplicantsLoadedState && currentState.hasReachedMax) {
         return;
@@ -89,7 +90,7 @@ class GetJobApplicantsBloc extends Bloc<GetJobApplicantsEvent, GetJobApplicantsS
 
       event.searchFilter.page = getPage();
 
-      getApplicants = await getJobApplicantsUseCase.call(event);
+      getApplicants = await getJobTopApplicantsUseCase.call(event);
 
       if (getApplicants is List<User>) {
         if (getApplicants.isNotEmpty) {
@@ -124,7 +125,11 @@ class GetJobApplicantsBloc extends Bloc<GetJobApplicantsEvent, GetJobApplicantsS
         emit(GetJobApplicantsErrorState(helperResponse: getApplicants));
       }
     });
+    on<ChangeToLoadingJobTopApplicantsEvent>((event, emit) async {
+      emit(GetJobApplicantsLoadingState());
 
+      add(GetJobApplicantsTopSearchEvent(searchFilter: JobApplicantsSearchFilter(page: 1), jobId: event.jobId));
+    });
     on<ChangeToLoadingJobApplicantsEvent>((event, emit) async {
       emit(GetJobApplicantsLoadingState());
 

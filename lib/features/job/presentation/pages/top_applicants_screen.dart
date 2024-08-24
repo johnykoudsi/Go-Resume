@@ -1,30 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:smart_recruitment_core/features/auth/domain/entities/user_entity.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/elevated_button_widget.dart';
 import 'package:smart_recruitment_core/utility/global_widgets/somthing_wrong.dart';
-import 'package:smart_recruitment_core/utility/theme/app_borders.dart';
-import 'package:smart_recruitment_core/utility/theme/color_style.dart';
 import 'package:smart_recruitment_core/utility/theme/text_styles.dart';
 import 'package:smart_recruitment_flutter_user/features/job/domain/entities/job_entity.dart';
-import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/applicant_filter_widget.dart';
 import 'package:smart_recruitment_flutter_user/features/job/presentation/widgets/job_applicants_widget.dart';
 import 'package:smart_recruitment_flutter_user/utility/global_widgets/shimmer.dart';
-
-import '../../../../core/enums.dart';
 import '../../../../core/router/app_routes.dart';
 import '../../../../generated/assets.dart';
-import '../../../../utility/app_strings.dart';
 import '../../../../utility/global_widgets/no_data_widget.dart';
 import '../../../../utility/global_widgets/search_text_field.dart';
 import '../bloc/get_job_applicants/get_job_applicants_bloc.dart';
-import '../widgets/filter_spacing_widget.dart';
-import '../widgets/handle_widget.dart';
-import '../widgets/job_type_filter_widget.dart';
-import '../widgets/sorts_filter_widget.dart';
+
 
 class TopApplicantsScreen extends StatefulWidget {
   JobEntity jobEntity;
@@ -45,12 +34,12 @@ class _TopApplicantsScreenState extends State<TopApplicantsScreen> {
   @override
   void initState() {
     getJobApplicantsBloc
-        .add(ChangeToLoadingJobApplicantsEvent(jobId: widget.jobEntity.id));
+        .add(ChangeToLoadingJobTopApplicantsEvent(jobId: widget.jobEntity.id));
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
         getJobApplicantsBloc.add(
-          GetJobApplicantsSearchEvent(
+          GetJobApplicantsTopSearchEvent(
             jobId: widget.jobEntity.id,
             searchFilter: JobApplicantsSearchFilter(),
           ),
@@ -61,7 +50,7 @@ class _TopApplicantsScreenState extends State<TopApplicantsScreen> {
   }
 
   void search() {
-    context.read<GetJobApplicantsBloc>().add(ChangeToLoadingJobApplicantsEvent(
+    context.read<GetJobApplicantsBloc>().add(ChangeToLoadingJobTopApplicantsEvent(
         jobId: widget.jobEntity.id, searchFilter: jobApplicantsFilter));
   }
 
@@ -112,7 +101,6 @@ class _TopApplicantsScreenState extends State<TopApplicantsScreen> {
       body: RefreshIndicator(
         onRefresh: () async {
           search();
-          // context.read<GetJobApplicantsBloc>().add(ChangeToLoadingJobApplicantsEvent(jobId: widget.jobEntity.id,searchFilter: jobFilter));
         },
         child: BlocBuilder<GetJobApplicantsBloc, GetJobApplicantsState>(
           builder: (context, state) {
@@ -165,11 +153,9 @@ class _TopApplicantsScreenState extends State<TopApplicantsScreen> {
                 title: "refresh".tr(),
                 onPressed: () {
                   context.read<GetJobApplicantsBloc>().add(
-                      ChangeToLoadingTopJobApplicantsEvent(
+                      ChangeToLoadingJobTopApplicantsEvent(
                           jobId: widget.jobEntity.id));
-
-                  //search(userS);
-                },
+                  },
               ),
             );
           },

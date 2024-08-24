@@ -177,7 +177,7 @@ class _JobApplicantsScreenState extends State<JobApplicantsScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, AppRoutes.topApplicants);
+          Navigator.pushNamed(context, AppRoutes.topApplicants,arguments: widget.jobEntity);
         },
         backgroundColor: AppColors.kMainColor100,
         child: SizedBox(

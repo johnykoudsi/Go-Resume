@@ -8,7 +8,7 @@ class GetJobTopApplicantsUseCase {
 
   GetJobTopApplicantsUseCase(this.jobRepo);
 
-  Future call(GetJobTopApplicantsSearchEvent getJobTopApplicantsSearchEvent) async {
-    return await jobRepo.getJobTopApplicants(getJobTopApplicantsSearchEvent);
+  Future call(GetJobApplicantsTopSearchEvent getJobApplicantsTopSearchEvent) async {
+    return await jobRepo.getJobTopApplicants(getJobApplicantsTopSearchEvent);
   }
 }

@@ -105,8 +105,8 @@ class JobRepoImpl extends JobRepo {
   }
 
   @override
-  Future getJobTopApplicants(GetJobTopApplicantsSearchEvent getJobTopApplicantsSearchEvent) async{
-    return jobDataSource.getJobTopApplicants(getJobTopApplicantsSearchEvent);
+  Future getJobTopApplicants(GetJobApplicantsTopSearchEvent getJobApplicantsTopSearchEvent) async{
+    return jobDataSource.getJobTopApplicants(getJobApplicantsTopSearchEvent);
 
   }
 }

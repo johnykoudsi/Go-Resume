@@ -275,7 +275,32 @@ class JobDataSource {
     }
     return helperResponse;
   }
+  Future getJobTopApplicants(
+      GetJobApplicantsTopSearchEvent getJobApplicantsTopSearchEvent) async {
+    String queryString =
+        Uri(queryParameters: getJobApplicantsTopSearchEvent.searchFilter.toJson())
+            .query;
 
+    String urlWithParams =
+        "${EndPoints.getJobTopApplicants(id: getJobApplicantsTopSearchEvent.jobId)}?$queryString";
+
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
+      url: urlWithParams,
+      useUserToken: true,
+    );
+    print("kkkkkkk");
+print(helperResponse.response);
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        final data = json.decode(helperResponse.response)["data"];
+        return List<User>.from(data.map((x) => User.fromJson(x)));
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
+    return helperResponse;
+  }
   Future getSalaryExpectation({required GetSalaryEvent event}) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       mainUrl: EndPoints.aiMainUrl,
