@@ -38,14 +38,9 @@ class JobDataSource {
       url: EndPoints.editJob(id: editMyJobEvent.jobId),
       body:json.encode(editMyJobEvent.toMapBody()),
     );
-    HelperResponse helperResponse2 = await NetworkHelpers.postDataWithFile(
-      crud: "PUT",
-      useUserToken: true,
-      url: EndPoints.editJob(id: editMyJobEvent.jobId),
-      body:editMyJobEvent.toMapBodyWithBenefits(),
-    );
-    print("kkkkkk");
-    print(editMyJobEvent.toMapBodyWithBenefits().toString());
+
+    print("the json I'm sending");
+    print(json.encode(editMyJobEvent.toMapBody()));
     return helperResponse;
   }
   Future deleteJob(DeleteJobEvent deleteJobEvent) async {

@@ -52,8 +52,8 @@ final class EditMyJobEvent extends EditJobEvent {
   List<int> benefits;
   num? minExpectedSalary;
   num? maxExpectedSalary;
-  Map<String, String> toMapBody() {
-    Map<String, String> map = {
+  Map<String, dynamic> toMapBody() {
+    Map<String, dynamic> map = {
       "position": position,
       "description": description,
       "start_date": startDate,
@@ -68,20 +68,13 @@ final class EditMyJobEvent extends EditJobEvent {
       "expected_min_salary": minExpectedSalary.toString(),
       "expected_max_salary": maxExpectedSalary.toString(),
     }..removeWhere((key, value) => value == null || value == "null");
-
-    return map;
-  }
-  Map<String, String> toMapBodyWithBenefits() {
-    Map<String, String> map = {
-
-    }..removeWhere((key, value) => value == null || value == "null");
     if (benefits.isNotEmpty) {
+      Map<String, String> benefitsMap = {};
       for (int i = 0; i < benefits.length; i++) {
-        map["benefits[$i]"] =benefits[i].toString();
+        benefitsMap[i.toString()] = benefits[i].toString();
       }
+      map["benefits"] = benefitsMap; // Adding the benefits as a nested map
     }
-    // Remove entries with null or empty values
-    map.removeWhere((key, value) => value.isEmpty || value == "none");
     return map;
   }
   @override
