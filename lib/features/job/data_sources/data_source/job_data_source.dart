@@ -32,12 +32,20 @@ class JobDataSource {
     return helperResponse;
   }
   Future editJob(EditMyJobEvent editMyJobEvent) async {
-    HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       crud: "PUT",
       useUserToken: true,
       url: EndPoints.editJob(id: editMyJobEvent.jobId),
-      body:editMyJobEvent.toMapBody(),
+      body:json.encode(editMyJobEvent.toMapBody()),
     );
+    HelperResponse helperResponse2 = await NetworkHelpers.postDataWithFile(
+      crud: "PUT",
+      useUserToken: true,
+      url: EndPoints.editJob(id: editMyJobEvent.jobId),
+      body:editMyJobEvent.toMapBodyWithBenefits(),
+    );
+    print("kkkkkk");
+    print(editMyJobEvent.toMapBodyWithBenefits().toString());
     return helperResponse;
   }
   Future deleteJob(DeleteJobEvent deleteJobEvent) async {
@@ -282,14 +290,14 @@ class JobDataSource {
             .query;
 
     String urlWithParams =
-        "${EndPoints.getJobTopApplicants(id: getJobApplicantsTopSearchEvent.jobId)}?$queryString";
+        EndPoints.getJobTopApplicants(id: getJobApplicantsTopSearchEvent.jobId);
+
 
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
       url: urlWithParams,
       useUserToken: true,
     );
-    print("kkkkkkk");
-print(helperResponse.response);
+
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
         final data = json.decode(helperResponse.response)["data"];

@@ -69,17 +69,21 @@ final class EditMyJobEvent extends EditJobEvent {
       "expected_max_salary": maxExpectedSalary.toString(),
     }..removeWhere((key, value) => value == null || value == "null");
 
+    return map;
+  }
+  Map<String, String> toMapBodyWithBenefits() {
+    Map<String, String> map = {
+
+    }..removeWhere((key, value) => value == null || value == "null");
     if (benefits.isNotEmpty) {
       for (int i = 0; i < benefits.length; i++) {
         map["benefits[$i]"] =benefits[i].toString();
       }
     }
-
     // Remove entries with null or empty values
     map.removeWhere((key, value) => value.isEmpty || value == "none");
     return map;
   }
-
   @override
   List<Object> get props => [
     position,
