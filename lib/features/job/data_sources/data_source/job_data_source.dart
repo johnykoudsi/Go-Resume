@@ -38,9 +38,6 @@ class JobDataSource {
       url: EndPoints.editJob(id: editMyJobEvent.jobId),
       body:json.encode(editMyJobEvent.toMapBody()),
     );
-
-    print("the json I'm sending");
-    print(json.encode(editMyJobEvent.toMapBody()));
     return helperResponse;
   }
   Future deleteJob(DeleteJobEvent deleteJobEvent) async {
